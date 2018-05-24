@@ -1,0 +1,165 @@
+/*********************************************
+
+	Secondary Color
+
+*********************************************/
+.header-1 .top-bar, .jspTrack, .mobile-menu, .layerslider .layerslider-block, footer.footer, #mobile-menu-btn, #mobile-cart-btn, .btn-secondary,
+.project figure figcaption i:hover, .controls span, #to-the-top, .header-2 .header-bg .header-search form button[type=submit].focus,
+.header-2 .header-bg .social-buttons ul li a.cart, .header-2 .desktop-dark-menu-bg, .testimonials-2-inner, .testimonials-2 .arrow,
+.estate-form .estate-search-type span, .estate-form .estate-form-item i.fa-caret-down, .header-1 .dark-header-bg, .header-2 .dark-header-bg,
+.property-1 figure figcaption i:hover, .header-3 .desktop-dark-menu-bg, .header-3 .header-dark-bg, .ls-label-secondary, .domain-price,
+.domain-search form .domain-search-inner div.zone i, .pricing-1 header, .product-1 figure figcaption i:hover, .feature-3 span .fa, .feature-3 span .glyphicon,
+.testimonials-3 .testimonials-3-inner .author .avatar, .tabs header span.active, .tabs header span.active div.arrow, .feature-store-dark span,
+.toggle article header.active, .social-button-2 .esb-tooltip, .social-button-2 .esb-tooltip .arrow, .skill-1 .color-1, .skill-1 .value, .skill-1 .value .arrow,
+p.contact-item i, .side-navi ul li.active, .sorting .sorting-filters span.active, .qa .a .lbl, .qa .a .arrow, .pagination .current, .property-1 p.type span,
+.single-estate p.type span, .single-product p.qty i.fa, .section-cart .shoppin-cart-table thead, .section-cart .shoppin-cart-table tbody td p.qty i.fa,
+.post figure figcaption i:hover, .comment i.fa {
+	background-color: #363b3f;
+}
+.navigation a, .section-twitter-1 i.fa-twitter, .feature-store span i, .section-color .navigation a:hover, .social-button-2-white .esb-main i:hover,
+.simple-twiiter-widget ul li i.fa-twitter {
+	color: #363b3f;
+}
+.header-2 .desktop-dark-menu-bg nav > ul > li, .header-1 .dark-header-bg nav > ul > li, .header-3 .desktop-dark-menu-bg nav > ul > li {
+	border-left-color: #363b3f;
+}
+.header-2 .desktop-dark-menu-bg nav > ul > li, .header-1 .dark-header-bg nav > ul > li, .header-3 .desktop-dark-menu-bg nav > ul > li {
+	border-right-color: #363b3f;
+}
+.header-2 .desktop-dark-menu-bg, .header-1 .dark-header-bg, .header-3 .desktop-dark-menu-bg {
+	border-bottom-color: #363b3f;
+}
+.section-color .navigation a:hover {
+	color: #363b3f !important;
+}
+
+
+
+
+/*********************************************
+
+	Primaty Color
+
+*********************************************/
+
+a:hover, .top-bar p a:hover, .header-1 .top-bar .shopping-cart .cart .cart-entry p .price, .mega .mega-section ul li a:hover i,
+.mobile-menu nav ul li i.glyphicon-plus-sign:hover, .mobile-menu nav ul li i.glyphicon-minus-sign, .mobile-menu nav ul li a:hover, .mobile-menu h3,
+.layerslider .layerslider-block h3, .mobile-cart-list p a:hover, .mobile-cart-list p span.price, .footer .widget .post-preview .header a:hover,
+.contacts-widget p .fa, .contacts-widget p .glyphicon, .footer a:hover, #preload i.fa, .section h2 span,
+.section p.block-description, .project .project-inner .project-details p.filter, .project .project-inner .project-details .project-likes .fa,
+.project .project-inner .project-details .project-likes .glyphicon, .testimonials-1 i.fa, .testimonials-1 i.glyphicon,
+.header-2 .desktop-dark-menu-bg nav > ul > li > a:hover, .footer .widget a:hover, .contacts-2-widget p span, .section-core ul li i,
+.testimonials-2 .fa, .testimonials-2 .glyphicon, .header-1 .dark-header-bg nav > ul > li > a:hover, .about-widget p.contacts i, .btn-primary-border,
+.property-1 ul li, .header-3 .header-bg .contact-info p i, .header-3 .desktop-dark-menu-bg nav > ul > li > a:hover, .header-3 .header-dark-bg .contact-info a:hover,
+.ls-layer p.feature i, .ls-layer p.color-text, .domain-price p, .pricing-1 header .plan-title small, .store-price-1 p.p1, .product-1 .details span.price,
+.testimonials-3 .testimonials-3-inner p.text i, .testimonials-3 .testimonials-3-inner .author small, .section-color li.tweet-item a, ul.e-color-list li i,
+.testimonials-2 p.author span, .feature-store p strong, .toggle article header.active .fa-minus, .category-widget ul li p a:hover i, blockquote .blockquote-inner .fa,
+p.contact-item i, .side-navi ul li:hover i, .pricing-2 .pricing-2-item .price p, .partner-1 p.link, .career-1 .details p.title, .career-1 header small,
+.team-1 .team-1-details p.role, .testimonials-inner p.author span, p.used-skills span i, p.project-date i, .property-1 ul li span, .single-estate p.price,
+.single-estate .propert-details ul li span, ul.property-options li .fa-check-circle, .store-filters p i:hover, .single-product p.price,
+.section-cart ul.order-total li span.total, .payment-option span {
+	color: #e14d43;
+}
+.header-1 .top-bar p i, .header-1 .top-bar ul.social-btns li a.hover, .header-1 .top-bar .shopping-cart > span i.hover, .btn-primary,
+.jspDrag, .scroller > i:hover, i.clicked, .feature header i, .arrow-color, .controls span.active, .section-st2, .header-2 .header-bg .social-buttons ul li a:hover,
+.header-2 .header-bg .social-buttons ul li a.cart span, .estate-form .estate-search-type span.active, .header-2 .dark-header-bg .header-search form.focus button[type=submit],
+.about-widget p.links a:hover,.property-1 span, .header-3 .header-bg .social-buttons a:hover, .ls-label-primary, .section-st3, .feature-2-color header .arrow,
+.pricing-1 header .plan-price, .pricing-1 header .plan-price .arrow, .tabs article > .fa, .tabs article > .glyphicon, .dropcap, .skill-1 .color-2, .desktop-breadscrubs-inner,
+.mobile-breadscrubs, .skill-2 span.color, .team-1 header, .category-widget ul li p span.hovered, .pricing-2 .pricing-2-item .plan p,
+.pricing-2 .pricing-2-item .plan .arrow, .riva-countdown .riva-countdown-item .label, .qa .q .lbl, .qa .q .arrow, .pagination .page-numbers:hover,
+.single-estate .propert-details p.agent-cosial a, .single-product p.qty i.fa:hover, .section-cart p.incart span, .section-cart .shoppin-cart-table tbody td p.qty i.fa:hover,
+.post header h3 .fa, .post-author {
+	background-color: #e14d43;
+}
+.clicked, .feature-2-color header i {
+	background-color: #e14d43 !important;
+}
+.top-bar .shopping-cart .cart p.title, .mega .mega-section h3, .store-price-1 p.p1, .single-estate .propert-details h3, h3.h3-2, .section-cart .shoppin-cart-table thead,
+.riva-toggle-tab h2, .comment p.meta {
+	border-bottom-color: #e14d43;
+}
+.mobile-menu, .domain-price, .call-to-action-3, blockquote .blockquote-inner {
+	border-left-color: #e14d43;
+}
+.post-preview .header .date span.month, .copyright-widget, .tabs header span.active, .toggle article header.active, .side-navi ul li.active, .f1,
+.sorting .sorting-filters span.active, .post .date span.month, .post .likes span.month {
+	border-top-color: #e14d43;
+}
+.footer .navigation a:hover, .flick-widget img:hover, .navigation a:hover, .header-2 .header-bg .header-search form.focus, .about-widget p.links a:hover,
+.btn-primary-border, .header-3 .header-bg .social-buttons a:hover,
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+select:focus, textarea:focus,
+.pagination .page-numbers:hover,
+.payment-option-active span {
+	border-color: #e14d43;
+}
+.project figure figcaption, .property-1 figure figcaption, .product-1 figure figcaption, .post-preview figure figcaption, .post figure figcaption {
+	background-color: rgba(225,77,67,0.8);
+}
+.navigation a:hover, .section-color .navigation a {
+	background-color: rgba(225,77,67,1);
+}
+.header-2 .dark-header-bg .social-buttons ul li a.cart:hover {
+	background-color: rgba(225,77,67,1) !important;
+}
+
+
+
+
+/*********************************************
+
+	Third Color
+
+*********************************************/
+
+.header-1 .top-bar .shopping-cart > span i.regular, .btn:hover, .controls span:hover, #to-the-top:hover, .tags-widget a.tag-item:hover {
+	background-color: #9AD03E;
+}
+.btn-primary-border:hover, .btn-secondary-border:hover {
+	border-color: #9AD03E !important;
+}
+
+
+
+
+
+/*********************************************
+
+	Placeholder
+
+*********************************************/
+
+::-webkit-input-placeholder {
+   color: #ccc;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #ccc;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #ccc;
+}
+
+:-ms-input-placeholder {  
+   color: #ccc;
+}
+
+/*********************************************
+
+   Coming Soon Bg Color
+
+*********************************************/
+
+.content-404-gradient {
+	background: #363b3f; /* Old browsers */
+	background: -moz-linear-gradient(-45deg,  #363b3f 25%, #e14d43 75%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(25%,#363b3f), color-stop(75%,#e14d43)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(-45deg,  #363b3f 25%,#e14d43 75%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(-45deg,  #363b3f 25%,#e14d43 75%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(-45deg,  #363b3f 25%,#e14d43 75%); /* IE10+ */
+	background: linear-gradient(135deg,  #363b3f 25%,#e14d43 75%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#363b3f', endColorstr='#e14d43',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
