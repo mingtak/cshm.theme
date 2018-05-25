@@ -92,5 +92,9 @@
   <!-- Footer -->
   <replace css:theme-children="footer.envor-footer.envor-footer-1" css:content-children="#portal-footer-wrapper" />
 
+  <!-- Logo -->
+  <copy css:theme="a#site-logo" css:content="a#portal-logo" attributes="*" />
+  <replace css:theme=".envor-logo img" css:content="a#portal-logo img" />
+
 </rules>
 </rules>
