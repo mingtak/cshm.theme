@@ -12,7 +12,7 @@
     <meta name="author" content="Suono Libero ( @rivathemes.com )">
     <link rel="shortcut icon" href="favicon.ico">
 
-    <title>Two Sidebars - Envor HTML5/CSS3 Template</title>
+    <title>Envor HTML5/CSS3 Template</title>
 
     <!--
     * Google Fonts
@@ -47,7 +47,6 @@
     <![endif]-->
 
     <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-    <script src="js/twitterFetcher_v10_min.js"></script>
   </head>
 
     <body>
@@ -67,11 +66,11 @@
     Image Preload
 
     //-->
-<!--    <div id="envor-preload">
+    <div id="envor-preload">
       <span>Now loading.<br>Please wait.</span>
       <i class="fa fa-cog fa-spin"></i>
       <p></p>
-    </div> -->
+    </div>
     <!--
 
     Envor mobile menu start
@@ -80,71 +79,114 @@
     <i class="glyphicon glyphicon-align-justify" id="envor-mobile-menu-btn"></i>
     <div class="envor-mobile-menu" id="envor-mobile-menu">
       <h3>menu</h3>
-                <!--
-
-                Mobile Menu start
-
-                //-->
-                <nav>
+                                                                <nav>
                   <ul>
-                    <li><a href="">home</a></li>
                     <li>
-                      <a href="">features</a>
+                      <a href="index.html">home</a>
+                      <ul>
+                        <li><a href="boxed/index.html">boxed version</a></li>
+                        <li><a href="index.html">Index 1</a></li>
+                        <li><a href="index-2.html">Index 2</a></li>
+                        <li><a href="index-3.html">Index 3</a></li>
+                        <li><a href="index-4.html">Index 4</a></li>
+                        <li><a href="index-5.html">Index 5</a></li>
+                        <li><a href="index-6.html">Index 6</a></li>
+                        <li><a href="index-7.html">Index 7</a></li>
+                        <li><a href="index-8.html">Index 8</a></li>
+                        <li><a href="index-9.html">Index 9</a></li>
+                        <li><a href="index-10.html">Index 10</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="#">features</a>
                       <ul>
                         <li>
-                          <a href="link">sliders</a>
+                          <a href="#">sliders</a>
                           <ul>
-                            <li><a href="">layer slider</a></li>
-                            <li><a href="">flex slider</a></li>
+                            <li><a href="index.html">layer slider</a></li>
+                            <li><a href="index-flex.html">flex slider</a></li>
+                            <li><a href="index-bootstrap-carousel.html">Bootstrap Carousel</a></li>
                           </ul>
                         </li>
-                        <li><a href="link">HTML5 Ajax contact form</a></li>
-                        <li><a href="link">jQuery Lightbox</a></li>
-                        <li><a href="link">Dynamic countdown</a></li>
-                        <li><a href="link">free sorting</a></li>
-                        <li><a href="link">newsletters subscribe</a></li>
+                        <li><a href="#">HTML5 Ajax contact form</a></li>
+                        <li><a href="#">jQuery Lightbox</a></li>
+                        <li><a href="#">Dynamic countdown</a></li>
+                        <li><a href="#">sort anything</a></li>
+                        <li><a href="#">toggles and tabs</a></li>
+                        <li><a href="#">newsletters subscribe</a></li>
                       </ul>
                     </li>
                     <li>
-                      <a href="">Pages</a>
+                      <a href="pages.html">pages</a>
                       <ul>
-                        <li><a href="link">about</a></li>
-                        <li><a href="link">services</a></li>
-                        <li><a href="link">Two Sidebars</a></li>
-                        <li><a href="link">right sidebar</a></li>
-                        <li><a href="link">full width</a></li>
-                        <li><a href="link">pricing tables</a></li>
-                        <li><a href="link">404 page</a></li>
-                        <li><a href="link">FAQ</a></li>
-                        <li><a href="link">coming soon</a></li>
-                        <li><a href="link">elements</a></li>
-                        <li><a href="link">typography</a></li>
+                        <li><a href="pages-about.html">about company</a></li>
+                        <li><a href="pages-about-single.html">about person</a></li>
+                        <li><a href="pages-services.html">Services</a></li>
+                        <li><a href="pages-sidebar-left.html">Left Sidebar</a></li>
+                        <li><a href="pages-sidebar-right.html">Right Sidebar</a></li>
+                        <li><a href="pages-sidebar-2.html">Two Sidebars</a></li>
+                        <li><a href="pages-sidebar-none.html">Full Width</a></li>
+                        <li><a href="pages-pricing-tables.html">Pricing Tables</a></li>
+                        <li><a href="pages-partners.html">Partners</a></li>
+                        <li><a href="pages-career.html">Career</a></li>
+                        <li><a href="pages-faq.html">FAQ</a></li>
+                        <li><a href="pages-elements.html">Elements</a></li>
+                        <li><a href="pages-testimonials.html">Testimonials</a></li>
+                        <li><a href="pages-typography.html">Typography</a></li>
+                        <li><a href="pages-404.html">404 Page</a></li>
+                        <li><a href="pages-coming-soon.html">Coming Soon</a></li>
                       </ul>
                     </li>
                     <li>
-                      <a href="">portfolio</a>
+                      <a href="projects.html">Projects</a>
                       <ul>
-                        <li><a href="">3 columns</a></li>
-                        <li><a href="">4 columns</a></li>
-                        <li><a href="">5 columns</a></li>
-                        <li><a href="">single project</a></li>
+                        <li><a href="projects-3-cols.html">Portfolio</a>
+                          <ul>
+                            <li><a href="projects-3-cols.html">3 Cols Portfolio</a></li>
+                            <li><a href="projects-3-cols-sidebar.html">3 Cols With Sidebar</a></li>
+                            <li><a href="projects-4-cols.html">4 Cols Portfolio</a></li>
+                            <li><a href="projects-5-cols.html">5 Cols Portfolio</a></li>
+                            <li><a href="projects-single-portfolio.html">Single Portfolio Page</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="index-3.html">Estate</a>
+                          <ul>
+                            <li><a href="projects-estate-listing-1.html">Estate Listing 1</a></li>
+                            <li><a href="projects-estate-listing-1-sidebar.html">Estate Listing 1 Sidebar</a></li>
+                            <li><a href="projects-estate-listing-2.html">Estate Listing 2</a></li>
+                            <li><a href="projects-estate-listing-2-sidebar.html">Estate Listing 2 Sidebar</a></li>
+                            <li><a href="projects-single-estate.html">Single Estate Page</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="index-5.html">Online Store</a>
+                          <ul>
+                            <li><a href="projects-store-catalog.html">Online Store Catalog</a></li>
+                            <li><a href="projects-store-cart.html">Online Store Shopping Cart</a></li>
+                            <li><a href="projects-store-checkout.html">Online Store Checkout</a></li>
+                            <li><a href="projects-single-product.html">Single Store Product</a></li>
+                          </ul>
+                        </li>
                       </ul>
                     </li>
                     <li>
-                      <a href="">news</a>
+                      <a href="blog-listing-1.html">news</a>
                       <ul>
-                        <li><a href="">blog</a></li>
-                        <li><a href="">single article</a></li>
+                                                <li><a href="blog-listing-1.html">blog listing 1</a></li>
+                        <li><a href="blog-listing-2.html">blog listing 2</a></li>
+                        <li><a href="blog-masonry.html">blog masonry</a></li>
+                        <li><a href="blog-timeline.html">blog timeline</a></li>
+                        <li><a href="blog-article.html">single blog article</a></li>
+
                       </ul>
                     </li>
-                    <li>
-                      <a href="">store</a>
-                      <ul>
-                        <li><a href="">catalog</a></li>
-                        <li><a href="">single product</a></li>
+                    <li><a href="contacts-general.html">contacts</a>
+                                            <ul>
+                        <li><a href="contacts-general.html">general</a></li>
+                        <li><a href="contacts-advanced.html">advanced</a></li>
+                        <li><a href="contacts-ajax.html">HTML5/AJAX Form</a></li>
                       </ul>
+
                     </li>
-                    <li><a href="">contacts</a></li>
                   </ul>
                 <!--
 
@@ -152,6 +194,8 @@
 
                 //-->
                 </nav>
+
+
     <!--
 
     Envor mobile menu end
@@ -287,7 +331,7 @@
                 //-->
                 </div>
                 </a>
-                                <!--
+                <!--
 
                 Desktop Menu start
 
@@ -520,315 +564,511 @@
     <div class="envor-content">
       <!--
 
-      Page Title start
+      LayerSlider start
 
       //-->
-      <section class="envor-page-title-1" data-stellar-background-ratio="0.5">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-9 col-md-9 col-sm-9">
-              <h1>Two Sidebars</h1>
+      <section class="envor-section envor-home-slider">
+        <div id="layerslider" class="envor-layerslider" style="height: 500px;">
+          <!--LayerSlider layer-->
+          <div class="ls-layer" style="transition3d: 1,4,5,11; transition2d: 2,8,30;">
+            <!--LayerSlider background-->
+            <img class="ls-bg" src="img/slider-bg.jpg" alt="layer1-background">
+            <div class="envor-layerslider-block ls-s1" style="top: 300px; left: 15px; transition2d: all; slidedelay: 6000; durationin: 1000; easingin: easeOutExpo;">
+              <h3>we are</h3>
+              <h2>envor</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-3">
-              <form class="search">
-                <input type="text" placeholder="type to search...">
-              </form>
+          </div>
+          <!--LayerSlider layer-->
+          <div class="ls-layer" style="transition3d: 2,3,6,14; transition2d: 4,5,23;">
+            <!--LayerSlider background-->
+            <img class="ls-bg" src="img/slider-bg.jpg" alt="layer1-background">
+            <div class="envor-layerslider-block ls-s1" style="top: 300px; left: 15px; transition2d: all; slidedelay: 6000; durationin: 1000; easingin: easeOutExpo;">
+              <h3>we are</h3>
+              <h2>envor</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+          </div>
+          <!--LayerSlider layer-->
+          <div class="ls-layer" style="transition3d: 2,3,6,14; transition2d: 4,5,23;">
+            <!--LayerSlider background-->
+            <img class="ls-bg" src="img/slider-bg.jpg" alt="layer1-background">
+            <div class="envor-layerslider-block ls-s1" style="top: 300px; left: 15px; transition2d: all; slidedelay: 6000; durationin: 1000; easingin: easeOutExpo;">
+              <h3>we are</h3>
+              <h2>envor</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
           </div>
         </div>
       <!--
 
-      Page Title end
+      LayerSlider end
 
       //-->
       </section>
       <!--
 
-      Desktop breadscrubs start
-
-      //-->
-      <section class="envor-desktop-breadscrubs">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="envor-desktop-breadscrubs-inner">
-                <a href="index.html">Home</a><i class="fa fa-angle-double-right"></i><a href="pages.html">pages</a><i class="fa fa-angle-double-right"></i>Two Sidebars
-              </div>
-            </div>
-          </div>
-        </div>
-      <!--
-
-      Desktop breadscrubs end
-
-      //-->
-      </section>
-      <!--
-
-      Mobile breadscrubs start
-
-      //-->
-      <section class="envor-mobile-breadscrubs">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <a href="index.html">Home</a><i class="fa fa-angle-double-right"></i><a href="pages.html">pages</a><i class="fa fa-angle-double-right"></i>Two Sidebars
-            </div>
-          </div>
-        </div>
-      <!--
-
-      Mobile breadscrubs end
-
-      //-->
-      </section>
-      <!--
-
-      Main Content start
-
+      Features start
+      
       //-->
       <section class="envor-section">
         <div class="container">
           <div class="row">
             <!--
 
-            Two Sidebars start
+            Feature
 
             //-->
-            <div class="col-lg-3">
-              <!--
-
-              Search Widget
-
-              //-->
-              <aside class="envor-widget envor-search-widget">
-                <h3><strong>Search</strong> Widget</h3>
-                <div class="envor-widget-inner">
-                  <form>
-                    <input type="text" name="s" placeholder="type to search...">
-                  </form>
-                </div>
-              </aside>
-              <!--
-
-              Categories Widget
-
-              //-->
-              <aside class="envor-widget envor-category-widget">
-                <h3>browse <strong>Categories</strong></h3>
-                <div class="envor-widget-inner">
-                  <ul>
-                    <li>
-                      <p><a href=""><i class="glyphicon glyphicon-folder-open"></i> web</a> <a href=""><i class="fa fa-rss"></i></a> <span>16</span></p>
-                      <small>Cras facilisis diam sit amet.</small>
-                    </li>
-                    <li>
-                      <p><a href=""><i class="glyphicon glyphicon-folder-open"></i> html</a> <a href=""><i class="fa fa-rss"></i></a> <span>21</span></p>
-                      <small>Integer ante velit, tempus eu libero id.</small>
-                    </li>
-                    <li>
-                      <p><a href=""><i class="glyphicon glyphicon-folder-open"></i> design</a> <a href=""><i class="fa fa-rss"></i></a> <span>7</span></p>
-                      <small>Sed feugiat purus eu diam.</small>
-                    </li>
-                    <li>
-                      <p><a href=""><i class="glyphicon glyphicon-folder-open"></i> development</a> <a href=""><i class="fa fa-rss"></i></a> <span>11</span></p>
-                      <small>Nunc pretium lorem ullamcorper tincidunt.</small>
-                    </li>
-                    <li>
-                      <p><a href=""><i class="glyphicon glyphicon-folder-open"></i> marketing</a> <a href=""><i class="fa fa-rss"></i></a> <span>35</span></p>
-                      <small>Vestibulum placerat, nulla eu molestie.</small>
-                    </li>
-                  </ul>
-                </div>
-              </aside>
-              <!--
-
-              Tabs Widget
-
-              //-->
-              <aside class="envor-widget envor-search-widget">
-                <h3>Blog <strong>Posts</strong></h3>
-                <div class="envor-widget-inner">
-                  <div class="envor-tabs">
-                    <header>
-                      <span><i class="fa fa-calendar"></i></span>
-                      <span><i class="fa fa-star"></i></span>
-                      <span><i class="fa fa-comment"></i></span>
-                    </header>
-                    <article>
-                      <!--
-
-                      Sidebar Post Item
-
-                      //-->
-                      <div class="envor-sidebar-post">
-                        <figure><a href=""><img src="img/img1.png" alt=""></a></figure>
-                        <p class="title"><a href="">Quisque rutrum nibh</a></p>
-                        <small class="meta">By <a href="">admin</a>, <a href="">5 Comments</a></small>
-                      </div>
-                      <!--
-
-                      Sidebar Post Item
-                      
-                      //-->
-                      <div class="envor-sidebar-post">
-                        <figure><a href=""><img src="img/img1.png" alt=""></a></figure>
-                        <p class="title"><a href="">Integer quis neque</a></p>
-                        <small class="meta">By <a href="">admin</a>, <a href="">5 Comments</a></small>
-                      </div>
-                      <!--
-
-                      Sidebar Post Item
-                      
-                      //-->
-                      <div class="envor-sidebar-post">
-                        <figure><a href=""><img src="img/img1.png" alt=""></a></figure>
-                        <p class="title"><a href="">Etiam in mattis risus</a></p>
-                        <small class="meta">By <a href="">admin</a>, <a href="">5 Comments</a></small>
-                      </div>
-                    </article>
-                    <article>
-                      <!--
-
-                      Sidebar Post Item
-                      
-                      //-->
-                      <div class="envor-sidebar-post">
-                        <figure><a href=""><img src="img/img1.png" alt=""></a></figure>
-                        <p class="title"><a href="">Duis non sollicitudin</a></p>
-                        <small class="meta">By <a href="">admin</a>, <a href="">5 Comments</a></small>
-                      </div>
-                      <!--
-
-                      Sidebar Post Item
-                      
-                      //-->
-                      <div class="envor-sidebar-post">
-                        <figure><a href=""><img src="img/img1.png" alt=""></a></figure>
-                        <p class="title"><a href="">Fusce nisl magna</a></p>
-                        <small class="meta">By <a href="">admin</a>, <a href="">5 Comments</a></small>
-                      </div>
-                      <!--
-
-                      Sidebar Post Item
-                      
-                      //-->
-                      <div class="envor-sidebar-post">
-                        <figure><a href=""><img src="img/img1.png" alt=""></a></figure>
-                        <p class="title"><a href="">Nulla varius eget</a></p>
-                        <small class="meta">By <a href="">admin</a>, <a href="">5 Comments</a></small>
-                      </div>
-                    </article>
-                    <article>
-                      <!--
-
-                      Sidebar Comment Item
-
-                      //-->
-                      <div class="envor-sidebar-comment">
-                        <p><a href="">admin</a> says:</p>
-                        <p class="comment">" Duis consectetur consequat tellus sit amet luctus... "</p>
-                        <p>On <a href="">Posts title here</a></p>
-                      </div>
-                      <!--
-
-                      Sidebar Comment Item
-                      
-                      //-->
-                      <div class="envor-sidebar-comment">
-                        <p><a href="">admin</a> says:</p>
-                        <p class="comment">" Duis consectetur consequat tellus sit amet luctus... "</p>
-                        <p>On <a href="">Posts title here</a></p>
-                      </div>
-                      <!--
-
-                      Sidebar Comment Item
-                      
-                      //-->
-                      <div class="envor-sidebar-comment">
-                        <p><a href="">admin</a> says:</p>
-                        <p class="comment">" Duis consectetur consequat tellus sit amet luctus... "</p>
-                        <p>On <a href="">Posts title here</a></p>
-                      </div>
-                    </article>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <article class="envor-feature">
+                  <div class="envor-feature-inner">
+                  <header>
+                    <i class="fa fa-globe"></i>
+                    lovely
+                  </header>
+                  <p>Donec cursus ligula ante, non faucibus felis lobortis sed.</p>
+                  <p><a href="">Details <i class="fa fa-arrow-circle-right"></i></a></p>
                   </div>
-                </div>
-              </aside>
-            <!--
-
-            Two Sidebars end
-
-            //-->
+                </article>
             </div>
             <!--
 
-            Content Section start
+            Feature
 
             //-->
-            <div class="col-lg-6">
-              <h2 class="align-left">This Is An Example <strong>Sidebar</strong> Page</h2>
-              <figure><img src="img/img1.png" alt=""></figure>
-              <p>&nbsp;</p>
-              <p>Quisque vitae commodo est. Duis rutrum odio nec risus sagittis pretium. Etiam bibendum turpis in tellus tempor, eget convallis nisi feugiat. Sed in eros ipsum. Vestibulum viverra adipiscing commodo. Sed vel nulla augue. In pellentesque aliquet lacus, vitae sagittis orci dictum vel. Maecenas mattis eros nec erat blandit aliquam. Aliquam aliquet lobortis dictum. Integer interdum interdum magna et dignissim. Donec tincidunt elit libero, eu blandit mauris tincidunt ut. Quisque malesuada commodo nisi vitae varius. Quisque malesuada quam ut sapien consequat suscipit. Nullam vel turpis lobortis, dapibus tortor nec, blandit ligula. Praesent vitae turpis eget purus rhoncus cursus nec id metus.</p>
-              <p>Praesent pulvinar quis enim quis auctor. Nam condimentum, nisi vitae volutpat bibendum, turpis nisl malesuada arcu, vitae consequat nibh est quis dolor. In consectetur nec risus sed tempor. Maecenas eu est felis. Sed a elit eget ligula rhoncus fringilla ac sit amet sapien. Mauris sagittis lectus eget interdum viverra. Vestibulum nec nisi eu nunc porttitor tristique. Cras nunc quam, cursus id dictum ut, ultrices at sapien. Maecenas lectus tellus, gravida vitae mollis nec, vulputate eu nibh. Sed ornare ante ac velit gravida rhoncus. Ut vitae molestie magna, feugiat porttitor enim.</p>
-              <blockquote>Nunc vel posuere tortor. Donec elementum purus nec hendrerit viverra. Morbi consectetur, ligula ut varius ultricies, felis felis facilisis libero, quis luctus massa leo at sapien. Nam ultricies lorem tellus, vitae congue felis tempor sit amet. Nam congue dui sem, at consequat tellus bibendum id. Vivamus porttitor augue a lorem suscipit viverra.</blockquote>
-              <p>Nam venenatis, neque at euismod lobortis, felis nulla tristique metus, in ultricies elit nulla a turpis. Nam condimentum nulla metus, vel blandit metus suscipit suscipit. Vivamus sed tortor tortor. Donec id lectus odio. Vestibulum vel tortor ac nibh pharetra vestibulum malesuada sit amet felis. Mauris placerat ornare leo eu sagittis. Suspendisse eu consequat elit. Donec suscipit scelerisque ligula, ullamcorper luctus sem laoreet eget. Duis quis iaculis enim. Etiam sit amet tristique augue, vel imperdiet lectus. Aliquam vitae pharetra mi. Aenean turpis dui, ultrices sit amet varius et, dignissim quis leo. Vivamus tempus, augue ut placerat adipiscing, dui ipsum rutrum risus, in euismod mi nibh non urna. Pellentesque dignissim ut risus id bibendum. Morbi quis nulla luctus, interdum nisi quis, euismod dolor.</p>
-              <h3>H3 Headline</h3>
-              <p>Quisque elementum, enim sagittis tempor tincidunt, sapien dui cursus orci, sed luctus neque eros in urna. Nunc gravida augue eget felis imperdiet lacinia. Duis feugiat porta ante non ornare. Duis mattis, magna rhoncus malesuada rutrum, leo libero rutrum lorem, vel rhoncus lorem risus id risus. Aliquam tincidunt ipsum vel turpis viverra, iaculis bibendum est bibendum. Nam luctus semper bibendum. Ut vel tortor non leo lacinia eleifend volutpat vitae dui. Vivamus accumsan lacus quam, ut semper tortor porta in. Sed dictum iaculis consequat. Donec posuere arcu mollis, sagittis velit a, viverra augue. Nunc blandit at est quis rhoncus. Donec egestas vestibulum orci, sit amet mattis metus elementum placerat. Maecenas accumsan mi in purus rutrum, convallis tempus metus porta. Proin blandit lectus ac lacus pharetra, in porttitor mauris sagittis.</p>
-              <ul>
-                <li>Sed placerat suscipit;</li>
-                <li>Sed quis dictum ligula;</li>
-                <li>Praesent sapien nisl;</li>
-                <li>Maecenas fringilla purus odio;</li>
-                <li>Nullam sed euismod nulla.</li>
-              </ul>
-              <p>Quisque id laoreet libero. Aenean commodo, sapien et tincidunt eleifend, nulla turpis egestas metus, in adipiscing nibh enim vel turpis. Pellentesque ullamcorper nulla at augue porta molestie. Donec eu augue rutrum, sollicitudin ipsum ac, pharetra urna. Praesent elementum tempor lacinia. Curabitur imperdiet at purus eget euismod. Nulla suscipit, quam non pulvinar iaculis, nisl massa interdum metus, ac placerat diam nibh sed mauris. Curabitur blandit sit amet neque non sagittis.</p>
-            <!--
-
-            Content Section end
-
-            //-->
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <article class="envor-feature">
+                  <div class="envor-feature-inner">
+                  <header>
+                    <i class="fa fa-cog"></i>
+                    exquisite
+                  </header>
+                  <p>Vivamus sollicitudin nisi rhoncus bibendum suscipit.</p>
+                  <p><a href="">Details <i class="fa fa-arrow-circle-right"></i></a></p>
+                  </div>
+                </article>
             </div>
             <!--
 
-            Right Sidebar start
+            Feature
 
             //-->
-            <div class="col-lg-3">
-              <!--
-
-              Video Widget
-
-              //-->
-              <aside class="envor-widget">
-                <h3><strong>Video</strong> widget</h3>
-                <div class="envor-widget-inner">
-                  <iframe src="//www.youtube.com/embed/iU8iA7jfrIg" frameborder="0" allowfullscreen></iframe>
-                </div>
-              </aside>
-              <!--
-
-              Twitter Widget
-
-              //-->
-              <aside class="envor-widget envor-simple-twiiter-widget">
-                <h3>Recent <strong>Tweets</strong></h3>
-                <div class="envor-widget-inner">
-                  <script>twitterFetcher.fetch('428880392213381120', 'twitter-posts-2', 2, true, false, false);</script>
-                  <div id="twitter-posts-2"></div>
-                </div>
-              </aside>
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <article class="envor-feature">
+                  <div class="envor-feature-inner">
+                  <header>
+                    <i class="fa fa-trophy"></i>
+                    glorious
+                  </header>
+                  <p>Pellentesque lacinia, lectus ac varius adipiscing.</p>
+                  <p><a href="">Details <i class="fa fa-arrow-circle-right"></i></a></p>
+                  </div>
+                </article>
+            </div>
             <!--
 
-            Right Sidebar end
+            Feature
 
             //-->
+            <div class="col-lg-3 col-md-3 col-sm-6">
+                <article class="envor-feature">
+                  <div class="envor-feature-inner">
+                  <header>
+                    <i class="fa fa-flask"></i>
+                    stunning
+                  </header>
+                  <p>Fusce mattis sem sed lectus rhoncus nisl nisl tincidunt libero.</p>
+                  <p><a href="">Details <i class="fa fa-arrow-circle-right"></i></a></p>
+                  </div>
+                </article>
             </div>
           </div>
         </div>
       <!--
 
-      Main Content start
+      Features end
+      
+      //-->
+      </section>
+      <!--
+
+      Call To Action start
+
+      //-->
+      <section class="envor-section envor-section-st1 envor-section-align-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <h2>welcome to <strong>Envor</strong> - <span>HTML5/CSS3</span> Multipurpose Template</h2>
+              <p>Vestibulum nunc erat, venenatis tristique nisi sit amet, volutpat accumsan lorem. Sed quis tortor magna. Maecenas hendrerit feugiat pulvinar. Aenean condimentum quam eu ultricies cursus.  Nulla facilisi. In hac habitasse platea dictumst. Ut nec tellus neque. Sed non dui eget arcu elementum facilisis.</p>
+              <p>
+                <a href="" class="envor-btn envor-btn-primary envor-btn-normal"><i class="glyphicon glyphicon-check"></i> purchase now!</a>
+                <a href="" class="envor-btn envor-btn-secondary envor-btn-normal"><i class="glyphicon glyphicon-question-sign"></i> discover more</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      <!--
+
+      Call To Action end
+
+      //-->
+      </section>
+      <!--
+
+      Projects start
+
+      //-->
+      <section class="envor-section envor-section-align-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <h2>latest <strong>projects</strong></h2>
+              <p class="block-description">Nullam condimentum nibh at lorem feugiat, at pulvinar orci luctus.</p>
+              <p>Etiam in ante ac velit imperdiet vestibulum ac quis nisi. Morbi sed fringilla nisl, a lacinia justo. Mauris vitae pellentesque felis. Nam placerat turpis eu mauris dignissim, in fringilla odio lobortis. Suspendisse venenatis sit amet lorem faucibus eleifend.</p>
+              <div class="envor-relative" id="latest-projects">
+                <!--
+
+                Projects Item start
+
+                //-->
+                <article class="envor-project envor-padding-left-30">
+                  <div class="envor-project-inner">
+                    <figure><a href=""><img src="img/img1.png" alt=""></a><figcaption><a href="img/img1.png" title="Morbi sagittis lacinia" class="colorbox"><i class="fa fa-plus"></i></a></figcaption></figure>
+                    <div class="envor-project-details">
+                      <div class="envor-project-likes"><i class="fa fa-thumbs-o-up"></i> 14</div>
+                      <p class="link"><a href="">Morbi sagittis lacinia</a></p>
+                      <p class="filter">javascript, html</p>
+                    </div>
+                  </div>
+                <!--
+
+                Projects Item end
+
+                //-->
+                </article>
+                <!--
+
+                Projects Item start
+
+                //-->
+                <article class="envor-project envor-padding-left-30">
+                  <div class="envor-project-inner">
+                    <figure><a href=""><img src="img/img1.png" alt=""></a><figcaption><a href="img/img1.png" title="Morbi sagittis lacinia" class="colorbox"><i class="fa fa-plus"></i></a></figcaption></figure>
+                    <div class="envor-project-details">
+                      <div class="envor-project-likes"><i class="fa fa-thumbs-o-up"></i> 21</div>
+                      <p class="link"><a href="">turpis lobortis</a></p>
+                      <p class="filter">web, photo</p>
+                    </div>
+                  </div>
+                <!--
+
+                Projects Item end
+
+                //-->
+                </article>
+                <!--
+
+                Projects Item start
+
+                //-->
+                <article class="envor-project envor-padding-left-30">
+                  <div class="envor-project-inner">
+                    <figure><a href=""><img src="img/img1.png" alt=""></a><figcaption><a href="img/img1.png" title="Morbi sagittis lacinia" class="colorbox"><i class="fa fa-plus"></i></a></figcaption></figure>
+                    <div class="envor-project-details">
+                      <div class="envor-project-likes"><i class="fa fa-thumbs-o-up"></i> 6</div>
+                      <p class="link"><a href="">Vestibulum tincidunt</a></p>
+                      <p class="filter">css, media</p>
+                    </div>
+                  </div>
+                <!--
+
+                Projects Item end
+
+                //-->
+                </article>
+                <!--
+
+                Projects Item start
+
+                //-->
+                <article class="envor-project envor-padding-left-30">
+                  <div class="envor-project-inner">
+                    <figure><a href=""><img src="img/img1.png" alt=""></a><figcaption><a href="img/img1.png" title="Morbi sagittis lacinia" class="colorbox"><i class="fa fa-plus"></i></a></figcaption></figure>
+                    <div class="envor-project-details">
+                      <div class="envor-project-likes"><i class="fa fa-thumbs-o-up"></i> 30</div>
+                      <p class="link"><a href="">mauris non egestas</a></p>
+                      <p class="filter">html, photo</p>
+                    </div>
+                  </div>
+                <!--
+
+                Projects Item end
+
+                //-->
+                </article>
+                <!--
+
+                Projects Item start
+
+                //-->
+                <article class="envor-project envor-padding-left-30">
+                  <div class="envor-project-inner">
+                    <figure><a href=""><img src="img/img1.png" alt=""></a><figcaption><a href="img/img1.png" title="Morbi sagittis lacinia" class="colorbox"><i class="fa fa-plus"></i></a></figcaption></figure>
+                    <div class="envor-project-details">
+                      <div class="envor-project-likes"><i class="fa fa-thumbs-o-up"></i> 17</div>
+                      <p class="link"><a href="">Nam mollis felis</a></p>
+                      <p class="filter">javascript, design</p>
+                    </div>
+                  </div>
+                <!--
+
+                Projects Item end
+
+                //-->
+                </article>
+                <!--
+
+                Projects Item start
+
+                //-->
+                <article class="envor-project envor-padding-left-30">
+                  <div class="envor-project-inner">
+                    <figure><a href=""><img src="img/img1.png" alt=""></a><figcaption><a href="img/img1.png" title="Morbi sagittis lacinia" class="colorbox"><i class="fa fa-plus"></i></a></figcaption></figure>
+                    <div class="envor-project-details">
+                      <div class="envor-project-likes"><i class="fa fa-thumbs-o-up"></i> 25</div>
+                      <p class="link"><a href="">et diam commodo</a></p>
+                      <p class="filter">develpopment, css</p>
+                    </div>
+                  </div>
+                <!--
+
+                Projects Item end
+
+                //-->
+                </article>
+                <!--
+
+                Projects Navigation start
+
+                //-->
+                <div class="envor-navigation rivaslider-navigation">
+                  <a href="" class="back"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                  <a href="" class="forward"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                <!--
+
+                Projects Navigation end
+
+                //-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!--
+
+      Projects end
+
+      //-->
+      </section>
+      <!--
+
+      Testimonials #1 start
+
+      //-->
+      <section class="envor-section envor-section-align-center envor-section-bg1" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <h2>clients <strong>testimonials</strong></h2>
+              <div class="envor-wrapper" id="clients-testimonials">
+                <!--
+
+                Testimonials #1 Item start
+
+                //-->
+                <article class="envor-testimonials-1">
+                  <div class="envor-testimonials-inner">
+                    <p><em>Quisque eget dictum turpis. Cras suscipit luctus facilisis. Etiam et elit eget dui sodales auctor vitae semper sapien. Ut iaculis erat non nunc feugiat laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</em></p>
+                    <p class="author">- Ruth M. Patterson, <span>developer</span></p>
+                    <i class="fa fa-quote-left"></i>
+                    <i class="fa fa-quote-right"></i>
+                  </div>
+                <!--
+
+                Testimonials #1 Item end
+
+                //-->
+                </article>
+                <!--
+
+                Testimonials #1 Item start
+
+                //-->
+                <article class="envor-testimonials-1">
+                  <div class="envor-testimonials-inner">
+                    <p><em>Pellentesque et condimentum ligula, ut eleifend neque. Phasellus ullamcorper nisl ut ligula semper dapibus.</em></p>
+                    <p class="author">- Sarah T. Elliot, <span>developer</span></p>
+                    <i class="fa fa-quote-left"></i>
+                    <i class="fa fa-quote-right"></i>
+                  </div>
+                <!--
+
+                Testimonials #1 Item end
+
+                //-->
+                </article>
+                <!--
+
+                Testimonials #1 Item start
+
+                //-->
+                <article class="envor-testimonials-1">
+                  <div class="envor-testimonials-inner">
+                    <p><em>Nam non dolor vulputate risus condimentum convallis quis non purus. Suspendisse tellus sapien, dignissim at tincidunt eu, tristique ac mauris. Aliquam sed lectus ut dolor vulputate sollicitudin. Sed leo erat, gravida eu massa a, placerat ultrices nulla. Sed cursus congue convallis.</em></p>
+                    <p class="author">- Vicki N. Ennis, <span>developer</span></p>
+                    <i class="fa fa-quote-left"></i>
+                    <i class="fa fa-quote-right"></i>
+                  </div>
+                <!--
+
+                Testimonials #1 Item end
+
+                //-->
+                </article>
+                <!--
+
+                Testimonials #1 Item start
+
+                //-->
+                <article class="envor-testimonials-1">
+                  <div class="envor-testimonials-inner">
+                    <p><em>Sed faucibus metus nibh, a condimentum lorem mattis sit amet. Ut feugiat a arcu at blandit. Cras elementum, lacus sed posuere dapibus, ipsum erat dapibus erat, dapibus malesuada neque enim eu turpis.</em></p>
+                    <p class="author">- Michael K. Nguyen, <span>developer</span></p>
+                    <i class="fa fa-quote-left"></i>
+                    <i class="fa fa-quote-right"></i>
+                  </div>
+                <!--
+
+                Testimonials #1 Item end
+
+                //-->
+                </article>
+                <!--
+
+                Testimonials #1 Item start
+
+                //-->
+                <article class="envor-testimonials-1">
+                  <div class="envor-testimonials-inner">
+                    <p><em>Mauris sit amet diam aliquet, iaculis nulla eget, vestibulum dolor. Aenean nec lacus porta, elementum augue vel, fringilla neque. Suspendisse eu odio mauris. Cras vehicula dolor sagittis lacus lobortis bibendum. Nunc nec purus non sapien rutrum euismod a ut ipsum. Maecenas egestas mi vitae nunc lacinia vulputate. Fusce iaculis ante diam, dignissim venenatis odio sollicitudin quis. Sed tristique elementum velit id condimentum.</em></p>
+                    <p class="author">- Marvin M. Gilbert, <span>developer</span></p>
+                    <i class="fa fa-quote-left"></i>
+                    <i class="fa fa-quote-right"></i>
+                  </div>
+                <!--
+
+                Testimonials #1 Item end
+
+                //-->
+                </article>
+                <!--
+
+                Testimonials #1 Controls end
+
+                //-->
+                <div class="envor-controls rivaslider-controls"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!--
+
+      Testimonials #1 end
+
+      //-->
+      </section>
+      <!--
+
+      Partners start
+
+      //-->
+      <section class="envor-section envor-section-align-center">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <h2>our <strong>partners</strong></h2>
+              <div class="envor-relative" id="our-partners">
+                <article class="envor-partner-logo">
+                  <div class="envor-partner-logo-inner">
+                    <img src="img/img4.png" alt="">
+                  </div>
+                </article>
+                <article class="envor-partner-logo">
+                  <div class="envor-partner-logo-inner">
+                    <img src="img/img4.png" alt="">
+                  </div>
+                </article>
+                <article class="envor-partner-logo">
+                  <div class="envor-partner-logo-inner">
+                    <img src="img/img4.png" alt="">
+                  </div>
+                </article>
+                <article class="envor-partner-logo">
+                  <div class="envor-partner-logo-inner">
+                    <img src="img/img4.png" alt="">
+                  </div>
+                </article>
+                <article class="envor-partner-logo">
+                  <div class="envor-partner-logo-inner">
+                    <img src="img/img4.png" alt="">
+                  </div>
+                </article>
+                <article class="envor-partner-logo">
+                  <div class="envor-partner-logo-inner">
+                    <img src="img/img4.png" alt="">
+                  </div>
+                </article>
+                <article class="envor-partner-logo">
+                  <div class="envor-partner-logo-inner">
+                    <img src="img/img4.png" alt="">
+                  </div>
+                </article>
+                <article class="envor-partner-logo">
+                  <div class="envor-partner-logo-inner">
+                    <img src="img/img4.png" alt="">
+                  </div>
+                </article>
+                <!--
+                * Our Partners Controls
+                //-->
+                <div class="envor-controls rivaslider-controls"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!--
+
+      Partners end
+
+      //-->
+      </section>
+      <!--
+
+      Call To Action #2 start
+
+      //-->
+      <section class="envor-section envor-section-st2 envor-section-cta2">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <p><span>Like <strong>Envor</strong> Template? Purchase in on ThemeForest!</span> <a href="" class="envor-btn envor-btn-normal envor-btn-border-white"><i class="glyphicon glyphicon-download"></i> purchase and download</a></p>
+            </div>
+          </div>
+        </div>
+      <!--
+
+      Call To Action #2 end
 
       //-->
       </section>
@@ -1065,7 +1305,7 @@
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the Two Sidebars load faster -->
+    <!-- Placed at the end of the document so the pages load faster -->
         <script src="js/vendor/jquery-1.11.0.min.js"></script>
 
     <script src="js/vendor/core-1.0.5.js"></script>
@@ -1075,13 +1315,13 @@
     <script src="js/jquery.mousewheel.min.js"></script>
     <script src="js/jquery.colorbox-min.js"></script>
     <script src="js/preloadCssImages.jQuery_v5.js"></script>
-        <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
 <script src="js/masonry.pkgd.min.js"></script>
 <script src="js/imagesloaded.pkgd.min.js"></script>
+
     <!--
     * jQuery with jQuery Easing, and jQuery Transit JS
     //-->
-
     <script src="js/layerslider/jquery-easing-1.3.js" type="text/javascript"></script>
     <script src="js/layerslider/jquery-transit-modified.js" type="text/javascript"></script>
     <!--
@@ -1097,12 +1337,59 @@
 
           /*
 
+          Home Page Layer Slider
+
+          */
+          $('#layerslider').layerSlider({
+            skinsPath               : 'css/layerslider/skins/',
+            skin : 'fullwidth',
+            thumbnailNavigation : 'hover',
+            hoverPrevNext : false,
+            responsive : false,
+            responsiveUnder : 1170,
+            sublayerContainer : 1170
+          });
+          /*
+
+          Latest Projects Slider
+          
+          */
+          var $latestProjects = $('#latest-projects');
+          // initialize Masonry after all images have loaded  
+          $latestProjects.imagesLoaded( function() {
+            $latestProjects.rivaSlider({
+              visible : 4,
+              selector : 'envor-project'
+            });
+          });
+          /*
+
+          Our Partners Slider
+
+          */
+          $('#our-partners').rivaCarousel({
+            visible : 5,
+            selector : 'envor-partner-logo',
+            mobile_visible : 1
+          });
+          /*
+
           Footer News Slider
 
           */
           $('#footer-news').rivaSlider({
             visible : 1,
             selector : 'envor-post-preview'
+          });
+          /*
+
+          Testimonials #1 Carousel
+
+          */
+          $('#clients-testimonials').rivaCarousel({
+            visible : 1,
+            selector : 'envor-testimonials-1',
+            mobile_visible : 1
           });
             $('#envor-preload').hide();
        });
