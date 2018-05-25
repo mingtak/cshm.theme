@@ -90,7 +90,7 @@
 <!--  <replace css:theme="#portal-top" css:content-children="#portal-top" /> -->
 
   <!-- Footer -->
-  <replace css:theme-children="footer.envor-footer.envor-footer-1" css:content-children="#portal-footer" />
+  <replace css:theme-children="footer.envor-footer.envor-footer-1" css:content-children="#portal-footer-wrapper" />
 
 </rules>
 </rules>
