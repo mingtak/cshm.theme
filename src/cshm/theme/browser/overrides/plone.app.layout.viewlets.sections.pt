@@ -1,0 +1,67 @@
+<tal:sections
+     xmlns:tal="http://xml.zope.org/namespaces/tal"
+     xmlns:metal="http://xml.zope.org/namespaces/metal"
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     tal:define="portal_tabs view/portal_tabs"
+     tal:condition="portal_tabs"
+     i18n:domain="plone">
+
+<?python
+from plone import api
+portal = api.portal.get()
+?>
+
+  <p class="hiddenStructure" i18n:translate="heading_sections">Navigation</p>
+  <nav class="plone-navbar" id="mobile-nav">
+      <ul tal:define="selected_tab python:view.selected_portal_tab">
+          <tal:tabs tal:repeat="tab portal_tabs">
+              <li tal:define="tid tab/id"
+                  tal:attributes="id string:portaltab-${tid};
+                                  class python:selected_tab==tid and 'selected' or nothing">
+                  <a href=""
+                     tal:content="tab/name"
+                     tal:attributes="href tab/url;
+                                     title tab/description|nothing;
+                                     target tab/link_target|nothing;">
+                  </a>
+                  <tal:ul define="sec_level python:portal[tab['id']].listFolderContents()" tal:on-error="nothing">
+                      <ul tal:condition="sec_level">
+                          <tal:li repeat="sec sec_level">
+                              <li tal:condition="not:sec/exclude_from_nav">
+                                  <a href="${sec/absolute_url}">${sec/title}</a>
+                              </li>
+                          </tal:li>
+                      </ul>
+                  </tal:ul>
+              </li>
+          </tal:tabs>
+      </ul>
+  </nav>
+
+  <nav class="plone-navbar" id="desktop-nav">
+      <ul tal:define="selected_tab python:view.selected_portal_tab">
+          <tal:tabs tal:repeat="tab portal_tabs">
+              <li tal:define="tid tab/id"
+                  tal:attributes="id string:portaltab-${tid};
+                                  class python:selected_tab==tid and 'selected' or nothing">
+                  <a href=""
+                     tal:content="tab/name"
+                     tal:attributes="href tab/url;
+                                     title tab/description|nothing;
+                                     target tab/link_target|nothing;">
+                  </a>
+                  <tal:ul define="sec_level python:portal[tab['id']].listFolderContents()" tal:on-error="nothing">
+                      <ul tal:condition="sec_level">
+                          <tal:li repeat="sec sec_level">
+                              <li tal:condition="not:sec/exclude_from_nav">
+                                  <a href="${sec/absolute_url}">${sec/title}</a>
+                              </li>
+                          </tal:li>
+                      </ul>
+                  </tal:ul>
+              </li>
+          </tal:tabs>
+      </ul>
+  </nav>
+
+</tal:sections>
