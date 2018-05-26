@@ -1,0 +1,13 @@
+<tal:statusmsg tal:define="messages view/messages"
+    tal:repeat="message messages">
+
+
+             <div style="margin-bottom:15px" tal:define="mtype message/type | nothing;"
+                  tal:attributes="class string:envor-msg envor-msg-${mtype};">
+                <header>
+                  <strong i18n:translate="" tal:content="python:'%s: ' % mtype.capitalize()" />
+                  <span tal:content="message/message | nothing" i18n:translate="" />
+                  <i class="fa fa-times"></i>
+                </header>
+             </div>
+</tal:statusmsg>
