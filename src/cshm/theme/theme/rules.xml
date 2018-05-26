@@ -60,7 +60,7 @@
   </replace>
 
   <!-- Alert message -->
-  <replace css:theme-children="#portal-message" css:content-children="#global_statusmessage" />
+  <replace css:theme-children=".portal-message" css:content-children="#global_statusmessage" />
 
   <!-- Left column -->
   <rules css:if-content="#portal-column-one">
