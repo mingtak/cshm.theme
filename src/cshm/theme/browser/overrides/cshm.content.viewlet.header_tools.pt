@@ -19,39 +19,50 @@
               Shopping cart start
 
               //-->
-              <div class="shopping-cart">
-                <span><i class="fa fa-shopping-cart regular"></i><i class="fa fa-shopping-cart hover"></i></span>
-                <div class="cart" style="display: none;">
-                  <p class="title">shopping cart</p>
-                  <div class="cart-entry mCustomScrollbar _mCS_1" id="topbarcart" style="overflow: hidden;"><div class="mCustomScrollBox mCS-light" id="mCSB_1" style="position: relative; height: 100%; overflow: hidden; max-width: 100%; max-height: 225px;"><div class="mCSB_container" style="position:relative; top:0;">
-                    <p><a href="/cshm/++theme++theme-for-cshm/">product title</a> x 2 <span class="price">$299.00</span></p>
-                    <p><a href="/cshm/++theme++theme-for-cshm/">product title</a> x 2 <span class="price">$299.00</span></p>
-                    <p><a href="/cshm/++theme++theme-for-cshm/">product title</a> x 2 <span class="price">$299.00</span></p>
-                    <p><a href="/cshm/++theme++theme-for-cshm/">product title</a> x 2 <span class="price">$299.00</span></p>
-                    <p><a href="/cshm/++theme++theme-for-cshm/">product title</a> x 2 <span class="price">$299.00</span></p>
-                    <p><a href="/cshm/++theme++theme-for-cshm/">product title</a> x 2 <span class="price">$299.00</span></p>
-                    <p><a href="/cshm/++theme++theme-for-cshm/">product title</a> x 2 <span class="price">$299.00</span></p>
-                  </div><div class="mCSB_scrollTools" style="position: absolute; display: block;"><div class="mCSB_draggerContainer"><div class="mCSB_dragger" style="position: absolute; height: 102px; top: 0px;" oncontextmenu="return false;"><div class="mCSB_dragger_bar" style="position: relative; line-height: 102px;"></div></div><div class="mCSB_draggerRail"></div></div></div></div></div>
-                  <p class="cart-btns"><a href="/cshm/++theme++theme-for-cshm/" class="envor-btn envor-btn-small envor-btn-primary">view cart</a></p>
-                </div>
 
-              <!--
-
-              Shopping cart end
-
-              //-->
-              </div>
               <!--
 
               Social Buttons start
 
               //-->
               <ul class="social-btns">
-                <li><a href="/cshm/++theme++theme-for-cshm/" class="regular"><i class="fa fa-facebook"></i></a><a href="/cshm/++theme++theme-for-cshm/" class="hover"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="/cshm/++theme++theme-for-cshm/" class="regular"><i class="fa fa-twitter"></i></a><a href="/cshm/++theme++theme-for-cshm/" class="hover"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="/cshm/++theme++theme-for-cshm/" class="regular"><i class="fa fa-linkedin"></i></a><a href="/cshm/++theme++theme-for-cshm/" class="hover"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="/cshm/++theme++theme-for-cshm/" class="regular"><i class="fa fa-google-plus"></i></a><a href="/cshm/++theme++theme-for-cshm/" class="hover"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="/cshm/++theme++theme-for-cshm/" class="regular"><i class="fa fa-rss"></i></a><a href="/cshm/++theme++theme-for-cshm/" class="hover"><i class="fa fa-rss"></i></a></li>
+               <tal:anon switch="view/isAnon">
+                <li tal:case="True" class="login">
+                  <a href="${view/portal/absolute_url}/login" class="regular" title="登入">
+                    登入<i class="fa fa-sign-in"></i>
+                  </a>
+                  <a href="${view/portal/absolute_url}/login" class="hover" title="登入">
+                    登入<i class="fa fa-sign-in"></i>
+                  </a>
+                </li>
+                <li tal:case="False" class="logout">
+                  <a href="${view/portal/absolute_url}/logout" class="regular" title="登出">
+                    您好, ${python:view.current.getProperty('fullname')} / <i class="fa fa-sign-out"></i>
+                  </a>
+                  <a href="${view/portal/absolute_url}/logout" class="hover" title="登出">
+                    您好, ${python:view.current.getProperty('fullname')} / <i class="fa fa-sign-out"></i>
+                  </a>
+                </li>
+               </tal:anon>
+               <tal:isMana condition="view/isMana">
+                <li>
+                  <a href="${view/portal/absolute_url}/folder_contents" class="regular" title="後台管理">
+                    <i class="fa fa-folder"></i>
+                  </a>
+                  <a href="${view/portal/absolute_url}/folder_contents" class="hover" title="後台管理">
+                    <i class="fa fa-folder-open"></i>
+                  </a>
+                </li>
+               </tal:isMana>
+                <li>
+                  <a href="https://www.facebook.com/中國勞工安全衛生管理學會-630695483732728/" class="regular" target="_blank">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                  <a href="https://www.facebook.com/中國勞工安全衛生管理學會-630695483732728/" class="hover" target="_blank">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                </li>
+
               <!--
 
               Social Buttons end
