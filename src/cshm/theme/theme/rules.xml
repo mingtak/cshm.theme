@@ -103,5 +103,8 @@
   <!-- header tools -->
   <replace css:theme=".envor-top-bar" css:content=".envor-top-bar" />
 
+  <!-- drop theme's mobile cart list -->
+  <drop css:theme="#envor-mobile-cart-btn, #envor-mobile-cart" />
+
 </rules>
 </rules>
