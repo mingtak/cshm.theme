@@ -1,3 +1,27 @@
+/* 中尺寸: 768~480px */
+@media (max-width: 768px) and (min-width: 480px) {
+    .envor-header-1 .envor-top-bar p.contacts {
+        display: none;
+    }
+
+    .envor-header-1 .envor-top-bar ul.social-btns {
+        display: initial;
+        float: initial;
+    }
+}
+/* 小尺寸: 480px 以下 */
+@media (max-width: 480px) {
+    .envor-header-1 .envor-top-bar p.contacts {
+        display: none;
+    }
+
+    .envor-header-1 .envor-top-bar ul.social-btns {
+        display: initial;
+        float: initial;
+    }
+}
+
+
 .envor-header-1 .envor-top-bar ul.social-btns li.login {
     width: 60px;
 }
