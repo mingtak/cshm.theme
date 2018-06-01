@@ -100,5 +100,8 @@
   <replace css:theme-children="nav#mobile-nav" css:content-children="nav#mobile-nav" />
   <replace css:theme-children="nav#desktop-nav" css:content-children="nav#desktop-nav" />
 
+  <!-- header tools -->
+  <replace css:theme=".envor-top-bar" css:content=".envor-top-bar" />
+
 </rules>
 </rules>
