@@ -7,14 +7,16 @@
           //-->
           <div class="col-lg-3 col-md-3">
             <div class="envor-widget">
-              <h3>關於我們</h3>
+              <h3>意見留言</h3>
               <div class="envor-widget-inner">
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                <p>如果任何意見，請填寫下列表單告訴我們，謝謝</p>
                 <div class="quick_newsletter">
-                  <form action="../../php/process.php">
-                    <input name="name" id="name" value="Name" class="text" onblur="_hint(this,'Name',1)" onclick="_hint(this,'Name',0)" type="text">
-                    <input name="email" id="email" value="email" class="text" onblur="_hint(this,'email',1)" onclick="_hint(this,'email',0)" type="text">
-                    <input name="submit" value="Subscribe me!" class="envor-btn envor-btn-primary envor-btn-normal" onclick="doSubscribe(this,'#subscribe_response_div');" type="button">
+                  <form action="javascript:void(0)">
+                    <input name="name" id="name" placeholder="姓名" class="text" type="text">
+                    <input name="email" id="email" placeholder="Email" class="text" type="email">
+                    <textarea placeholder="留言" id="detail-message" name="message" rows="5" style="width:100%; height:auto; margin-bottom:10px"></textarea>
+                    <input name="submit" value="留言送出"
+                           class="envor-btn envor-btn-primary envor-btn-normal" type="submit">
                   </form>
                 </div>
                 <span id="subscribe_response_div"></span>
@@ -151,19 +153,19 @@
           //-->
           <div class="col-lg-3 col-md-3">
             <div class="envor-widget envor-contacts-widget">
-              <h3>Contacts</h3>
+              <h3>聯絡我們</h3>
               <div class="envor-widget-inner">
                 <p>
                   <i class="fa fa-map-marker"></i>
-                  121 King Street, Melbourne  Victoria 3000, Australia
+                  100 台北市北平東路16號9樓
                 </p>
                 <p>
                   <i class="fa fa-phone"></i>
-                  731-509-5843
+                  (02)2321-8195
                 </p>
                 <p>
                   <i class="fa fa-envelope"></i>
-                  <a href="">support@envor.com</a>
+                  <a href="mailto:mole@cshm.org.tw">mole@cshm.org.tw</a>
                 </p>
               </div>
             </div>
@@ -178,11 +180,16 @@
           Footer Copyright start
 
           //-->
+<?python
+from plone import api
+from DateTime import DateTime
+portal = api.portal.get()
+?>
+
           <div class="col-lg-12">
             <div class="envor-widget envor-copyright-widget">
               <div class="envor-widget-inner">
-                <p>© Copyright 2013 by <a href="">envor</a>. All Rights Reserved.</p>
-                <p><a href="">home</a> / <a href="">faq</a> / <a href="">contacts</a></p>
+                <p>© Copyright ${python:DateTime().strftime('%Y')} by <a href="${portal/absolute_url}">中國勞工安全衛生管理學會</a>. All Rights Reserved.</p>
               </div>
             </div>
           <!--
