@@ -55,10 +55,10 @@
                 </li>
                </tal:isMana>
                 <li>
-                  <a href="https://www.facebook.com/中國勞工安全衛生管理學會-630695483732728/" class="regular" target="_blank">
+                  <a href="https://www.facebook.com/中國勞工安全衛生管理學會-630695483732728/" class="regular" target="_blank" title="FB動態">
                     <i class="fa fa-facebook"></i>
                   </a>
-                  <a href="https://www.facebook.com/中國勞工安全衛生管理學會-630695483732728/" class="hover" target="_blank">
+                  <a href="https://www.facebook.com/中國勞工安全衛生管理學會-630695483732728/" class="hover" target="_blank" title="FB動態">
                     <i class="fa fa-facebook"></i>
                   </a>
                 </li>
