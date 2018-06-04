@@ -1,0 +1,25 @@
+      <!--
+
+      LayerSlider start
+
+      //-->
+<?python
+from plone import api
+portal = api.portal.get()
+sliders = portal['resource']['cover_slider'].getChildNodes()
+?>
+      <section class="envor-section envor-home-slider" id="cover-slider">
+        <div id="layerslider" class="envor-layerslider" style="height: 350px;">
+          <!--LayerSlider layer-->
+          <div tal:repeat="item sliders"
+               class="ls-layer" style="transition3d: 1,4,5,11; transition2d: 2,8,30;">
+            <!--LayerSlider background-->
+            <img class="ls-bg" src="${item/absolute_url}/@@images/image" alt="${item/title}">
+          </div>
+        </div>
+      <!--
+
+      LayerSlider end
+
+      //-->
+      </section>

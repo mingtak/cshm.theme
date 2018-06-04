@@ -103,6 +103,11 @@
   <!-- header tools -->
   <replace css:theme=".envor-top-bar" css:content=".envor-top-bar" />
 
+  <!-- cover slider -->
+  <before css:theme-children=".envor-content" css:content="#cover-slider" />
+
+<!--  <drop css:theme=".envor-page-title-1" /> --> <!-- 暫時 -->
+
   <!-- drop theme's mobile cart list -->
   <drop css:theme="#envor-mobile-cart-btn, #envor-mobile-cart" />
 

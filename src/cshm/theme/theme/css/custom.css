@@ -33,6 +33,12 @@
 .template-course_info #content-core .detail {
     font-size: 16px;
 }
+
 #content-core .image-container-center {
     text-align: center;    
+}
+
+/* Home page Slider */
+.ls-layer .ls-bg {
+    top: 100%;
 }
