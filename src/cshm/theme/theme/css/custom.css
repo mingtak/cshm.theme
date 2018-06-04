@@ -38,7 +38,17 @@
     text-align: center;    
 }
 
+#results-count {
+    font-size: 22px;
+}
+
+.searchResults li {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
 /* Home page Slider */
 .ls-layer .ls-bg {
     top: 100%;
 }
+
