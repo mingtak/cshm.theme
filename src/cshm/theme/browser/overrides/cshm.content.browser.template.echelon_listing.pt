@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<h3>辦班作業</h3>
+<hr>
+  <tal:li repeat="item view/echelonBrain">
+      <tal:obj define="obj item/getObject">
+        <h4>${python:obj.getParentNode().title} / ${item/Title}</h4>
+        <h5><b>開班前</b></h5>
+        <ul>
+          <li>套版作業：教師聘</li>
+        </ul>
+        <br>
+        <h5><b>開班中</b></h5>
+        <br>
+        <h5><b>結訓後</b></h5>
+        <br>
+
+
+
+      </tal:obj>
+    <hr>
+  </tal:li>
+
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
