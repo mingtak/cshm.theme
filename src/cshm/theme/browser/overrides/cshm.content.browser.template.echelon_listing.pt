@@ -19,7 +19,7 @@
         <h4>${python:obj.getParentNode().title} / ${item/Title}</h4>
         <h5><b>開班前</b></h5>
         <ul>
-          <li>套版作業：教師聘</li>
+          <li><a href="${item/getURL}/@@teacher_appointment">套版作業：教師聘書</a></li>
         </ul>
         <br>
         <h5><b>開班中</b></h5>
