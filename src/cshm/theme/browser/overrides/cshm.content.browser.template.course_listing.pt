@@ -16,21 +16,16 @@
   <tal:li repeat="item view/echelonBrain">
     <li>
       <tal:obj define="obj item/getObject">
-        <h4>${python:obj.getParentNode().title} / ${item/Title} [<span i18n:translate="">${obj/duringTime}</span>](<a href="${item/getURL}/@@reg_course">報名</a>)</h4>
+        <h4>${python:obj.getParentNode().title} / ${item/Title} [<span i18n:translate="">${obj/duringTime}</span>]</h4>
         <h5><b>課程資訊</b></h5>
         <ul tal:define="subjects obj/getChildNodes">
             <li>開課地點: ${obj/trainingCenter/to_object/title}</li>
             <li>開課日期: ${obj/courseStart} 至 ${obj/courseEnd}</li>
             <li>開課時段: ${obj/classTime}</li>
             <li>課程費用: ${obj/courseFee}</li>
-            <li>課程科目:
-              <ul>
-                <tal:sub repeat="subject subjects ">
-                  <li>${subject/title} (時數: ${subject/hours} 小時)</li>
-                </tal:sub>
-              </ul>
-            </li>
         </ul>
+        <a class="btn btn-info" href="${item/getURL}/@@course_ifno">詳細資訊</a>
+        <a class="btn btn-success" href="${item/getURL}/@@reg_course">前往報名</a>
       </tal:obj>
     </li>
     <hr>
