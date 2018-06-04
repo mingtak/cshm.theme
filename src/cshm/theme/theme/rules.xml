@@ -106,7 +106,8 @@
   <!-- cover slider -->
   <before css:theme-children=".envor-content" css:content="#cover-slider" />
 
-<!--  <drop css:theme=".envor-page-title-1" /> --> <!-- 暫時 -->
+  <!-- page banner -->
+  <before css:theme-children=".envor-content" css:content="#page-banner" />
 
   <!-- drop theme's mobile cart list -->
   <drop css:theme="#envor-mobile-cart-btn, #envor-mobile-cart" />

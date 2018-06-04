@@ -1,0 +1,27 @@
+<?python
+from plone import api
+portal = api.portal.get()
+sliders = portal['resource']['cover_slider'].getChildNodes()
+?>
+
+      <section tal:condition="python:view.isFrontend and context.portal_type != 'Plone Site'"
+               id="page-banner"
+               class="envor-page-title-1" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-9">
+              <h1>${context/title}</h1>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3">
+              <form class="search" >
+                <input type="text" placeholder="全站搜尋...">
+              </form>
+            </div>
+          </div>
+        </div>
+      <!--
+
+      Page Title end
+
+      //-->
+      </section>
