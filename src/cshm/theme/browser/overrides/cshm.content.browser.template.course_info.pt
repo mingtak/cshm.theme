@@ -12,9 +12,43 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
-course info
+<h2>${python:context.getParentNode().title} / ${context/title}</h2>
 
+<div class="detail">
+    <div class="row"><div class="col-xs-3"><b>開課日期</b></div><div class="col-xs-9">${context/courseStart} 至 ${context/courseEnd}</div></div>
+    <div class="row"><div class="col-xs-3"><b>上課時段</b></div><div class="col-xs-9"><span i18n:translate="" tal:replace="context/duringTime"></span> (${context/classTime})</div></div>
+    <div class="row"><div class="col-xs-3"><b>開課地點</b></div><div class="col-xs-9">${context/trainingCenter/to_object/title}</div></div>
+    <div class="row"><div class="col-xs-3"><b>地 址</b></div><div class="col-xs-9">${context/trainingCenter/to_object/address}</div></div>
+    <div class="row"><div class="col-xs-3"><b>訓練費用</b></div><div class="col-xs-9">${context/courseFee}</div></div>
+    <div class="row"><div class="col-xs-3"><b>開課狀態</b></div><div class="col-xs-9">${context/courseStatus}</div></div>
+    <div class="row"><div class="col-xs-3"><b>課程時數</b></div><div class="col-xs-9">${context/courseHours}</div></div>
+    <div class="row"><div class="col-xs-3"><b>報名截止</b></div><div class="col-xs-9">${context/regDeadline}</div></div>
+    <div class="row"><div class="col-xs-3"><b>聯絡資訊</b></div><div class="col-xs-9">${context/contact}</div></div>
+    <div class="row"><div class="col-xs-3"><b>優惠方案</b></div><div class="col-xs-9">${context/discountProgram}</div></div>
+    <div class="row"><div class="col-xs-3"><b>繳交資料</b></div>
+        <div class="col-xs-9" tal:content="structure python:context.prepareInfo.replace('\n', '<br>')"></div>
+    </div>
+    <div class="row"><div class="col-xs-3"><b>上課詳細時間</b></div>
+        <div class="col-xs-9" tal:content="structure python:context.detailClassTime.replace('\n', '<br>')"></div>
+    </div>
+    <div class="row"><div class="col-xs-3"><b>起重機具機型</b></div><div class="col-xs-9">${context/craneType}</div></div>
+    <div class="row"><div class="col-xs-3"><b>備註</b></div><div class="col-xs-9" tal:content="structure context/memo/raw"></div></div>
+</div>
 
+<div class="row">
+    <div class="col-xs-3">
+        <a class="envor-btn envor-btn-primary envor-btn-large" href="${context/absolute_url}/@@reg_course">線上報名</a>
+    </div>
+    <div class="col-xs-3">
+        <a class="envor-btn envor-btn-primary-border envor-btn-large" href="${view/portal/absolute_url}/training/courselist">課程列表</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 image-container-center">
+        <img src="${view/portal/absolute_url}/resource/images/process.png/@@images/image" />
+    </div>
+</div>
 
 </metal:content-core>
 </metal:content-core>

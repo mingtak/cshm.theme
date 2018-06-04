@@ -29,3 +29,10 @@
 .envor-header-1 .envor-top-bar ul.social-btns li.logout {
     width: 120px;
 }
+
+.template-course_info #content-core .detail {
+    font-size: 16px;
+}
+#content-core .image-container-center {
+    text-align: center;    
+}

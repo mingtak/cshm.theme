@@ -24,7 +24,8 @@
             <li>開課時段: ${obj/classTime}</li>
             <li>課程費用: ${obj/courseFee}</li>
         </ul>
-        <a class="btn btn-info" href="${item/getURL}/@@course_ifno">詳細資訊</a>
+        <br>
+        <a class="btn btn-info" href="${item/getURL}/@@course_info">詳細資訊</a>
         <a class="btn btn-success" href="${item/getURL}/@@reg_course">前往報名</a>
       </tal:obj>
     </li>
