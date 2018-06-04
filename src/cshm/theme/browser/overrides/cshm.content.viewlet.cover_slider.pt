@@ -1,14 +1,11 @@
-      <!--
-
-      LayerSlider start
-
-      //-->
 <?python
 from plone import api
 portal = api.portal.get()
 sliders = portal['resource']['cover_slider'].getChildNodes()
 ?>
-      <section class="envor-section envor-home-slider" id="cover-slider">
+
+      <section tal:condition="view/isFrontend"
+               class="envor-section envor-home-slider" id="cover-slider">
         <div id="layerslider" class="envor-layerslider" style="height: 350px;">
           <!--LayerSlider layer-->
           <div tal:repeat="item sliders"
@@ -17,9 +14,4 @@ sliders = portal['resource']['cover_slider'].getChildNodes()
             <img class="ls-bg" src="${item/absolute_url}/@@images/image" alt="${item/title}">
           </div>
         </div>
-      <!--
-
-      LayerSlider end
-
-      //-->
       </section>
