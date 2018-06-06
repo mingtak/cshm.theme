@@ -52,3 +52,10 @@
     top: 100%;
 }
 
+/* portlet */
+h3.portletHeader {
+    background-color: #ee7;
+    padding: 10px 15px;
+/*    border:2px #ccc solid; */
+    border-radius:6px;
+}

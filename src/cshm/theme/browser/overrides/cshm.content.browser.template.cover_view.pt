@@ -25,6 +25,27 @@
                          thumb_scale_summary view/get_thumb_scale_summary;
                          img_class python:'thumb-%s pull-right' % thumb_scale_list;
                          showicons view/show_icons">
+<div class="row">
+    <div class="col-md-2">
+        <a class="btn btn-info btn-lg">技術服務<a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-success btn-lg">教育訓練<a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-warning btn-lg">會員專區<a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-danger btn-lg">本會刊物<a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-default btn-lg">職訓中心<a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-primary btn-lg">臉書專頁<a>
+    </div>
+</div>
+<hr>
       <tal:listing condition="batch">
         <div class="entries" metal:define-slot="entries"
             tal:define="portal context/@@plone_portal_state/portal;
