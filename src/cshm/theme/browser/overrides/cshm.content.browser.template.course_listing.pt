@@ -12,8 +12,10 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
-<ul>
-  <tal:li repeat="item view/echelonBrain">
+
+<ul tal:repeat="status view/statusList">
+  <h4 i18n:translate="">${status}</h4>
+  <tal:li repeat="item python:view.echelonBrain[status]">
     <li>
       <tal:obj define="obj item/getObject">
         <h4>${python:obj.getParentNode().title} / ${item/Title} [<span i18n:translate="">${obj/duringTime}</span>]</h4>
