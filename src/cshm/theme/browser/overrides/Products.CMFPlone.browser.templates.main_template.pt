@@ -32,7 +32,6 @@
     </tal:comment>
     <metal:topslot define-slot="top_slot" />
     <metal:headslot define-slot="head_slot" />
-    <metal:styleslot define-slot="style_slot" />
 
     <div tal:replace="structure provider:plone.scripts" />
     <metal:javascriptslot define-slot="javascript_head_slot" />
@@ -40,6 +39,7 @@
     <link tal:replace="structure provider:plone.htmlhead.links" />
     <meta name="generator" content="Plone - http://plone.com" />
 
+    <metal:styleslot define-slot="style_slot" />
   </head>
 
   <body tal:define="isRTL portal_state/is_rtl;

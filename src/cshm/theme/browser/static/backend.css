@@ -1,0 +1,10 @@
+.tr-title {
+    text-align:center;
+    background-color:#307bb3;
+    color:#fff;
+}
+
+.plone-toolbar-expanded table tr td {
+    padding:8px;
+    border: 1px solid #999;
+}
