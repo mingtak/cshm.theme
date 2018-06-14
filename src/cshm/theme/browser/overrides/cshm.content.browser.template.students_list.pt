@@ -22,6 +22,7 @@
 <h3>學生名單: ${python:context.getParentNode().title} / ${context/title}</h3>
 
 <h4>正取學員</h4>
+<a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a>
 <table border="1" id="ctable" cellspacing="0" cellpadding="0">
   <thead>
     <tr class="tr-title">
@@ -49,6 +50,7 @@
       </td>
       <td>
           <a href="javascript:void(0)"
+             id="view-log-${item/id}"
              class="view-log"
              data-id="${item/id}"
              data-log="${item/contactLog}">查看聯絡記錄</a>
@@ -59,10 +61,11 @@
 
 <hr>
 <h4>備取學員</h4>
+<a id="all-trans-to-admit" href="javascript:void(0)">全部轉為正取(只能進行一次)</a>
 <table border="1" id="ctable" cellspacing="0" cellpadding="0">
   <thead>
     <tr class="tr-title">
-      <td>座號</td>
+      <td>備取</td>
       <td>姓名</td>
       <td>聯絡電話</td>
       <td>承辦人</td>
@@ -70,11 +73,12 @@
       <td>繳費狀況</td>
       <td>新增聯絡紀錄</td>
       <td>查看</td>
+      <td>轉正取</td>
     </tr>
   </thead>
   <tbody>
     <tr tal:repeat="item view/waiting">
-      <td>${item/seatNo}</td>
+      <td>${item/isAlt}</td>
       <td>${item/name}</td>
       <td>電話:${item/phone}<br />手機:${item/cellphone}</td>
       <td>TODO</td>
@@ -86,9 +90,13 @@
       </td>
       <td>
           <a href="javascript:void(0)" 
+             id="view-log-${item/id}"
              class="view-log" 
              data-id="${item/id}"
              data-log="${item/contactLog}">查看聯絡記錄</a>
+      </td>
+      <td>
+          <a class="waiting-trans-to-admit" data-id="${item/id}" href="javascript:void(0)">轉正取</a>
       </td>
     </tr>
   </tbody>
