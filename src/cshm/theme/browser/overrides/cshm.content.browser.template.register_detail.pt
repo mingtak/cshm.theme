@@ -21,6 +21,9 @@
 
 <h2>報名作業 / 開班程序</h2>
 <hr>
+<h3>${python:context.getParentNode().title} / ${context/title}</h3>
+
+<a target="_blank" href="${context/absolute_url}/edit#autotoc-item-autotoc-1">編輯課程狀態</a> |
 <a target="_blank" href="${context/absolute_url}/@@students_list">名單</a>
 <hr>
   <table border="1" cellpadding="0" cellspacing="0" width="850px">

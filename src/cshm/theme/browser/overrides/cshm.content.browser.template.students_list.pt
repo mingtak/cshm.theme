@@ -19,7 +19,80 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
-<h2>學生名單</h2>
+<h3>學生名單: ${python:context.getParentNode().title} / ${context/title}</h3>
+
+<h4>正取學員</h4>
+<table border="1" id="ctable" cellspacing="0" cellpadding="0">
+  <thead>
+    <tr class="tr-title">
+      <td>座號</td>
+      <td>姓名</td>
+      <td>聯絡電話</td>
+      <td>承辦人</td>
+      <td>發送mail</td>
+      <td>繳費狀況</td>
+      <td>新增聯絡紀錄</td>
+      <td>查看</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr tal:repeat="item view/admit">
+      <td>${item/seatNo}</td>
+      <td>${item/name}</td>
+      <td>電話:${item/phone}<br />手機:${item/cellphone}</td>
+      <td>TODO</td>
+      <td>${item/priv-email}</td>
+      <td>TODO</td>
+      <td>
+          <input type="text" name='contactLog' style="width:80%; float:left" id="log-data-${item/id}"/>
+          <a href="javascript:void(0)" class="add-log" data-id="${item/id}">新增</a>
+      </td>
+      <td>
+          <a href="javascript:void(0)"
+             class="view-log"
+             data-id="${item/id}"
+             data-log="${item/contactLog}">查看聯絡記錄</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr>
+<h4>備取學員</h4>
+<table border="1" id="ctable" cellspacing="0" cellpadding="0">
+  <thead>
+    <tr class="tr-title">
+      <td>座號</td>
+      <td>姓名</td>
+      <td>聯絡電話</td>
+      <td>承辦人</td>
+      <td>發送mail</td>
+      <td>繳費狀況</td>
+      <td>新增聯絡紀錄</td>
+      <td>查看</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr tal:repeat="item view/waiting">
+      <td>${item/seatNo}</td>
+      <td>${item/name}</td>
+      <td>電話:${item/phone}<br />手機:${item/cellphone}</td>
+      <td>TODO</td>
+      <td>${item/priv-email}</td>
+      <td>TODO</td>
+      <td>
+          <input type="text" name='contactLog' style="width:80%; float:left" id="log-data-${item/id}"/>
+          <a href="javascript:void(0)" class="add-log" data-id="${item/id}">新增</a>
+      </td>
+      <td>
+          <a href="javascript:void(0)" 
+             class="view-log" 
+             data-id="${item/id}"
+             data-log="${item/contactLog}">查看聯絡記錄</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 
 </metal:content-core>
