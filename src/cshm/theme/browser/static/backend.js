@@ -1,5 +1,21 @@
 // ContactLog
 $(document).ready(function(){
+
+    // export to download site
+    $('a.to-url').click(function(){
+        data = {'url': $('input.to-url').val()}
+        $.post("@@export_to_download_site", data)
+            .done(function(data){
+                if(data == '0'){
+                    alert('匯出失敗，請檢查網址或與系統管理員聯絡');
+                }else if(data == '1'){
+                    alert('匯出帳號成功')
+                }
+            }).fail(function(){
+                alert('作業失敗，請稍候再試，\n若持續失敗，請與系統管理員聯絡')
+            });
+    })
+
     // waiting trans to admit
     $('.waiting-trans-to-admit').click(function(){
         data = {'id': $(this).data('id')}
