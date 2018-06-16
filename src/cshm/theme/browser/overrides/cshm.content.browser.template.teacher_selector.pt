@@ -18,15 +18,56 @@
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
+<?python
+from plone import api
+?>
+
+<tal:folder tal:define="folder python:context.getParentNode()">
+  <tal:table tal:condition="python:view.request.form.get('uid')">
+      <h3>老師遴選表</h3>
+      <h4>${folder/title} ${context/title}
+          (${context/trainingCenter/to_object/title} /
+          <span i18n:translate="">${context/duringTime}</span>)
+      </h4>
+      <h5><b>參照班別</b>: ${folder/title}: ${view/refObj/title} (${view/refObj/trainingCenter/to_object/title} /
+       <span i18n:translate="">${view/refObj/duringTime}</span>)
+      </h5>
+      <hr>
+      <table>
+        <thead>
+          <tr>
+            <td>科目名稱</td>
+            <td>前期授課講師</td>
+            <td>合格遴選講師</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr tal:repeat="item python:view.refObj.getChildNodes()">
+            <td>${item/title}</td>
+            <td>${item/teacher/to_object/title}</td>
+            <td>
+                <tal:ts define="ts python:api.content.find(Type='Teacher', teacheSubjects=item.title)"
+                        repeat="teacher ts">
+                    ${teacher/Title} <span tal:condition="not:repeat/teacher/end"> / </span>
+                </tal:ts>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+  </tal:table>
 
 
-<ul tal:define="folder python:context.getParentNode()"
-    tal:condition="python:not view.request.form.get('uid')">
+
+<ul tal:condition="python:not view.request.form.get('uid')">
   <li tal:repeat="item python:folder.getChildNodes()" style="padding:10px">
-    <a target="_blank" href="@@teacher_selector?uid=${item/UID}">${folder/title}: ${item/title} (${item/trainingCenter/to_object/title})</a>
+    <a target="_blank" href="@@teacher_selector?uid=${item/UID}">
+       ${folder/title}: ${item/title} (${item/trainingCenter/to_object/title} /
+       <span i18n:translate="">${item/duringTime}</span>)
+    </a>
   </li>
 </ul>
-
+</tal:folder>
 
 </metal:content-core>
 </metal:content-core>
