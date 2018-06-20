@@ -32,7 +32,7 @@
 <hr>
 
 
-<table border="1" id="ctable" cellspacing="0" cellpadding="0">
+<table border="1" id="admit-list" cellspacing="0" cellpadding="0">
   <thead>
     <tr class="tr-title">
       <td>座號</td>
@@ -47,7 +47,9 @@
   </thead>
   <tbody>
     <tr tal:repeat="item view/admit">
-      <td>${item/seatNo}</td>
+      <td>
+          <input class="seatNo" id="seatNo-${item/seatNo}" value="${item/seatNo}" data-id="${item/id}" style="width:50px">
+      </td>
       <td>${item/name}</td>
       <td>電話:${item/phone}<br />手機:${item/cellphone}</td>
       <td>TODO</td>
@@ -66,12 +68,13 @@
       </td>
     </tr>
   </tbody>
-</table>
+</table><br>
+<a id="update-seatNo" class="context">更新座位</a>
 
 <hr>
 <h4>備取學員</h4>
 <a id="all-trans-to-admit" href="javascript:void(0)">全部轉為正取(只能進行一次)</a>
-<table border="1" id="ctable" cellspacing="0" cellpadding="0">
+<table border="1" id="waiting-list" cellspacing="0" cellpadding="0">
   <thead>
     <tr class="tr-title">
       <td>備取</td>

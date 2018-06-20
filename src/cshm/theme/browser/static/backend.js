@@ -1,6 +1,32 @@
 // ContactLog
 $(document).ready(function(){
 
+    // update seatNo
+    $('a#update-seatNo').click(function(){
+        items = $('input.seatNo')
+        data = {}
+        nos = []
+        // 檢查重複
+        for(i=0; i<items.length; i++){
+            if( nos.includes($(items[i]).val()) ){
+                alert('座號編碼錯誤: 有重複編號')
+                return
+            }else{
+                id = $(items[i]).data('id')
+                data['seat-' + id] = $(items[i]).val()
+                nos.push($(items[i]).val())
+            }
+        }
+
+        $.post("@@update_seat_no", data)
+            .done(function(data){
+                alert('更新座位編號成功')
+                location.reload();
+            }).fail(function(){
+                alert('作業失敗，請稍候再試，\n若持續失敗，請與系統管理員聯絡')
+            });
+    })
+
     // export to download site
     $('a.to-url').click(function(){
         data = {'url': $('input.to-url').val()}
