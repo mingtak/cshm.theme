@@ -9,7 +9,6 @@
 
 
 <metal:style fill-slot="style_slot">
-    <link rel="stylesheet" type="text/css" href="${portal_url}/++plone++cshm.theme/backend.css">
 </metal:style>
 <metal:js fill-slot="javascript_head_slot">
     <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
@@ -23,7 +22,8 @@
 
 <h4>正取學員</h4>
 <a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a> |
-<a id="teacher-selector" target="_blank" href="@@teacher_selector">老師遴選</a>
+<a id="teacher-selector" target="_blank" href="@@teacher_selector">老師遴選</a> |
+<a id="admin-reg-course" target="_blank" href="@@admin_reg_course">後台報名註冊</a> |
 
 
 <hr>

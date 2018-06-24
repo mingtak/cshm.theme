@@ -1,3 +1,27 @@
+.envor-msg.envor-msg-info, .alert.status.alert-success, .portalMessage.alert-success, .alert.status.info, .portalMessage.info {
+    background-color: #aad6ea;
+    border: 1px solid #9acee6;
+    color: rgba(0, 0, 0, 0.5);
+    padding: 8px 8px 3px 8px;
+    border-radius:5px;
+}
+
+.envor-msg.envor-msg-warning, .alert.status.alert-warning, .portalMessage.alert-warning, .alert.status.warning, .portalMessage.warning {
+    background-color: #ebd380;
+    border: 1px solid #e7ca66;
+    color: rgba(0, 0, 0, 0.5);
+    padding: 8px 8px 3px 8px;
+    border-radius:5px;
+}
+
+.envor-msg.envor-msg-error, .alert.status.alert-error, .portalMessage.alert-error, .alert.status.error, .portalMessage.error {
+    background-color: #EC9C8D;
+    border: 1px solid #eb9484;
+    color: rgba(0, 0, 0, 0.5);
+    padding: 8px 8px 3px 8px;
+    border-radius:5px;
+}
+
 .tr-title {
     text-align:center;
     background-color:#307bb3;

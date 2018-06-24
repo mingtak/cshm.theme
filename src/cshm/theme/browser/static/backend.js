@@ -87,8 +87,12 @@ $(document).ready(function(){
     $('#admit-batch-numbering').click(function(){
         $.post("@@admit_batch_numbering")
             .done(function(data){
-                alert('座位編碼成功');
-                location.reload();
+                if(data == '1'){
+                    alert('批次編號只能執行一次，請改以手動更新編號')
+                }else{
+                    alert('座位編碼成功');
+                    location.reload();
+                }
             }).fail(function(){
                 alert('座位編碼失敗，請稍候再試，\n若持續失敗，請與系統管理員聯絡')
             });

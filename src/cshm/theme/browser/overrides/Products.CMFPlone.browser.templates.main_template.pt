@@ -39,6 +39,8 @@
     <link tal:replace="structure provider:plone.htmlhead.links" />
     <meta name="generator" content="Plone - http://plone.com" />
 
+    <!-- BACKEND.CSS -->
+    <link rel="stylesheet" type="text/css" href="${portal_url}/++plone++cshm.theme/backend.css" />
     <metal:styleslot define-slot="style_slot" />
   </head>
 
