@@ -60,7 +60,7 @@
           </div>
       </td>
       <td>
-          <select name="training_status">
+          <select name="training_status" id="status-${item/id}">
               <tal:opt repeat="status view/trainingStatus">
                   <option tal:attributes="value status/id;
                                           selected python:True if item['training_status'] == status['id'] else False" >
@@ -87,7 +87,7 @@
     </tr>
   </tbody>
 </table><br>
-<a id="update-seatNo" class="context">更新座位</a>
+<a id="update-seatNo" class="context">更新座位及受訓狀態</a>
 
 <hr>
 <h4>備取學員</h4>

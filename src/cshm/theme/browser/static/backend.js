@@ -8,11 +8,11 @@ $(document).ready(function(){
     $('.popup-box').hover( function(){popupInfo($(this))}, function(){popupInfo($(this))} )
     // Popup 視窗 End
 
-    // update seatNo 更新編碼
+    // update seatNo 更新編碼(受訓狀態同步更新)
     $('a#update-seatNo').click(function(){
         items = $('input.seatNo')
         data = {}
-        nos = []
+        nos = [] //檢查重複用
         // 檢查重複
         for(i=0; i<items.length; i++){
             if( ! $.isNumeric($(items[i]).val()) ){
@@ -27,6 +27,7 @@ $(document).ready(function(){
             }else{
                 id = $(items[i]).data('id')
                 data['seat-' + id] = $(items[i]).val()
+                data['status-' + id] = $('#status-' + id).find(":selected").val();
                 nos.push($(items[i]).val())
             }
         }
