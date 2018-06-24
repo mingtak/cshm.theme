@@ -1,14 +1,27 @@
 // ContactLog
 $(document).ready(function(){
 
-    // update seatNo
+    // Popup 視窗 Start
+    function popupInfo(el) {
+        el.children('.popup').children('.popuptext').toggle();
+    }
+    $('.popup-box').hover( function(){popupInfo($(this))}, function(){popupInfo($(this))} )
+    // Popup 視窗 End
+
+    // update seatNo 更新編碼
     $('a#update-seatNo').click(function(){
         items = $('input.seatNo')
         data = {}
         nos = []
         // 檢查重複
         for(i=0; i<items.length; i++){
-            if( nos.includes($(items[i]).val()) ){
+            if( ! $.isNumeric($(items[i]).val()) ){
+                alert('編號作業請輸入數字，並且編號不可空白')
+                return
+            }else if( Number($(items[i]).val()) < 1 || Number($(items[i]).val()) > items.length){
+                alert('編號超過範圍，請檢查所有編號，有效範圍 1~' + items.length)
+                return
+            }else if( nos.includes($(items[i]).val()) ){
                 alert('座號編碼錯誤: 有重複編號')
                 return
             }else{

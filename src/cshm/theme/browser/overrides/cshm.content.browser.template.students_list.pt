@@ -50,7 +50,14 @@
       <td>
           <input class="seatNo" id="seatNo-${item/seatNo}" value="${item/seatNo}" data-id="${item/id}" style="width:50px">
       </td>
-      <td>${item/name}</td>
+      <td class="popup-box">
+          <div class="popup">
+              <span>${item/name}</span>
+              <div class="popuptext">
+                  受訓狀態: ${item/status}<br>
+              </div>
+          </div>
+      </td>
       <td>電話:${item/phone}<br />手機:${item/cellphone}</td>
       <td>TODO</td>
       <td>${item/priv-email}</td>
