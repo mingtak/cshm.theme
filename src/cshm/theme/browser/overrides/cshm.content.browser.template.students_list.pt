@@ -23,14 +23,30 @@
 <h4>正取學員</h4>
 <a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a> |
 <a id="teacher-selector" target="_blank" href="@@teacher_selector">老師遴選</a> |
-<a id="admin-reg-course" target="_blank" href="@@admin_reg_course">後台報名註冊</a> |
-
+<a id="admin-reg-course" target="_blank" href="@@admin_reg_course">後台報名</a> |
+<a id="admin-group-reg-course" target="_blank" href="@@admin_group_reg_course">後台團報</a> |
 
 <hr>
 <input name="url" class="to-url" type="text" placeholder="請輸入下載專區網址" style="width: 300px; float:left">
 <a class="to-url" href="javascript:void(0)" >匯出至下載專區</a>
 <hr>
 
+<form method="post" action="${context/absolute_url}/@@reserve_seat">
+    <table>
+      <tr>
+        <td>
+          <input name="quota" class="" type="number" placeholder="請輸入預留人數">
+        </td>
+        <td>
+          <input name="company-name" class="" type="text" placeholder="服務單位">
+        </td>
+        <td>
+          <input name="submit" type="submit" value="送出">
+        </td>
+      </tr>
+    </table>
+</form>
+<br>
 
 <table border="1" id="admit-list" cellspacing="0" cellpadding="0">
   <thead>
@@ -56,6 +72,7 @@
               <span>${item/name}</span>
               <div class="popuptext">
                   受訓狀態: ${item/status}<br>
+                  最後聯絡記: ${python:item.contactLog.split('\n')[-1] if item.contactLog is not None else ''}
               </div>
           </div>
       </td>
