@@ -101,12 +101,18 @@ $(document).ready(function(){
     // add contactLog
     $(".add-log").click(function(){
         id = $(this).data('id')
+        currentName = $(this).data('currentname')
+        var date = new Date()
+        year = date.getFullYear()
+        month = date.getMonth()
+        day = date.getDate()
+        dateStr = year + '-' + month + '-' + day
         if( $('#log-data-' + id).val() ){
             // 串接新舊資料
             if( $('#view-log-' + id).data('log') ){
-                logData = $('#view-log-' + id).data('log') + '\n' + $('#log-data-' + id).val()
+                logData = $('#view-log-' + id).data('log') + '\n' + currentName + ' / ' + dateStr + ' / ' + $('#log-data-' + id).val() //後續聯絡
             }else{
-                logData = $('#log-data-' + id).val()
+                logData = currentName + ' / ' + dateStr + ' / ' + $('#log-data-' + id).val() //第一次聯絡
             }
             data = {
                 'id': id,
