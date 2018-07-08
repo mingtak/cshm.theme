@@ -7,6 +7,8 @@
     i18n:domain="cshm.content">
 <body>
 
+<metal:javascriptslot fill-slot="javascript_head_slot">
+</metal:javascriptslot>
 
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
@@ -79,19 +81,28 @@
     </form>
   </div>
 
-
-
-
-
-
 </div>
 
-
-
-
-
 </metal:content-core>
 </metal:content-core>
+
+
+<metal:js fill-slot="javascript_in_body_slot">
+
+<div class="js-in-body">
+<script>
+$(document).ready(function(){
+  var app = new Vue({
+    el: '#content-core',
+    data: {
+      message: 'Hello Vue!'
+    }
+  })
+})
+</script>
+</div>
+</metal:js>
+
 
 </body>
 </html>

@@ -112,5 +112,6 @@
   <!-- drop theme's mobile cart list -->
   <drop css:theme="#envor-mobile-cart-btn, #envor-mobile-cart" />
 
+<after css:theme-children="body" css:content-children=".js-in-body" />
 </rules>
 </rules>
