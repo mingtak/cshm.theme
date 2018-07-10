@@ -2,6 +2,8 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:metal="http://xml.zope.org/namespaces/metal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://www.vue.org/v-bind"
+    xmlns:v-on="http://www.vue.org/v-bind"
     lang="en"
     metal:use-macro="context/main_template/macros/master"
     i18n:domain="cshm.content">
@@ -37,19 +39,22 @@
 <p>      <input type="text" name="cellphone" id="cellphone" value="" placeholder="行動電話" required></p>
 <p>      <input type="text" name="fax" id="fax" value="" placeholder="傳真電話"></p>
 <p>      <input type="text" name="address" id="address" value="" placeholder="聯絡地址" required></p>
-<p>      <input type="email" name="priv-email" id="priv-email" value="" placeholder="電子郵件(私人)" required></p>
-<p>      <input type="email" name="com-email" id="com-email" value="" placeholder="電子郵件(公司)"></p>
+<p>      <input type="email" name="priv_email" id="priv_email" value="" placeholder="電子郵件(私人)" required></p>
+<p>      <input type="email" name="com_email" id="com_email" value="" placeholder="電子郵件(公司)"></p>
 <hr>
 
 
 <h4>公司資料</h4>
-<p>      <input type="text" name="company-name" id="company-name" value="" placeholder="服務單位"></p>
-<p>      <input type="text" name="job-title" id="job-title" value="" placeholder="職稱"></p>
-<p>      <input type="text" name="company-address" id="company-address" value="" placeholder="公司地址"></p>
+<p>      <input type="text" name="tax_no" id="tax_no" placeholder="統一編號"
+                v-on:input="getCompanyName($event)"></p>
+<p>      <input type="text" name="company_name" id="company_name" placeholder="服務單位" v-bind:value="company_name"></p>
+<p>      <input type="text" name="company_address" id="company_address" value="" placeholder="公司地址" v-bind:value="company_address"></p>
+<p>      <input type="text" name="job_title" id="job_title" value="" placeholder="職稱"></p>
 <hr>
 <h4>收據資料</h4>
-<p>      <input type="text" name="tax-title" id="tax-title" value="" placeholder="收據抬頭"></p>
-<p>      <input type="text" name="tax-no" id="tax-no" value="" placeholder="統一編號"></p>
+<p>      <input type="text" name="invoice_tax_no" id="invoice_tax_no" value="" placeholder="統一編號"
+                v-on:input="getCompanyName($event)"></p>
+<p>      <input type="text" name="invoice_title" id="invoice_title" value="" placeholder="收據抬頭" v-bind:value="invoice_title"></p>
 
 <hr>
 
@@ -91,14 +96,38 @@
 
 <div class="js-in-body">
 <script>
-$(document).ready(function(){
-  var app = new Vue({
+
+var app = new Vue({
     el: '#content-core',
     data: {
-      message: 'Hello Vue!'
+      message: 'Hello Vue!',
+      company_name: '',
+      company_address: '',
+      invoice_title: ''
+    },
+    methods: {
+      getCompanyName: function(event) {
+        val = event.currentTarget.value
+        id = event.currentTarget.id
+        if(val.length == 8){
+            $.get('${portal_url}/@@query_company?tax_no=' + val)
+                .done(function(data){
+                    if(! data){
+                        return
+                    }
+                    else if(id == 'tax_no'){
+                        app.company_name = data.split(',')[0]
+                        app.company_address = data.split(',')[1]
+                    }else if(id == 'invoice_tax_no'){
+                        app.invoice_title = data.split(',')[0]
+                    }
+                })
+        }
+      }
     }
-  })
 })
+
+
 </script>
 </div>
 </metal:js>

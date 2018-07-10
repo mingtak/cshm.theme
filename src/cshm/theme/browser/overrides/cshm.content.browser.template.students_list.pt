@@ -18,14 +18,14 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
-<h3>學生名單: ${python:context.getParentNode().title} / ${context/title}</h3>
+<h3>${python:context.getParentNode().title} / ${context/title}: 學生名單</h3>
 
-<h4>正取學員</h4>
 <a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a> |
 <a id="teacher-selector" target="_blank" href="@@teacher_selector">老師遴選</a> |
 <a id="admin-reg-course" target="_blank" href="@@admin_reg_course">後台報名</a> |
 <a id="admin-group-reg-course" target="_blank" href="@@admin_group_reg_course">後台團報</a> |
 <a id="export-email-cell" target="_blank" href="@@export_email_cell">匯出Email/手機清單</a> |
+<a id="batch_update_reg_info" target="_blank" href="@@batch_updte_reg_info">批次修改報名資訊</a> |
 <hr>
 <input name="url" class="to-url" type="text" placeholder="請輸入下載專區網址" style="width: 300px; float:left">
 <a class="to-url" href="javascript:void(0)" >匯出至下載專區</a>
@@ -38,7 +38,7 @@
           <input name="quota" min=1 max=100 class="" type="number" placeholder="請輸入預留人數">
         </td>
         <td>
-          <input name="company-name" class="" type="text" placeholder="服務單位">
+          <input name="company_name" class="" type="text" placeholder="服務單位">
         </td>
         <td>
           <input name="submit" type="submit" value="送出">
@@ -48,30 +48,29 @@
 </form>
 <br>
 
+<h4>正取學員</h4>
 <table border="1" id="admit-list" cellspacing="0" cellpadding="0">
   <thead>
     <tr class="tr-title">
       <td>座號</td>
       <td>姓名</td>
       <td>受訓狀態</td>
-      <td>聯絡電話</td>
-      <td>承辦人</td>
-      <td>發送mail</td>
       <td>繳費狀況</td>
       <td>新增聯絡紀錄</td>
       <td>查看</td>
     </tr>
   </thead>
   <tbody>
-    <tr tal:repeat="item view/admit">
-      <td>
+   <tal:tr repeat="item view/admit">
+    <tr>
+      <td  align='center' valign="middle">
           <input class="seatNo" id="seatNo-${item/seatNo}" value="${item/seatNo}" data-id="${item/id}" style="width:50px">
       </td>
       <td class="popup-box">
           <div class="popup">
               <span>${item/name}</span>
               <div class="popuptext">
-                  廠商名稱: ${item/company-name}<br>
+                  廠商名稱: ${item/company_name}<br>
                   受訓狀態: ${item/status}<br>
                   最後聯絡記錄: ${python:item.contactLog.split('\n')[-1] if item.contactLog is not None else ''}
               </div>
@@ -87,22 +86,26 @@
               </tal:opt>
           </select>
       </td>
-      <td>電話:${item/phone}<br />手機:${item/cellphone}</td>
-      <td>TODO</td>
-      <td>${item/priv-email}</td>
       <td>TODO</td>
       <td>
           <input type="text" name='contactLog' style="width:80%; float:left" id="log-data-${item/id}"/>
           <a href="javascript:void(0)" class="add-log" data-id="${item/id}" data-currentname="${view/currentName}">新增</a>
       </td>
       <td>
+          廠商名稱: ${item/company_name}<br>
+          承辦人:TODO<br>
+          電話:${item/phone}<br>
+          手機:${item/cellphone}<br>
+          email:<a href="mailto:${item/priv_email}">${item/priv_email}</a><br>
           <a href="javascript:void(0)"
              id="view-log-${item/id}"
              class="view-log"
              data-id="${item/id}"
-             data-log="${item/contactLog}">查看聯絡記錄</a>
+             data-log="${item/contactLog}">聯絡記錄</a><br>
       </td>
     </tr>
+   </tal:tr>
+
   </tbody>
 </table><br>
 <a id="update-seatNo" class="context">更新座位及受訓狀態</a>
@@ -130,7 +133,7 @@
       <td>${item/name}</td>
       <td>電話:${item/phone}<br />手機:${item/cellphone}</td>
       <td>TODO</td>
-      <td>${item/priv-email}</td>
+      <td>${item/priv_email}</td>
       <td>TODO</td>
       <td>
           <input type="text" name='contactLog' style="width:80%; float:left" id="log-data-${item/id}"/>
@@ -149,7 +152,17 @@
     </tr>
   </tbody>
 </table>
-
+<script>
+var app = new Vue({
+    el: '#content-core',
+    data: {
+      message: 'Hello Vue!',
+      admits: <tal:content content="python:str(view.admitForJS).replace('None', 'null')">
+    },
+    methods: {
+    }
+})
+</script>
 
 </metal:content-core>
 </metal:content-core>

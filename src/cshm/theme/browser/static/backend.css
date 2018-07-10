@@ -1,3 +1,11 @@
+.template-students_list table {
+    text-align:left;
+}
+
+.template-students_list table td {
+    vertical-align:middle;
+}
+
 .envor-msg.envor-msg-info, .alert.status.alert-success, .portalMessage.alert-success, .alert.status.info, .portalMessage.info {
     background-color: #aad6ea;
     border: 1px solid #9acee6;
