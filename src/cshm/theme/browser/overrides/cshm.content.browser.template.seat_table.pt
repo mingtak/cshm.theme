@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://www.vue.org/v-bind"
+    xmlns:v-on="http://www.vue.org/v-bind"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+<metal:javascriptslot fill-slot="javascript_head_slot">
+</metal:javascriptslot>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+
+<h3>${python:context.getParentNode().title} ${context/title} 座位表</h3>
+<input type='text' placeholder='範例: 3-4-3, 4-3-3 或其它，走道以 - 區隔' v-model="seat_state">
+<a class="submit-widget button-field context" href="javascript:void(0)" v-on:click="foo">產生座位表</a>
+<hr>
+<table>
+    <tr v-for="i in Math.ceil(100/row_total)">
+        <td>座號 <br> 姓名</td>
+        <template v-for="j in row_total">
+          <td>{{ ((i-1)*row_total) + j }} <br> {{ students[((i-1)*row_total) + j] }}</td>
+          <td rowspan="30" v-if="i == 1 && road.slice(0,-1).includes(j)">走道</td>
+        </template>
+    </tr>
+
+</table>
+
+<script>
+var app = new Vue({
+    el: '#content-core',
+    data: {
+      message: 'Hello Vue!',
+      seat_state: '3-4-3',
+      row_total: 10,
+      road: [],
+      count: 1,
+      seatState: [],
+      students: ${python:str(dict(view.result)).replace("u'", "'")}
+    },
+    methods: {
+      foo: function(){
+          seatList = this.seat_state.split('-')
+          this.seatState = []
+          this.road = [0]
+          this.row_total = 0
+          for(i=0; i<seatList.length; i++){
+              this.seatState.push(Number(seatList[i]))
+              this.row_total += Number(seatList[i])
+              if(this.road != 0){
+          debugger;
+
+                  this.road.push(Number(seatList[i]) + Number(this.road[i-1]))
+              }else{
+                  this.road = [Number(seatList[i])]
+              }
+          }
+      }
+    }
+})
+</script>
+
+
+</metal:content-core>
+</metal:content-core>
+
+
+</body>
+</html>

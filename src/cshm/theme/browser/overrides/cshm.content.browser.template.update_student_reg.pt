@@ -439,9 +439,6 @@
   </form>
 
 
-
-
-
 <script>
 var app = new Vue({
     el: '#content-core',

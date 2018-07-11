@@ -25,6 +25,7 @@
 <a id="admin-reg-course" target="_blank" href="@@admin_reg_course">後台報名</a> |
 <a id="admin-group-reg-course" target="_blank" href="@@admin_group_reg_course">後台團報</a> |
 <a id="export-email-cell" target="_blank" href="@@export_email_cell">匯出Email/手機清單</a> |
+<a id="seat_table" target="_blank" href="@@seat_table">套印座位表</a> |
 <a id="batch_update_reg_info" target="_blank" href="@@batch_updte_reg_info">批次修改報名資訊</a> |
 <hr>
 <input name="url" class="to-url" type="text" placeholder="請輸入下載專區網址" style="width: 300px; float:left">
