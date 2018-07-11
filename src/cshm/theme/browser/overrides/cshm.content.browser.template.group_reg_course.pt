@@ -24,11 +24,7 @@
   <li>上課地點: ${context/trainingCenter/to_object/title}</li>
 </ul>
 
-<h4>公司團報請先下載<a target="_blank" href="@@download_group_reg">團體報名表</a>，填寫後
-  <tal:isFrontend switch="view/isFrontend">
-      <a tal:case="True" href="@@group_reg_course">上傳報名表</a>
-      <a tal:case="False" href="@@admin_group_reg_course">上傳報名表</a>
-  </tal:isFrontend>
+<h4>公司團報請先下載<a target="_blank" href="@@download_group_reg">團體報名表</a>，填寫後回到本頁面上傳報名表
 </h4>
 <hr>
 

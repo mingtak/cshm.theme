@@ -108,6 +108,7 @@
              class="view-log"
              data-id="${item/id}"
              data-log="${item/contactLog}">聯絡記錄</a><br>
+          <a href="${context/absolute_url}/@@update_student_reg?id=${item/id}" target="_blank">編輯個人詳細</a>
         </tal:cond>
           <a href="javascript:void(0)" tal:condition="item/isReserve" data-id="${item/id}" class="del_reserve">刪除預約</a>
       </td>
