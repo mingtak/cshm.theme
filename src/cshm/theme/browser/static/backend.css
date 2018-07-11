@@ -1,3 +1,8 @@
+.tr-head {
+    background: #4CAF50;
+    color: #fff;
+}
+
 .template-students_list table {
     text-align:left;
 }
