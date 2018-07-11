@@ -64,12 +64,15 @@
    <tal:tr repeat="item view/admit">
     <tr>
       <td  align='center' valign="middle">
+        <tal:cond condition="not:item/isReserve">
           <input class="seatNo" id="seatNo-${item/seatNo}" value="${item/seatNo}" data-id="${item/id}" style="width:50px">
+        </tal:cond>
+        <tal:cond condition="item/isReserve">預約</tal:cond>
       </td>
       <td class="popup-box">
           <div class="popup">
               <span>${item/name}</span>
-              <div class="popuptext">
+              <div class="popuptext" tal:condition="not:item/isReserve">
                   廠商名稱: ${item/company_name}<br>
                   受訓狀態: ${item/status}<br>
                   最後聯絡記錄: ${python:item.contactLog.split('\n')[-1] if item.contactLog is not None else ''}
@@ -77,7 +80,7 @@
           </div>
       </td>
       <td>
-          <select name="training_status" id="status-${item/id}">
+          <select name="training_status" id="status-${item/id}" tal:condition="not:item/isReserve">
               <tal:opt repeat="status view/trainingStatus">
                   <option tal:attributes="value status/id;
                                           selected python:True if item['training_status'] == status['id'] else False" >
@@ -88,11 +91,14 @@
       </td>
       <td>TODO</td>
       <td>
+        <tal:cond condition="not:item/isReserve">
           <input type="text" name='contactLog' style="width:80%; float:left" id="log-data-${item/id}"/>
           <a href="javascript:void(0)" class="add-log" data-id="${item/id}" data-currentname="${view/currentName}">新增</a>
+        </tal:cond>
       </td>
       <td>
           廠商名稱: ${item/company_name}<br>
+        <tal:cond condition="not:item/isReserve">
           承辦人:TODO<br>
           電話:${item/phone}<br>
           手機:${item/cellphone}<br>
@@ -102,6 +108,8 @@
              class="view-log"
              data-id="${item/id}"
              data-log="${item/contactLog}">聯絡記錄</a><br>
+        </tal:cond>
+          <a href="javascript:void(0)" tal:condition="item/isReserve" data-id="${item/id}" class="del_reserve">刪除預約</a>
       </td>
     </tr>
    </tal:tr>

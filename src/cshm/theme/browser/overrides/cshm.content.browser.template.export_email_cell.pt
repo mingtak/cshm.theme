@@ -18,11 +18,11 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
-<h3>Email 清單</h3>
+<h3>正取學會 Email 清單</h3>
 <tal:list repeat="item view/rightEmails">${item}; </tal:list>
 
 
-<h3>手機清單</h3>
+<h3>正取學員手機清單</h3>
 <tal:list repeat="item view/rightCells">${item}, </tal:list>
 
 <h3>無效 Email 清單</h3>

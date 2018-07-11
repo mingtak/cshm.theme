@@ -1,6 +1,21 @@
 // ContactLog
 $(document).ready(function(){
 
+    // 刪除預約
+    $('.del_reserve').click(function(){
+        id = $(this).data('id')
+        tr = $($(this).parents('tr')[0])
+        $.get("@@del_reserve?id=" + id)
+            .done(function(data){
+            tr.hide(200)
+            }).fail(function(){
+                alert('作業失敗，請稍候再試，\n若持續失敗，請與系統管理員聯絡')
+            });
+    })
+
+
+
+
     // Popup 視窗 Start
     function popupInfo(el) {
         el.children('.popup').children('.popuptext').toggle();
@@ -61,7 +76,7 @@ $(document).ready(function(){
         data = {'id': $(this).data('id')}
         $.post("@@waiting_trans_to_admit", data)
             .done(function(data){
-                alert('備取轉正取成功');
+//                alert('備取轉正取成功');
                 location.reload();
             }).fail(function(){
                 alert('作業失敗，請稍候再試，\n若持續失敗，請與系統管理員聯絡')
@@ -87,12 +102,8 @@ $(document).ready(function(){
     $('#admit-batch-numbering').click(function(){
         $.post("@@admit_batch_numbering")
             .done(function(data){
-                if(data == '1'){
-                    alert('批次編號只能執行一次，請改以手動更新編號')
-                }else{
-                    alert('座位編碼成功');
-                    location.reload();
-                }
+                alert('座位編碼成功');
+                location.reload();
             }).fail(function(){
                 alert('座位編碼失敗，請稍候再試，\n若持續失敗，請與系統管理員聯絡')
             });
