@@ -68,14 +68,14 @@
      <td>
       生　　日
      </td>
-     <td><input type="date" value="${student/birthday}" name='birthday'></td>
+     <td><input type="date" v-model="birthday" name='birthday'></td>
     </tr>
     <tr>
      <td>
       學　　歷
      </td>
      <td>
-       <select name="education" tal:define="eduList view/getEducation">
+       <select name="education" v-model="education_id" tal:define="eduList view/getEducation">
          <option tal:repeat="item eduList"
                  tal:attributes="selected python:item['id'] == student['education_id']"
                  value="${item/id}">${item/degree}</option>
@@ -85,7 +85,7 @@
       學校
      </td>
      <td colspan="7">
-       <input name="edu_school" type="text" value="${student/edu_school}"/>
+       <input name="edu_school" type="text" v-model="edu_school"/>
      </td>
     </tr>
     <tr>
@@ -93,19 +93,19 @@
       電　　話
      </td>
      <td colspan="1">
-      <input name="phone" type="text" value="${student/phone}"/>
+      <input name="phone" type="text" v-model="phone"/>
      </td>
      <td>
       行動電話
      </td>
      <td colspan="1">
-      <input name="cellphone" type="text" value="${student/cellphone}"/>
+      <input name="cellphone" type="text" v-model="cellphone"/>
      </td>
      <td>
       傳真
      </td>
      <td colspan="5">
-      <input name="fax" type="text" value="${student/fax}"/>
+      <input name="fax" type="text" v-model="fax"/>
      </td>
     </tr>
     <tr>
@@ -528,6 +528,12 @@ var app = new Vue({
     el: '#content-core',
     data: {
       message: 'Hello Vue!',
+      birthday: '${student/birthday}',
+      education_id: '${student/education_id}',
+      edu_school: '${student/edu_school}',
+      phone: '${student/phone}',
+      cellphone: '${student/cellphone}',
+      fax: '${student/fax}',
       city: '${student/city}',
       zip: '${student/zip}',
       address: '${student/address}',
