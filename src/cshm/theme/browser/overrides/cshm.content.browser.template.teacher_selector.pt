@@ -35,6 +35,7 @@ from plone import api
       <table>
         <thead>
           <tr>
+            <td>課程-科目編號</td>
             <td>科目名稱</td>
             <td>前期授課講師</td>
             <td>合格遴選講師</td>
@@ -42,6 +43,7 @@ from plone import api
         </thead>
         <tbody>
           <tr tal:repeat="item python:view.refObj.getChildNodes()">
+            <td>${python:context.getParentNode().id.upper()}-${item/id}</td>
             <td>${item/title}</td>
             <td>${item/teacher/to_object/title}</td>
             <td>
@@ -53,10 +55,7 @@ from plone import api
           </tr>
         </tbody>
       </table>
-
   </tal:table>
-
-
 
 <ul tal:condition="python:not view.request.form.get('uid')">
   <li tal:repeat="item python:folder.getChildNodes()" style="padding:10px">
