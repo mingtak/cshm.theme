@@ -47,7 +47,7 @@
     <tr class="tr-head">
      <td colspan="10">
       │
-      <a href="cs_print.asp?idda=R223404745&amp;clano=A003&amp;clti=假日班&amp;clana=職業衛生管理師&amp;sno=425909" target="new">
+      <a href="${context/absolute_url}/@@update_student_reg?print_form=&id=${student/id}" target="_blank">
        套印報名表
       </a>
       │

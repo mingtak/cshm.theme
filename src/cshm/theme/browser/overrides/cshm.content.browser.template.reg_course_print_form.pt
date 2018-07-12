@@ -1,0 +1,279 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-on="http://vue.org/v-on"
+    xmlns:v-bind="http://vue.org/v-bind"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<div tal:define="student view/regCourse">
+<?python
+from DateTime import DateTime
+?>
+
+  <table border="1" bordercolordark="gray" bordercolorlight="gray" cellspacing="0">
+   <tr height="100">
+    <td colspan="8">
+     <b style="text-align:center">
+      <h3>${python:context.getParentNode().title} ${context/title}</h3>
+     </b>
+     <br/>
+     <p align="right">
+      列印日期：${python:DateTime().strftime('%Y/%m/%d')}
+     </p>
+    </td>
+   </tr>
+   <tr height="40">
+    <td width="70">
+     <b>
+      姓名
+     </b>
+    </td>
+    <td width="70">
+     ${student/name}
+    </td>
+    <td width="70">
+     <b>
+      ID字號
+     </b>
+    </td>
+    <td width="70">
+     ${student/studId}
+    </td>
+    <td width="70">
+     <b>
+      生日
+     </b>
+    </td>
+    <td width="70">
+     ${student/birthday}
+    </td>
+    <td width="70">
+     <b>
+      學歷
+     </b>
+    </td>
+    <td width="70">
+     ${student/education_id}
+    </td>
+   </tr>
+   <tr height="40">
+    <td width="70">
+     <b>
+      電話
+     </b>
+    </td>
+    <td colspan="3">
+     ${student/phone}
+    </td>
+    <td>
+     <b>
+      傳真
+     </b>
+    </td>
+    <td colspan="3" width="70">
+     ${student/fax}
+    </td>
+   </tr>
+   <tr height="40">
+    <td width="70">
+     <b>
+      email
+     </b>
+    </td>
+    <td colspan="7" width="70">
+     <a href="mailto:${student/priv_email}">
+      ${student/priv_email}
+     </a>
+    </td>
+   </tr>
+   <tr height="40">
+    <td>
+     <b>
+      地址
+     </b>
+    </td>
+    <td colspan="7">
+     ${student/city}${student/zip}${student/address}
+    </td>
+   </tr>
+   <tr height="40">
+    <td>
+     <b>
+      公司
+     </b>
+    </td>
+    <td colspan="3">
+     ${student/company_name}
+    </td>
+    <td>
+     <b>
+      地址
+     </b>
+    </td>
+    <td colspan="3">
+     ${student/company_city}${student/company_zip}${student/company_address}
+    </td>
+   </tr>
+   <tr height="40">
+    <td width="70">
+     <b>
+      承辦人
+     </b>
+    </td>
+    <td width="70">
+     TODO
+    </td>
+    <td width="70">
+     <b>
+      部門
+     </b>
+    </td>
+    <td width="70">
+     TODO
+    </td>
+    <td width="70">
+     <b>
+      電話
+     </b>
+    </td>
+    <td colspan="3">
+     TODO
+    </td>
+   </tr>
+   <tr height="40">
+    <td>
+     <b>
+      傳真
+     </b>
+    </td>
+    <td colspan="3">
+     ${student/fax}
+    </td>
+    <td>
+     <b>
+      email
+     </b>
+    </td>
+    <td colspan="3">
+     <a href="mailto:${student/com_email}">
+      ${student/com_email}
+     </a>
+    </td>
+   </tr>
+   <tr height="40">
+    <td>
+     <b>
+      上課狀況
+     </b>
+    </td>
+    <td colspan="3">
+     TODO 確定上課　報名106.10.21
+    </td>
+    <td>
+     <b>
+      繳費狀況
+     </b>
+    </td>
+    <td colspan="3">
+     TODO 已繳費10604241
+    </td>
+   </tr>
+   <tr height="40">
+    <td colspan="8">
+     <b>
+      -------------------------聯絡紀錄-------------------------
+     </b>
+    </td>
+   </tr>
+   <tr height="200">
+    <td colspan="8">
+     TODO
+    </td>
+   </tr>
+   <tr height="40">
+    <td colspan="8">
+     <b>
+      -------------------------其他說明-------------------------
+     </b>
+    </td>
+   </tr>
+   <tr height="200">
+    <td colspan="8">
+     <p>
+      TODO
+     </p>
+    </td>
+   </tr>
+  </table>
+
+
+
+<script>
+var app = new Vue({
+    el: '#content-core',
+    data: {
+      message: 'Hello Vue!',
+      contactLog: '',
+      birthday: '${student/birthday}',
+      education_id: '${student/education_id}',
+      edu_school: '${student/edu_school}',
+      phone: '${student/phone}',
+      cellphone: '${student/cellphone}',
+      fax: '${student/fax}',
+      city: '${student/city}',
+      zip: '${student/zip}',
+      address: '${student/address}',
+      priv_email : '${student/priv_email}',
+      com_email: '${student/com_email}',
+      company_name: '${student/company_name}',
+      company_city: '${student/company_city}',
+      company_zip: '${student/company_zip}',
+      company_address: '${student/company_address}',
+      job_title: '${student/job_title}',
+      training_status: '${student/training_status}',
+      invoice_title: '${student/invoice_title}',
+      tax_no: '${student/tax_no}',
+      distList: "${python:view.getDistList().replace('\n', '\t')}".split('\t')
+    },
+    methods: {
+      getZIP: function(cityStr){
+          if(cityStr == 'city'){
+              city = this.city
+          }else{
+              city = this.company_city
+          }
+          for(i=0; i<this.distList.length; i++){
+              if(this.distList[i].startsWith(city)){
+                  distList = this.distList[i].split(':')[1].split('|')
+                  zips = []
+                  for(j=0; j<distList.length; j++){
+                      zips.push(distList[j])
+                  }
+                  return zips
+              }
+          }
+      }
+    }
+})
+</script>
+
+</div>
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
