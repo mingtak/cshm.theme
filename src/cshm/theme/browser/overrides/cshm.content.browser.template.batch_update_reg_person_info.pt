@@ -38,25 +38,18 @@
     <td style="width:10%">${item/name}</td>
     <td style="width:10%"><input style="width:100%" v-model="phone__${item/id}"></td>
     <td style="width:10%"><input style="width:100%" v-model="cellphone__${item/id}"></td>
-    <td style="width:10%"><input style="width:100%" v-model="birthday__${item/id}"></td>
+    <td style="width:10%"><input type="date" style="width:100%" v-model="birthday__${item/id}"></td>
     <td style="width:15%"><input style="width:100%" v-model="priv_email__${item/id}"></td>
     <td style="width:35%"><input style="width:100%" v-model="contactLog__${item/id}"></td>
-    <td style="width:5%"><a class="update" data-id="${item/id}" v-on:click="foo" href="javascript:void(0)">更新</a></td>
+    <td style="width:5%"><a v-on:click="update(${item/id})" href="javascript:void(0)">更新</a></td>
   </tr>
 </table>
-
-
-
-
-
-
 
 <script>
 var app = new Vue({
     el: '#content-core',
     data: {
       message: 'Hello Vue!',
-      contactLog: '',
 <tal:item repeat="item view/result">
       phone__${item/id}: '${item/phone}',
       cellphone__${item/id}: '${item/cellphone}',
@@ -66,28 +59,25 @@ var app = new Vue({
 </tal:item>
     },
     methods: {
-      foo:function(){alert('aa')},
-
-
-
-
-      getZIP: function(cityStr){
-alert('cc')
-          if(cityStr == 'city'){
-              city = this.city
-          }else{
-              city = this.company_city
-          }
-          for(i=0; i<this.distList.length; i++){
-              if(this.distList[i].startsWith(city)){
-                  distList = this.distList[i].split(':')[1].split('|')
-                  zips = []
-                  for(j=0; j<distList.length; j++){
-                      zips.push(distList[j])
-                  }
-                  return zips
-              }
-          }
+      update:function(id){
+alert(id)
+        data = {
+           id: id,
+           phone: this['phone__' + id],
+           cellphone: this['cellphone__' + id],
+           birthday: this['birthday__' + id],
+           priv_email: this['priv_email__' + id],
+           contactLog: this['contactLog__' + id],
+           update: 1,
+        }
+        $.post(
+           '${context/absolute_url}/@@batch_update_reg_person_info',
+           data=data,
+        ).done(function(respon){
+            alert('更新成功')
+        }).fail(function(respon){
+            alert('更新失敗，請稍候再試，若持續失敗，請聯絡系統管理員')
+        })
       }
     }
 })
