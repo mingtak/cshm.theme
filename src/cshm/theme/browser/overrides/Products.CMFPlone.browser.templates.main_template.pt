@@ -42,6 +42,9 @@
     <!-- BACKEND.CSS -->
     <link rel="stylesheet" type="text/css" href="${portal_url}/++plone++cshm.theme/backend.css" />
     <metal:styleslot define-slot="style_slot" />
+
+    <link rel="stylesheet" type="text/css" href="${portal_url}/++plone++cshm.theme/css/jquery.toastmessage.css" />
+    <script src="${portal_url}/++plone++cshm.theme/jquery.toastmessage.js"></script>
   </head>
 
   <body tal:define="isRTL portal_state/is_rtl;

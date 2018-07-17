@@ -60,7 +60,6 @@ var app = new Vue({
     },
     methods: {
       update:function(id){
-alert(id)
         data = {
            id: id,
            phone: this['phone__' + id],
@@ -74,9 +73,10 @@ alert(id)
            '${context/absolute_url}/@@batch_update_reg_person_info',
            data=data,
         ).done(function(respon){
-            alert('更新成功')
+            $().toastmessage('showSuccessToast', '更新成功');
+            app['contactLog__' + id] = ''
         }).fail(function(respon){
-            alert('更新失敗，請稍候再試，若持續失敗，請聯絡系統管理員')
+            $().toastmessage('showErrorToast', '更新失敗，請稍候再試，若持續失敗，請聯絡系統管理員');
         })
       }
     }
