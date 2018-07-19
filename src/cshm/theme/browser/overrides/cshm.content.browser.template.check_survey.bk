@@ -38,7 +38,6 @@
   <input type="submit" value="送出" class="btn">
 
 </form>
-
 <script>
 window.onload = function(){
     select = document.getElementById('seat_number')
@@ -47,7 +46,7 @@ window.onload = function(){
         var t = document.createTextNode(i);
         option.appendChild(t);
         select.appendChild(option)
-	option.setAttribute('value', i)
+       option.setAttribute('value', i)
     }
 }
 </script>
