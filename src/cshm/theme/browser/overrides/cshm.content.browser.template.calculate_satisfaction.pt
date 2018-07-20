@@ -15,7 +15,7 @@ th{
 <?python
 import json
 ?>
-<form action="download_excel" method="post" style='margin-bottom: 20px'>
+<form action="download_satisfaction_excel" method="post" style='margin-bottom: 20px'>
     <input value="${view/each_teacher_data}" type='hidden' name="each_teacher_data">
     <input value="${view/total_anw}" type='hidden' name='total_anw'>
     <input value="${python:view.anw_data['count_A']}" type='hidden' name='count_A'>

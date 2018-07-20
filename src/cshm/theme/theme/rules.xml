@@ -10,7 +10,6 @@
 <!-- Only theme front end pages -->
 <rules css:if-content="body.frontend#visual-portal-wrapper">
 
-
   <theme href="index.html" />
   <notheme css:if-not-content="#visual-portal-wrapper" />
 
