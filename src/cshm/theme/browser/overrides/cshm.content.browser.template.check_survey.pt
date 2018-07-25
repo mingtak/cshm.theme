@@ -41,12 +41,12 @@
 <script>
 window.onload = function(){
     select = document.getElementById('seat_number')
-    for(i=1; i<=60; i++){
+    for(i=1; i<=${view/maxSeatNumber}; i++){
         var option = document.createElement("option");
         var t = document.createTextNode(i);
         option.appendChild(t);
         select.appendChild(option)
-       option.setAttribute('value', i)
+        option.setAttribute('value', i)
     }
 }
 </script>

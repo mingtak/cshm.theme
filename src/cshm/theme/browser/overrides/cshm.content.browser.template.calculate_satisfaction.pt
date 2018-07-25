@@ -1,5 +1,32 @@
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
 <body>
+
+<metal:style fill-slot="style_slot">
+    <link rel="stylesheet" type="text/css" href="${portal_url}/++theme++theme-for-cshm/css/c3.min.css">
+</metal:style>
+
+<metal:js fill-slot="top_slot">
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+<script type="text/javascript" src="${portal_url}/++theme++theme-for-cshm/js/c3.min.js"></script>
+
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<?python
+import json
+from plone import api
+abs_url = api.portal.get().absolute_url()
+?>
+
 <style>
 td,th{
     text-align: center;
@@ -7,14 +34,14 @@ td,th{
 }
 td{
     font-size: 17px;
+    border: 1px solid #999 !important;
 }
 th{
     font-size: 20px;
+    border: 1px solid #999 !important;
 }
 </style>
-<?python
-import json
-?>
+
 <form action="download_satisfaction_excel" method="post" style='margin-bottom: 20px'>
     <input value="${view/each_teacher_data}" type='hidden' name="each_teacher_data">
     <input value="${view/total_anw}" type='hidden' name='total_anw'>
@@ -135,7 +162,15 @@ import json
 <div id="each_teacher_pie" style='display:flex;flex-wrap:wrap;justify-content:space-around'>
 
 </div>
-<script src="++thene++theme-for-cshm/js/drawPie.js"></script>
+<div id='chart'></div>
+<!--<script src="${abs_url}/++theme++theme-for-cshm/js/d3.v3.min.js"></script>-->
+
+<script type="text/javascript" src="${abs_url}/++theme++theme-for-cshm/js/drawPie.js"></script>
+
+</metal:content-core>
+</metal:content-core>
 
 </body>
 </html>
+
+

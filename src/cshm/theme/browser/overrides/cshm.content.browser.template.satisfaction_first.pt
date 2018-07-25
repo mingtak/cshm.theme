@@ -62,10 +62,10 @@ abs_url = api.portal.get().absolute_url()
 </a>
 
 <br/>
-<form class="col-xs-12 col-sm-12" action="result_satisfaction" method="post">
+<form class="col-xs-12 col-sm-12" action="result_satisfaction" method="post" onsubmit="return checkForm()">
     <div>
         <p>課程名稱：</p>
-        <input type="text" value='${view/subjectName}' readonly="readonly"  name='subject_name'/>    
+        <input type="text" value='${view/subjectName}' readonly="readonly"  name='subjectName'/>    
     </div>
     <div>
         <p>期數：</p>

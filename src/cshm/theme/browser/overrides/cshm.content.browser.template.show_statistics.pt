@@ -53,22 +53,22 @@ abs_url = api.portal.get().absolute_url()
 <button id='back' style='margin-bottom:20px' 
    onclick="backFolderContents()">回目錄</button>
 <br/>
-訓前
-<select name="course" id="course1">
+<p  style='display:none'>訓前</p>
+<select name="course" id="course1" style='display:none'>
     <option value="職業安全衛生管理員">職業安全衛生管理員 </option>
     <option value="荷重再一噸以上之堆高機操作人員">荷重再一噸以上之堆高機操作人員</option>
     <option value="丙種職業安全衛生業務主管">丙種職業安全衛生業務主管</option>
     <option value="急救人員">急救人員</option>
 </select>
 
-期數 <input type="number" id="period1"  />
+<p  style='display:none'>期數</p> <input type="hidden" id="period1"   />
 
-<button class='send' id='send1' data-target="1"  >送出</button>
+<button class='send' id='send1' data-target="1"   style='display:none'>送出</button>
 <br>
 
 滿意度
 <select id="course2">
-    <option tal:repeat="item view/result" value="${python: item[1]}">${python:item[0]}</option>
+    <option tal:repeat="item python: view.result.keys()" value="${python: item}">${python: view.result[item]}</option>
 </select>
 期數 <input type="number" id="period2"  />
 <button class='send' id='send2'  data-target="2" >送出</button>
