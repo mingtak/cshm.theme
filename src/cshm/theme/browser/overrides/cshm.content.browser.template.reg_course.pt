@@ -38,7 +38,28 @@
 <p>      <input type="text" name="phone" id="phone" value="" placeholder="聯絡電話" required></p>
 <p>      <input type="text" name="cellphone" id="cellphone" value="" placeholder="行動電話" required></p>
 <p>      <input type="text" name="fax" id="fax" value="" placeholder="傳真電話"></p>
-<p>      <input type="text" name="address" id="address" value="" placeholder="聯絡地址" required></p>
+
+<p>
+
+       <select name="city" tal:define="cityList view/getCityList" v-model="city">
+         <option value="">請選擇縣市</option>
+         <option tal:repeat="item python:cityList.split(',')"
+                 value="${item}">${item}</option>
+       </select>
+       <select name="zip" tal:define="distList view/getDistList" v-model="zip">
+         <option value="" selected>鄉鎮市區</option>
+         <option v-for="item in getZIP('city')"
+                 v-bind:value="item.split(',')[1]">{{item.split(',')[0]}}
+         </option>
+       </select>
+       <input name="address" type="text" v-model="address" placeholder="聯絡地址"/>
+</p>
+
+
+
+
+
+
 <p>      <input type="email" name="priv_email" id="priv_email" value="" placeholder="電子郵件(私人)" required></p>
 <p>      <input type="email" name="com_email" id="com_email" value="" placeholder="電子郵件(公司)"></p>
 <hr>
@@ -107,7 +128,12 @@ var app = new Vue({
       company_name: '',
       company_address: '',
       invoice_title: '',
-      invoice_tax_no: ''
+      invoice_tax_no: '',
+
+      city: '',
+      zip: '',
+      address: '',
+      distList: "${python:view.getDistList().replace('\n', '\t')}".split('\t')
     },
     methods: {
       getCompanyName: function(event) {
@@ -143,10 +169,23 @@ var app = new Vue({
                     }else if(id == 'invoice_title'){
                         app.invoice_tax_no = data.split(',')[0]
                     }
-debugger
                 })
         }
+      },
+      getZIP: function(cityStr){
+          city = this.city
+          for(i=0; i<this.distList.length; i++){
+              if(this.distList[i].startsWith(city)){
+                  distList = this.distList[i].split(':')[1].split('|')
+                  zips = []
+                  for(j=0; j<distList.length; j++){
+                      zips.push(distList[j])
+                  }
+                  return zips
+              }
+          }
       }
+
     }
 })
 
