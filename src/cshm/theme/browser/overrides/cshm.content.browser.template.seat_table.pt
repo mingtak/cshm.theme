@@ -19,34 +19,61 @@
 
 <h3>${python:context.getParentNode().title} ${context/title} 座位表</h3>
 <input type='text' placeholder='範例: 3-4-3, 4-3-3 或其它，走道以 - 區隔' v-model="seat_state">
+<input type='text' placeholder='跳號，請輸入要跳開的座位編號，以半型逗點(,)隔開,由小到大依序填寫' v-model="seat_jump">
 <a class="submit-widget button-field context" href="javascript:void(0)" v-on:click="foo">產生座位表</a>
 <hr>
 <table>
     <tr v-for="i in Math.ceil(100/row_total)">
         <td>座號 <br> 姓名</td>
         <template v-for="j in row_total">
-          <td>{{ ((i-1)*row_total) + j }} <br> {{ students[((i-1)*row_total) + j] }}</td>
+          <td>
+              {{ studSeat[((i-1)*row_total) + j-1 ][0] }} <br> {{ studSeat[((i-1)*row_total) + j-1 ][1] }}
+          </td>
           <td rowspan="30" v-if="i == 1 && road.slice(0,-1).includes(j)">走道</td>
         </template>
     </tr>
 
 </table>
 
+<?python
+emptyList = ''
+for i in range(200):
+    emptyList += "['', ''],"
+emptyList = '[' + emptyList[:-1] + ']'
+?>
 <script>
 var app = new Vue({
     el: '#content-core',
     data: {
       message: 'Hello Vue!',
       seat_state: '3-4-3',
+      seat_jump: '',
+      seat_jump_list: [],
       row_total: 10,
       road: [],
       count: 1,
       seatState: [],
-      students: ${python:str(dict(view.result)).replace("u'", "'")}
+      students: ${python:str(list(view.result)).replace("u'", "'").replace('(', '[').replace(')', ']')},
+      studSeat: ${emptyList},
+      index: 0,
     },
     methods: {
       foo: function(){
           seatList = this.seat_state.split('-')
+          if(this.seat_jump){
+              this.seat_jump_list = this.seat_jump.split(',')
+          }else{
+              this.seat_jump_list = []
+          }
+          this.studSeat = this.students.slice()
+
+          for(i=0; i<this.seat_jump_list.length; i++){
+              this.studSeat.splice(Number(this.seat_jump_list[i])-1, 0, ['', '']);
+          }
+          for(i=this.studSeat.length; i<200; i++){
+              this.studSeat.push(['', '']);
+          }
+
           this.seatState = []
           this.road = [0]
           this.row_total = 0
@@ -54,8 +81,6 @@ var app = new Vue({
               this.seatState.push(Number(seatList[i]))
               this.row_total += Number(seatList[i])
               if(this.road != 0){
-          debugger;
-
                   this.road.push(Number(seatList[i]) + Number(this.road[i-1]))
               }else{
                   this.road = [Number(seatList[i])]
@@ -64,6 +89,9 @@ var app = new Vue({
       }
     }
 })
+
+
+
 </script>
 
 

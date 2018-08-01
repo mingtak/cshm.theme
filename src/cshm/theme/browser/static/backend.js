@@ -115,9 +115,11 @@ $(document).ready(function(){
         currentName = $(this).data('currentname')
         var date = new Date()
         year = date.getFullYear()
-        month = date.getMonth()
+        month = date.getMonth() + 1
         day = date.getDate()
-        dateStr = year + '-' + month + '-' + day
+        hour = date.getHours()
+        minute = date.getMinutes()
+        dateStr = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
         if( $('#log-data-' + id).val() ){
             // 串接新舊資料
             if( $('#view-log-' + id).data('log') ){

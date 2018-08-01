@@ -94,7 +94,8 @@
       <td>TODO</td>
       <td>
         <tal:cond condition="not:item/isReserve">
-          <input type="text" name='contactLog' style="width:80%; float:left" id="log-data-${item/id}"/>
+          <p>${python:item.contactLog.split('\n')[-1] if item.contactLog is not None else ''}</p>
+          <input type="text" name='contactLog' style="width:80%; float:left" id="log-data-${item/id}">
           <a href="javascript:void(0)" class="add-log" data-id="${item/id}" data-currentname="${view/currentName}">新增</a>
         </tal:cond>
       </td>
