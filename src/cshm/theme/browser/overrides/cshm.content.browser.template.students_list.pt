@@ -27,6 +27,7 @@
 <a id="export-email-cell" target="_blank" href="@@export_email_cell">匯出Email/手機清單</a> |
 <a id="seat_table" target="_blank" href="@@seat_table">套印座位表</a> |
 <a id="batch_update_reg_info" target="_blank" href="@@batch_update_reg_person_info">批次修改個人資訊</a> |
+<a id="echelon_view" target="_blank" href="@@echelon_view">滿意度調查</a>
 <hr>
 <input name="url" class="to-url" type="text" placeholder="請輸入下載專區網址" style="width: 300px; float:left">
 <a class="to-url" href="javascript:void(0)" >匯出至下載專區</a>

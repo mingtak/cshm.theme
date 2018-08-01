@@ -59,3 +59,31 @@ h3.portletHeader {
 /*    border:2px #ccc solid; */
     border-radius:6px;
 }
+
+h1 { font-size: 24px; }
+.envor-page-title-1 h1 { font-size: 24px;}
+h2 { font-size: 22px; }
+h3 { font-size: 20px; }
+h4 { font-size: 18px; }
+h5 { font-size: 16px; }
+h6 { font-size: 14px; }
+
+body { color: #555; font-size: 15px; }
+footer .envor-widget-inner { color: #aaa; }
+.envor-top-bar .contacts { color: #ccc; }
+
+input[type=text], input[type=email], input[type=file], input[type=tel], input[type=url], input[type=password], select, textarea {
+    background-color: #ccc;
+    border: 1px solid #333;
+}
+::placeholder {
+    color: #777;
+}
+:-ms-input-placeholder { 
+    color: #777;
+}
+::-ms-input-placeholder { 
+    color: #777;
+}
+
+

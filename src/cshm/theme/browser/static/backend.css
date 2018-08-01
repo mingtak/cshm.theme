@@ -105,3 +105,21 @@
     to {opacity:1 ;}
 }
 /* Popup 視窗 End */
+
+#edit-zone {
+    z-index: 12;
+}
+
+/* api.portal.show_message  */
+.envor-msg{
+    padding: 10px;
+    font-size: 15px;
+    margin: 0 16px 10px 16px;
+    font-weight: bold; 
+}
+.envor-msg-warn{
+    background: #ffaa36cc;
+    color: #a22a2a;
+    border: 1px solid #cf9a35eb;
+    border-bottom: 2px solid #cf9a35eb;
+}

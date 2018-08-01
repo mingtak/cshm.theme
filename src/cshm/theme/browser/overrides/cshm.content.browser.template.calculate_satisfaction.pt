@@ -8,13 +8,13 @@
 <body>
 
 <metal:style fill-slot="style_slot">
-    <link rel="stylesheet" type="text/css" href="${portal_url}/++theme++theme-for-cshm/css/c3.min.css">
+    <link rel="stylesheet" type="text/css" href="${portal_url}/++plone++cshm.theme/c3.min.css">
 </metal:style>
 
 <metal:js fill-slot="top_slot">
 <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
 
-<script type="text/javascript" src="${portal_url}/++theme++theme-for-cshm/js/c3.min.js"></script>
+<script type="text/javascript" src="${portal_url}/++plone++cshm.theme/c3.min.js"></script>
 
 </metal:js>
 
@@ -138,6 +138,7 @@ th{
     <td id="pie3"></td>
     <td id="pie4"></td>
   </tr>
+<tal:condition condition="view/count_F_flag">
   <tr>
     <th>上課音量、口音表達適當、清晰</th>
     <th>提供技能檢定或考照之建議或協助</th>
@@ -154,6 +155,26 @@ th{
     <td id="pie7"></td>
     <td id="pie8"></td>
   </tr>
+</tal:condition>
+
+<tal:condition condition="not: view/count_F_flag">
+  <tr>
+    <th>上課音量、口音表達適當、清晰</th>
+    <th>學習環境</th>
+  </tr>
+  <tr>
+    <td id="pie5"></td>
+    <td id="pie7"></td>
+  </tr>
+  <tr>
+    <th>訓練服務</th>
+  </tr>
+  <tr>
+    <td id="pie8"></td>
+  </tr>
+</tal:condition>
+
+
 </table>
 
 
@@ -162,10 +183,8 @@ th{
 <div id="each_teacher_pie" style='display:flex;flex-wrap:wrap;justify-content:space-around'>
 
 </div>
-<div id='chart'></div>
-<!--<script src="${abs_url}/++theme++theme-for-cshm/js/d3.v3.min.js"></script>-->
 
-<script type="text/javascript" src="${abs_url}/++theme++theme-for-cshm/js/drawPie.js"></script>
+<script type="text/javascript" src="${abs_url}/++plone++cshm.theme/drawPie.js"></script>
 
 </metal:content-core>
 </metal:content-core>
