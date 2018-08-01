@@ -4,16 +4,19 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     xmlns:v-on="http://vuejs.org"
     lang="en"
-    metal:use-macro="context/main_template/macros/master"
     i18n:domain="cshm.content">
 <body>
-<metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 <?python
 from plone import api
 abs_url = api.portal.get().absolute_url()
 ?>
+
+<h3>${python:context.getParentNode().title} - ${context/title} 滿意度調查</h3>
+
+
+
 <button id='back' onclick="back()">回管理頁</button>
     <a href=" ${python: view.context.absolute_url()}/@@manager?course_title=${python: view.context.Title()}" style='display:none'>
 職業安全衛生管理員學員訓前職能調查表</a> <br/>
@@ -45,7 +48,10 @@ abs_url = api.portal.get().absolute_url()
         location.href = url
     }
 </script>
-</metal:content-core>
+<style>
+body {padding: 50px}
+</style>
+
 </metal:content-core>
 
 </body>
