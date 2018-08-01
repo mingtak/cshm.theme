@@ -26,9 +26,7 @@
     <td style="width:5%">座號</td>
     <td style="width:10%">姓名</td>
     <td style="width:10%">電話</td>
-    <td style="width:10%">手機</td>
-    <td style="width:10%">生日</td>
-    <td style="width:15%">個人email</td>
+    <td style="width:35%">地址</td>
     <td style="width:35%">聯絡記錄</td>
     <td style="width:5%">更新</td>
   </tr>
@@ -37,10 +35,28 @@
     <td style="width:5%">${item/seatNo}</td>
     <td style="width:10%">${item/name}</td>
     <td style="width:10%"><input style="width:100%" v-model="phone__${item/id}"></td>
-    <td style="width:10%"><input style="width:100%" v-model="cellphone__${item/id}"></td>
-    <td style="width:10%"><input type="date" style="width:100%" v-model="birthday__${item/id}"></td>
-    <td style="width:15%"><input style="width:100%" v-model="priv_email__${item/id}"></td>
-    <td style="width:35%"><input style="width:100%" v-model="contactLog__${item/id}"></td>
+    <td style="width:35%">
+
+       <select name="city" tal:define="cityList view/getCityList" v-model="city__${item/id}">
+         <option value="">請選擇縣市</option>
+         <option tal:repeat="item python:cityList.split(',')"
+                 value="${item}">${item}</option>
+       </select>
+
+       <select name="zip" tal:define="distList view/getDistList" v-model="zip__${item/id}">
+         <option value="" selected>鄉鎮市區</option>
+         <option v-for="item in getZIP('city__${item/id}')"
+                 v-bind:value="item.split(',')[1]">{{item.split(',')[0]}}
+         </option>
+       </select>
+
+      <input name="address" type="text" v-model="address__${item/id}" placeholder="請輸入詳細地址"/>
+
+    </td>
+    <td style="width:35%">
+        <input style="width:100%" v-model="contactLog__${item/id}">
+        <span>{{ lastContactLog__${item/id} }}</span>
+    </td>
     <td style="width:5%"><a v-on:click="update(${item/id})" href="javascript:void(0)">更新</a></td>
   </tr>
 </table>
@@ -52,21 +68,25 @@ var app = new Vue({
       message: 'Hello Vue!',
 <tal:item repeat="item view/result">
       phone__${item/id}: '${item/phone}',
-      cellphone__${item/id}: '${item/cellphone}',
-      birthday__${item/id}: '${item/birthday}',
-      priv_email__${item/id}: '${item/priv_email}',
       contactLog__${item/id}: '',
+      lastContactLog__${item/id}: '${python:item.contactLog.split('\n')[-1] if item.contactLog else ""}',
+
+      city__${item/id}: '${item/city}',
+      zip__${item/id}: '${item/zip}',
+      address__${item/id}: '${item/address}',
 </tal:item>
+      distList: "${python:view.getDistList().replace('\n', '\t')}".split('\t'),
     },
     methods: {
       update:function(id){
+debugger
         data = {
            id: id,
            phone: this['phone__' + id],
-           cellphone: this['cellphone__' + id],
-           birthday: this['birthday__' + id],
-           priv_email: this['priv_email__' + id],
            contactLog: this['contactLog__' + id],
+           city: this['city__' + id],
+           zip: this['zip__' + id],
+           address: this['address__' + id],
            update: 1,
         }
         $.post(
@@ -74,11 +94,28 @@ var app = new Vue({
            data=data,
         ).done(function(respon){
             $().toastmessage('showSuccessToast', '更新成功');
+            if(app['contactLog__' + id]){
+                app['lastContactLog__' + id] = app['contactLog__' + id]
+            }
             app['contactLog__' + id] = ''
         }).fail(function(respon){
             $().toastmessage('showErrorToast', '更新失敗，請稍候再試，若持續失敗，請聯絡系統管理員');
         })
+      },
+      getZIP: function(cityStr){
+          city = this[cityStr]
+          for(i=0; i<this.distList.length; i++){
+              if(this.distList[i].startsWith(city)){
+                  distList = this.distList[i].split(':')[1].split('|')
+                  zips = []
+                  for(j=0; j<distList.length; j++){
+                      zips.push(distList[j])
+                  }
+                  return zips
+              }
+          }
       }
+
     }
 })
 </script>
