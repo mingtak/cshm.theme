@@ -46,15 +46,17 @@
 
 <h4>公司資料</h4>
 <p>      <input type="text" name="tax_no" id="tax_no" placeholder="統一編號"
-                v-on:input="getCompanyName($event)"></p>
-<p>      <input type="text" name="company_name" id="company_name" placeholder="服務單位" v-bind:value="company_name"></p>
+                v-model="tax_no" v-on:input="getCompanyName($event)"></p>
+<p>      <input type="text" name="company_name" id="company_name" placeholder="服務單位"
+                v-model="company_name" v-on:input="getTaxNo($event)"></p>
 <p>      <input type="text" name="company_address" id="company_address" value="" placeholder="公司地址" v-bind:value="company_address"></p>
 <p>      <input type="text" name="job_title" id="job_title" value="" placeholder="職稱"></p>
 <hr>
 <h4>收據資料</h4>
 <p>      <input type="text" name="invoice_tax_no" id="invoice_tax_no" value="" placeholder="統一編號"
-                v-on:input="getCompanyName($event)"></p>
-<p>      <input type="text" name="invoice_title" id="invoice_title" value="" placeholder="收據抬頭" v-bind:value="invoice_title"></p>
+                v-on:input="getCompanyName($event)" v-model="invoice_tax_no"></p>
+<p>      <input type="text" name="invoice_title" id="invoice_title" value="" placeholder="收據抬頭"
+                v-on:input="getTaxNo($event)" v-model="invoice_title"></p>
 
 <hr>
 
@@ -101,9 +103,11 @@ var app = new Vue({
     el: '#content-core',
     data: {
       message: 'Hello Vue!',
+      tax_no: '',
       company_name: '',
       company_address: '',
-      invoice_title: ''
+      invoice_title: '',
+      invoice_tax_no: ''
     },
     methods: {
       getCompanyName: function(event) {
@@ -121,6 +125,25 @@ var app = new Vue({
                     }else if(id == 'invoice_tax_no'){
                         app.invoice_title = data.split(',')[0]
                     }
+                })
+        }
+      },
+      getTaxNo: function(event) {
+        val = event.currentTarget.value
+        id = event.currentTarget.id
+        if(val.length > 6){
+            $.get('${portal_url}/@@query_tax_no?company_name=' + val)
+                .done(function(data){
+                    if(! data){
+                        return
+                    }
+                    else if(id == 'company_name'){
+                        app.tax_no = data.split(',')[0]
+                        app.company_address = data.split(',')[1]
+                    }else if(id == 'invoice_title'){
+                        app.invoice_tax_no = data.split(',')[0]
+                    }
+debugger
                 })
         }
       }
