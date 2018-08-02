@@ -29,7 +29,8 @@
 <a id="batch_update_before_training" target="_blank" href="@@batch_update_before_training">批次修改(訓前)</a> |
 <a id="batch_update_on_training" target="_blank" href="@@batch_update_on_training">批次修改(訓中)</a> |
 <a id="batch_update_after_training" target="_blank" href="@@batch_update_after_training">批次修改(訓後)</a> |
-<a id="echelon_view" target="_blank" href="@@echelon_view">滿意度調查</a>
+<a id="echelon_view" target="_blank" href="@@echelon_view">滿意度調查</a> |
+<a id="calculate_satisfaction" target="_blank" href="@@calculate_satisfaction">滿意度報表</a>
 <hr>
 <input name="url" class="to-url" type="text" placeholder="請輸入下載專區網址" style="width: 300px; float:left">
 <a class="to-url" href="javascript:void(0)" >匯出至下載專區</a>
@@ -50,7 +51,11 @@
       </tr>
     </table>
 </form>
-<br>
+<hr>
+
+<h4>優惠方案</h4>
+<div tal:content="structure python:context.discountInfo_no_open.replace('\n', '<br>') if context.discountInfo_no_open else ''"></div>
+<hr>
 
 <h4>正取學員</h4>
 <table border="1" id="admit-list" cellspacing="0" cellpadding="0">
@@ -67,7 +72,7 @@
   </thead>
   <tbody>
    <tal:tr repeat="item view/admit">
-    <tr>
+    <tr tal:attributes="class string:on_training_${item/on_training}">
       <td  align='center' valign="middle">
         <tal:cond condition="not:item/isReserve">
           <input class="seatNo" id="seatNo-${item/seatNo}" value="${item/seatNo}" data-id="${item/id}" style="width:50px">

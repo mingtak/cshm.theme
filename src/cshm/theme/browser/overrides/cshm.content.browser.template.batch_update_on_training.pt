@@ -31,7 +31,7 @@
     <td style="width:5%">更新</td>
   </tr>
 
-  <tr tal:repeat="item view/result">
+  <tr tal:repeat="item view/result" tal:attributes="class string:on_training_${item/on_training}">
     <td style="width:5%">${item/seatNo}</td>
     <td style="width:10%">${item/name}</td>
     <td style="width:10%"><input style="width:100%" v-model="phone__${item/id}"></td>

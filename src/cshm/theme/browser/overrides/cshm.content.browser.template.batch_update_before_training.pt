@@ -26,32 +26,21 @@
     <td style="width:5%">座號</td>
     <td style="width:10%">姓名</td>
     <td style="width:10%">電話</td>
-    <td style="width:35%">地址</td>
+    <td style="width:35%">保留/轉出</td>
     <td style="width:35%">聯絡記錄</td>
     <td style="width:5%">更新</td>
   </tr>
 
-  <tr tal:repeat="item view/result">
+  <tr tal:repeat="item view/result" tal:attributes="class string:on_training_${item/on_training}">
     <td style="width:5%">${item/seatNo}</td>
     <td style="width:10%">${item/name}</td>
     <td style="width:10%"><input style="width:100%" v-model="phone__${item/id}"></td>
     <td style="width:35%">
-
-       <select name="city" tal:define="cityList view/getCityList" v-model="city__${item/id}">
-         <option value="">請選擇縣市</option>
-         <option tal:repeat="item python:cityList.split(',')"
-                 value="${item}">${item}</option>
+       <select name="on_training" v-model="on_training__${item/id}">
+         <option tal:repeat="state view/getOnTraining"
+                 tal:attributes="value state/id;
+                                 selected python:item['on_training'] == state['id']">${state/status}</option>
        </select>
-
-       <select name="zip" tal:define="distList view/getDistList" v-model="zip__${item/id}">
-         <option value="" selected>鄉鎮市區</option>
-         <option v-for="item in getZIP('city__${item/id}')"
-                 v-bind:value="item.split(',')[1]">{{item.split(',')[0]}}
-         </option>
-       </select>
-
-      <input name="address" type="text" v-model="address__${item/id}" placeholder="請輸入詳細地址"/>
-
     </td>
     <td style="width:35%">
         <input style="width:100%" v-model="contactLog__${item/id}">
@@ -70,23 +59,16 @@ var app = new Vue({
       phone__${item/id}: '${item/phone}',
       contactLog__${item/id}: '',
       lastContactLog__${item/id}: '${python:item.contactLog.split('\n')[-1] if item.contactLog else ""}',
-
-      city__${item/id}: '${item/city}',
-      zip__${item/id}: '${item/zip}',
-      address__${item/id}: '${item/address}',
+      on_training__${item/id}: ${item/on_training},
 </tal:item>
-      distList: "${python:view.getDistList().replace('\n', '\t')}".split('\t'),
     },
     methods: {
       update:function(id){
-debugger
         data = {
            id: id,
            phone: this['phone__' + id],
            contactLog: this['contactLog__' + id],
-           city: this['city__' + id],
-           zip: this['zip__' + id],
-           address: this['address__' + id],
+           on_training: this['on_training__' + id],
            update: 1,
         }
         $.post(
@@ -98,24 +80,11 @@ debugger
                 app['lastContactLog__' + id] = app['contactLog__' + id]
             }
             app['contactLog__' + id] = ''
+            location.reload();
         }).fail(function(respon){
             $().toastmessage('showErrorToast', '更新失敗，請稍候再試，若持續失敗，請聯絡系統管理員');
         })
       },
-      getZIP: function(cityStr){
-          city = this[cityStr]
-          for(i=0; i<this.distList.length; i++){
-              if(this.distList[i].startsWith(city)){
-                  distList = this.distList[i].split(':')[1].split('|')
-                  zips = []
-                  for(j=0; j<distList.length; j++){
-                      zips.push(distList[j])
-                  }
-                  return zips
-              }
-          }
-      }
-
     }
 })
 </script>

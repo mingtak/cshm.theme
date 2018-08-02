@@ -26,16 +26,17 @@
     <td style="width:5%">座號</td>
     <td style="width:10%">姓名</td>
     <td style="width:10%">電話</td>
-    <td style="width:35%">地址</td>
+<!--    <td style="width:35%">地址</td>
+-->
     <td style="width:35%">聯絡記錄</td>
     <td style="width:5%">更新</td>
   </tr>
 
-  <tr tal:repeat="item view/result">
+  <tr tal:repeat="item view/result" tal:attributes="class string:on_training_${item/on_training}">
     <td style="width:5%">${item/seatNo}</td>
     <td style="width:10%">${item/name}</td>
     <td style="width:10%"><input style="width:100%" v-model="phone__${item/id}"></td>
-    <td style="width:35%">
+<!--    <td style="width:35%">
 
        <select name="city" tal:define="cityList view/getCityList" v-model="city__${item/id}">
          <option value="">請選擇縣市</option>
@@ -53,6 +54,7 @@
       <input name="address" type="text" v-model="address__${item/id}" placeholder="請輸入詳細地址"/>
 
     </td>
+-->
     <td style="width:35%">
         <input style="width:100%" v-model="contactLog__${item/id}">
         <span>{{ lastContactLog__${item/id} }}</span>
