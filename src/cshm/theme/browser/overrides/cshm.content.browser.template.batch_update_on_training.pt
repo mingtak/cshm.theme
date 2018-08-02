@@ -1,0 +1,127 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-on="http://vue.org/v-on"
+    xmlns:v-bind="http://vue.org/v-bind"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<h4>批次修改個人資訊(訓中)</h4>
+<table style="width:100%;table-layout: auto;">
+  <tr class="tr-title">
+    <td style="width:5%">座號</td>
+    <td style="width:10%">姓名</td>
+    <td style="width:10%">電話</td>
+    <td style="width:35%">地址</td>
+    <td style="width:35%">聯絡記錄</td>
+    <td style="width:5%">更新</td>
+  </tr>
+
+  <tr tal:repeat="item view/result">
+    <td style="width:5%">${item/seatNo}</td>
+    <td style="width:10%">${item/name}</td>
+    <td style="width:10%"><input style="width:100%" v-model="phone__${item/id}"></td>
+    <td style="width:35%">
+
+       <select name="city" tal:define="cityList view/getCityList" v-model="city__${item/id}">
+         <option value="">請選擇縣市</option>
+         <option tal:repeat="item python:cityList.split(',')"
+                 value="${item}">${item}</option>
+       </select>
+
+       <select name="zip" tal:define="distList view/getDistList" v-model="zip__${item/id}">
+         <option value="" selected>鄉鎮市區</option>
+         <option v-for="item in getZIP('city__${item/id}')"
+                 v-bind:value="item.split(',')[1]">{{item.split(',')[0]}}
+         </option>
+       </select>
+
+      <input name="address" type="text" v-model="address__${item/id}" placeholder="請輸入詳細地址"/>
+
+    </td>
+    <td style="width:35%">
+        <input style="width:100%" v-model="contactLog__${item/id}">
+        <span>{{ lastContactLog__${item/id} }}</span>
+    </td>
+    <td style="width:5%"><a v-on:click="update(${item/id})" href="javascript:void(0)">更新</a></td>
+  </tr>
+</table>
+
+<script>
+var app = new Vue({
+    el: '#content-core',
+    data: {
+      message: 'Hello Vue!',
+<tal:item repeat="item view/result">
+      phone__${item/id}: '${item/phone}',
+      contactLog__${item/id}: '',
+      lastContactLog__${item/id}: '${python:item.contactLog.split('\n')[-1] if item.contactLog else ""}',
+
+      city__${item/id}: '${item/city}',
+      zip__${item/id}: '${item/zip}',
+      address__${item/id}: '${item/address}',
+</tal:item>
+      distList: "${python:view.getDistList().replace('\n', '\t')}".split('\t'),
+    },
+    methods: {
+      update:function(id){
+debugger
+        data = {
+           id: id,
+           phone: this['phone__' + id],
+           contactLog: this['contactLog__' + id],
+           city: this['city__' + id],
+           zip: this['zip__' + id],
+           address: this['address__' + id],
+           update: 1,
+        }
+        $.post(
+           '${context/absolute_url}/@@batch_update_on_training',
+           data=data,
+        ).done(function(respon){
+            $().toastmessage('showSuccessToast', '更新成功');
+            if(app['contactLog__' + id]){
+                app['lastContactLog__' + id] = app['contactLog__' + id]
+            }
+            app['contactLog__' + id] = ''
+        }).fail(function(respon){
+            $().toastmessage('showErrorToast', '更新失敗，請稍候再試，若持續失敗，請聯絡系統管理員');
+        })
+      },
+      getZIP: function(cityStr){
+          city = this[cityStr]
+          for(i=0; i<this.distList.length; i++){
+              if(this.distList[i].startsWith(city)){
+                  distList = this.distList[i].split(':')[1].split('|')
+                  zips = []
+                  for(j=0; j<distList.length; j++){
+                      zips.push(distList[j])
+                  }
+                  return zips
+              }
+          }
+      }
+
+    }
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

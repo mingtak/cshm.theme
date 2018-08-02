@@ -26,7 +26,9 @@
 <a id="admin-group-reg-course" target="_blank" href="@@admin_group_reg_course">後台團報</a> |
 <a id="export-email-cell" target="_blank" href="@@export_email_cell">匯出Email/手機清單</a> |
 <a id="seat_table" target="_blank" href="@@seat_table">套印座位表</a> |
-<a id="batch_update_reg_info" target="_blank" href="@@batch_update_reg_person_info">批次修改個人資訊</a> |
+<a id="batch_update_before_training" target="_blank" href="@@batch_update_before_training">批次修改(訓前)</a> |
+<a id="batch_update_on_training" target="_blank" href="@@batch_update_on_training">批次修改(訓中)</a> |
+<a id="batch_update_after_training" target="_blank" href="@@batch_update_after_training">批次修改(訓後)</a> |
 <a id="echelon_view" target="_blank" href="@@echelon_view">滿意度調查</a>
 <hr>
 <input name="url" class="to-url" type="text" placeholder="請輸入下載專區網址" style="width: 300px; float:left">
@@ -57,6 +59,7 @@
       <td>座號</td>
       <td>姓名</td>
       <td>受訓狀態</td>
+      <td>回訓課程</td>
       <td>繳費狀況</td>
       <td>新增聯絡紀錄</td>
       <td>查看</td>
@@ -91,6 +94,20 @@
               </tal:opt>
           </select>
       </td>
+
+      <td>
+          <select name="retraining_from" id="retraining_from-${item/id}" tal:condition="not:item/isReserve">
+              <option value="" tal:attributes="selected not:item/retraining_from" >請選擇</option>
+              <tal:opt repeat="course python:context.getParentNode().reTrainingCourse">
+                  <option tal:attributes="value course/to_object/title;
+                                          selected python:True if course.to_object.title == item['retraining_from'] else False" >
+                      ${course/to_object/title}
+                  </option>
+              </tal:opt>
+          </select>
+      </td>
+
+
       <td>TODO</td>
       <td>
         <tal:cond condition="not:item/isReserve">
