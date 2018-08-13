@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://www.vue.org/v-bind"
+    xmlns:v-on="http://www.vue.org/v-bind"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+<metal:javascriptslot fill-slot="javascript_head_slot">
+</metal:javascriptslot>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<style>
+.up_side_down{
+    text-align: center;
+    vertical-align: middle;
+    width: 1%;
+    word-wrap:break-word;
+    word-break: break-all;
+}
+th{
+    width: 25px;
+}
+.change_table{
+    cursor: pointer;
+    padding: 0px 3px;
+    font-weight: 600;
+}
+table{
+    margin-top: 10px;
+}
+#back_btn{
+    padding: 5px 10px;
+    background: #ff9a00;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+}
+</style>
+<form action='list_print' method='post' tal:condition='not: view/hasNumbers'>
+  <label>
+    請選擇個數：<input type='number' required name='numbers'>
+  </label>
+  <br>
+  <input type='submit'>
+</form>
+
+<tal:condition condition='view/hasNumbers'>
+
+  <span tal:repeat='data view/data' data-target='table${repeat/data/number}' 
+        class='change_table'>第${repeat/data/number}張</span>
+
+  <span style='margin:0 10px'>總共${python: view.totalNumber}位</span>
+
+  <a href="${python: view.context.absolute_url() + '/@@list_print'}" id='back_btn'>返回</a>
+
+  <table  tal:define="courseLen python: len(view.courseList);
+                      numbers python: int(view.numbers)" 
+          tal:repeat="item view/data"
+          id='table${repeat/item/number}' 
+          border="1" cellpadding="2" cellspacing="1" style="table-layout:fixed;">
+    <tr>
+      <td class='up_side_down'>座號</td>
+      <td class='up_side_down'>姓名</td>
+      <td tal:repeat="course view/courseList" class='up_side_down'>
+        <tal:repeat repeat="word course">
+          ${word}
+        </tal:repeat>
+      </td>
+    </tr>
+    <tal:repeat repeat='student python: item'>
+      <tr>
+        <td>${python: student[1]}</td>
+        <td>${python: student[0]}</td>
+        <td tal:condition="python: student[2] == 1" 
+            tal:repeat="i python: range(courseLen)"></td>
+        <td tal:condition="python: student[2] == 2" colspan="${courseLen}" style='text-align: center'>退訓</td>
+      </tr>
+    </tal:repeat>
+
+  </table>
+</tal:condition>
+
+<script>
+$(function(){
+    $('#table1').siblings('table').hide()
+    $('span.change_table').each(function(){
+        if($(this).data()['target'] == 'table1'){
+            $(this).css('color', 'red')
+        }
+    })
+
+    $('.change_table').click(function(){
+        target = $(this).data()['target']
+        $(this).css('color', 'red')
+        $(this).siblings('span.change_table').css('color', 'black')
+        $('#' + target).show()
+        $('#' + target).siblings('table').hide()
+    })
+})
+</script>
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
