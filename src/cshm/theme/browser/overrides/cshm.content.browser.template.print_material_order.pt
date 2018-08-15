@@ -56,15 +56,13 @@ td{
       <td>${material}</td>
       <td>${python: view.materialList[material][1]}</td>
       <td>${python: view.materialList[material][0]}</td>
-      <td>TODO</td>
-      <td>TODO</td>
+      <td>${python: view.returnList[material] if view.returnList.has_key(material) else 0}</td>
+      <td>${python: view.materialList[material][0] - view.returnList[material] if view.returnList.has_key(material) else 0}</td>
     </tr>
   </table>
 </div>
 <br><br>
 <p style='width:830px;margin:auto;font-size:19px'>※實際到訓人數:___________,請於退書時，檢附本教材請領紀錄單，並註明教材退回數量，謝謝。</p>
-
-
 
 </body>
 </html>

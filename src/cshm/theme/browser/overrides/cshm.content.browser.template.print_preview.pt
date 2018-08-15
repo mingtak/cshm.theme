@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    i18n:domain="cshm.content">
+<body>
+
+<style>
+#preview_container>ul{
+    padding-left: 15px;
+    border: 1px solid #999;
+}
+#preview_container>ul>li{
+    font-szie: 18px;
+    padding: 8px 0;
+}
+</style>
+<div tal:define="context python: view.context;
+                 result python: view.result[0]" style='border: 1px solid #fff' id='preview_container'>
+  <p style='font-size: 24px;text-align: center;padding: 10px 0;margin: 0' class='${python: result[12]}'>
+     ${python: context.getParentNode().title}${context/title} 
+     ${python: context.trainingCenter.to_object.title} 
+     訓練開始日期：${python: context.courseStart}</p>
+  <ul>
+    <li>請領時間：${python: result[5]}（${python: result[10]}）</li>
+    <li>寄送日期：${python: result[6]}</li>
+    <li>寄送地址：${python: result[11]}</li>
+    <li>處理狀態：${python: result[4]}</li>
+  </ul>
+  <table>
+    <tr class='${python: result[12]}' >
+      <td colspan='8'>教材明細</td>
+    </tr>
+    <tr>
+      <td>/</td>
+      <td>教材名稱</td>
+      <td>出版單位</td>
+      <td>數量</td>
+      <td>定價</td>
+      <td>處理狀態</td>
+      <td>/</td>
+      <td>/</td>
+    </tr>
+    <tr tal:repeat="detail python: result[8].split('/')">
+      <tal:condition condition="detail"
+                     define="name python: detail.split('*')[0]">
+        <td style='40px'>${repeat/detail/number}</td>
+        <td style='280px'>${name}</td>
+        <td style='280px'>${python: view.materialList[name][1]}</td>
+        <td style='70px'>${python: detail.split('*')[1]}</td>
+        <td style='70px'>${python: view.materialList[name][0]}</td>
+        <td style='110px'></td>
+        <td style='70px'>修改</td>
+        <td style='70px'>刪除</td>
+      </tal:condition>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
+

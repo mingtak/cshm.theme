@@ -16,104 +16,192 @@
 ul{
     list-style: none;
 }
-li{
+.btn_group>li{
     display: inline-block;
-    padding: 0 3px;
+    padding: 8px 10px;
+    color: #fff;
+    background-color: #545b62;
+    border-color: #4e555b;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.add{
+    background: #b9ff5c;
+    color: #253b1a;
+}
+.return{
+    background: #ff7683;
+    color: #253b1a;
+}
+tbody > tr:first-child > td{
+    border: none;
+    text-align: center;
+}
+table{
+    border: 1px solid #999;
+}
+td{
+    text-align: center;
+}
+.align_left {
+    text-align: left;
+}
+label{
+    vertical-align: middle;
+    display: inline;
+}
+label input[type="text"], label input[type='date']{
+    display: inline-block;
+    width: 80%;
+    margin: 8px 0;
+}
+.container{
+    width: 1200px;
+    margin: auto;
+}
+.btn_group li.selected{
+    background-color: #07689f;
+}
+.content_title{
+    margin: 0;
+    padding: 5px 0 ;
+    font-size: 24px;
+    text-align: center;
+    color: white;
+}
+.deepblue{
+   color: white;
+   background: #0062cc;
+}
+.deepred{
+   color: white;
+   background: #dd4848;
+}
+a{
+   border: none !important;
+   text-decoration: none;
 }
 </style>
-<ul>
+
+<ul class='btn_group'>
+  <li data-target='all' class='selected'>總覧</li>
   <li data-target='add'>教材請領/追加</li>
-  <li>教材退還</li>
-  <li><a href="${python: view.context.absolute_url()}/print_order?type=material" target='_blank'>套印教材單</a></li>
+  <li data-target='return'>教材退還</li>
+  <li style='padding: 0'><a href="${python: view.context.absolute_url()}/print_order?type=material" target='_blank' 
+         style='color: white;border: none;text-decoration: none;padding: 9px 10px;background: #545b62;border-radius: 8px'>套印教材單</a></li>
   <li>回到期別表</li>
 <ul>
 
-<div>
-  <h2 tal:condition="not: view/orderList">尚未有請領紀錄</h2>
+<div class='container'>
+	<div id='all'>
+	  <h2 tal:condition="not: view/orderList">尚未有請領紀錄</h2>
+	  <div tal:condition="view/orderList" tal:define="contextUrl python: context.absolute_url()">
+	    <table >
+	      <tr style='background: #0062cc;color: white;'>
+		<td>序號</td>
+		<td>處理狀態</td>
+		<td>請領時間</td>
+		<td>寄送日期</td>
+		<td>貨運單號</td>
+		<td></td>
+		<td></td>
+	      </tr>
+	      <tr tal:repeat="order view/orderList" class="${python: order[5]}">
+		<td>${repeat/order/number}</td>
+		<td>${python: order[0]}</td>
+		<td>${python: order[1]}</td>
+		<td>${python: order[4]}</td>
+		<td>${python: order[3]}</td>
+		<td>
+                  <a href="${contextUrl}/print_order?type=shipment&order_id=${python: order[2]}" 
+                     target='_blank' tal:condition="python: order[5] == 'add'">出貨單</a>
+                  <a href="${contextUrl}/print_order?type=return&order_id=${python: order[2]}" 
+                     target='_blank' tal:condition="python: order[5] == 'return'">退還單</a>
+                </td>
+		<td class='preview' data-order_id="${python: order[2]}" style='cursor: pointer'>檢視</td>
+	      </tr>
+	    </table>
+	    <br>
+	    <table>
+	      <tr style='background: #0062cc;color: white;'>
+		<td>項次</td>
+		<td>教材名稱</td>
+		<td>總請計數量</td>
+	      </tr>
+	      <tr tal:repeat="detail view/totalMaterialList">
+		  <td>${repeat/detail/number}</td>
+		  <td class='align_left'>${python: detail}</td>
+		  <td>${python: view.totalMaterialList[detail]}</td>
+	      </tr>
+	    </table>
+	  </div>
+	</div>
 
-  <div tal:condition="view/orderList" tal:define="contextUrl python: context.absolute_url()">
-    <table >
-      <tr>
-        <td>序號</td>
-        <td>處理狀態</td>
-        <td>請領時間</td>
-        <td>寄送日期</td>
-        <td>貨運單號</td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr tal:repeat="order view/orderList">
-        <td>${repeat/order/number}</td>
-        <td>${python: order[0]}</td>
-        <td>${python: order[1]}</td>
-        <td>${python: order[4]}</td>
-        <td>${python: order[3]}</td>
-        <td><a href="${contextUrl}/print_order?type=shipment&order_id=${python: order[2]}" target='_blank'>出貨單</a></td>
-        <td>檢視</td>
-      </tr>
-    </table>
-    <br>
-    <table>
-      <tr>
-        <td>項次</td>
-        <td>教材名稱</td>
-        <td>總請計數量</td>
-      </tr>
-      <tr tal:repeat="detail view/totalMaterialList">
-          <td>${repeat/detail/number}</td>
-          <td>${python: detail}</td>
-          <td>${python: view.totalMaterialList[detail]}</td>
-      </tr>
-    </table>
-  </div>
-</div>
+	<div id='add' style='display:none'>
+	  <p class='content_title deepblue'>${python: view.context.getParentNode().title}${view/context/title}</p>
+	  <p class='content_title deepblue'>教材申請/追加</p>
 
-<div id='add' style='display:none'>
-  <form action='add_material' method='post'>
-    ※指定寄送地址：<input type='text' name='address'>
-    ※備　　　　註：<input type='text' name='remark'>
-    ※希望寄達日期：<input type='date' name='send_date'>
-    <table>
-      <tr>
-        <td>序號</td>
-        <td>教材名稱</td>
-        <td>出版單位</td>
-        <td>數量</td>
-      </tr>
-      <tr tal:repeat="material python: view.materialList">
-          <td>${repeat/material/number}</td>
-          <td>${python: material[0]}</td>
-          <td>${python: material[2]}</td>
-          <td><input type='number' min=0 class='add_material' data-name='${python: material[0]}'></td>
-      </tr>
-      <input type='hidden' name='detail' id='material_detail'>
-    </table>
-    <input type='submit'>
-  </form>
-</div>
+	  <form action='manipulate_material' method='post'>
+            <div style='display:inline'>
+	      <label>※指定寄送地址：<input type='text' name='address'></label><br>
+	      <label>※備　　　　註：<input type='text' name='remark'></label><br>
+	      <label>※希望寄達日期：<input type='date' name='send_date'></label>
+            </div>
+	    <input type='hidden' name='action' value='add'>
+	    <table>
+	      <tr class='deepblue'>
+		<td>序號</td>
+		<td>教材名稱</td>
+		<td>出版單位</td>
+		<td>數量</td>
+	      </tr>
+	      <tr tal:repeat="material python: view.materialList">
+		  <td>${repeat/material/number}</td>
+		  <td>${python: material[0]}</td>
+		  <td>${python: material[2]}</td>
+		  <td><input type='number' min=0 class='add_material' data-name='${python: material[0]}'></td>
+	      </tr>
+	      <input type='hidden' name='detail' class='material_detail'>
+	    </table>
+            <div style='text-align: center;margin-top: 20px'>
+              <input type='submit' style='width:85px'>
+            </div>
+	  </form>
+	</div>
 
-<div id='return'>
-  <form action='add_material' method='post'>
-    ※指定寄送地址：<input type='text' name='address'>
-    ※備　　　　註：<input type='text' name='remark'>
-    ※希望寄達日期：<input type='date' name='send_date'>
-    <table>
-      <tr>
-        <td>序號</td>
-        <td>教材名稱</td>
-        <td>出版單位</td>
-        <td>數量</td>
-      </tr>
-      <tr tal:repeat="material python: view.materialList">
-          <td>${repeat/material/number}</td>
-          <td>${python: material[0]}</td>
-          <td>${python: material[2]}</td>
-          <td><input type='number' min=0 class='add_material' data-name='${python: material[0]}'></td>
-      </tr>
-      <input type='hidden' name='detail' id='material_detail'>
-    </table>
-    <input type='submit'>
-  </form>
+	<div id='return' style='display:none'>
+	  <p class='content_title deepred'>${python: view.context.getParentNode().title}${view/context/title}</p>
+	  <p class='content_title deepred'>教材退還申請</p>
+	  <form action='manipulate_material' method='post'>
+            <div style='display:inline'>
+              <label>※指定寄送地址：<input type='text' name='address'></label><br>
+              <label>※備　　　　註：<input type='text' name='remark'></label><br>
+              <label>※希望寄達日期：<input type='date' name='send_date'></label>
+            </div>
+	    <input type='hidden' name='action' value='return'>
+	    <table>
+	      <tr class='deepred'>
+		<td>序號</td>
+		<td>教材名稱</td>
+		<td>出版單位</td>
+		<td>數量</td>
+	      </tr>
+	      <tr tal:repeat="material python: view.materialList">
+		  <td>${repeat/material/number}</td>
+		  <td>${python: material[0]}</td>
+		  <td>${python: material[2]}</td>
+		  <td><input type='number' min=0 class='add_material' data-name='${python: material[0]}'></td>
+	      </tr>
+	      <input type='hidden' name='detail' class='material_detail'>
+	    </table>
+            <div style='text-align: center;margin-top: 20px'>
+	      <input type='submit' style='width:85px'>
+            </div>
+	  </form>
+	</div>
+        <div id='preview_order' style='display:none'></div>
 </div>
 
 <script>
@@ -127,9 +215,38 @@ $(function(){
                 detail += name + '*' + val + '/'
             }
         })
-        $('#material_detail').val(detail)
+        $(this).find('.material_detail').val(detail)
     })
+    $('.btn_group li').click(function(){
+       if($(this).text() != '套印教材單'){
+          target = $(this).data()['target']
+          if(target){
+              $('#' + target).show()
+              $('#' + target).siblings().hide()
+          }
+          $(this).addClass('selected')
+          $(this).siblings().removeClass('selected')
+       }
+    })
+    $('.preview').click(function(){
+        order_id = $(this).data()['order_id']
 
+        url = location.href.replace('material_view', 'print_preview')
+        data = {
+            'order_id': order_id
+        }
+
+        $.ajax({
+            method: 'post',
+            url: url,
+            data: data,
+            success: function(rep){
+                $('#preview_order').html(rep)
+                $('#preview_order').show()
+                $('#all').hide()
+            }
+        })
+    })
 })
 </script>
 
