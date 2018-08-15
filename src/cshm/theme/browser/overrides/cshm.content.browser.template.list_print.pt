@@ -57,7 +57,7 @@ table{
 
   <span style='margin:0 10px'>總共${python: view.totalNumber}位</span>
 
-  <a href="${python: view.context.absolute_url() + '/@@list_print'}" id='back_btn'>返回</a>
+  <a href="${python: view.context.absolute_url() + '/@@list_print'}" id='back_btn'>重新設定</a>
 
   <table  tal:define="courseLen python: len(view.courseList);
                       numbers python: int(view.numbers)" 

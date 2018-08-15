@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    i18n:domain="cshm.content">
+<body>
+
+<style>
+.container{
+    width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+table{
+    width: 700px;
+    margin: auto;
+}
+.has_border td{
+    padding: 5px;
+}
+
+</style>
+<br><br>
+<div class='container' tal:define="context python: view.context;
+                                   result  python: view.result[0];
+                                   materialList python: result[8].split('/')">
+    <p style='font-size:25px;font-weight: 500'>中國勞工安全衛生管理學會出貨單 </p>
+    <span style='font-size: 18px;font-weight: 600;margin-right: 10px;'>${python: context.getParentNode().title}</span>
+    <span style='font-size: 18px;font-weight: 600;margin-right: 10px;'>第${context/title}</span>
+    <span style='font-size: 18px;font-weight: 600;margin-right: 10px;'>${python: context.trainingCenter.to_object.title}</span>
+    <span style='font-size: 18px;font-weight: 600;margin-right: 10px;border-bottom: 2px solid black'>${context/courseStart}開課</span>
+    <br>
+    <hr style='width: 850px;'>
+    <br>
+    <table>
+      <tr>
+        <td>請領日期：</td><td>${python: result[5]}</td>
+        <td>寄送日期：</td><td>${python: result[6]}</td>
+        <td>貨運單號：</td><td>${python: result[7]}</td>
+      </tr>
+      <tr>
+        <td>寄送地址：</td><td>${python: result[11]}</td>
+      </tr>
+    </table>
+
+    <table class='has_border' 
+           border="1" bordercolorlight="black" bordercolordark="white" cellspacing="0" cellpadding="0" bgcolor="white">
+      <tr>
+        <td>項次</td>
+        <td>教材名稱</td>
+        <td style='width: 45px'>請領數量</td>
+        <td style='width: 45px'>出貨確認</td>
+        <td style='width: 45px'>裝箱確認</td>
+        <td>備註</td>
+      </tr>
+      <tr tal:repeat="material materialList">
+        <tal:condition condition="python: material.split('*')[0]">
+          <td>${repeat/material/number}</td>
+          <td>${python: material.split('*')[0]}</td>
+          <td>${python: material.split('*')[1]}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tal:condition>
+      </tr>
+    </table>
+<br><br><br>
+    <p style='font-size:20px;width: 700px;margin: auto;text-align: left;'>簽收：＿＿＿＿＿＿＿＿＿＿＿　　　年　　　月　　　日</p>
+    <p style='font-size:20px;width: 700px;margin: auto;text-align: left;'>※收到後請簽收並回傳02-23218330 ${python: result[10]}</p>
+</div>
+
+</body>
+</html>
+

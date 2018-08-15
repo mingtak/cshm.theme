@@ -1,0 +1,140 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://www.vue.org/v-bind"
+    xmlns:v-on="http://www.vue.org/v-bind"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<style>
+ul{
+    list-style: none;
+}
+li{
+    display: inline-block;
+    padding: 0 3px;
+}
+</style>
+<ul>
+  <li data-target='add'>教材請領/追加</li>
+  <li>教材退還</li>
+  <li><a href="${python: view.context.absolute_url()}/print_order?type=material" target='_blank'>套印教材單</a></li>
+  <li>回到期別表</li>
+<ul>
+
+<div>
+  <h2 tal:condition="not: view/orderList">尚未有請領紀錄</h2>
+
+  <div tal:condition="view/orderList" tal:define="contextUrl python: context.absolute_url()">
+    <table >
+      <tr>
+        <td>序號</td>
+        <td>處理狀態</td>
+        <td>請領時間</td>
+        <td>寄送日期</td>
+        <td>貨運單號</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr tal:repeat="order view/orderList">
+        <td>${repeat/order/number}</td>
+        <td>${python: order[0]}</td>
+        <td>${python: order[1]}</td>
+        <td>${python: order[4]}</td>
+        <td>${python: order[3]}</td>
+        <td><a href="${contextUrl}/print_order?type=shipment&order_id=${python: order[2]}" target='_blank'>出貨單</a></td>
+        <td>檢視</td>
+      </tr>
+    </table>
+    <br>
+    <table>
+      <tr>
+        <td>項次</td>
+        <td>教材名稱</td>
+        <td>總請計數量</td>
+      </tr>
+      <tr tal:repeat="detail view/totalMaterialList">
+          <td>${repeat/detail/number}</td>
+          <td>${python: detail}</td>
+          <td>${python: view.totalMaterialList[detail]}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div id='add' style='display:none'>
+  <form action='add_material' method='post'>
+    ※指定寄送地址：<input type='text' name='address'>
+    ※備　　　　註：<input type='text' name='remark'>
+    ※希望寄達日期：<input type='date' name='send_date'>
+    <table>
+      <tr>
+        <td>序號</td>
+        <td>教材名稱</td>
+        <td>出版單位</td>
+        <td>數量</td>
+      </tr>
+      <tr tal:repeat="material python: view.materialList">
+          <td>${repeat/material/number}</td>
+          <td>${python: material[0]}</td>
+          <td>${python: material[2]}</td>
+          <td><input type='number' min=0 class='add_material' data-name='${python: material[0]}'></td>
+      </tr>
+      <input type='hidden' name='detail' id='material_detail'>
+    </table>
+    <input type='submit'>
+  </form>
+</div>
+
+<div id='return'>
+  <form action='add_material' method='post'>
+    ※指定寄送地址：<input type='text' name='address'>
+    ※備　　　　註：<input type='text' name='remark'>
+    ※希望寄達日期：<input type='date' name='send_date'>
+    <table>
+      <tr>
+        <td>序號</td>
+        <td>教材名稱</td>
+        <td>出版單位</td>
+        <td>數量</td>
+      </tr>
+      <tr tal:repeat="material python: view.materialList">
+          <td>${repeat/material/number}</td>
+          <td>${python: material[0]}</td>
+          <td>${python: material[2]}</td>
+          <td><input type='number' min=0 class='add_material' data-name='${python: material[0]}'></td>
+      </tr>
+      <input type='hidden' name='detail' id='material_detail'>
+    </table>
+    <input type='submit'>
+  </form>
+</div>
+
+<script>
+$(function(){
+    $('form').submit(function(){
+        detail = ''
+        $('.add_material').each(function(){
+            name = $(this).data()['name']
+            val = $(this).val()
+            if(val){
+                detail += name + '*' + val + '/'
+            }
+        })
+        $('#material_detail').val(detail)
+    })
+
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
