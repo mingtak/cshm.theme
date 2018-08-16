@@ -44,6 +44,7 @@ table{
 }
 td{
     text-align: center;
+    vertical-align: middle !important;
 }
 .align_left {
     text-align: left;
@@ -56,6 +57,9 @@ label input[type="text"], label input[type='date']{
     display: inline-block;
     width: 80%;
     margin: 8px 0;
+}
+label input[type='date']{
+   width: 20%;
 }
 .container{
     width: 1200px;
@@ -81,7 +85,7 @@ label input[type="text"], label input[type='date']{
 }
 a{
    border: none !important;
-   text-decoration: none;
+   text-decoration: none !important;
 }
 </style>
 
@@ -91,7 +95,8 @@ a{
   <li data-target='return'>教材退還</li>
   <li style='padding: 0'><a href="${python: view.context.absolute_url()}/print_order?type=material" target='_blank' 
          style='color: white;border: none;text-decoration: none;padding: 9px 10px;background: #545b62;border-radius: 8px'>套印教材單</a></li>
-  <li>回到期別表</li>
+  <li><a href="${portal_url}/period_listing" style='color: white'>回到期別表</a></li>
+  <li><a href="${portal_url}/resource/material_folder/material_listing" target='_blank' style='color: white'>教材價目表</a></li>
 <ul>
 
 <div class='container'>
@@ -120,7 +125,7 @@ a{
                   <a href="${contextUrl}/print_order?type=return&order_id=${python: order[2]}" 
                      target='_blank' tal:condition="python: order[5] == 'return'">退還單</a>
                 </td>
-		<td class='preview' data-order_id="${python: order[2]}" style='cursor: pointer'>檢視</td>
+		<td class='preview' data-order_id="${python: order[2]}" style='cursor: pointer;color: #007bb1'>檢視</td>
 	      </tr>
 	    </table>
 	    <br>

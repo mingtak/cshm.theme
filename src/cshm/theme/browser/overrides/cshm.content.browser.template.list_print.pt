@@ -42,7 +42,8 @@ table{
     text-decoration: none;
 }
 </style>
-<form action='list_print' method='post' tal:condition='not: view/hasNumbers'>
+
+<form action='list_print' method='post' style='margin-bottom: 20px'>
   <label>
     請選擇個數：<input type='number' required name='numbers'>
   </label>
@@ -57,29 +58,35 @@ table{
 
   <span style='margin:0 10px'>總共${python: view.totalNumber}位</span>
 
-  <a href="${python: view.context.absolute_url() + '/@@list_print'}" id='back_btn'>重新設定</a>
-
   <table  tal:define="courseLen python: len(view.courseList);
                       numbers python: int(view.numbers)" 
           tal:repeat="item view/data"
           id='table${repeat/item/number}' 
-          border="1" cellpadding="2" cellspacing="1" style="table-layout:fixed;">
+          border="1" cellpadding="2" cellspacing="1">
     <tr>
-      <td class='up_side_down'>座號</td>
+      <td style='width: 100px'></td>
+      <td style='width: 200px'></td>
+      <td tal:repeat="course view/courseList" style='width:100px'></td>
+    </tr>
+    <tr>
+      <td class='up_side_down' >座號</td>
       <td class='up_side_down'>姓名</td>
-      <td tal:repeat="course view/courseList" class='up_side_down'>
+      <td tal:repeat="course view/courseList" class='up_side_down' >
         <tal:repeat repeat="word course">
-          ${word}
+          ${word}<br>
         </tal:repeat>
       </td>
     </tr>
     <tal:repeat repeat='student python: item'>
       <tr>
-        <td>${python: student[1]}</td>
-        <td>${python: student[0]}</td>
-        <td tal:condition="python: student[2] == 1" 
-            tal:repeat="i python: range(courseLen)"></td>
-        <td tal:condition="python: student[2] == 2" colspan="${courseLen}" style='text-align: center'>退訓</td>
+        <td style='text-align: center'>${python: student[1]}</td>
+        <td style='text-align: center'>
+            ${python: student[0]}
+        </td>
+        <td tal:condition="python: student[2] == 0 or student[2] == 1  or student[2] == 2 or student[2] == 3 or student[2] == 4" 
+            tal:repeat="i python: range(courseLen) "></td>
+        <td tal:condition="python: student[2] == 5" colspan="${courseLen}" style='text-align: center'>未到訓</td>
+        <td tal:condition="python: student[2] == 6" colspan="${courseLen}" style='text-align: center'>退訓訓</td>
       </tr>
     </tal:repeat>
 

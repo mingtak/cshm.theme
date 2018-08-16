@@ -1,0 +1,127 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<style>
+.alert{
+    color: red;
+}
+.show{
+    display: table;
+}
+.hide{
+    display: none;
+}
+.center_btn{
+    margin-bottom: 20px;
+    padding: 8px 10px;
+    color: #fff;
+    border-color: #4e555b;
+    background: #4e555b;
+    border-radius: 8px;
+}
+.center_btn:hover{
+    border-color: #07689f;
+    background: #07689f;
+    color: #fff;
+}
+.center_btn:focus{
+    border-color: #07689f;
+    background: #07689f;
+    color: #fff;
+}
+.selected{
+    background: #07689f;
+}
+.table_title{
+    background: #155263;
+    color: white;
+    text-align: center;
+}
+.table_title td{
+    font-size: 22px;
+}
+.table_header{
+    background: #aacfd0;
+    color: black;
+    text-align: center;
+}
+.table_data{
+    text-align: center;
+}
+.table_data td{
+    vertical-align: middle;
+}
+.no_data{
+    text-align: center;
+    font-size: 22px;
+    color: #f33535;
+}
+</style>
+<button tal:repeat="trainingCenter view/trainingCenterBrains" data-target='${trainingCenter/Title}'
+        class='center_btn'>${python: trainingCenter.Title}</button>
+<a href="${portal_url}/resource/material_folder/material_listing" target='_blank' style='margin-left:30px'>
+  <button class='center_btn'>教材價目表</button>
+</a>
+
+<tal:repeat repeat="center view/trainingCenterBrains" >
+<table tal:define="item python: center.getObject().title" id='${item}' class="${python: 'show' if item == '台北職訓中心' else 'hide'}">
+  <tr class='table_title'>
+    <td colspan='7'>${python: item}</td>
+  </tr>
+  <tr class='table_header'>
+    <td>序號</td>
+    <td>課程名稱</td>
+    <td>期別</td>
+    <td>訓練開始日期</td>
+    <td>承辦人</td>
+    <td>請領次數</td>
+    <td>請領教材</td>
+  </tr>
+  <tal:cond condition="python: item in view.data.keys()">
+    <tr tal:repeat="val python: view.data[str(item)]" class='table_data'>
+      <td>${repeat/val/number}</td>
+      <td>${python: val[0]}</td>
+      <td>${python: val[1]}</td>
+      <td>${python: val[2]}</td>
+      <td>${python: val[3]}</td>
+      <td class="${python: 'alert' if val[4] == '尚未請領' else 'normal'}">${python: val[4]}</td>
+      <td>
+        <a href="${python: val[5]}/@@material_view">
+          <img src="++theme++theme-for-cshm/img/write.bmp">
+        </a>
+      </td>
+    </tr>
+  </tal:cond>
+  <tal:cond condition="python: item not in view.data.keys()">
+    <td colspan='7' class='no_data'>暫無資料</td>
+  </tal:cond>
+</table>
+</tal:repeat>
+
+<script>
+$(function(){
+    $('.center_btn').click(function(){
+        target = $(this).data()['target']
+        $('#' + target).removeClass('hide')
+        $('#' + target).addClass('show')
+        $(this).addClass('selected')
+        $('#' + target).siblings('table').addClass('hide')
+        $(this).siblings('button').removeClass('selected')
+    })
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+
