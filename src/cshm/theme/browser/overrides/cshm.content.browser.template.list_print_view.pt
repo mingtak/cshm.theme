@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://www.vue.org/v-bind"
+    xmlns:v-on="http://www.vue.org/v-bind"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+<metal:javascriptslot fill-slot="javascript_head_slot">
+</metal:javascriptslot>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<style>
+.up_side_down{
+    text-align: center;
+    vertical-align: middle;
+    width: 1%;
+    word-wrap:break-word;
+    word-break: break-all;
+}
+th{
+    width: 25px;
+}
+.change_table{
+    cursor: pointer;
+    padding: 0px 3px;
+    font-weight: 600;
+}
+table{
+    margin-top: 10px;
+}
+#back_btn{
+    padding: 5px 10px;
+    background: #ff9a00;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+}
+.page_list_a{
+    display: inline-block;
+    padding: 8px 10px;
+    color: #fff;
+    background-color: #545b62;
+    border-color: #4e555b;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.page_list_a:hover{
+    color: white;
+    border: none;
+    text-decoration: none;
+}
+.page_list_a:focus{
+    color: white;
+    border: none;
+    text-decoration: none;
+}
+
+</style>
+  <label>
+    請選擇個數   總共${view/total_number}位：<input type='number'  id='gap' min="1" value='1'>
+  </label>
+  <br>
+  <button id='send'>送出</button>
+
+<div id='page_list'>
+
+</div>
+
+
+
+<script>
+$(function(){
+    $('#send').click(function(){
+        $('#page_list').html('')
+        gap = $('#gap').val()
+        total_number = ${view/total_number}
+        page_number = Math.ceil(total_number / gap)
+        for(i=1; i <= page_number; i++){
+            url = location.href + "?page=" + i + "&gap=" + gap
+            $('#page_list').append("<a href=" + url + " target='_blank' class='page_list_a'>第" + i + "張</a>")
+        }
+    })
+})
+</script>
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
