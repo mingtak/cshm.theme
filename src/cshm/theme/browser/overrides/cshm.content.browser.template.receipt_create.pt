@@ -1,0 +1,146 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://www.vue.org/v-bind"
+    xmlns:v-on="http://www.vue.org/v-bind"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+<metal:javascriptslot fill-slot="javascript_head_slot">
+</metal:javascriptslot>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<?python
+from datetime import datetime
+now = datetime.now().strftime('%Y-%m-%d')
+?>
+<style>
+.row{
+    padding: 8px 0;
+}
+hr{
+    border-style: dashed;
+}
+</style>
+
+<h1>開立收據</h1>
+<hr>
+<form action='do_receipt_create' method='post'>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <div class='col-md-6'>區域</div>
+      <div class='col-md-6'>${python: view.context.trainingCenter.to_object.title}</div>
+    </div>
+    <div class='col-md-3'>
+      <div class='col-md-6'>收據類型</div>
+      <div class='col-md-6'>
+        <select name="type" >
+          <option vlaue="訓練">訓練</option>
+          <option value="補發證書">補發證書</option>
+          <option value="教材">教材</option>
+          <option value="電腦測驗">電腦測驗</option>
+          <option value="會員">會員</option>
+        </select>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      <div class='col-md-6'>收據日期</div>
+      <div class='col-md-6'>
+        <input type='date' value='${now}' name='receipt_date'>
+      </div>
+    </div>
+    <div class='col-md-3'>
+      <div class='col-md-6'>建立日期</div>
+      <div class='col-md-6'>
+        <input type='date' value='${now}' name='apply_date'>
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-6'>
+      <div class='col-md-6'>收據抬頭</div>
+      <div class='col-md-6'>
+        <input type="text" name='title' id='title' value="${python: view.data[0]}">
+        <input type="hidden" name="user_id" value="${view/userList}">
+      </div>
+    </div>
+    <div class='col-md-3'>
+      <div class='col-md-6'>統一編號</div>
+      <div class='col-md-6'>
+        <input type="text" name='code' id="code" value="${python: view.data[1]}">
+      </div>
+    </div>
+    <div class='col-md-3'>
+      <div class='col-md-6'>金額</div>
+      <div class='col-md-6'>
+        <input type='number' name='total_money'>
+      </div>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-md-12' style='padding-left: 7px'>
+      <div class='col-md-3' style='padding-left: 23px'>備註</div>
+      <div class='col-md-9'>
+        <input type='text' name='note'>
+      </div>
+    </div>
+  </div>
+
+  <table>
+    <tr>
+      <td>1</td>
+      <td>項目名稱</td>
+      <td><input type="text" name='detail1_name' value="${python: view.context.getParentNode().title}"></td>
+      <td>金額</td>
+      <td><input type="number" name='detail1_money'></td>
+      <td>備註</td>
+      <td><input type="text" name='detail1_note' value="${python: view.context.title}"></td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>項目名稱</td>
+      <td><input type="text" name='detail2_name'></td>
+      <td>金額</td>
+      <td><input type="number" name='detail2_money'></td>
+      <td>備註</td>
+      <td><input type="text" name='detail2_note'></td>
+    </tr>
+  </table>
+  <input type="submit">
+ </div>
+</form>
+
+<script>
+$(function(){
+    $('#code').change(function(){
+        val = $(this).val()
+        data = {
+            'tax_no': val
+        }
+        url = '${portal_url}/query_company'
+        $.ajax({
+            method: 'post',
+            url: url,
+            data: data,
+            success: function(rep){
+                if(rep){
+                    $('#title').val(rep.split(',')[0])
+                }
+            }
+        })
+    })
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
