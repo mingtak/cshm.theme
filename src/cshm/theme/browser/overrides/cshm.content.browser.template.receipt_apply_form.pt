@@ -1,0 +1,142 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    i18n:domain="cshm.content">
+<body>
+
+<style>
+.container{
+    width: 800px;
+    margin: auto;
+}
+.black_border{
+    border: 1px solid black;
+}
+div{
+    text-align: center;
+    vertical-align: middle;
+    height: 40px;
+    line-height: 40px;
+}
+.inline{
+    display: inline-flex;
+    border: none;
+}
+.w100{
+    width: 98px;
+}
+.w300{
+    width: 298px;
+}
+.w700{
+    width: 698px;
+}
+.w800{
+    width: 798px;
+}
+.h250{
+    height: 250px !important;
+}
+.bold{
+    font-size: 18px;
+    font-weight: 800;
+}
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+</style>
+<?python
+from datetime import datetime
+now = datetime.now().strftime('%Y/%m/%d')
+?>
+<div class='container' tal:define="result python: dict(view.result[0])">
+  <div style='height: 100px;position: relative' class="black_border">
+    <span style="position: absolute;right: 10px;bottom: 0">報名日期：${python: result['apply_time'].strftime('%Y/%m/%d')} 列印日期：${now}</span>
+  </div>
+  <div class="inline">
+    <div class="w100  black_border bold">姓名</div>
+    <div class="w100  black_border ">${python: result['name']}</div>
+    <div class="w100  black_border bold">ID字號</div>
+    <div class="w100  black_border ">${python: result['studId']}</div>
+    <div class="w100  black_border bold">生日</div>
+    <div class="w100  black_border ">${python: result['birthday']}</div>
+    <div class="w100  black_border bold">學歷</div>
+    <div class="w100  black_border ">${python: result['edu_school']}</div>
+  </div>
+  <div class="inline">
+    <div class="w100   black_border bold">電話</div>
+    <div class="w300 black_border">
+     市話：${python: result['cellphone']}  手機：${python: result['phone']}
+    </div>
+    <div class="w100  black_border bold">傳真</div>
+    <div class="w300 black_border">${python: result['fax']}</div>
+  </div>
+  <div class="inline">
+    <div class="w100 black_border bold">信箱</div>
+    <div class="black_border" style="text-align: left;padding-left: 10px;width: 688px">${python: result['priv_email']}</div>
+  </div>
+  <div class="inline">
+    <div class="w100  black_border bold">地址</div>
+    <div class="black_border" style="text-align: left;padding-left: 10px;width: 688px">${python: result['address']}</div>
+  </div>
+  <div class="inline">
+    <div class="w100  black_border bold">公司</div>
+    <div class="w300  black_border">${python: result['company_name']}</div>
+    <div class="w100  black_border bold">地址</div>
+    <div class="w300  black_border">${python: result['company_address']}</div>
+  </div>
+  <div class="inline">
+    <div class="w100  black_border bold">承辦人</div>
+    <div class="w100  black_border">TODO</div>
+    <div class="w100  black_border bold">部門</div>
+    <div class="w100  black_border">TODO</div>
+    <div class="black_border bold" style='width: 97px'>電話</div>
+    <div class="w300  black_border">TODO</div>
+  </div>
+  <div class="inline">
+    <div class="w100  black_border bold">傳真</div>
+    <div class="w300  black_border">TODO</div>
+    <div class="w100  black_border bold">Email</div>
+    <div class="w300  black_border">TODO</div>
+  </div>
+  <div class="inline">
+    <div class="w100  black_border bold">上課狀況</div>
+    <div class="w300  black_border">TODO</div>
+    <div class="w100  black_border bold">繳費狀況</div>
+    <div class="w300  black_border">TODO</div>
+  </div>
+  <div class="inline">
+    <div class="w100  black_border bold">折扣</div>
+    <div class="w700  black_border">TODO</div>
+  </div>
+  <div class="inline">
+    <div class="w800 black_border bold">----------聯絡紀錄----------</div>
+  </div>
+  <div class="inline h250 black_border">
+    <div class="w800 h250  black_border"></div>
+  </div>
+  <div class="inline">
+    <div class="w800 black_border bold">----------其他說明----------</div>
+  </div>
+  <div class="inline h250 black_border">
+    <div class="w800 h250 black_border"></div>
+  </div>
+
+</div>
+
+</body>
+</html>
+

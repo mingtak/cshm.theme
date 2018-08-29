@@ -26,6 +26,39 @@ now = datetime.now().strftime('%Y-%m-%d')
 hr{
     border-style: dashed;
 }
+.send{
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #07689f;
+    border-color: #4e555b;
+    border-radius: 8px;
+    cursor: pointer;
+    float: left;
+    margin-top: 15px;
+    margin-left: 620px;
+}
+.send:hover{
+    background-color: #034062;
+    color: white;
+}
+.back{
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #e65966;
+    border-color: #4e555b;
+    border-radius: 8px;
+    cursor: pointer;
+    float: right;
+    margin-top: 15px;
+    margin-right: 620px;
+    text-decoration: none;
+}
+.back:hover{
+    background-color: #dd3c4b;
+    color: white;
+    text-decoration: none;
+}
+
 </style>
 
 <h1>開立收據</h1>
@@ -52,13 +85,13 @@ hr{
     <div class='col-md-3'>
       <div class='col-md-6'>收據日期</div>
       <div class='col-md-6'>
-        <input type='date' value='${now}' name='receipt_date'>
+        <input type='date' value='${now}' name='receipt_date' required>
       </div>
     </div>
     <div class='col-md-3'>
       <div class='col-md-6'>建立日期</div>
       <div class='col-md-6'>
-        <input type='date' value='${now}' name='apply_date'>
+        <input type='date' value='${now}' name='apply_date' required>
       </div>
     </div>
   </div>
@@ -67,20 +100,20 @@ hr{
     <div class='col-md-6'>
       <div class='col-md-6'>收據抬頭</div>
       <div class='col-md-6'>
-        <input type="text" name='title' id='title' value="${python: view.data[0]}">
+        <input type="text" name='title' id='title' value="${python: view.title}" required>
         <input type="hidden" name="user_id" value="${view/userList}">
       </div>
     </div>
     <div class='col-md-3'>
       <div class='col-md-6'>統一編號</div>
       <div class='col-md-6'>
-        <input type="text" name='code' id="code" value="${python: view.data[1]}">
+        <input type="text" name='code' id="code" value="${python: view.tax_no}" required>
       </div>
     </div>
     <div class='col-md-3'>
       <div class='col-md-6'>金額</div>
       <div class='col-md-6'>
-        <input type='number' name='total_money'>
+        <input type='number' name='total_money' value="${python: view.totalMoney}" required>
       </div>
     </div>
   </div>
@@ -113,7 +146,8 @@ hr{
       <td><input type="text" name='detail2_note'></td>
     </tr>
   </table>
-  <input type="submit">
+  <input type="submit" class='send' >
+  <a href="${python: view.context.absolute_url()}/@@receipt_list" class='back'>回上一頁</a>
  </div>
 </form>
 
