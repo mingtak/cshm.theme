@@ -107,7 +107,7 @@ hr{
     <div class='col-md-3'>
       <div class='col-md-6'>統一編號</div>
       <div class='col-md-6'>
-        <input type="text" name='code' id="code" value="${python: view.tax_no}" required>
+        <input type="text" name='tax_no' id="tax_no" value="${python: view.tax_no}" required>
       </div>
     </div>
     <div class='col-md-3'>
@@ -153,7 +153,7 @@ hr{
 
 <script>
 $(function(){
-    $('#code').change(function(){
+    $('#tax_no').change(function(){
         val = $(this).val()
         data = {
             'tax_no': val

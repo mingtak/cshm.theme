@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://www.vue.org/v-bind"
+    xmlns:v-on="http://www.vue.org/v-bind"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<style>
+td{
+    text-align: center;
+    vertical-align: middle !important;
+}
+input[type="number"]{
+    display: inline;
+}
+table{
+    width: 1200px;
+    margin: auto;
+}
+</style>
+
+<tal:condition condition="view/result">
+  <table>
+    <tr style="background: #0062cc;color: white;">
+      <td>序號</td>
+      <td>收據號碼</td>
+      <td>收據日期</td>
+      <td>收據抬頭</td>
+      <td>總金額</td>
+      <td>經手人</td>
+      <td>審核狀態</td>
+      <td>檢視</td>
+    </tr>
+    <tr tal:repeat="item python: view.result">
+      <tal:def define="number repeat/item/number;
+                       obj python: dict(item);
+                       contextURL python: view.context.absolute_url()">
+        <td>${number}</td>
+        <td>
+            ${python: obj['training_center']}字號
+            ${python: obj['year']}<tal:rep repeat="i python: range(5 - len(str(obj['serial_number'])))"><span>0</span></tal:rep>${python: obj['serial_number']}號
+        </td>
+        <td>${python: obj['receipt_date']}</td>
+        <td>${python: obj['title']}</td>
+        <td>${python: obj['money']}</td>
+        <td>${python: obj['undertaker']}</td>
+        <td>
+          <span tal:condition="python: obj['is_check'] == 0">未審核</span>
+          <span tal:condition="python: obj['is_check'] == 1">已審核</span>
+        </td>
+        <td>
+            <a href="${contextURL}/@@receipt_detail?receipt_id=${python: obj['id']}">檢視</a>
+        </td>
+      </tal:def>
+    </tr>
+  </table>
+<tal:condition>
+
+<tal:condition condition="not: view/result">
+  <h1>No Data</h1>
+</tal:condition>
+
+<script>
+$(function(){
+
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

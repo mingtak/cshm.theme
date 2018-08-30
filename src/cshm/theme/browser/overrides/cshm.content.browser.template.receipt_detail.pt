@@ -1,0 +1,190 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://www.vue.org/v-bind"
+    xmlns:v-on="http://www.vue.org/v-bind"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<style>
+.well{
+    width: 1200px;
+    margin: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    position: relative;
+    padding: 20px;
+}
+.download_pdf{
+    position: absolute;
+    right: 20px;
+    top: 40px;
+}
+.w400{
+    width: 380px;
+}
+.w200{
+    width: 200px;
+}
+.inline{
+    display: inline-block;
+}
+h4{
+    display: inline-block;
+    font-weight: 600;
+}
+.detail_container{
+    background: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 1120px;
+    margin: 15px auto;
+}
+</style>
+
+<tal:condition condition="view/result">
+<tal:def define="obj python: dict(view.result[0])">
+
+  <div class="well">
+    <div>
+      <h1>收據</h1>
+      <a class="download_pdf">下載pdf</a>
+    </div>
+    <hr>
+    <div class='inline w400'>
+      <h4 class='w200'>審核狀態</h4>
+      <span tal:condition="python: obj['is_check'] == 0"> 尚未審核</span>
+      <span tal:condition="python: obj['is_check'] == 1"> 已審核</span>
+    </div>
+    <div class='inline w400'>
+      <h4 class='w200'>審核日期</h4>
+      <span>${python: obj['check_date']}</span>
+    </div>
+    <div class='inline w400'>
+      <h4 class='w200'>審核者</h4>
+      <span>${python: obj['inspector']}</span>
+    </div>
+
+    <hr>
+
+    <div class='inline w400'>
+      <h4 class='w200'>收據日期</h4>
+      <span>${python: obj['receipt_date']}</span>
+    </div>
+    <div class='inline w400'>
+      <h4 class='w200'>收據號碼</h4>
+      <span>
+            ${python: obj['training_center']}字號
+            ${python: obj['year']}<tal:rep repeat="i python: range(5 - len(str(obj['serial_number'])))"><span>0</span></tal:rep>${python: obj['serial_number']}號
+      </span>
+    </div>
+    <div class='inline w400'>
+      <h4 class='w200'>收據金額</h4>
+      <span>NT$ ${python: obj['money']}</span>
+    </div>
+
+    <div class='inline w400'>
+      <h4 class='w200'>收據抬頭</h4>
+      <span>${python: obj['title']}</span>
+    </div>
+    <div class='inline w400'>
+      <h4 class='w200'>統一編號</h4>
+      <span>${python: obj['tax_no']}</span>
+    </div>
+    <div class='w400'>
+      <h4 class='w200'>備註</h4>
+      <span>${python: obj['note']}</span>
+    </div>
+
+    <div class='detail_container' tal:define="detail python: obj['detail'].split(',')">
+      <h3>收據明細</h3>
+      <h4 style='width: 112px' class='inline'>
+        序號
+      </h4>
+      <h4 style='width: 448px' class='inline'>
+        項目名稱
+      </h4>
+      <h4 style='width: 112px' class='inline'>
+        金額
+      </h4>
+      <h4 style='width: 336px' class='inline'>
+        備註
+      </h4>
+
+      <tal:rep repeat="item python: detail">
+      <tal:cond condition="python: item.split('/')[0]">
+        <span style='width: 112px' class='inline'>
+          第${repeat/item/number}項
+        </span>
+        <span style='width: 448px' class='inline'>
+          ${python: item.split('/')[0]}
+        </span>
+        <span style='width: 112px' class='inline'>
+          ${python: 'NT$%s' %item.split('/')[1] if item.split('/')[1] else ''}
+        </span>
+        <span style='width: 336px' class='inline'>
+          ${python: item.split('/')[2]}
+        </span>
+      </tal:cond>
+      </tal:rep>
+
+      <hr>
+
+      <h4 style='width: 336px' class='inline'>
+        小計
+      </h4>
+      <h4 style='width: 336px' class='inline'>
+        NT$ ${python: obj['money']}
+      </h4>
+    </div>
+
+    <hr>
+
+    <div class='w400'>
+      <h4 class='w200'>建立</h4>
+      <span>${python: obj['apply_date']}</span>
+    </div>
+    <div class='w400'>
+      <h4 class='w200'>修改</h4>
+      <span>TODO</span>
+    </div>
+    <div class='inline w400'>
+      <h4 class='w200'>轉檔</h4>
+      <span>TODO</span>
+    </div>
+    <div class='inline w400'>
+      <h4 class='w200'>收據密碼</h4>
+      <span>TODO</span>
+    </div>
+    <div class='w400'>
+      <h4 class='w200'>作廢</h4>
+      <span>TODO</span>
+    </div>
+
+  </div>
+
+</tal:def>
+<tal:condition>
+
+<tal:condition condition="not: view/result">
+  <h1>No Data</h1>
+</tal:condition>
+
+<script>
+$(function(){
+
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

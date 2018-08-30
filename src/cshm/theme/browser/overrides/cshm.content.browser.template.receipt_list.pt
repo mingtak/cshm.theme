@@ -64,17 +64,42 @@ table{
 }
 .change_money{
     padding: 8px 10px;
-    color: #fff;
-    background-color: #ff7683;
-    border-color: #4e555b;
+    color: white;
+    background-color: #e0a800;
+    border-color: #d39e00;
     border-radius: 8px;
     cursor: pointer;
 }
 .change_money:hover{
-    background-color: #dd3c4b;
+    background-color: #d39e00;
     color: white;
 }
-
+.cancel_btn{
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+.cancel_btn:hover{
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+    text-decoration: none;
+}
+.create_receipt{
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+.create_receipt:hover{
+    color: #fff;
+    background-color: #218838;
+    border-color: #218838;
+    text-decoration: none;
+}
 .input_container {
     display: initial;
     position: relative;
@@ -168,18 +193,19 @@ table{
           <button tal:attributes="class python: 'show change_money' if money else 'hide change_money'">修改</button>
         </td>
         <td class='option_container'>
-          <tal:cond condition="python: dict['id'] not in view.idList">
+          <tal:cond condition="python: str(dict['id']) not in view.idDict">
             <a href="${python: view.context.absolute_url()}/@@receipt_create_view?userList=${python: dict['id']}"
-               tal:attributes="class python: 'show' if money else 'hide'">建立收據</a>
+               tal:attributes="class python: 'show create_receipt' if money else 'hide create_receipt'">建立收據</a>
             <label tal:attributes="class python: 'show input_container' if money else 'hide input_container'">
               <input type="checkbox"  data-user_id="${python: dict['id']}">
               <span class="checkmark"></span>
             </label>
           </tal:cond>
-          <tal:cond condition="python: dict['id']in view.idList">
-            <p class="already_create">已建立收據</p>
+          <tal:cond condition="python: str(dict['id']) in view.idDict">
+            <span>已建立訂單</span>
+            <a href="${python: view.context.absolute_url()}/@@cancel_receipt?receipt_id=${python: view.idDict[str(dict['id'])]}"
+               class="cancel_btn">撤銷收據</a>
           </tal:cond>
-
         </td>
         <td>
           <a href="${python: view.context.absolute_url()}/@@receipt_apply_form?user_id=${python: dict['id']}" target="_blank">報名表</a>
@@ -211,7 +237,7 @@ $(function(){
             data['userList'] = userList
             url = location.href.replace("receipt_list", "receipt_create_view")
             url += '?userList=' + JSON.stringify(userList)
-            window.open(url)
+            location.href = url
         }
     })
 
