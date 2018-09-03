@@ -24,6 +24,18 @@ table{
     width: 1200px;
     margin: auto;
 }
+.pass{
+    background: #b9ff5c;
+    color: #253b1a;
+}
+.uncheck{
+    background: #ff7683;
+    color: #253b1a;
+}
+.cancel{
+    background: black;
+    color: white;
+}
 </style>
 
 <tal:condition condition="view/result">
@@ -39,7 +51,9 @@ table{
       <td>審核</td>
       <td>檢視</td>
     </tr>
-    <tr tal:repeat="item python: view.result">
+    <tr tal:repeat="item python: view.result" 
+        class="${python: 'cancel' if dict(item)['is_cancel'] == 1 else ''}
+               ${python: 'pass' if dict(item)['is_check'] == 1 and dict(item)['is_cancel'] == 0 else 'uncheck'}">
       <tal:def define="number repeat/item/number;
                        obj python: dict(item);
                        contextURL python: view.context.absolute_url()">
@@ -53,12 +67,15 @@ table{
         <td>${python: obj['money']}</td>
         <td>${python: obj['undertaker']}</td>
         <td>
-          <span tal:condition="python: obj['is_check'] == 0" style='color: red'>未審核</span>
-          <span tal:condition="python: obj['is_check'] == 1" style='color: blue'>已審核</span>
+          <span tal:condition="python: obj['is_cancel'] == 1" style='color: white'>已撤銷</span>
+          <span tal:condition="python: obj['is_check'] == 0 and obj['is_cancel'] == 0" style='color: red'>未審核</span>
+          <span tal:condition="python: obj['is_check'] == 1 and obj['is_cancel'] == 0" style='color: blue'>已審核</span>
         </td>
         <td>
-          <a href="${contextURL}/@@pass_receipt?receipt_id=${python: obj['id']}" class='pass_btn'>通過</a>
-          <a href="${contextURL}/@@cancel_receipt?receipt_id=${python: obj['id']}" class="cancel_btn">撤銷收據</a>
+          <tal:cond condition="python: obj['is_cancel'] == 0 and obj['is_check'] == 0">
+            <a href="${contextURL}/@@pass_receipt?receipt_id=${python: obj['id']}" class='pass_btn'>通過</a>
+            <a href="${contextURL}/@@cancel_receipt?receipt_id=${python: obj['id']}" class="cancel_btn">撤銷收據</a>
+          </tal:cond>
         </td>
         <td>
             <a href="${contextURL}/@@receipt_detail?receipt_id=${python: obj['id']}">檢視</a>

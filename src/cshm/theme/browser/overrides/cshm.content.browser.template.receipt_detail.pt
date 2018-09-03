@@ -58,13 +58,15 @@ h4{
   <div class="well">
     <div>
       <h1>收據</h1>
-      <a class="download_pdf" href="${python: view.context.absolute_url()}/@@download_receipt_pdf?receipt_id=${view/receipt_id}">下載pdf</a>
+      <a class="download_pdf" href="${python: view.context.absolute_url()}/@@download_receipt_pdf?receipt_id=${view/receipt_id}"
+         target="_blank">下載pdf</a>
     </div>
     <hr>
     <div class='inline w400'>
       <h4 class='w150'>審核狀態</h4>
-      <span tal:condition="python: obj['is_check'] == 0" style='color: red'> 尚未審核</span>
-      <span tal:condition="python: obj['is_check'] == 1" style='color: blue'> 已審核</span>
+      <span tal:condition="python: obj['is_cancel'] == 1" style='color: black'>已撤銷</span>
+      <span tal:condition="python: obj['is_check'] == 0 and obj['is_cancel'] == 0" style='color: red'> 尚未審核</span>
+      <span tal:condition="python: obj['is_check'] == 1 and obj['is_cancel'] == 0" style='color: blue'> 已審核</span>
     </div>
     <div class='inline w400'>
       <h4 class='w150'>審核日期</h4>

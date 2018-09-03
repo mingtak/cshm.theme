@@ -1,0 +1,124 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://www.vue.org/v-bind"
+    xmlns:v-on="http://www.vue.org/v-bind"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+<metal:javascriptslot fill-slot="javascript_head_slot">
+</metal:javascriptslot>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<style>
+.header{
+    padding: 20px;
+    background: #fbfbfb;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+.search_btn{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    border-radius: 5px;
+    font-size: 17px;
+}
+.search_btn:hover{
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+.show{
+    display: initial;
+}
+.hide{
+    display: none;
+}
+input{
+    width: 20% !important;
+    display: inherit !important;
+}
+</style>
+
+<?python
+import datetime
+week_ago = (datetime.datetime.now() - datetime.timedelta(days=7)).strftime('%Y-%m-%d')
+now = datetime.datetime.now().strftime('%Y-%m-%d')
+?>
+
+<div class='header'>
+  <div data-target='title'>
+    <p>收據抬頭關鍵字查詢</p>
+    <input type='text'  required>
+  </div>
+
+  <div data-target='tax_no'>
+    <p>收據統編查詢</p>
+    <input type='text'  required>
+  </div>
+
+  <div data-target='code'>
+    <p>收據編號查詢</p>
+    <input type='text'  required>
+  </div>
+
+  <div data-target='receipt_date'>
+    <p>收據日期查詢</p>
+    <input type='date'  value='${now}'>
+  </div>
+
+  <div data-target='between_date'>
+    <p>收據日期區間查詢</p>
+    <input type='date' class='start_date' value='${week_ago}'>
+    <input type='date' class='end_date' value="${now}">
+  </div>
+  <button class='search_btn' >查詢</button>
+</div>
+
+<div id='result'>
+</div>
+<script>
+$(function(){
+    $('.header div').each(function(){
+        if($(this).data()['target'] == '${view/action}'){
+            $(this).addClass('show')
+        }
+        else{
+            $(this).addClass('hide')
+        }
+    })
+    $('.search_btn').click(function(){
+        if('${view/action}' == 'between_date'){
+            sd = $('.start_date').val()
+            ed = $('.end_date').val()
+            kw = sd + ',' + ed
+        }else{
+            kw = $('.show input').val()
+        }
+        data = {
+            'key_word': kw
+        }
+        $.ajax({
+            'type': 'post',
+            'url': location.href,
+            'data': data,
+            success: function(rep){
+               $('#result').html(rep)
+            }
+        })
+    })
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

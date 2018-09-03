@@ -58,7 +58,10 @@ hr{
     color: white;
     text-decoration: none;
 }
-
+td{
+    vertical-align: middle !important;
+    text-align: center;
+}
 </style>
 
 <h1>開立收據</h1>
@@ -68,7 +71,19 @@ hr{
   <div class='row'>
     <div class='col-md-3'>
       <div class='col-md-6'>區域</div>
-      <div class='col-md-6'>${python: view.context.trainingCenter.to_object.title}</div>
+      <div class='col-md-6'>
+        <select name="training_center">
+          <option vlaue="台北職訓中心">台北職訓中心</option>
+          <option vlaue="基隆職訓中心">基隆職訓中心</option>
+          <option vlaue="桃園職訓中心">桃園職訓中心</option>
+          <option vlaue="中壢職訓中心">中壢職訓中心</option>
+          <option vlaue="台中職訓中心">台中職訓中心</option>
+          <option vlaue="花蓮職訓中心">花蓮職訓中心</option>
+          <option vlaue="嘉義職訓中心">嘉義職訓中心</option>
+          <option vlaue="高雄職訓中心">高雄職訓中心</option>
+          <option vlaue="南科職訓中心">南科職訓中心</option>
+        </select>
+      </div>
     </div>
     <div class='col-md-3'>
       <div class='col-md-6'>收據類型</div>
@@ -100,20 +115,19 @@ hr{
     <div class='col-md-6'>
       <div class='col-md-6'>收據抬頭</div>
       <div class='col-md-6'>
-        <input type="text" name='title' id='title' value="${python: view.title}" required>
-        <input type="hidden" name="user_id" value="${view/userList}">
+        <input type="text" name='title' id='title' value="" required>
       </div>
     </div>
     <div class='col-md-3'>
       <div class='col-md-6'>統一編號</div>
       <div class='col-md-6'>
-        <input type="text" name='code' id="code" value="${python: view.tax_no}" required>
+        <input type="text" name='tax_no' id="tax_no" value="" required>
       </div>
     </div>
     <div class='col-md-3'>
       <div class='col-md-6'>金額</div>
       <div class='col-md-6'>
-        <input type='number' name='total_money' value="${python: view.totalMoney}" required>
+        <input type='number' name='total_money' value="" required>
       </div>
     </div>
   </div>
@@ -130,11 +144,14 @@ hr{
     <tr>
       <td>1</td>
       <td>項目名稱</td>
-      <td><input type="text" name='detail1_name' value="${python: view.context.getParentNode().title}"></td>
+      <td>
+        <input type="text" name='detail1_name' value="">
+      </td>
       <td>金額</td>
       <td><input type="number" name='detail1_money'></td>
       <td>備註</td>
-      <td><input type="text" name='detail1_note' value="${python: view.context.title}"></td>
+      <td>
+        <input type="text" name='detail1_note' value="">
     </tr>
     <tr>
       <td>2</td>
@@ -146,14 +163,14 @@ hr{
       <td><input type="text" name='detail2_note'></td>
     </tr>
   </table>
+  <input type='hidden' value='empty' name='empty'>
   <input type="submit" class='send' >
-  <a href="${python: view.context.absolute_url()}/@@receipt_list" class='back'>回上一頁</a>
  </div>
 </form>
 
 <script>
 $(function(){
-    $('#code').change(function(){
+    $('#tax_no').change(function(){
         val = $(this).val()
         data = {
             'tax_no': val
