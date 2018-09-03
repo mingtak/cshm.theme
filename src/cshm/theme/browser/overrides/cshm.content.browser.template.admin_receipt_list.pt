@@ -36,6 +36,7 @@ table{
       <td>總金額</td>
       <td>經手人</td>
       <td>審核狀態</td>
+      <td>審核</td>
       <td>檢視</td>
     </tr>
     <tr tal:repeat="item python: view.result">
@@ -52,8 +53,12 @@ table{
         <td>${python: obj['money']}</td>
         <td>${python: obj['undertaker']}</td>
         <td>
-          <span tal:condition="python: obj['is_check'] == 0">未審核</span>
-          <span tal:condition="python: obj['is_check'] == 1">已審核</span>
+          <span tal:condition="python: obj['is_check'] == 0" style='color: red'>未審核</span>
+          <span tal:condition="python: obj['is_check'] == 1" style='color: blue'>已審核</span>
+        </td>
+        <td>
+          <a href="${contextURL}/@@pass_receipt?receipt_id=${python: obj['id']}" class='pass_btn'>通過</a>
+          <a href="${contextURL}/@@cancel_receipt?receipt_id=${python: obj['id']}" class="cancel_btn">撤銷收據</a>
         </td>
         <td>
             <a href="${contextURL}/@@receipt_detail?receipt_id=${python: obj['id']}">檢視</a>

@@ -203,8 +203,6 @@ table{
           </tal:cond>
           <tal:cond condition="python: str(dict['id']) in view.idDict">
             <span>已建立訂單</span>
-            <a href="${python: view.context.absolute_url()}/@@cancel_receipt?receipt_id=${python: view.idDict[str(dict['id'])]}"
-               class="cancel_btn">撤銷收據</a>
           </tal:cond>
         </td>
         <td>

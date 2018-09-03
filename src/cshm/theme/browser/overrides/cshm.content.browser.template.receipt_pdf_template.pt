@@ -1,0 +1,184 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://www.vue.org/v-bind"
+    xmlns:v-on="http://www.vue.org/v-bind"
+    lang="en"
+    i18n:domain="cshm.content">
+<body>
+
+<style>
+.container{
+    width: 1000px;
+    margin: auto;
+    padding: 20px 50px;
+    text-align: center;
+    font-size: 18px;
+    font-family: Roboto, Noto Sans CJK TC, Noto Sans CJK SC, WenQuanYi Zen Hei, sans-serif;
+}
+.center{
+    text-align: center; 
+}
+.fs22{
+    font-size: 22px;
+}
+.float_l{
+    float: left;
+}
+.float_r{
+    float: right;
+}
+</style>
+
+<div class='container' tal:define="obj python: view.result[0]">
+  <h3>中國勞工安全衛生管理學會附設${view/trainingCenter}</h3>
+  <h3>收　　　　據</h3>
+
+  <span class='float_l'>${python: view.result[0]['receipt_date']}</span>
+  <span class='float_r'>${python: obj['training_center']}字號${python: obj['year']}
+  <tal:rep repeat="i python: range(5 - len(str(obj['serial_number'])))"><span>0</span></tal:rep>${python: obj['serial_number']}號</span>
+  
+  <div style='border: 1px solid black;clear: both;text-align: left;padding: 10px 5px'>
+    買受人：${python: obj['title']}
+    <br>
+    統一編號：${python: obj['tax_no']}
+  </div>
+  <div style='display: flex'>
+    <span style='border: 1px solid black;padding: 10px 5px;width: 500px;border-top: 0'>項目</span>
+    <span style='border-bottom: 1px solid black;padding: 10px 5px;width: 150px'>金額</span>
+    <span style='border: 1px solid black;padding: 10px 5px;width: 350px;border-top: 0'>備註</span>
+  </div>
+  <div style='display: flex' tal:repeat="item python: obj['detail'].split(',')">
+    <tal:def define="temp python: item.split('/')">
+      <span style='border: 1px solid black;padding: 10px 5px;width: 500px;border-top: 0;height: 30px;line-height: 32px;'>
+        ${python: temp[0] if temp[0] else ''}</span>
+      <span style='border-bottom: 1px solid black;padding: 10px 5px;width: 150px;height: 30px;line-height: 32px;'>
+        ${python: temp[1] if temp[1] else ''}</span>
+      <span style='border: 1px solid black;padding: 10px 5px;width: 350px;border-top: 0;height: 30px;line-height: 32px;'>
+        ${python: temp[2] if temp[2] else ''}</span>
+    </tal:def>
+  </div>
+  <div  style='border: 1px solid black;border-top: 0;text-align: left;padding: 10px 5px'>
+    合計：新台幣${python: obj['money']}元整
+  </div> 
+  <br>
+  <div style="text-align: left">
+    <span>理事長</span> <span style='margin: 0 80px'>施昭宏</span> <span>主管</span> <span style='margin: 0 80px'>宋金柳</span> 經手人
+  </div>
+  <hr style="border:1px solid black">
+  <div style='text-align: left'>
+統一編號:00973377　設立字號:台內社字第8117014號
+<br>
+連絡電話:(07)2368133　傳真號碼:(07)2368195　地址:高雄市新興區民族二路97號6樓
+  </div>
+</div>
+
+
+<div class='container' tal:define="obj python: view.result[0]">
+  <h3>中國勞工安全衛生管理學會附設${view/trainingCenter}</h3>
+  <h3>收　　　　據</h3>
+
+  <span class='float_l'>${python: view.result[0]['receipt_date']}</span>
+  <span class='float_r'>${python: obj['training_center']}字號${python: obj['year']}
+  <tal:rep repeat="i python: range(5 - len(str(obj['serial_number'])))"><span>0</span></tal:rep>${python: obj['serial_number']}號</span>
+
+  <div style='border: 1px solid black;clear: both;text-align: left;padding: 10px 5px'>
+    買受人：${python: obj['title']}
+    <br>
+    統一編號：${python: obj['tax_no']}
+  </div>
+  <div style='display: flex'>
+    <span style='border: 1px solid black;padding: 10px 5px;width: 500px;border-top: 0'>項目</span>
+    <span style='border-bottom: 1px solid black;padding: 10px 5px;width: 150px'>金額</span>
+    <span style='border: 1px solid black;padding: 10px 5px;width: 350px;border-top: 0'>備註</span>
+  </div>
+  <div style='display: flex' tal:repeat="item python: obj['detail'].split(',')">
+    <tal:def define="temp python: item.split('/')">
+      <span style='border: 1px solid black;padding: 10px 5px;width: 500px;border-top: 0;height: 30px;line-height: 32px;'>
+        ${python: temp[0] if temp[0] else ''}</span>
+      <span style='border-bottom: 1px solid black;padding: 10px 5px;width: 150px;height: 30px;line-height: 32px;'>
+        ${python: temp[1] if temp[1] else ''}</span>
+      <span style='border: 1px solid black;padding: 10px 5px;width: 350px;border-top: 0;height: 30px;line-height: 32px;'>
+        ${python: temp[2] if temp[2] else ''}</span>
+    </tal:def>
+  </div>
+  <div  style='border: 1px solid black;border-top: 0;text-align: left;padding: 10px 5px'>
+    合計：新台幣${python: obj['money']}元整
+  </div>
+  <br>
+  <div style="text-align: left">
+    <span>理事長</span> <span style='margin: 0 80px'>施昭宏</span> <span>主管</span> <span style='margin: 0 80px'>宋金柳</span> 經手人
+  </div>
+  <hr style="border:1px solid black">
+  <div style='text-align: left'>
+統一編號:00973377　設立字號:台內社字第8117014號
+<br>
+連絡電話:(07)2368133　傳真號碼:(07)2368195　地址:高雄市新興區民族二路97號6樓
+  </div>
+</div>
+
+
+<div class='container' tal:define="obj python: view.result[0]">
+  <h3>中國勞工安全衛生管理學會附設${view/trainingCenter}</h3>
+  <h3>收　　　　據</h3>
+
+  <span class='float_l'>${python: view.result[0]['receipt_date']}</span>
+  <span class='float_r'>${python: obj['training_center']}字號${python: obj['year']}
+  <tal:rep repeat="i python: range(5 - len(str(obj['serial_number'])))"><span>0</span></tal:rep>${python: obj['serial_number']}號</span>
+
+  <div style='border: 1px solid black;clear: both;text-align: left;padding: 10px 5px'>
+    買受人：${python: obj['title']}
+    <br>
+    統一編號：${python: obj['tax_no']}
+  </div>
+  <div style='display: flex'>
+    <span style='border: 1px solid black;padding: 10px 5px;width: 500px;border-top: 0'>項目</span>
+    <span style='border-bottom: 1px solid black;padding: 10px 5px;width: 150px'>金額</span>
+    <span style='border: 1px solid black;padding: 10px 5px;width: 350px;border-top: 0'>備註</span>
+  </div>
+  <div style='display: flex' tal:repeat="item python: obj['detail'].split(',')">
+    <tal:def define="temp python: item.split('/')">
+      <span style='border: 1px solid black;padding: 10px 5px;width: 500px;border-top: 0;height: 30px;line-height: 32px;'>
+        ${python: temp[0] if temp[0] else ''}</span>
+      <span style='border-bottom: 1px solid black;padding: 10px 5px;width: 150px;height: 30px;line-height: 32px;'>
+        ${python: temp[1] if temp[1] else ''}</span>
+      <span style='border: 1px solid black;padding: 10px 5px;width: 350px;border-top: 0;height: 30px;line-height: 32px;'>
+        ${python: temp[2] if temp[2] else ''}</span>
+    </tal:def>
+  </div>
+  <div  style='border: 1px solid black;border-top: 0;text-align: left;padding: 10px 5px'>
+    合計：新台幣${python: obj['money']}元整
+  </div>
+  <br>
+  <div style="text-align: left">
+    <span>理事長</span> <span style='margin: 0 80px'>施昭宏</span> <span>主管</span> <span style='margin: 0 80px'>宋金柳</span> 經手人
+  </div>
+  <hr style="border:1px solid black">
+  <div style='text-align: left'>
+統一編號:00973377　設立字號:台內社字第8117014號
+<br>
+連絡電話:(07)2368133　傳真號碼:(07)2368195　地址:高雄市新興區民族二路97號6樓
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
+<script src="http://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+<script>
+window.onload = function(){
+  html2canvas(document.body).then(canvas => {
+      //返回图片dataURL，参数：图片格式和清晰度(0-1)
+      var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+      //方向默认竖直，尺寸ponits，格式a4[595.28,841.89]
+      var pdf = new jsPDF('', 'pt', 'a4');
+
+      //addImage后两个参数控制添加图片的尺寸，此处将页面高度按照a4纸宽高比列进行压缩
+      pdf.addImage(pageData, 'JPEG', 0, 0, 595.28, 592.28/canvas.width * canvas.height );
+      title = "${python: view.result[0]['training_center']}字號${python: view.result[0]['year']}<tal:rep repeat="i python: range(5 - len(str(view.result[0]['serial_number'])))">0</tal:rep>${python: view.result[0]['serial_number']}號"
+      pdf.save(title);
+  });
+}
+</script>
+
+</body>
+</html>

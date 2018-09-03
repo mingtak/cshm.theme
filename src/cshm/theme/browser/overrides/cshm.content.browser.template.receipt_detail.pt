@@ -26,11 +26,14 @@
     right: 20px;
     top: 40px;
 }
+span{
+    font-size: 16px;
+}
 .w400{
     width: 380px;
 }
-.w200{
-    width: 200px;
+.w150{
+    width: 150px;
 }
 .inline{
     display: inline-block;
@@ -55,51 +58,51 @@ h4{
   <div class="well">
     <div>
       <h1>收據</h1>
-      <a class="download_pdf">下載pdf</a>
+      <a class="download_pdf" href="${python: view.context.absolute_url()}/@@download_receipt_pdf?receipt_id=${view/receipt_id}">下載pdf</a>
     </div>
     <hr>
     <div class='inline w400'>
-      <h4 class='w200'>審核狀態</h4>
-      <span tal:condition="python: obj['is_check'] == 0"> 尚未審核</span>
-      <span tal:condition="python: obj['is_check'] == 1"> 已審核</span>
+      <h4 class='w150'>審核狀態</h4>
+      <span tal:condition="python: obj['is_check'] == 0" style='color: red'> 尚未審核</span>
+      <span tal:condition="python: obj['is_check'] == 1" style='color: blue'> 已審核</span>
     </div>
     <div class='inline w400'>
-      <h4 class='w200'>審核日期</h4>
+      <h4 class='w150'>審核日期</h4>
       <span>${python: obj['check_date']}</span>
     </div>
     <div class='inline w400'>
-      <h4 class='w200'>審核者</h4>
+      <h4 class='w150'>審核者</h4>
       <span>${python: obj['inspector']}</span>
     </div>
 
     <hr>
 
     <div class='inline w400'>
-      <h4 class='w200'>收據日期</h4>
+      <h4 class='w150'>收據日期</h4>
       <span>${python: obj['receipt_date']}</span>
     </div>
     <div class='inline w400'>
-      <h4 class='w200'>收據號碼</h4>
+      <h4 class='w150'>收據號碼</h4>
       <span>
             ${python: obj['training_center']}字號
             ${python: obj['year']}<tal:rep repeat="i python: range(5 - len(str(obj['serial_number'])))"><span>0</span></tal:rep>${python: obj['serial_number']}號
       </span>
     </div>
     <div class='inline w400'>
-      <h4 class='w200'>收據金額</h4>
+      <h4 class='w150'>收據金額</h4>
       <span>NT$ ${python: obj['money']}</span>
     </div>
 
     <div class='inline w400'>
-      <h4 class='w200'>收據抬頭</h4>
+      <h4 class='w150'>收據抬頭</h4>
       <span>${python: obj['title']}</span>
     </div>
     <div class='inline w400'>
-      <h4 class='w200'>統一編號</h4>
+      <h4 class='w150'>統一編號</h4>
       <span>${python: obj['tax_no']}</span>
     </div>
     <div class='w400'>
-      <h4 class='w200'>備註</h4>
+      <h4 class='w150'>備註</h4>
       <span>${python: obj['note']}</span>
     </div>
 
@@ -148,23 +151,23 @@ h4{
     <hr>
 
     <div class='w400'>
-      <h4 class='w200'>建立</h4>
+      <h4 class='w150'>建立</h4>
       <span>${python: obj['apply_date']}</span>
     </div>
     <div class='w400'>
-      <h4 class='w200'>修改</h4>
+      <h4 class='w150'>修改</h4>
       <span>TODO</span>
     </div>
     <div class='inline w400'>
-      <h4 class='w200'>轉檔</h4>
+      <h4 class='w150'>轉檔</h4>
       <span>TODO</span>
     </div>
     <div class='inline w400'>
-      <h4 class='w200'>收據密碼</h4>
+      <h4 class='w150'>收據密碼</h4>
       <span>TODO</span>
     </div>
     <div class='w400'>
-      <h4 class='w200'>作廢</h4>
+      <h4 class='w150'>作廢</h4>
       <span>TODO</span>
     </div>
 
