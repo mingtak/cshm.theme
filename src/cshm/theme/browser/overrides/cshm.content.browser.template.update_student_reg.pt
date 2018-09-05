@@ -161,13 +161,33 @@
       行業別
      </td>
      <td colspan="10">
-      <select name="industry">
-       <option>
-        TODO
-       </option>
-       <option>
-        銀行業
-       </option>
+      <select name="industry" v-model="industry">
+        <tal:cond condition="python: view.context.getParentNode().title == '一般安全衛生教育訓練'">
+          <option value="一般">一般</option>
+          <option value="營造業">營造業</option>
+        </tal:cond>
+        <tal:cond condition="python: view.context.getParentNode().title != '一般安全衛生教育訓練'">
+          <option value="">  </option>
+          <option value="銀行業">銀行業</option>
+          <option value="證券業">證券業</option>
+          <option value="電信業">電信業</option>
+          <option value="營造業">營造業</option>
+          <option value="局限空間作業">局限空間作業</option>
+          <option value="住宿業">住宿業</option>
+          <option value="製造業">製造業</option>
+          <option value="批發零售業">批發零售業</option>
+          <option value="金融保險">金融保險</option>
+          <option value="醫療保健業">醫療保健業</option>
+          <option value="餐館業">餐館業</option>
+          <option value="清潔服務業">清潔服務業</option>
+          <option value="不動產及租賃業">不動產及租賃業</option>
+          <option value="水電及燃氣供應業">水電及燃氣供應業</option>
+          <option value="運輸及倉儲業">運輸及倉儲業</option>
+          <option value="保全業">保全業</option>
+          <option value="停車場業">停車場業</option>
+          <option value="廢棄物處理及清除業">廢棄物處理及清除業</option>
+          <option value="其他">其他</option>
+        </tal:cond>
       </select>
      </td>
     </tr>
@@ -464,7 +484,8 @@ var app = new Vue({
       training_status: '${student/training_status}',
       invoice_title: '${student/invoice_title}',
       tax_no: '${student/tax_no}',
-      distList: "${python:view.getDistList().replace('\n', '\t')}".split('\t')
+      distList: "${python:view.getDistList().replace('\n', '\t')}".split('\t'),
+      industry: '${student/industry}'
     },
     methods: {
       getZIP: function(cityStr){

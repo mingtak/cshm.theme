@@ -1,0 +1,72 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    i18n:domain="cshm.content">
+<body>
+
+<style>
+.container{
+    width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+p{
+    font-size: 22px;
+    font-weight: 400;
+}
+.tal{
+    text-align: left;
+}
+table{
+    width: 100%;
+}
+td, td{
+    border: 1px solid black;
+    text-align:center;
+    vertical-align: middle;
+    padding: 15px 7px;
+}
+</style>
+
+<div class='container'>
+  <p>中國勞工安全衛生管理學會</p>
+  <p>${python: view.context.title}【${python: view.context.getParentNode().title}】訓練班</p>
+  <p>學員名冊</p>
+
+  <p class='tal'>核准開班文號：TODO</p>
+  <p class='tal'>訓練日期：${view/context/courseStart}～${view/context/courseEnd}</p>
+  <p class='tal'>訓練地點：${python: view.context.trainingCenter.to_object.address}</p>
+  <p class='tal'>輔導員：TODO</p>
+  <p class='tal'>監考人員：TODO</p>
+  <br>
+  <table border="1" cellpadding="0" cellspacing="0" bordercolorlight="black" bordercolordark="black">
+    <tr>
+      <td>序號</td>
+      <td>姓名</td>
+      <td>出生日期</td>
+      <td>身份證字號</td>
+      <td>學歷</td>
+      <td>服務單位</td>
+      <td>聯絡地址</td>
+      <td>電話</td>
+      <td>備註</td>
+    </tr>
+    <tr tal:repeat="item view/result">
+      <td>${repeat/item/number}</td>
+      <td>${python: item[4]}</td>
+      <td>${python: item[12]}</td>
+      <td>${python: item[15]}</td>
+      <td>${python: item[25]}</td>
+      <td>${python: item[6]}</td>
+      <td>${python: item[13]}</td>
+      <td>${python: item[1]}</td>
+      <td>${python: item[33]}</td>
+    </tr>
+
+  </table>
+</div>
+</body>
+</html>
+
