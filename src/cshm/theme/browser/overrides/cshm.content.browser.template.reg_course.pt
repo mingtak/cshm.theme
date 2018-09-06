@@ -40,7 +40,7 @@
 <p>      <input type="text" name="fax" id="fax" value="" placeholder="傳真電話"></p>
 <p>
     <select name="education_id" required>
-        <option value="">----請選擇行業----</option>
+        <option value="">----請選擇學歷----</option>
         <option value="1">博士</option>
         <option value="2">碩士</option>
         <option value="3">大學</option>

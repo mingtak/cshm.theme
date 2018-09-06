@@ -70,16 +70,14 @@
        承辦人員
       </b>
      </td>
-     <td>TODO</td>
+     <td>${context/undertaker}</td>
      <td>
       <b>
        專職輔導員
       </b>
      </td>
      <td>
-      TODO
-      <span>
-      </span>
+      ${context/counselor}
       <br/>
       <span>
        (代理輔導員：TODO)

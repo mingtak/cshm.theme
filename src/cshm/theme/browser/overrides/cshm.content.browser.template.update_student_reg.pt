@@ -250,10 +250,28 @@
       <input type="text" value="TODO"/>
      </td>
     </tr>
-    <tr>
+    <tr class="tr-head">
      <td colspan="10">
       受訓狀態
      </td>
+    </tr>
+    <tr>
+      <td>回訓類別</td>
+      <td colspan=10>
+        <select name="reTrainingCat" v-model="reTrainingCat">
+          <option value=''></option>
+          <option tal:repeat="reTraining python: view.context.getParentNode().reTrainingCourse" 
+                  value="${python: reTraining.to_object.title}">${python: reTraining.to_object.title}</option>
+        </select>
+        <span style='color: red;font-size:25px'>●</span>
+        <span style='color: red'>初訓證號</span>
+        <input type='text' name="reTrainingCode" style='width: 20%;display: inherit' v-model="reTrainingCode" value=''>
+        <span style='color: red;font-size:25px'>●</span>
+        <span style='color: red'>回訓時數</span>
+        <input type='number' name='reTrainingHour' style='width: 5%;display: inherit' min=0 max=24 class='reTrainingHour'
+               v-model="reTrainingHour" value=0>
+        <span style='color: red'>時</span>
+      </td>
     </tr>
     <tr>
      <td>
@@ -485,7 +503,10 @@ var app = new Vue({
       invoice_title: '${student/invoice_title}',
       tax_no: '${student/tax_no}',
       distList: "${python:view.getDistList().replace('\n', '\t')}".split('\t'),
-      industry: '${student/industry}'
+      industry: '${student/industry}',
+      reTrainingCat: '${student/reTrainingCat}',
+      reTrainingCode: '${student/reTrainingCode}',
+      reTrainingHour: '${student/reTrainingHour}',
     },
     methods: {
       getZIP: function(cityStr){

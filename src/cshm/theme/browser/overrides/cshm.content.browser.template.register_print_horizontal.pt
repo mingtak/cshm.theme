@@ -29,7 +29,6 @@ td, td{
     padding: 15px 7px;
 }
 </style>
-
 <div class='container'>
   <p>中國勞工安全衛生管理學會</p>
   <p>${python: view.context.title}【${python: view.context.getParentNode().title}】訓練班</p>
@@ -58,7 +57,7 @@ td, td{
       <td>${python: item[4]}</td>
       <td>${python: item[12]}</td>
       <td>${python: item[15]}</td>
-      <td>${python: item[25]}</td>
+      <td>${python: item[34]}</td>
       <td>${python: item[6]}</td>
       <td>${python: item[13]}</td>
       <td>${python: item[1]}</td>
