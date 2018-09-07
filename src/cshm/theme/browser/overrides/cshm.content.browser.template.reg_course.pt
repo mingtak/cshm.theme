@@ -50,7 +50,7 @@
         <option value="7">國小</option>
         <option value="8">其他</option>
     </select>
-    <select name="industry" required>
+    <select name="industry" required class="industry">
         <option value="">----請選擇行業----</option>
         <option value="銀行業">銀行業</option>
         <option value="證券業">證券業</option>
@@ -72,6 +72,9 @@
         <option value="廢棄物處理及清除業">廢棄物處理及清除業</option>
         <option value="其他">其他</option>
     </select>
+    <label style="padding: 7px;width: 200px;" class='check_print'>
+        <input type="checkbox" name="check_print">是否要印行業在證照上？
+    </label>
 </p>
 
 <p>
@@ -154,7 +157,16 @@
 
 <div class="js-in-body">
 <script>
-
+$(function(){
+    $('.check_print').hide()
+    $('.industry').change(function(){
+        if($(this).val() == '營造業'){
+            $('.check_print').show()
+        }else{
+            $('.check_print').hide()
+        }
+    })
+})
 var app = new Vue({
     el: '#content-core',
     data: {
@@ -165,7 +177,7 @@ var app = new Vue({
       invoice_title: '',
       invoice_tax_no: '',
 
-      city: ,
+      city: '',
       zip: '',
       address: '',
       distList: "${python:view.getDistList().replace('\n', '\t')}".split('\t')

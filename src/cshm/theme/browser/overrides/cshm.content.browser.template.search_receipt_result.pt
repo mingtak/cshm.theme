@@ -9,23 +9,58 @@
 <body>
 
 <style>
+th{
+    background: #0062cc;
+    color: white;
+    text-align: center;
+    padding: 8px 0;
+}
+.is_cancel{
+    color: red;
+}
+.is_waiting{
+    color: blue;
+}
+.is_pass{
+    color: green;
+}
+.tac{
+    text-align: center;
+}
 </style>
 
-
-${view/result}
-<table>
+<table style='margin-top: 25px;'>
   <tr>
-    <td>序號</td>
-    <td>收據號碼</td>
-    <td>收據日期</td>
-    <td>收據抬頭</td>
-    <td>總金額</td>
-    <td>經手人</td>
-    <td>審核狀態</td>
-    <td>檢視</td>
+    <th>序號</th>
+    <th>收據號碼</th>
+    <th>收據日期</th>
+    <th>收據抬頭</th>
+    <th>總金額</th>
+    <th>經手人</th>
+    <th>審核狀態</th>
+    <th>檢視</th>
+  </tr>
+  <tr tal:condition="not: view/result">
+    <td colspan='8' class='tac'><h3>NO DATA</h3></td>
+  </tr>
+  <tr tal:repeat="item view/result" tal:condition="view/result">
+    <td class='tac'>${repeat/item/number}</td>
+    <td>${python: item[3]}${python: item[4]}<tal:rep repeat="i python: range(5-len(str(item[4])))">0</tal:rep>${python: item[5]}</td>
+    <td>${python: item[10]}</td>
+    <td>${python: item[12]}</td>
+    <td>${python: item[8]}</td>
+    <td>${python: item[7]}</td>
+    <td tal:define="is_cancel python: item[16];
+                    is_check  python: item[17]"  class='tac'>
+      <span class='is_cancel' tal:condition="python: is_cancel == 1">已撤銷</span>
+      <span class='is_waiting' tal:condition="python: is_cancel == 0 and is_check == 0">待審查</span>
+      <span class='is_pass' tal:condition="python: is_cancel == 0 and is_check == 1">審核通過</span>
+    </td>
+    <td class='tac'>
+      <a href="${view/context/absolute_url}/@@receipt_detail?receipt_id=${python: item[0]}" target='_blank'>檢視</a>
+    </td>
   </tr>
 
-  </tr>
 </table>
 </body>
 </html>

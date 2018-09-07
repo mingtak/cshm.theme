@@ -14,7 +14,8 @@
 
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
-                    tal:define="toc context/table_of_contents|nothing;">
+                    tal:define="toc context/table_of_contents|nothing;
+                    contextURL view/context/absolute_url">
 
 <style>
 .header{
@@ -30,7 +31,7 @@
     border-radius: 5px;
     font-size: 17px;
 }
-.search_btn:hover{
+.search_btn:hover, .search_btn:focus{
     color: #fff;
     background-color: #286090;
     border-color: #204d74;
@@ -43,8 +44,23 @@
 }
 input{
     width: 20% !important;
-    display: inherit !important;
+    display: inline-block !important;
 }
+.search_btn{
+    margin-top: 20px;
+}
+.select_btn a{
+    background-color: #07689f;
+    padding: 8px 10px;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.select_btn a:hover, .select_btn a:focus{
+    border: none !important;
+    text-decoration: none;
+}
+
 </style>
 
 <?python
@@ -52,29 +68,38 @@ import datetime
 week_ago = (datetime.datetime.now() - datetime.timedelta(days=7)).strftime('%Y-%m-%d')
 now = datetime.datetime.now().strftime('%Y-%m-%d')
 ?>
-
-<div class='header'>
-  <div data-target='title'>
+<div class='select_btn' style='margin-bottom: 20px'>
+  <a href="${contextURL}/@@search_receipt?action=title">依收據抬頭關鍵字</a>
+  <a href="${contextURL}/@@search_receipt?action=tax_no">依統一編號</a>
+  <a href="${contextURL}/@@search_receipt?action=code">依收據編號</a>
+  <a href="${contextURL}/@@search_receipt?action=receipt_date">依日期</a>
+  <a href="${contextURL}/@@search_receipt?action=between_date">依日期區間</a>
+</div>
+<div class='header' tal:define="action view/action">
+  <div data-target='title' tal:condition="python: action == 'title'">
     <p>收據抬頭關鍵字查詢</p>
     <input type='text'  required>
   </div>
 
-  <div data-target='tax_no'>
-    <p>收據統編查詢</p>
+  <div data-target='tax_no' tal:condition="python: action == 'tax_no'">
+    <p>收據統一編號查詢</p>
     <input type='text'  required>
   </div>
 
-  <div data-target='code'>
+  <div data-target='code' tal:condition="python: action == 'code'">
     <p>收據編號查詢</p>
-    <input type='text'  required>
+    <span style="color: red">假設搜尋 花訓107001 :</span>
+    <span style="color: red">花,107,1</span>
+    <br>
+    <input type='text'  required style='margin-top: 10px'>
   </div>
 
-  <div data-target='receipt_date'>
+  <div data-target='receipt_date' tal:condition="python: action == 'receipt_date'">
     <p>收據日期查詢</p>
     <input type='date'  value='${now}'>
   </div>
 
-  <div data-target='between_date'>
+  <div data-target='between_date'  tal:condition="python: action == 'between_date'">
     <p>收據日期區間查詢</p>
     <input type='date' class='start_date' value='${week_ago}'>
     <input type='date' class='end_date' value="${now}">
@@ -86,21 +111,18 @@ now = datetime.datetime.now().strftime('%Y-%m-%d')
 </div>
 <script>
 $(function(){
-    $('.header div').each(function(){
-        if($(this).data()['target'] == '${view/action}'){
-            $(this).addClass('show')
-        }
-        else{
-            $(this).addClass('hide')
-        }
-    })
     $('.search_btn').click(function(){
         if('${view/action}' == 'between_date'){
             sd = $('.start_date').val()
             ed = $('.end_date').val()
             kw = sd + ',' + ed
         }else{
-            kw = $('.show input').val()
+            kw = $('input').val()
+        }
+
+        if(!kw){
+            alert('請輸入查詢條件')
+            return 
         }
         data = {
             'key_word': kw

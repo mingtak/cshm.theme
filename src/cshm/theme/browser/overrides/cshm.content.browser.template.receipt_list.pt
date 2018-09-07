@@ -167,7 +167,7 @@ table{
 </style>
 
 <ul class='btn_group'>
-  <li data-action="create">批次建立收據</li>
+  <li data-action="create" class='more_create'>批次建立收據</li>
 </ul>
 
 <tal:condition condition="view/admit">
@@ -193,17 +193,20 @@ table{
           <button tal:attributes="class python: 'show change_money' if money else 'hide change_money'">修改</button>
         </td>
         <td class='option_container'>
+
           <tal:cond condition="python: str(dict['id']) not in view.idDict">
             <a href="${python: view.context.absolute_url()}/@@receipt_create_view?userList=${python: dict['id']}"
                tal:attributes="class python: 'show create_receipt' if money else 'hide create_receipt'">建立收據</a>
-            <label tal:attributes="class python: 'show input_container' if money else 'hide input_container'">
+            <label tal:attributes="class python: 'show input_container has_money' if money else 'hide input_container no_money'">
               <input type="checkbox"  data-user_id="${python: dict['id']}">
               <span class="checkmark"></span>
             </label>
           </tal:cond>
+
           <tal:cond condition="python: str(dict['id']) in view.idDict">
             <span>已建立訂單</span>
           </tal:cond>
+
         </td>
         <td>
           <a href="${python: view.context.absolute_url()}/@@receipt_apply_form?user_id=${python: dict['id']}" target="_blank">報名表</a>
@@ -260,7 +263,6 @@ $(function(){
                     $(self).parent().parent().find('.option_container a').show()
                     $(self).parent().parent().find('.option_container .input_container').show()
                 }else if(rep == 'error'){
-//TODO
                 }
             }
         })
