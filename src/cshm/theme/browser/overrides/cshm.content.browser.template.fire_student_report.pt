@@ -1,0 +1,114 @@
+<style>
+.container{
+    width: 1200px;
+    margin: auto;
+}
+.page{
+    height: 1500px;
+    width: 1400px;
+    margin: auto;
+    position: relative;
+}
+span{
+    
+}
+body{
+}
+.title{
+    position: absolute;
+    right: 370px;
+}
+.rotate{
+    transform: rotate(90deg);
+    width: 13px;
+}
+.po_abs{
+    position: absolute;
+}
+table{
+    border-spacing: 0;
+}
+table, td{
+    border: 1px solid black;
+}
+table{
+    position: absolute;
+    top: 600px;
+    transform: rotate(90deg);
+}
+td{
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 20px;
+}
+.w100{
+    width: 100px;
+}
+.w200{
+    width: 200px;
+}
+</style>
+
+<body tal:define="numList python: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '/']">
+
+<div class='page' tal:define="title python: '中國勞工安全衛生管理學會%s訓練班第%s期學員名冊' %(view.context.getParentNode().Title(), view.context.id)">
+  <div class='title'>
+     <div tal:repeat="word python: title.decode('utf-8')" style='font-size: 25px;font-weight: 500' 
+          class="${python: 'rotate' if word in numList else ''}">${word}<br></div>
+  </div>
+
+  <div class='po_abs' style='top: 500px;left: 300px'>
+     <div tal:repeat="word python: '核准開班文號：中華民國107年3月20日北市消預字第10731924800號'.decode()"
+          class="${python: 'rotate' if word in numList else ''}">
+      ${word}<br>
+    </div>
+  </div>
+
+  <div class='po_abs' style='top: 500px;left: 265px'>
+      <div tal:repeat="word python: '訓練期間：107/4/16~107/4/16'.decode()"
+          class="${python: 'rotate' if word in numList else ''}">
+       ${word}<br>
+     </div>
+  </div>
+
+  <div class='po_abs' style='top: 500px;left: 230px'>
+      <div tal:repeat="word python: '學科：台北市北平東路16號9樓'.decode()"
+          class="${python: 'rotate' if word in numList else ''}">
+       ${word}<br>
+     </div>
+  </div>
+
+  <div class='po_abs' style='top: 500px;left: 200px'>
+      <div tal:repeat="word python: '術科：台北市北平東路16號9樓'.decode()"
+          class="${python: 'rotate' if word in numList else ''}">
+       ${word}<br>
+     </div>
+  </div>
+</div>
+<tal:rep repeat="result view/data">
+<div class='page'>
+  <table>
+    <tr>
+      <td>編號</td>
+      <td class='w100'>姓名</td>
+      <td>生日</td>
+      <td>身份證字號</td>
+      <td class='w200'>服務單位</td>
+      <td class='w200'>聯絡地址</td>
+      <td class='w200'>備註</td>
+    </tr>
+    <tr tal:repeat="item result">
+      <tal:def define="obj python: dict(item)">
+        <td>${repeat/item/number}</td>
+        <td>${python: obj['name']}</td>
+        <td>${python: view.getChineseBirthday(obj['birthday'])}</td>
+        <td>${python: obj['studId']}</td>
+        <td>${python: obj['company_name']}</td>
+        <td>${python: obj['address']}</td>
+        <td></td>
+      </tal:def>
+    </tr>
+  </table>
+</div>
+</tal:rep>
+</body>

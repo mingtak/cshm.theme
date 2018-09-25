@@ -188,7 +188,7 @@ table{
         <td>${python: dict['name']}</td>
         <td class='money_container'>
           <input type="number" class="money" name="money" style="width: 20%"  data-user_id="${python: dict['id']}"
-                 tal:attributes="disabled python: 'disabled' if money else ''" value="${python: money}">
+                 tal:attributes="disabled python: 'disabled' if money else ''" value="${python: money if money else view.context.courseFee}">
           <button tal:attributes="class python: 'hide do_update_money' if money else 'show do_update_money'">確認</button>
           <button tal:attributes="class python: 'show change_money' if money else 'hide change_money'">修改</button>
         </td>

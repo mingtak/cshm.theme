@@ -293,12 +293,12 @@
      </td>
      <td colspan="9">
       發證單位
-      <input maxlength="30" name="xa1" type="text" value="TODO"/>
+      <input maxlength="30" name="license_unit" type="text" v-model='license_unit'/>
       受訓日期
-      <input maxlength="20" name="xa2" type="text" value="TODO"/>
+      <input maxlength="20" name="license_date" type="date" v-model='license_date'/>
       <br/>
       證書號碼
-      <input maxlength="30" name="xa3" type="text" value="TODO"/>
+      <input maxlength="30" name="license_code" type="text" v-model='license_code'/>
      </td>
     </tr>
     <tr>
@@ -308,7 +308,7 @@
       受訓時數
      </td>
      <td colspan="9">
-      <input maxlength="3" name="xa4" type="text" value="TODO"/>
+      <input maxlength="3" name="training_hour" type="text" v-model="training_hour"/>
       小時
      </td>
     </tr>
@@ -507,6 +507,10 @@ var app = new Vue({
       reTrainingCat: '${student/reTrainingCat}',
       reTrainingCode: '${student/reTrainingCode}',
       reTrainingHour: '${student/reTrainingHour}',
+      training_hour: '${student/training_hour}',
+      license_date: '${student/license_date}',
+      license_unit: '${student/license_unit}',
+      license_code: '${student/license_code}',
     },
     methods: {
       getZIP: function(cityStr){

@@ -11,7 +11,7 @@
 <style>
 .up_side_down{
     text-align: center;
-    vertical-align: middle;
+    vertical-align: top;
     width: 1%;
     word-wrap:break-word;
     word-break: break-all;
@@ -24,8 +24,9 @@ th{
     padding: 0px 3px;
     font-weight: 600;
 }
-table{
-    margin-top: 10px;
+.container{
+    width: 900px;
+    margin: auto;
 }
 #back_btn{
     padding: 5px 10px;
@@ -34,36 +35,84 @@ table{
     border-radius: 8px;
     text-decoration: none;
 }
+.header{
+    width: 100%;
+    display: flex;
+}
+.left{
+    width: 80%;
+    height: 150px;
+}
+.right{
+    width: 18%;
+    height: 140px;
+    border: 1px solid black;
+    text-align: center;
+}
+.right p{
+    margin: 3px 0;
+}
+.left p{
+    text-align: center;
+}
+.left span{
+    margin-left: 20px;
+}
+table{
+    border-spacing: 0px;
+}
 </style>
+<div class='container' tal:define="course python: view.context.getParentNode().title">
 
-
+  <div class='header'>
+    <div class='left'>
+      <p>中國勞工安全衛生管理學會受訓學員點名紀錄</p>
+      <p>第${view/context/id}期 ${course}　${view/context/courseStart}~${view/context/courseEnd}</p>
+      <span>全程未缺課：　　　人；缺課超過五分之一：　　　人；曾曠課：　　　人；</span>
+      <br>
+      <span>請假超過三小時：　　　人</span>
+    </div>
+    <div class='right' tal:condition="python: course != '防火管理人初訓' and course != '防火管理人複訓'">
+      <p>監考人員</p>
+      <p>簽名確認</p>
+    </div>
+  </div>
   <table  tal:define="courseLen python: len(view.courseList)"
           tal:repeat="item view/data"
           id='table${repeat/item/number}' 
           border="1" cellpadding="2" cellspacing="1">
     <tr>
-      <td class='up_side_down' >座號</td>
-      <td class='up_side_down'>姓名</td>
-      <td tal:repeat="course view/courseList" class='up_side_down' >
-        <tal:repeat repeat="word course">
-          ${word}<br>
-        </tal:repeat>
+      <td colspan='2' style='width: 1%;text-align: center'>
+        <p style='text-align: right'>科<br>目</p><p>姓<br>名</p><p style='text-align: left'>座<br>號</p>
+      </td>
+
+      <td tal:repeat="course view/courseList" class='up_side_down' colspan='1'>
+        ${python: course[0][:2]}<br>${python: course[0][2:]}<br><tal:rep repeat="word python: course[1]">${word}<br></tal:rep>
       </td>
     </tr>
+    <tr tal:condition="python: course == '防火管理人初訓' or course == '防火管理人複訓'">
+      <td colspan='2'>點名時間</td>
+      <td tal:repeat='item python: view.context.getChildNodes()'></td>
+    </tr>
+    <tr tal:condition="python: course == '防火管理人初訓' or course == '防火管理人複訓'">
+      <td colspan='2'>點名人員</td>
+      <td tal:repeat='item python: view.context.getChildNodes()'></td>
+    </tr>
+
     <tal:repeat repeat='student python: item'>
       <tr>
         <td style='text-align: center'>${python: student[1]}</td>
         <td style='text-align: center'>
-            ${python: student[0]}
+            ${python: student[0]}<tal:cond condition="python: course == '職業安全管理師' or course == '職業衛生管理師'">${python:'(%s)' % student[3] if student[3] else ''}</tal:cond>
         </td>
         <td tal:condition="python: student[2] == 0 or student[2] == 1  or student[2] == 2 or student[2] == 3 or student[2] == 4" 
             tal:repeat="i python: range(courseLen) "></td>
         <td tal:condition="python: student[2] == 5" colspan="${courseLen}" style='text-align: center'>未到訓</td>
-        <td tal:condition="python: student[2] == 6" colspan="${courseLen}" style='text-align: center'>退訓訓</td>
+        <td tal:condition="python: student[2] == 6" colspan="${courseLen}" style='text-align: center'>退訓</td>
       </tr>
     </tal:repeat>
   </table>
-
+</div>
 
 </body>
 </html>
