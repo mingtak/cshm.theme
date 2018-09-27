@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<style>
+.btn{
+    background-color: #07689f;
+    display: inline-block;
+    padding: 8px 10px;
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+    font-size: 18px;
+}
+.btn:hover{
+   text-decoration: none;
+   color: #fff;
+   border: none;
+}
+</style>
+
+<h3>主旨: ${view/title}</h3>
+<h3>發文字號: ${view/code}</h3>
+<h3>發文日期: ${view/date}</h3>
+<h3>收件人: ${view/recipient}</h3>
+<h3>說明: </h3>
+<ul style='list-style: none'>
+ <li><h4>${view/detail_1}</h4></li>
+ <li><h4>${view/detail_2}</h4></li>
+ <li><h4>${view/detail_3}</h4></li>
+ <li><h4>${view/detail_4}</h4></li>
+ <li><h4>${view/detail_5}</h4></li>
+ <li><h4>${view/detail_6}</h4></li>
+ <li><h4>${view/detail_7}</h4></li>
+ <li><h4>${view/detail_8}</h4></li>
+ <li><h4>${view/detail_9}</h4></li>
+ <li><h4>${view/detail_10}</h4></li>
+</ul>
+<a href="${python: portal_url + '/download_official_doc?uid=%s&mode=official' %view.uid}" class='btn'>下載</a>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+

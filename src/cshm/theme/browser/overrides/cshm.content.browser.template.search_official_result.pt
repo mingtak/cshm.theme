@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <td>主旨</td>
+    <td>文號</td>
+    <td>收件人</td>
+    <td>日期</td>
+  </tr>
+  <tr tal:repeat="item view/data">
+    <td>${python: item[0]}</td>
+    <td>${python: item[1]}</td>
+    <td>${python: item[3]}</td>
+    <td>${python: item[2]}</td>
+  </tr>
+</table>
