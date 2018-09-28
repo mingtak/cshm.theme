@@ -31,57 +31,24 @@ a{
     text-decoration: none !important;
 }
 
-.sample_list{
-    font-size: 18px;
-    padding: 5px;
-}
-.sample_list li{
-    cursor: pointer;
-}
-.sample_list a{
-    float: right;
-}
 </style>
 
-<div class='col-md-3 signature_sample'>
-  <h3>個人範本</h3>
-  <hr>
-  <ul class='sample_list'>
-    <tal:rep repeat="item view/sample">
-      <li tal:condition="python: item[2]" data-id='${python: item[0]}'>
-        ${python: item[1]} 
-        <a href="${portal_url}/sql_signature_sample?action=delect&id=${python: item[0]}">刪除</a>
-      </li>
-    </tal:rep>
-  </ul>
-  <br>
-  <h3>公用範本</h3>
-  <hr>
-  <ul class='sample_list'>
-    <tal:rep repeat="item view/sample">
-      <li tal:condition="not: python: item[2]" data-id='${python: item[0]}'>
-        ${python: item[1]}
-      </li>
-    </tal:rep>
-  </ul>
-</div>
-
-<form action='modify_signature' method='post' class='col-md-9'>
-<table tal:define='item python: view.result[0]'>
+<form action='add_signature_sample' method='post'>
+<table style='width: 70%;margin: auto'>
     <tr>
-        <th colspan="2" style='text-align: center;padding: 16px 0;font-size: 20px;border: 1px solid #999'>簽呈修改</th>
+        <th colspan="2" style='text-align: center;padding: 16px 0;font-size: 20px;border: 1px solid #999'>新增範本</th>
     </tr>
     <tr>
-      <td>簽呈字號</td>
-      <td>          
-          年度：${python: item[7]}
-          簽呈編號：<tal:rep repeat="i python: range(4 - len(str(view.result[0][8])))">0</tal:rep>${python: item[8]}
-      </td>
+        <td>範本名稱</td>
+        <td>
+            <input type='text' name='sample_name' required>
+        </td>
     </tr>
     <tr>
         <td>簽呈分類</td>
         <td>
-            <select name='category' id='category'> 
+            <select name='category' required id='category'> 
+                <option value=''></option>
                 <option value="訓練業務_考核_工作考核">訓練業務_考核_工作考核</option>
                 <option value="訓練業務_公文簽辦_簽稿併陳">訓練業務_公文簽辦_簽稿併陳</option>
                 <option value="訓練業務_證明_相關證明">訓練業務_證明_相關證明</option>
@@ -122,116 +89,46 @@ a{
         </td>
     </tr>
     <tr>
-        <td>簽呈日期</td>
-        <td>
-            <input type="date" name="date" value="${python: item[4]}">
-        </td>
-    </tr>
-    <tr>
-        <td>速別</td>
-        <td>
-            <select name="type" id="type">
-                <option value="普通件">普通件</option>
-                <option value="最速件">最速件</option>
-                <option value="速效">速件</option>
-                <option value="限定時效">限定時效</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td>會辦部門</td>
-        <td>
-            <select name="department" id="department">
-                <option value=''>   </option>
-                <option value="教育訓練處">教育訓練處</option>
-                <option value="行政服務處">行政服務處</option>
-                <option value="技術服務處">技術服務處</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
         <td>主旨</td>
         <td>
-            <textarea name="title" id="title" cols="30" rows="3" required >${python: item[6]}</textarea>
+            <textarea name="title" id="title" cols="30" rows="3" required></textarea>
         </td>
     </tr>
     <tr>
         <td>說明一</td>
         <td>
-            <textarea name="detail_1" id="detail_1" cols="30" rows="3" >${python: item[9]}</textarea>
+            <textarea name="detail_1" id="detail_1" cols="30" rows="3"></textarea>
         </td>
     </tr>
     <tr>
         <td>說明二</td>
         <td>
-            <textarea name="detail_2" id="detail_2" cols="30" rows="3" >${python: item[10]}</textarea>
+            <textarea name="detail_2" id="detail_2" cols="30" rows="3"></textarea>
         </td>
     </tr>
     <tr>
         <td>說明三</td>
         <td>
-            <textarea name="detail_3" id="detail_3" cols="30" rows="3">${python: item[11]}</textarea>
+            <textarea name="detail_3" id="detail_3" cols="30" rows="3"></textarea>
         </td>
     </tr>
     <tr>
         <td>說明四</td>
         <td>
-            <textarea name="detail_4" id="detail_4" cols="30" rows="3">${python: item[12]}</textarea>
+            <textarea name="detail_4" id="detail_4" cols="30" rows="3"></textarea>
         </td>
     </tr>
     <tr>
         <td colspan='2' style='text-align: center'>
-          <input type='hidden' value='${python: item[0]}' name='id'>
           <button>送出</button>
         </td>
     </tr>
 </table>
 </form>
-
-<div style='text-align:center;margin-top: 20px'>
+<div style='text-align:center;margin-top: 20px' class='col-md-12'>
   <button id='back' onclick="location.href='${portal_url}/signature_view'">回上一頁</button>
 </div>
 
-<script>
-$(function(){
-    $('#category option').each(function(){
-        if($(this).val() == '${python: view.result[0][2]}'){
-            $(this).prop('selected', true)
-        }
-    })
-    $('#type option').each(function(){
-        if($(this).val() == '${python: view.result[0][3]}'){
-            $(this).prop('selected', true)
-        }
-    })
-    $('#department option').each(function(){
-        if($(this).val() == '${python: view.result[0][5]}'){
-            $(this).prop('selected', true)
-        }
-    })
-    $('.signature_sample li').click(function(){
-        id = $(this).data()['id']
-        data = {'id': id}
-        $.ajax({
-            method: 'post',
-            url: '${portal_url}/sql_signature_sample?action=search',
-            data: data,
-            success: function(rep){
-                rep = JSON.parse(rep)
-                $('#category').val(rep['category'])
-                $('#title').val(rep['title'])
-                $('#detail_1').val(rep['detail_1'])
-                $('#detail_2').val(rep['detail_2'])
-                $('#detail_3').val(rep['detail_3'])
-                $('#detail_4').val(rep['detail_4'])
-            }
-        })
-    })
-    $('.sample_list a').click(function(){
-        $(this).parent().remove()
-    })
-})
-</script>
 
 </metal:content-core>
 </metal:content-core>

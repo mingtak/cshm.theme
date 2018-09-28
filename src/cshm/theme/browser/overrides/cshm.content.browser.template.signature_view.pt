@@ -26,7 +26,8 @@ a{
 </style>
 
 
-<button onclick="location.href='${portal_url}/add_signature'">新增</button>
+<button onclick="location.href='${portal_url}/add_signature'">新增簽呈</button>
+<button onclick="location.href='${portal_url}/add_signature_sample'">新增範本</button>
 <br><br>
 
 <table>
@@ -35,7 +36,7 @@ a{
         <td>編號</td>
         <td>速別</td>
         <td>簽呈日期</td>
-        <td>主旨</td>
+        <td style='width: 700px'>主旨</td>
         <td>承辦人</td>
         <td>狀態</td>
         <td>修改</td>

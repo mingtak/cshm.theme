@@ -23,16 +23,59 @@ textarea{
 td{
     vertical-align: middle !important;
 }
+ul{
+    list-style: none;
+}
+a{
+    border: none !important;
+    text-decoration: none !important;
+}
+.sample_list{
+    font-size: 18px;
+    padding: 5px;
+}
+.sample_list li{
+    cursor: pointer;
+}
+.sample_list a{
+    float: right;
+}
+
 </style>
-<form action='add_signature' method='post'>
-<table style='width: 65%;margin:auto'>
+
+<div class='col-md-3 signature_sample'>
+  <h3>個人範本 </h3>
+  <hr>
+  <ul class='sample_list'>
+    <tal:rep repeat="item view/sample">
+      <li tal:condition="python: item[2]" data-id='${python: item[0]}'>
+        ${python: item[1]}
+        <a href="${portal_url}/sql_signature_sample?action=delect&id=${python: item[0]}">刪除</a>
+      </li>
+    </tal:rep>
+  </ul>
+  <br>
+  <h3>公用範本</h3>
+  <hr>
+  <ul class='sample_list'>
+    <tal:rep repeat="item view/sample">
+      <li tal:condition="not: python: item[2]" data-id='${python: item[0]}'>
+        ${python: item[1]}
+      </li>
+    </tal:rep>
+  </ul>
+</div>
+
+
+<form action='add_signature' method='post' class='col-md-9'>
+<table>
     <tr>
         <th colspan="2" style='text-align: center;padding: 16px 0;font-size: 20px;border: 1px solid #999'>新增簽呈</th>
     </tr>
     <tr>
         <td>簽呈分類</td>
         <td>
-            <select name='category' required> 
+            <select name='category' required id='category'> 
                 <option value=''>   </option>
                 <option value="訓練業務_考核_工作考核">訓練業務_考核_工作考核</option>
                 <option value="訓練業務_公文簽辦_簽稿併陳">訓練業務_公文簽辦_簽稿併陳</option>
@@ -84,9 +127,9 @@ td{
         <td>
             <select name="type" id="">
                 <option value="普通件">普通件</option>
-                <option value="">最速件</option>
-                <option value="">速件</option>
-                <option value="">限定時效</option>
+                <option value="最速件">最速件</option>
+                <option value="速件">速件</option>
+                <option value="限定時效">限定時效</option>
             </select>
         </td>
     </tr>
@@ -104,31 +147,31 @@ td{
     <tr>
         <td>主旨</td>
         <td>
-            <textarea name="title" id="" cols="30" rows="3" required></textarea>
+            <textarea name="title" id="title" cols="30" rows="3" required></textarea>
         </td>
     </tr>
     <tr>
         <td>說明一</td>
         <td>
-            <textarea name="detail_1" id="" cols="30" rows="3"></textarea>
+            <textarea name="detail_1" id="detail_1" cols="30" rows="3"></textarea>
         </td>
     </tr>
     <tr>
         <td>說明二</td>
         <td>
-            <textarea name="detail_2" id="" cols="30" rows="3"></textarea>
+            <textarea name="detail_2" id="detail_2" cols="30" rows="3"></textarea>
         </td>
     </tr>
     <tr>
         <td>說明三</td>
         <td>
-            <textarea name="detail_3" id="" cols="30" rows="3"></textarea>
+            <textarea name="detail_3" id="detail_3" cols="30" rows="3"></textarea>
         </td>
     </tr>
     <tr>
         <td>說明四</td>
         <td>
-            <textarea name="detail_4" id="" cols="30" rows="3"></textarea>
+            <textarea name="detail_4" id="detail_4" cols="30" rows="3"></textarea>
         </td>
     </tr>
     <tr>
@@ -138,9 +181,35 @@ td{
     </tr>
 </table>
 </form>
-<div style='text-align:center;margin-top: 20px'>
+<div style='text-align:center;margin-top: 20px' class='col-md-12'>
   <button id='back' onclick="location.href='${portal_url}/signature_view'">回上一頁</button>
 </div>
+
+<script>
+$(function(){
+    $('.signature_sample li').click(function(){
+        id = $(this).data()['id']
+        data = {'id': id}
+        $.ajax({
+            method: 'post',
+            url: '${portal_url}/sql_signature_sample?action=search',
+            data: data,
+            success: function(rep){
+                rep = JSON.parse(rep)
+                $('#category').val(rep['category'])
+                $('#title').val(rep['title'])
+                $('#detail_1').val(rep['detail_1'])
+                $('#detail_2').val(rep['detail_2'])
+                $('#detail_3').val(rep['detail_3'])
+                $('#detail_4').val(rep['detail_4'])
+            }
+        })
+    })
+    $('.sample_list a').click(function(){
+        $(this).parent().remove()
+    })
+})
+</script>
 
 </metal:content-core>
 </metal:content-core>
