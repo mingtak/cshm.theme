@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<?python
+from plone import api
+user = api.user.get_current().getUserName()
+?>
+<style>
+td{
+    vertical-align: middle !important;
+}
+a{
+    border: none !important;
+    text-decoration: none !important;
+}
+</style>
+
+
+<button onclick="location.href='${portal_url}/add_signature'">新增</button>
+<br><br>
+
+<table>
+    <tr>
+        <td>年度</td>
+        <td>編號</td>
+        <td>速別</td>
+        <td>簽呈日期</td>
+        <td>主旨</td>
+        <td>承辦人</td>
+        <td>狀態</td>
+        <td>修改</td>
+        <td>套印</td>
+        <td>管理</td>
+        <td>批准</td>
+    </tr>
+    <tr tal:repeat="item view/result">
+        <td>${python: item[7]}</td>
+        <td><tal:rep repeat="i python: range(4 - len(str(view.result[0][8])))">0</tal:rep>${python: item[8]}</td>
+        <td>${python: item[3]}</td>
+        <td>${python: item[4]}</td>
+        <td>${python: item[6]}</td>
+        <td>${python: item[1]}</td>
+        <td>${python: item[13]}</td>
+        <td>
+            <a href='${portal_url}/modify_signature?id=${python: item[0]}' tal:condition="python: item[1] == user">修改</a>
+        </td>
+        <td>
+            <a href='${portal_url}/download_signature_doc?id=${python: item[0]}&type=1' target='_blank'>格式一</a>
+            <br>
+            <a href='${portal_url}/download_signature_doc?id=${python: item[0]}&type=2' target='_blank'>格式二</a>
+        </td>
+        <td>
+            <a href='${portal_url}/manage_signature?id=${python: item[0]}'>狀態管理</a>
+        </td>
+        <td>
+             <button onclick="location.href='${portal_url}/manage_signature?id=${python: item[0]}&status=已核准'">設為已核准</button>
+        </td>
+    </tr>
+</table>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+

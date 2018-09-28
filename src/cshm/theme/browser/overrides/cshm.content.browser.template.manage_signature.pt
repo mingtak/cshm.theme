@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<style>
+textarea{
+    min-height: unset;
+    height: unset;
+}
+td{
+    vertical-align: middle !important;
+}
+</style>
+
+
+<form action='manage_signature' method='post'>
+<table style='width: 65%;margin:auto' tal:define="item python: view.result[0]">
+    <tr>
+        <th colspan="2" style='text-align: center;padding: 16px 0;font-size: 20px;border: 1px solid #999'>簽呈分文/狀態修改</th>
+    </tr>
+    <tr>
+        <td>簽呈字號</td>
+        <td>
+          年度：${python: item[7]}
+          簽呈編號：<tal:rep repeat="i python: range(4 - len(str(view.result[0][8])))">0</tal:rep>${python: item[8]}
+        </td>
+    </tr>
+    <tr>
+        <td>簽呈分類</td>
+        <td>
+           ${python: item[2]}
+        </td>
+    </tr>
+    <tr>
+        <td>簽呈日期</td>
+        <td>
+           ${python: item[4]}
+        </td>
+    </tr>
+    <tr>
+        <td>速別</td>
+        <td>
+          ${python: item[3]}
+        </td>
+    </tr>
+    <tr>
+        <td>會辦部門</td>
+        <td>
+          ${python: item[5]}
+        </td>
+    </tr>
+    <tr>
+        <td>承辦人</td>
+        <td>
+          ${python: item[1]}
+        </td>
+    </tr>
+    <tr>
+        <td>批核狀態</td>
+        <td>
+          <select id='status' name='status'>
+            <option value="回辦">回辦</option>
+            <option value="已核准">已核准</option>
+            <option value="取消">取消</option>
+            <option value="尚未核准">尚未核准</option>
+          </select>
+          <input value='${python: item[0]}' name='id' type='hidden'>
+          <button>送出</button>
+        </td>
+    </tr>
+    <tr>
+        <td>主旨</td>
+        <td>
+          ${python: item[6]}
+        </td>
+    </tr>
+</table>
+</form>
+<div style='text-align:center;margin-top: 20px'>
+  <button id='back' onclick="location.href='${portal_url}/signature_view'">回上一頁</button>
+</div>
+<script>
+$(function(){
+    $('#status option').each(function(){
+        if($(this).val() == '${python: view.result[0][13]}'){
+            $(this).prop('selected', true)
+        }
+    })
+})
+</script>
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+

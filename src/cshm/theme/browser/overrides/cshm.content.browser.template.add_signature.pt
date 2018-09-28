@@ -1,0 +1,150 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<?python
+from datetime import datetime
+now = datetime.now().strftime('%Y-%m-%d')
+?>
+<style>
+textarea{
+    min-height: unset;
+    height: unset;
+}
+td{
+    vertical-align: middle !important;
+}
+</style>
+<form action='add_signature' method='post'>
+<table style='width: 65%;margin:auto'>
+    <tr>
+        <th colspan="2" style='text-align: center;padding: 16px 0;font-size: 20px;border: 1px solid #999'>新增簽呈</th>
+    </tr>
+    <tr>
+        <td>簽呈分類</td>
+        <td>
+            <select name='category' required> 
+                <option value=''>   </option>
+                <option value="訓練業務_考核_工作考核">訓練業務_考核_工作考核</option>
+                <option value="訓練業務_公文簽辦_簽稿併陳">訓練業務_公文簽辦_簽稿併陳</option>
+                <option value="訓練業務_證明_相關證明">訓練業務_證明_相關證明</option>
+                <option value="訓練業務_發證_發證簽">訓練業務_發證_發證簽</option>
+                <option value="訓練業務_發證_先行發證簽">訓練業務_發證_先行發證簽</option>
+                <option value="訓練業務_費用_訓練費用折扣簽">訓練業務_費用_訓練費用折扣簽</option>
+                <option value="訓練業務_費用_辦事處管理費優惠簽">訓練業務_費用_辦事處管理費優惠簽</option>
+                <option value="訓練業務_費用_預支款請領簽">訓練業務_費用_預支款請領簽</option>
+                <option value="訓練業務_專案計畫_報價">訓練業務_專案計畫_報價</option>
+                <option value="訓練業務_專案計畫_專案">訓練業務_專案計畫_專案</option>
+                <option value="訓練業務_專案計畫_計畫案">訓練業務_專案計畫_計畫案</option>
+                <option value="總務會務_印製簽_印製簽">總務會務_印製簽_印製簽</option>
+                <option value="總務會務_盤點簽_盤點簽">總務會務_盤點簽_盤點簽</option>
+                <option value="總務會務_工讀生_獎金">總務會務_工讀生_獎金</option>
+                <option value="總務會務_其他_房屋租賃合約簽">總務會務_其他_房屋租賃合約簽</option>
+                <option value="總務會務_其他_公共關係簽">總務會務_其他_公共關係簽</option>
+                <option value="總務會務_其他_旅遊活動辦理簽">總務會務_其他_旅遊活動辦理簽</option>
+                <option value="總務會務_規範_各項規範">總務會務_規範_各項規範</option>
+                <option value="總務會務_理監事_各項簽呈">總務會務_理監事_各項簽呈</option>
+                <option value="人事業務_人事_到職簽">人事業務_人事_到職簽</option>
+                <option value="人事業務_人事_離職簽">人事業務_人事_離職簽</option>
+                <option value="人事業務_人事_職等調整簽">人事業務_人事_職等調整簽</option>
+                <option value="人事業務_人事_獎勵/懲處簽">人事業務_人事_獎勵/懲處簽</option>
+                <option value="人事業務_人事_特別休假/請假統計簽">人事業務_人事_特別休假/請假統計簽</option>
+                <option value="人事業務_人事_年度上班日簽">人事業務_人事_年度上班日簽</option>
+                <option value="人事業務_人事_員工教育訓練日簽">人事業務_人事_員工教育訓練日簽</option>
+                <option value="人事業務_人事_在職/工作證明簽">人事業務_人事_在職/工作證明簽</option>
+                <option value="人事業務_人事_工作移交簽">人事業務_人事_工作移交簽</option>
+                <option value="人事業務_規範_各項人事規範">人事業務_規範_各項人事規範</option>
+                <option value="財務業務_獎金_各三節獎金簽">財務業務_獎金_各三節獎金簽</option>
+                <option value="財務業務_報表_各財務報表簽">財務業務_報表_各財務報表簽</option>
+                <option value="財務業務_印製_印製簽">財務業務_印製_印製簽</option>
+                <option value="財務業務_退費_退費簽">財務業務_退費_退費簽</option>
+                <option value="其他_工作會議_會議決議執行">其他_工作會議_會議決議執行</option>
+                <option value="其他_一般作業_一般作業">其他_一般作業_一般作業</option>
+                <option value="人事業務_人事_加班簽">人事業務_人事_加班簽</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>簽呈日期</td>
+        <td>
+            <input type="date" name="date" value="${now}">
+        </td>
+    </tr>
+    <tr>
+        <td>速別</td>
+        <td>
+            <select name="type" id="">
+                <option value="普通件">普通件</option>
+                <option value="">最速件</option>
+                <option value="">速件</option>
+                <option value="">限定時效</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>會辦部門</td>
+        <td>
+            <select name="department" id="">
+                <option value=''>   </option>
+                <option value="教育訓練處">教育訓練處</option>
+                <option value="行政服務處">行政服務處</option>
+                <option value="技術服務處">技術服務處</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>主旨</td>
+        <td>
+            <textarea name="title" id="" cols="30" rows="3" required></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>說明一</td>
+        <td>
+            <textarea name="detail_1" id="" cols="30" rows="3"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>說明二</td>
+        <td>
+            <textarea name="detail_2" id="" cols="30" rows="3"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>說明三</td>
+        <td>
+            <textarea name="detail_3" id="" cols="30" rows="3"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>說明四</td>
+        <td>
+            <textarea name="detail_4" id="" cols="30" rows="3"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td colspan='2' style='text-align: center'>
+          <button>送出</button>
+        </td>
+    </tr>
+</table>
+</form>
+<div style='text-align:center;margin-top: 20px'>
+  <button id='back' onclick="location.href='${portal_url}/signature_view'">回上一頁</button>
+</div>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+
