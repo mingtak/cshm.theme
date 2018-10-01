@@ -1,0 +1,27 @@
+<style>
+td{
+    vertical-align: middle !important;
+}
+</style>
+
+
+<table>
+    <tr>
+        <td>年度</td>
+        <td>編號</td>
+        <td>速別</td>
+        <td>簽呈日期</td>
+        <td style='width: 700px'>主旨</td>
+        <td>承辦人</td>
+        <td>狀態</td>
+    </tr>
+    <tr tal:repeat="item view/result">
+        <td>${python: item[7]}</td>
+        <td><tal:rep repeat="i python: range(4 - len(str(view.result[0][8])))">0</tal:rep>${python: item[8]}</td>
+        <td>${python: item[3]}</td>
+        <td>${python: item[4]}</td>
+        <td>${python: item[6]}</td>
+        <td>${python: item[1]}</td>
+        <td>${python: item[13]}</td>
+    </tr>
+</table>

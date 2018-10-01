@@ -1,0 +1,142 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<?python
+from datetime import datetime
+now = datetime.now().strftime('%Y-%m-%d')
+?>
+<button id='back' onclick="location.href='${portal_url}/signature_view'">回上一頁</button>
+<br><br>
+<label>
+<input type='radio' name='type' id='radio1' checked>
+分類查詢：
+</label>
+<select id='year'>
+  <option tal:repeat="year view/yearList" value="${python: year[0]}">${python: year[0]}</option>
+</select>
+
+
+<select id='category'>
+  <option value="訓練業務_考核_工作考核">訓練業務_考核_工作考核</option>
+  <option value="訓練業務_公文簽辦_簽稿併陳">訓練業務_公文簽辦_簽稿併陳</option>
+  <option value="訓練業務_證明_相關證明">訓練業務_證明_相關證明</option>
+  <option value="訓練業務_發證_發證簽">訓練業務_發證_發證簽</option>
+  <option value="訓練業務_發證_先行發證簽">訓練業務_發證_先行發證簽</option>
+  <option value="訓練業務_費用_訓練費用折扣簽">訓練業務_費用_訓練費用折扣簽</option>
+  <option value="訓練業務_費用_辦事處管理費優惠簽">訓練業務_費用_辦事處管理費優惠簽</option>
+                <option value="訓練業務_費用_預支款請領簽">訓練業務_費用_預支款請領簽</option>
+                <option value="訓練業務_專案計畫_報價">訓練業務_專案計畫_報價</option>
+                <option value="訓練業務_專案計畫_專案">訓練業務_專案計畫_專案</option>
+                <option value="訓練業務_專案計畫_計畫案">訓練業務_專案計畫_計畫案</option>
+                <option value="總務會務_印製簽_印製簽">總務會務_印製簽_印製簽</option>
+                <option value="總務會務_盤點簽_盤點簽">總務會務_盤點簽_盤點簽</option>
+                <option value="總務會務_工讀生_獎金">總務會務_工讀生_獎金</option>
+                <option value="總務會務_其他_房屋租賃合約簽">總務會務_其他_房屋租賃合約簽</option>
+                <option value="總務會務_其他_公共關係簽">總務會務_其他_公共關係簽</option>
+                <option value="總務會務_其他_旅遊活動辦理簽">總務會務_其他_旅遊活動辦理簽</option>
+                <option value="總務會務_規範_各項規範">總務會務_規範_各項規範</option>
+                <option value="總務會務_理監事_各項簽呈">總務會務_理監事_各項簽呈</option>
+                <option value="人事業務_人事_到職簽">人事業務_人事_到職簽</option>
+                <option value="人事業務_人事_離職簽">人事業務_人事_離職簽</option>
+                <option value="人事業務_人事_職等調整簽">人事業務_人事_職等調整簽</option>
+                <option value="人事業務_人事_獎勵/懲處簽">人事業務_人事_獎勵/懲處簽</option>
+                <option value="人事業務_人事_特別休假/請假統計簽">人事業務_人事_特別休假/請假統計簽</option>
+                <option value="人事業務_人事_年度上班日簽">人事業務_人事_年度上班日簽</option>
+                <option value="人事業務_人事_員工教育訓練日簽">人事業務_人事_員工教育訓練日簽</option>
+                <option value="人事業務_人事_在職/工作證明簽">人事業務_人事_在職/工作證明簽</option>
+                <option value="人事業務_人事_工作移交簽">人事業務_人事_工作移交簽</option>
+                <option value="人事業務_規範_各項人事規範">人事業務_規範_各項人事規範</option>
+                <option value="財務業務_獎金_各三節獎金簽">財務業務_獎金_各三節獎金簽</option>
+                <option value="財務業務_報表_各財務報表簽">財務業務_報表_各財務報表簽</option>
+                <option value="財務業務_印製_印製簽">財務業務_印製_印製簽</option>
+                <option value="財務業務_退費_退費簽">財務業務_退費_退費簽</option>
+                <option value="其他_工作會議_會議決議執行">其他_工作會議_會議決議執行</option>
+                <option value="其他_一般作業_一般作業">其他_一般作業_一般作業</option>
+                <option value="人事業務_人事_加班簽">人事業務_人事_加班簽</option>
+</select>
+<br><br>
+<span style='color:red;font-size: 16px' id='code_notice'>*編號範例：0004請輸入4,0012請輸入12</span>
+<br>
+<label>
+<input type='radio' name='type' id ='radio2'>
+項目查詢：
+</label>
+<select id='item'>
+  <option value='user'>承辦人</option>
+  <option value='code'>簽呈編號</option>
+  <option value='date'>簽呈日期</option>
+</select>
+<input type='date' id='date' style='display: none;width: 20%' value='${now}'>
+<input type='text' id='kw' style='display: inline;width: 20%' placeholder='關鍵字'>
+<br><br>
+
+<button id='search'>查詢</button>
+<br>
+<div id='result' style='margin-top: 20px'></div>
+
+<script>
+$('#item').change(function(){
+    val = $(this).val()
+    if(val == 'date'){
+        $('#kw').hide()
+        $('#date').show()
+        $('#date').css('display', 'inline')
+    }else{
+        $('#kw').show()
+        $('#date').hide()
+    }
+})
+
+$('#search').click(function(){
+    radio_checked = $('input[type="radio"]:checked')[0].id
+
+    if(radio_checked == 'radio1'){
+        year = $('#year').val()
+        category = $('#category').val()
+        data = {
+            'year':year,
+            'category': category
+        }
+    }else if(radio_checked == 'radio2'){
+        item = $('#item').val()
+        kw = $('#kw').val()
+        if(!kw && item != 'date'){
+            alert('請輸入關鍵字')
+            return
+        }
+        if(item == 'date'){
+            kw = $('#date').val()
+        }
+        data = { 
+            'item':item,
+            'kw': kw
+        }
+    }
+    url = '${portal_url}/search_signature_view'
+    $.ajax({
+        method: 'post',
+        data: data,
+        url: url,
+        success: function(rep){
+            $('#result').html(rep)
+        }
+    })
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+
