@@ -64,6 +64,13 @@ table{
 }
 
 </style>
+  <h1>簽到表：</h1>
+  <button tal:repeat="child view/childNodes" 
+          onclick="location.href='${python: view.context.absolute_url()}/normal_sing_in_report?subject=${child/Title}'">${child/Title}</button>
+
+  <br><br>
+
+  <h1>點名紀錄：</h1>
   <label>
     請選擇個數   總共${view/total_number}位：<input type='number'  id='gap' min="1" value='1'>
   </label>

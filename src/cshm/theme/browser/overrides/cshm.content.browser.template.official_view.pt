@@ -45,7 +45,7 @@
  <li><h4>${view/detail_9}</h4></li>
  <li><h4>${view/detail_10}</h4></li>
 </ul>
-<a href="${python: portal_url + '/download_official_doc?uid=%s&mode=official' %view.uid}" class='btn'>下載</a>
+<a href="${python: portal_url + '/download_official_doc?uid=%s&' %view.uid}" class='btn'>下載</a>
 
 </metal:content-core>
 </metal:content-core>

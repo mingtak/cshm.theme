@@ -181,7 +181,7 @@ a{
     </tr>
 </table>
 </form>
-<div style='text-align:center;margin-top: 20px' class='col-md-12'>
+<div style='text-align:center;margin: 20px' class='col-md-12'>
   <button id='back' onclick="location.href='${portal_url}/signature_view'">回上一頁</button>
 </div>
 

@@ -77,6 +77,7 @@ table{
       <p>簽名確認</p>
     </div>
   </div>
+<br>
   <table  tal:define="courseLen python: len(view.courseList)"
           tal:repeat="item view/data"
           id='table${repeat/item/number}' 

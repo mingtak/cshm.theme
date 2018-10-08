@@ -65,7 +65,7 @@ now = datetime.now().strftime('%Y-%m-%d')
                 <option value="人事業務_人事_加班簽">人事業務_人事_加班簽</option>
 </select>
 <br><br>
-<span style='color:red;font-size: 16px' id='code_notice'>*編號範例：0004請輸入4,0012請輸入12</span>
+<span style='color:red;font-size: 16px' id='code_notice'>*編號00004請輸入4,編號00012請輸入12</span>
 <br>
 <label>
 <input type='radio' name='type' id ='radio2'>

@@ -188,10 +188,9 @@ a{
 </table>
 </form>
 
-<div style='text-align:center;margin-top: 20px'>
+<div style='text-align:center;margin: 20px 0' class='col-md-12'>
   <button id='back' onclick="location.href='${portal_url}/signature_view'">回上一頁</button>
 </div>
-
 <script>
 $(function(){
     $('#category option').each(function(){

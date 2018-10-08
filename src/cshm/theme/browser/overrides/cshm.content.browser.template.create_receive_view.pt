@@ -1,0 +1,161 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<?python
+from datetime import datetime
+now = datetime.now().strftime('%Y-%m-%d')
+?>
+<style>
+textarea{
+    min-height: unset;
+    height: unset;
+}
+td{
+    vertical-align: middle !important;
+}
+ul{
+    list-style: none;
+}
+a{
+    border: none !important;
+    text-decoration: none !important;
+}
+.sample_list{
+    font-size: 18px;
+    padding: 5px;
+}
+.sample_list li{
+    cursor: pointer;
+}
+.sample_list a{
+    float: right;
+}
+
+</style>
+
+<form action='create_receive_view' method='post'>
+<table>
+    <tr>
+        <th colspan="2" style='text-align: center;padding: 16px 0;font-size: 20px;border: 1px solid #999'>登錄收文</th>
+    </tr>
+    <tr>
+        <td>收文日期</td>
+        <td>
+            <input type="date" name="date" value="${now}">
+        </td>
+    </tr>
+    <tr>
+        <td>課程編號</td>
+        <td>
+          <select name="course">
+            <option value=""></option>
+            <option value="A001職業安全管理師">A001職業安全管理師</option>
+            <option value="A003職業衛生管理師">A003職業衛生管理師</option>
+            <option value="A005職業安全衛生管理員">A005職業安全衛生管理員</option>
+          </select>
+        </td>
+    </tr>
+    <tr>
+        <td>期別</td>
+        <td>
+          <input type='number' name='period'>
+        </td>
+    </tr>
+    <tr>
+        <td>類別</td>
+        <td>
+            <select name="type">
+                <option value=''>   </option>
+                <option value="其他公文">其他公文</option>
+                <option value="核准開班公文">核准開班公文</option>
+                <option value="變更公文">變更公文</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>簽辦狀態</td>
+        <td>
+            <select name="type">
+                <option value=''>   </option>
+                <option value="未簽辦">未簽辦</option>
+                <option value="已簽辦">已簽辦</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>發文單位</td>
+        <td>
+            <input type='text' name='official_unit'>
+        </td>
+    </tr>
+    <tr>
+        <td>公文日期</td>
+        <td>
+          <input type='date' name='official_date'>
+        </td>
+    </tr>
+    <tr>
+        <td>公文號碼</td>
+        <td>
+          <input type='type' name='official_code'>
+        </td>
+    </tr>
+    <tr>
+        <td>內容</td>
+        <td>
+            <textarea name="msg" cols="30" rows="3"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td colspan='2' style='text-align: center'>
+          <button>送出</button>
+        </td>
+    </tr>
+</table>
+</form>
+<div style='text-align:center;margin-top: 20px' class='col-md-12'>
+  <button id='back' onclick="location.href='${portal_url}/signature_view'">回上一頁</button>
+</div>
+
+<script>
+$(function(){
+    $('.signature_sample li').click(function(){
+        id = $(this).data()['id']
+        data = {'id': id}
+        $.ajax({
+            method: 'post',
+            url: '${portal_url}/sql_signature_sample?action=search',
+            data: data,
+            success: function(rep){
+                rep = JSON.parse(rep)
+                $('#category').val(rep['category'])
+                $('#title').val(rep['title'])
+                $('#detail_1').val(rep['detail_1'])
+                $('#detail_2').val(rep['detail_2'])
+                $('#detail_3').val(rep['detail_3'])
+                $('#detail_4').val(rep['detail_4'])
+            }
+        })
+    })
+    $('.sample_list a').click(function(){
+        $(this).parent().remove()
+    })
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+
