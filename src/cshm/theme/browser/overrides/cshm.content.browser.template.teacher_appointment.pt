@@ -16,15 +16,15 @@
 <div class="col-md-6">
 <h3>教師聘書 套表作業</h3>
 <form action="${context/absolute_url}/@@teacher_appointment" method="post">
-    聘書編號: <input type='text' name='appointment_no' /><br>
-    教師姓名: <input type='text' name='teacher_name' /><br>
-    聘任類別: <input type='text' name='type' /><br>
-    聘任領域、科目: <input type='text' name='subject' /><br>
-    聘任日期(起): <input type='text' name='start_date' /><br>
-    聘任日期(迄): <input type='text' name='end_date' /><br>
-    其他相關事項: <textarea type='text' name='memo' /><br>
-    理事長姓名: <input type='text' name='manager' /><br>
-    發聘日期: <input type='text' name='appointment_date' /><br>
+    教師姓名: <select name='teacher_name'>
+                 <option tal:repeat="teacher python: view.teacherList" values='${teacher}'>${teacher}</option>
+              </select><br>
+    類別：<select name='type'>
+            <option value='inner'>室內空品版</option>
+            <option value='organization'>本會版</option>
+            <option value='not_organization'>非本會版</option>
+          </select>
+
     <input type="submit" name="submit" value="送出"  class="btn btn-info" />
 </form>
 </div></div>
