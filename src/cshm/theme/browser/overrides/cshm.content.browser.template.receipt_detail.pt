@@ -65,12 +65,12 @@ h4{
     <div class='inline w400'>
       <h4 class='w150'>審核狀態</h4>
       <span tal:condition="python: obj['is_cancel'] == 1" style='color: black'>已撤銷</span>
-      <span tal:condition="python: obj['is_check'] == 0 and obj['is_cancel'] == 0" style='color: red'> 尚未審核</span>
-      <span tal:condition="python: obj['is_check'] == 1 and obj['is_cancel'] == 0" style='color: blue'> 已審核</span>
+      <span tal:condition="python: obj['one_check'] == 0 and obj['is_cancel'] == 0" style='color: red'> 第一次審核</span>
+      <span tal:condition="python: obj['two_check'] == 1 and obj['is_cancel'] == 0" style='color: blue'> 第二次已審核</span>
     </div>
     <div class='inline w400'>
       <h4 class='w150'>審核日期</h4>
-      <span>${python: obj['check_date']}</span>
+      <span>${python: obj['two_check_date'] if obj['two_check_date'] else obj['onw_check_date']}</span>
     </div>
     <div class='inline w400'>
       <h4 class='w150'>審核者</h4>

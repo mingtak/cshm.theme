@@ -136,6 +136,7 @@
     <!-- Content header -->
     <drop css:theme="#portal-top" />
     <drop css:theme="#portal-footer-wrapper" />
+
 <after css:theme-children="body" css:content-children=".js-in-body" />
   </rules>
 

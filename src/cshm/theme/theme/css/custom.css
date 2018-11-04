@@ -72,7 +72,7 @@ body { color: #555; font-size: 15px; }
 footer .envor-widget-inner { color: #aaa; }
 .envor-top-bar .contacts { color: #ccc; }
 
-input[type=text], input[type=email], input[type=file], input[type=tel], input[type=url], input[type=password], select, textarea {
+input[type=text], input[type=number], input[type=email], input[type=file], input[type=tel], input[type=url], input[type=password], select, textarea{
     background-color: #ccc;
     border: 1px solid #333;
 }
@@ -85,5 +85,30 @@ input[type=text], input[type=email], input[type=file], input[type=tel], input[ty
 ::-ms-input-placeholder { 
     color: #777;
 }
+.group-reg {color:#47d}
 
+/* template-echelon_detail */
+.template-echelon_detail .section-title {
+    background: #6ce9ca;
+    margin:20px;
+    padding:10px;
+    text-align: center;
+    color:#1960db;
+}
 
+.template-echelon_detail .section-body {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+}
+
+.template-echelon_detail table {
+    width:100%;
+}
+
+.template-echelon_detail th, .template-echelon_detail td {
+    border: solid 1px #555;
+    padding:5px;
+}
+
+.template-echelon_detail table a {color:blue}

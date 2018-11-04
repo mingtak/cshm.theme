@@ -1,0 +1,157 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://www.vue.org/v-bind"
+    xmlns:v-on="http://www.vue.org/v-bind"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+<metal:javascriptslot fill-slot="javascript_head_slot">
+</metal:javascriptslot>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<div class="row">
+<div class="section-title col col-md-12">
+基本資訊
+</div>
+
+<div class="section-body col col-md-12">
+    <div class="row">
+        <div class="col col-md-3">
+            上課時數
+        </div>
+        <div class="col col-md-9">
+            ${context/courseHours} 小時
+        </div>  
+    </div>
+
+    <div class="row">
+        <div class="col col-md-3">
+            上課資格
+        </div>   
+        <div class="col col-md-9">
+            ${context/qualification}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-md-3">
+            回訓說明
+        </div>   
+        <div class="col col-md-9" tal:content="structure context/reTrainingDetail/raw|nothing">
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+<div class="section-title col col-md-12">
+    開課資料一覽表
+</div>
+
+<?python
+from plone import api
+course = context.getParentNode().getChildNodes()
+echelon = context.getChildNodes()
+?>
+<div class="section-body col col-md-12">
+    <div class="row">
+        <div class="col col-md-12">
+<p> ※點選「開課資訊」可查看該梯次上課日期、訓練費用、繳費方式、所需文件、報名期限、報名方式等資訊。</p>
+<table>
+<tr class="course-head">
+  <th>地區</th>
+  <th>時段</th>
+  <th>開課日期</th>
+  <th>開課狀態</th>
+  <th>檢視</th>
+</tr>
+<tr class="course-body" tal:repeat="item course">
+  <td>${item/trainingCenter/to_object/title}</td>
+  <td i18n:translate="">${item/duringTime}</td>
+  <td>${python:item.courseStart}</td>
+  <td i18n:translate="">${item/classStatus}</td>
+  <td><a href="${item/absolute_url}/@@echelon_detail" target="_blank">開課資訊</a></td>
+</tr>
+</table>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<div class="row">
+<div class="section-title col col-md-12">
+    課程簡介
+</div>
+
+<div class="section-body col col-md-12">
+    <div class="row">
+        <div class="col col-md-12" tal:content="structure context/courseIntro/raw|nothing" >
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<div class="row">
+<div class="section-title col col-md-12">
+    測驗方式
+</div>
+
+<div class="section-body col col-md-12">
+    <div class="row">
+        <div class="col col-md-12" tal:content="structure context/testMethod/raw|nothing">
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="row">
+<div class="section-title col col-md-12">
+    課程內容
+</div>
+
+<div class="section-body col col-md-12">
+    <div class="row">
+        <div class="col col-md-12">
+
+
+<table>
+<tr class="course-head">
+  <th> / </th>
+  <th> / </th>
+  <th>上課科目</th>
+  <th>時數</th>
+</tr>
+<tr class="course-body" tal:repeat="item echelon">
+  <td>${item/id/upper}</td>
+  <td>${repeat/item/number}</td>
+  <td>${item/title}</td>
+  <td>${item/hours}</td>
+</tr>
+</table>
+
+
+
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

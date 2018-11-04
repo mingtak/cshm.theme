@@ -27,7 +27,7 @@
   <li>時段: <span i18n:translate="">${context/duringTime}</span></li>
   <li>上課地點: ${context/trainingCenter/to_object/title}</li>
 </ul>
-<h4>公司團報請先下載<a target="_blank" href="@@download_group_reg">團體報名表</a>，填寫後<a href="@@group_reg_course">上傳報名表</a> </h4>
+<h4>公司團報請先下載<a class="group-reg" target="_blank" href="@@download_group_reg">團體報名表</a>，填寫後<a class="group-reg" href="@@group_reg_course">上傳報名表</a> </h4>
 <hr>
 <h4>個人資料</h4>
     <form action="${view/request/ACTUAL_URL}" method="post">
@@ -50,6 +50,13 @@
         <option value="7">國小</option>
         <option value="8">其他</option>
     </select>
+</p>
+<p>
+    <input type='text' placeholder='學校名稱' name='edu_school' required/>
+    <input type='text' placeholder='科系' name='edu_major' required/>
+    畢業年月：<input type='date' name='edu_date' required/>
+</p>
+<p>
     <select name="industry" required class="industry">
         <option value="">----請選擇行業----</option>
         <option value="銀行業">銀行業</option>
@@ -77,26 +84,43 @@
     </label>
 </p>
 
+<p>聯絡地址</p>
 <p>
-
-       <select name="city" tal:define="cityList view/getCityList" v-model="city">
+       <select name="city" tal:define="cityList view/getCityList" v-model="city" required>
          <option value="">請選擇縣市</option>
          <option tal:repeat="item python:cityList.split(',')"
                  value="${item}">${item}</option>
        </select>
-       <select name="zip" tal:define="distList view/getDistList" v-model="zip">
+       <select name="zip" tal:define="distList view/getDistList" v-model="zip" required>
          <option value="" selected>鄉鎮市區</option>
          <option v-for="item in getZIP('city')"
                  v-bind:value="item.split(',')[1]">{{item.split(',')[0]}}
          </option>
        </select>
-       <input name="address" type="text" v-model="address" placeholder="聯絡地址"/>
+</p>
+<p>
+       <input name='address_code' type='number' style='' min='0' placeholder='郵遞區號' required/>
+       <input name="address" type="text" v-model="address" placeholder="聯絡地址" required/>
 </p>
 
-
-
-
-
+<p>戶籍地址</p>
+<p>
+       <select name="home_city" tal:define="cityList view/getCityList" v-model="home_city" required>
+         <option value="">請選擇縣市</option>
+         <option tal:repeat="item python:cityList.split(',')"
+                 value="${item}">${item}</option>
+       </select>
+       <select name="home_zip" tal:define="distList view/getDistList" v-model="home_zip" required>
+         <option value="" selected>鄉鎮市區</option>
+         <option v-for="item in getHomeZIP('city')"
+                 v-bind:value="item.split(',')[1]">{{item.split(',')[0]}}
+         </option>
+       </select>
+</p>
+<p>
+       <input name='home_address_code' type='number' style='' min='0' placeholder='郵遞區號' required/>
+       <input name="home_address" type="text" placeholder="聯絡地址" required/>
+</p>
 
 <p>      <input type="email" name="priv_email" id="priv_email" value="" placeholder="電子郵件(私人)" required></p>
 <p>      <input type="email" name="com_email" id="com_email" value="" placeholder="電子郵件(公司)"></p>
@@ -110,6 +134,11 @@
                 v-model="company_name" v-on:input="getTaxNo($event)"></p>
 <p>      <input type="text" name="company_address" id="company_address" value="" placeholder="公司地址" v-bind:value="company_address"></p>
 <p>      <input type="text" name="job_title" id="job_title" value="" placeholder="職稱"></p>
+<p>
+       <input type='text' name='company_undertaker' placeholder='承辦人' />
+       <input type='text' name='company_undertaker_job' placeholder='職稱' />
+       <input type='number' name='company_undertaker_phone' placeholder='電話' />
+</p>
 <hr>
 <h4>收據資料</h4>
 <p>      <input type="text" name="invoice_tax_no" id="invoice_tax_no" value="" placeholder="統一編號"
@@ -156,6 +185,7 @@
 <metal:js fill-slot="javascript_in_body_slot">
 
 <div class="js-in-body">
+
 <script>
 $(function(){
     $('.check_print').hide()
@@ -180,6 +210,10 @@ var app = new Vue({
       city: '',
       zip: '',
       address: '',
+      home_city: '',
+      home_zip: '',
+      home_address: '',
+
       distList: "${python:view.getDistList().replace('\n', '\t')}".split('\t')
     },
     methods: {
@@ -221,6 +255,19 @@ var app = new Vue({
       },
       getZIP: function(cityStr){
           city = this.city
+          for(i=0; i<this.distList.length; i++){
+              if(this.distList[i].startsWith(city)){
+                  distList = this.distList[i].split(':')[1].split('|')
+                  zips = []
+                  for(j=0; j<distList.length; j++){
+                      zips.push(distList[j])
+                  }
+                  return zips
+              }
+          }
+      },
+      getHomeZIP: function(cityStr){
+          city = this.home_city
           for(i=0; i<this.distList.length; i++){
               if(this.distList[i].startsWith(city)){
                   distList = this.distList[i].split(':')[1].split('|')

@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<style>
+table>tbody>tr>th, table>tbody>tr>td{
+    padding: 8px;
+    border: 1px solid #999;
+    text-align: center;
+}
+</style>
+
+<table>
+  <tr>
+    <th>課程名稱</th>
+    <th>日間</th>
+    <th>夜間</th>
+    <th>假日</th>
+    <th>假日夜間</th>
+    <th>綜合</th>
+    <th>電洽</th>
+  </tr>
+  <tr tal:repeat="key view/data">
+    <td>${key}</td>
+    <td>
+      <tal:cond condition="python: view.data[key].has_key('inDay')">
+        <a href="${view/context/absolute_url}/has_export_view?uidList=${python: view.data[key]['inDay'][1]}">
+          ${python: view.data[key]['inDay'][0] if view.data[key].has_key('inDay') else 0}
+        </a>
+      </tal:cond>
+      <tal:cond condition="python: not view.data[key].has_key('inDay')">
+        0
+      </tal:cond>
+    </td>
+    <td>
+      <tal:cond condition="python: view.data[key].has_key('inEvening')">
+        <a href="${view/context/absolute_url}/has_export_view?uidList=${python: view.data[key]['inEvening'][1]}">
+          ${python: view.data[key]['inEvening'][0] if view.data[key].has_key('inEvening') else 0}
+        </a>
+      </tal:cond>
+      <tal:cond condition="python: not view.data[key].has_key('inEvening')">
+        0
+      </tal:cond>
+    </td>
+    <td>
+      <tal:cond condition="python: view.data[key].has_key('inWeekend')">
+        <a href="${view/context/absolute_url}/has_export_view?uidList=${python: view.data[key]['inWeekend'][1]}">
+          ${python: view.data[key]['inWeekend'][0] if view.data[key].has_key('inWeekend') else 0}
+        </a>
+      </tal:cond>
+      <tal:cond condition="python: not view.data[key].has_key('inWeekend')">
+        0
+      </tal:cond>
+    </td>
+    <td>
+      <tal:cond condition="python: view.data[key].has_key('inWeekendEvening')">
+        <a href="${view/context/absolute_url}/has_export_view?uidList=${python: view.data[key]['inWeekendEvening'][1]}">
+          ${python: view.data[key]['inWeekendEvening'][0] if view.data[key].has_key('inWeekendEvening') else 0}
+        </a>
+      </tal:cond>
+      <tal:cond condition="python: not view.data[key].has_key('inWeekendEvening')">
+        0
+      </tal:cond>
+    </td>
+    <td>
+      <tal:cond condition="python: view.data[key].has_key('complex')">
+        <a href="${view/context/absolute_url}/has_export_view?uidList=${python: view.data[key]['complex'][1]}">
+          ${python: view.data[key]['complex'][0] if view.data[key].has_key('complex') else 0}
+        </a>
+      </tal:cond>
+      <tal:cond condition="python: not view.data[key].has_key('complex')">
+        0
+      </tal:cond>
+    </td>
+    <td>
+      <tal:cond condition="python: view.data[key].has_key('phone')">
+        <a href="${view/context/absolute_url}/has_export_view?uidList=${python: view.data[key]['phone'][1]}">
+          ${python: view.data[key]['phone'][0] if view.data[key].has_key('phone') else 0}
+        </a>
+      </tal:cond>
+      <tal:cond condition="python: not view.data[key].has_key('phone')">
+        0
+      </tal:cond>
+    </td>
+  </tr>
+</table>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+

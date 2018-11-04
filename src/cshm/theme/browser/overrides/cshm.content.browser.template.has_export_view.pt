@@ -34,40 +34,41 @@ table{
 }
 </style>
 
-<tal:rep repeat="course view/data">
-  <table  tal:condition="python: view.data[course][0]">
+  <table>
     <tr class='deepblue'>
-      <td colspan='6' style='font-size: 22px'>${course}</td>
+      <td colspan='12' style='font-size: 22px'>${view/course_name}      ${view/time}</td>
     </tr>
     <tr class='header'>
-      <td>姓名</td>
-      <td>手機</td>
-      <td>市話</td>
-      <td>信箱</td>
-      <td>公司名稱</td>
-      <td>轉備取</td>
+      <td>單位</td>
+      <td>姓名/身份證</td>
+      <td>報名日期</td>
+      <td>聯絡狀況</td>
+      <td>上課狀況</td>
+      <td>繳費狀況</td>
+      <td>折扣</td>
+      <td>發Mail</td>
+      <td>刪除</td>
+      <td>轉出</td>
+      <td>收據輔助</td>
+      <td>轉介</td>
     </tr>
-    <tr tal:repeat="user python: view.data[course][0]" >
-      <td>${python: user[1]}</td>
-      <td>${python: user[0]}</td>
-      <td>${python: user[4]}</td>
-      <td>${python: user[3]}</td>
-      <td>${python: user[2]}</td>
-      <td>
-        <form action='has_export_view' method='post'>
-          <select name='period'>
-            <option tal:repeat="period python: view.data[course][1]" value="${python: period[0]}" >
-              ${python: period[1]}
-            </option>
-          </select>
-          <input type='hidden' name='user_id' value='${python: user[5]}'>
-          <input type='submit'>
-        </form>
-      </td>
+    <tr tal:repeat="user view/result" >
+      <tal:define define="obj python: dict(user)">
+        <td>${python: obj['company_name']}</td>
+        <td>${python: '%s/%s' %(obj['name'], obj['studId'])}</td>
+        <td>${python: obj['apply_time'].strftime('%Y-%m-%d')}</td>
+        <td>${python: ''}</td>
+        <td>${python: ''}</td>
+        <td>${python: '繳費狀況'}</td>
+        <td>${python: obj['training_hour']}</td>
+        <td>${python: 'send mail'}</td>
+        <td>${python: ''}</td>
+        <td>${python: ''}</td>
+        <td>${python: ''}</td>
+        <td>${python: ''}</td>
+      </tal:define>
     </tr>
   </table>
-</tal:rep>
-
 </metal:content-core>
 </metal:content-core>
 

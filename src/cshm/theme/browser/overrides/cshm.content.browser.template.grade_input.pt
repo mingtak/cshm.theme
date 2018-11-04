@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<style>
+</style>
+
+<h3 style="text-align: center">${python: view.context.getParentNode().title}  第${view/context/id}期</h3>
+
+<table>
+  <tr>
+    <td>／</td>
+    <td>座號</td>
+    <td>姓名</td>
+    <td>身分證字號</td>
+    <td>生日</td>
+    <td>電話</td>
+    <td>學科</td>
+    <td>術科</td>
+    <td>證書編號</td>
+  </tr>
+  <tr tal:repeat="item view/result">
+    <td>${repeat/item/number}</td>
+    <td>${python: item[19]}</td>
+    <td>${python: item[4]}</td>
+    <td>${python: item[15]}</td>
+    <td>${python: item[12]}</td>
+    <td>${python: item[11]}</td>
+    <td>
+      <input type='number' data-id="${python: item[0]}" class='grade1' value='${python: item[40]}'>
+    </td>
+    <td>
+      <input type='number' data-id="${python: item[0]}" class='grade2' value='${python: item[41]}'>
+    </td>
+    <td></td>
+  </tr>
+</table>
+<button id='send'>送出成績</button>
+
+<script>
+$(function(){
+    $('#send').click(function(){
+        data = {}
+        $('input').each(function(){
+            id = $(this).data('id')
+            className = this.className
+            val = parseInt($(this).val())
+            if(data[id]){
+                data[id][className] = val
+            }else{
+                className == 'grade1'?data[id] = {grade1: val}:data[id]={grade2: val}
+            }
+        })
+        $.ajax({
+            method: 'post',
+            url: '${view/context/absolute_url}/grade_input',
+            data: {data: JSON.stringify(data)},
+            success: function(rep){
+                alert('更新成功！！！')
+                location.reload()
+            }
+        })
+    })
+})
+</script>
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+

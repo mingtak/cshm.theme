@@ -19,20 +19,64 @@
     <div class="row"><div class="col-xs-3"><b>上課時段</b></div><div class="col-xs-9"><span i18n:translate="" tal:replace="context/duringTime"></span> (${context/classTime})</div></div>
     <div class="row"><div class="col-xs-3"><b>開課地點</b></div><div class="col-xs-9">${context/trainingCenter/to_object/title}</div></div>
     <div class="row"><div class="col-xs-3"><b>地 址</b></div><div class="col-xs-9">${context/trainingCenter/to_object/address}</div></div>
+    <div class="row"><div class="col-xs-3"><b>開課狀態</b></div><div class="col-xs-9">${context/classStatus}</div></div>
     <div class="row"><div class="col-xs-3"><b>訓練費用</b></div><div class="col-xs-9">${context/courseFee}</div></div>
-    <div class="row"><div class="col-xs-3"><b>開課狀態</b></div><div class="col-xs-9">${context/courseStatus}</div></div>
     <div class="row"><div class="col-xs-3"><b>課程時數</b></div><div class="col-xs-9">${context/courseHours}</div></div>
     <div class="row"><div class="col-xs-3"><b>報名截止</b></div><div class="col-xs-9">${context/regDeadline}</div></div>
     <div class="row"><div class="col-xs-3"><b>聯絡資訊</b></div><div class="col-xs-9">${context/contact}</div></div>
     <div class="row"><div class="col-xs-3"><b>優惠方案</b></div><div class="col-xs-9">${context/discountProgram}</div></div>
     <div class="row"><div class="col-xs-3"><b>繳交資料</b></div>
-        <div class="col-xs-9" tal:content="structure python:context.prepareInfo.replace('\n', '<br>')"></div>
+        <div class="col-xs-9"
+             tal:condition="context/prepareInfo"
+             tal:content="structure python:context.prepareInfo.replace('\n', '<br>')"></div>
     </div>
     <div class="row"><div class="col-xs-3"><b>上課詳細時間</b></div>
-        <div class="col-xs-9" tal:content="structure python:context.detailClassTime.replace('\n', '<br>')"></div>
+        <div class="col-xs-9"
+             tal:condition="context/detailClassTime"
+             tal:content="structure python:context.detailClassTime.replace('\n', '<br>')"></div>
     </div>
     <div class="row"><div class="col-xs-3"><b>起重機具機型</b></div><div class="col-xs-9">${context/craneType}</div></div>
-    <div class="row"><div class="col-xs-3"><b>備註</b></div><div class="col-xs-9" tal:content="structure context/memo/raw"></div></div>
+    <div class="row"><div class="col-xs-3"><b>備註</b></div><div class="col-xs-9" tal:condition="context/memo" tal:content="structure context/memo/raw"></div></div>
+
+    <div class="row">
+        <div class="col-xs-3"><b>詳細資訊</b></div>
+        <div class="col-xs-9"><a style="color:blue" target="_blank" href="${context/absolute_url}/@@echelon_detail">前往查閱詳細資訊</a></div>
+    </div>
+
+</div>
+
+<div class='row'>
+  <div class='col-xs-12'>
+    <p style='text-align: center;background: #8fc4de;color: #363636; padding: 10px 0'>測驗方式</p>
+    <p style='padding: 3px 15px 3px 15px'>於課程最後一堂後，參加本會辦理之「期末測驗」，測驗合格者頒發「期滿證明」並 依本訓練證書及其他相關文件，報考勞動部舉辦之技術士技能檢定。 </p>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-xs-12'>
+    <p style='text-align: center;background: #8fc4de;color: #363636; padding: 10px 0'>聯絡方式</p>
+    <p style='padding: 3px 0 3px 15px;color: blue'>承辦人：${context/undertaker}</p>
+    <p style='padding: 3px 0 3px 15px'>電話：${context/trainingCenter/to_object/phone}</p>
+    <p style='padding: 3px 0 3px 15px'>傳真：${context/trainingCenter/to_object/fax}</p>
+
+    <div  style='background: #d7f5ba; padding: 15px; border-radius: 15px'>
+<h3>繳費方式</h3>
+
+<h4 style='color: #36051d'>1.現金(支票)繳費</h4>
+<h5>可親洽本區各區辦事處辦理繳費(現金/即期支票均可)，或來電洽詢。</h5>
+<h4 style='color: #36051d'>2.匯款繳費</h4>
+<tal:cond condition="python: context.trainingCenter.to_object.id != 'kaohsiung'">
+  <h5>遠東國際商業銀行　台北忠孝分行(代號：805)</h5>
+  <h5>帳號：03100-400-107-966　</h5>
+</tal:cond>
+<tal:cond condition="python: context.trainingCenter.to_object.id == 'kaohsiung'">
+  <h5>中國信託銀行　基隆分行(代號：822)</h5>
+  <h5>帳號：381-118005001　</h5>
+</tal:cond>
+
+<h5>戶名：中國勞工安全衛生管理學會</h5>
+    </div>
+  </div>
 </div>
 
 <div class="row">
@@ -43,6 +87,7 @@
         <a class="envor-btn envor-btn-primary-border envor-btn-large" href="${view/portal/absolute_url}/training/courselist">課程列表</a>
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-xs-12 image-container-center">

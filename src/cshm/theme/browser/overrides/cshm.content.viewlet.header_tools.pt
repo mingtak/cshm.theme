@@ -46,10 +46,10 @@
                </tal:anon>
                <tal:isMana condition="view/isMana">
                 <li>
-                  <a href="${view/portal/absolute_url}/folder_contents" class="regular" title="後台管理">
+                  <a href="${view/portal/absolute_url}/@@echelon_listing_register" class="regular" title="後台管理">
                     <i class="fa fa-folder"></i>
                   </a>
-                  <a href="${view/portal/absolute_url}/folder_contents" class="hover" title="後台管理">
+                  <a href="${view/portal/absolute_url}/@@echelon_listing_register" class="hover" title="後台管理">
                     <i class="fa fa-folder-open"></i>
                   </a>
                 </li>

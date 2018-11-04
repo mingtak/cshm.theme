@@ -83,14 +83,14 @@ hr{
       </div>
     </div>
     <div class='col-md-3'>
-      <div class='col-md-6'>收據日期</div>
-      <div class='col-md-6'>
+      <div class='col-md-5'>收據日期</div>
+      <div class='col-md-7'>
         <input type='date' value='${now}' name='receipt_date' required>
       </div>
     </div>
     <div class='col-md-3'>
-      <div class='col-md-6'>建立日期</div>
-      <div class='col-md-6'>
+      <div class='col-md-5'>建立日期</div>
+      <div class='col-md-7'>
         <input type='date' value='${now}' name='apply_date' required>
       </div>
     </div>
@@ -105,14 +105,14 @@ hr{
       </div>
     </div>
     <div class='col-md-3'>
-      <div class='col-md-6'>統一編號</div>
-      <div class='col-md-6'>
-        <input type="text" name='code' id="code" value="${python: view.tax_no}" required>
+      <div class='col-md-5'>統一編號</div>
+      <div class='col-md-7'>
+        <input type="text" name='tax_no' id="tax_no" value="${python: view.tax_no}" required>
       </div>
     </div>
     <div class='col-md-3'>
-      <div class='col-md-6'>金額</div>
-      <div class='col-md-6'>
+      <div class='col-md-5'>金額</div>
+      <div class='col-md-7'>
         <input type='number' name='total_money' value="${python: view.totalMoney}" required>
       </div>
     </div>
@@ -132,7 +132,7 @@ hr{
       <td>項目名稱</td>
       <td><input type="text" name='detail1_name' value="${python: view.context.getParentNode().title}"></td>
       <td>金額</td>
-      <td><input type="number" name='detail1_money'></td>
+      <td><input type="number" name='detail1_money' value='${python: view.totalMoney}'></td>
       <td>備註</td>
       <td><input type="text" name='detail1_note' value="${python: view.context.title}"></td>
     </tr>
@@ -153,7 +153,7 @@ hr{
 
 <script>
 $(function(){
-    $('#code').change(function(){
+    $('#tax_no').change(function(){
         val = $(this).val()
         data = {
             'tax_no': val

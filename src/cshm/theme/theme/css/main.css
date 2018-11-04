@@ -67,6 +67,7 @@ form p {
 	display: inline-block;
 }
 input[type=text],
+input[type=number],
 input[type=email],
 input[type=file],
 input[type=tel],

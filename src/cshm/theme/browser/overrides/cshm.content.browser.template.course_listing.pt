@@ -12,6 +12,13 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
+<div tal:condition="view/trainingCenter">
+    <h4>訓練中心：${view/trainingCenter/title}</h4>
+    <h4>電話：${view/trainingCenter/phone}</h4>
+    <h4>傳真：${view/trainingCenter/fax}</h4>
+    <h4>地址：${view/trainingCenter/address}</h4>
+    <hr>
+</div>
 
 <ul tal:repeat="status view/statusList">
   <h4 i18n:translate="">${status}</h4>
@@ -35,6 +42,11 @@
   </tal:li>
 </ul>
 
+<script>
+    <tal:reg_alert condition="python:view.request.form.get('reg_alert') == '1'">
+        alert('${python:view.request.form.get('msg')}')
+    </tal:reg_alert>
+</script>
 
 </metal:content-core>
 </metal:content-core>

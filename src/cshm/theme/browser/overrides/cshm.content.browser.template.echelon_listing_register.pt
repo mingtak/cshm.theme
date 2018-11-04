@@ -11,11 +11,43 @@
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
+<?python
+from plone import api
+current = api.user.get_current()
+?>
 
-<h2>報名作業</h2>
+<h3>${current/fullname} 您好,這是您的作業區域</h3>
 <hr>
 
-<div tal:repeat="status view/statusList">
+<div class="row">
+  <div class="col col-sm-12 col-md-6">
+    <table id="customers">
+      <tr>
+        <th style="background:#a1dcde">開課作業</th>
+      </tr>
+      <tr><td>TODO</td>
+      </tr>
+    </table>
+
+  </div>
+
+  <div class="col col-sm-12 col-md-6">
+    <table id="customers">
+      <tr>
+        <th style="background:#f8a74c">訓前作業</th>
+      </tr>
+      <tr><td>TODO</td>
+      </tr>
+    </table>
+  </div>
+
+
+</div>
+
+<hr>
+
+<div class="row">
+<div tal:repeat="status view/statusList" class="col col-sm-12 col-md-6">
   <table id="customers">
     <tr>
       <th><span i18n:translate="">${status}</span></th>
@@ -28,7 +60,7 @@
   </table>
   <p></p>
 </div>
-
+</div>
 
 <style>
 #customers {
