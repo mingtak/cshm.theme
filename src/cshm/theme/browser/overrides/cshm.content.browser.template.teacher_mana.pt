@@ -1,0 +1,134 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<h3>教師管理</h3>
+
+<!-- <a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a> | -->
+<a id="export-teacher-list" target="_blank" href="${context/absolute_url}/@@teacher_mana?output=">匯出搜尋結果</a>
+
+<br>
+<br>
+
+<h4>條件搜尋</h4>
+<form action="${context/absolute_url}/@@teacher_mana" method="get">
+  <div class="col col-md-4">
+      身份證字號: <input name="idCardNo">
+  </div>
+  <div class="col col-md-4">
+      老師姓名: <input name="title">
+  </div>
+  <div class="col col-md-2">
+      <input type="submit" name="submit" value="查詢">
+  </div>
+</form>
+
+<br><br><br>
+
+<table>
+  <!-- Table Header -->
+  <tr class="tr-title">
+    <td>序號</td>
+    <td>姓名</td>
+    <td>會員</td>
+    <td>手機</td>
+    <td>地址</td>
+    <td>授課地點</td>
+    <td>證書</td>
+    <td>檢視</td>
+    <td>評分</td>
+    <td>更新</td>
+  </tr>
+
+  <!-- Table Body -->
+  <tal:teacher repeat="item python:view.getActivationTeachers(True)">
+  <tr tal:define="obj item/getObject">
+    <td>${repeat/item/number}</td>
+    <td>${item/Title}</td>
+    <td>
+      <input type="checkbox" id="isMember-${item/UID}" name="isMember-${item/UID}" data-uid="${item/UID}"
+             tal:attributes="checked obj/isMember">
+    </td>
+    <td>
+      <input type="text" id="cellPhone-${item/UID}" name="cellPhone-${item/UID}" data-uid="${item/UID}"
+             tal:attributes="value obj/cellPhone">
+    </td>
+    <td>
+      <input type="text" id="contactAddr-${item/UID}" name="contactAddr-${item/UID}" data-uid="${item/UID}"
+             tal:attributes="value obj/contactAddr">
+    </td>
+    <td>
+      <tal:tc repeat="tc obj/teachTrainingCenter">
+         ${tc/to_object/title}<span tal:condition="not:repeat/tc/end"> / </span>
+      </tal:tc>
+    </td>
+    <td>證書</td>
+    <td><a href="${item/getURL}" target="_blank">檢視</a></td>
+    <td>評分</td>
+    <td><a class="update" data-uid="${item/UID}" href="javascript:voild(0)">更新</a></td>
+  </tr>
+  </tal:teacher>
+</table>
+
+
+
+<script>
+$(document).ready(function(){
+    $('a.update').click(function(){
+        uid = $(this).data('uid')
+
+        data = {uid: uid,
+                isMember: $('#isMember-' + uid).prop('checked'),
+                cellPhone: $('#cellPhone-' + uid).val(),
+                contactAddr: $('#contactAddr-' + uid).val(),
+                update_teacher: true
+               }
+        $.post('${context/absolute_url}/@@teacher_mana',
+            data=data,
+        ).done(function(){
+            alert('教師資料已更新')
+          }
+        ).fail(function(){
+            alert('更新失敗，請稍候再試，若一直失敗，請聯絡系統管理員')
+        })
+
+    })
+
+})
+</script>
+
+
+
+
+<script>
+var app = new Vue({
+    el: '#content-core',
+    data: {
+      message: 'Hello Vue!'
+    },
+    methods: {
+    }
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

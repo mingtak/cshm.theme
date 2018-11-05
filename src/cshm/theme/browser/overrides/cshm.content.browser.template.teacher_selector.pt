@@ -47,7 +47,7 @@ from plone import api
             <td>${item/title}</td>
             <td>${item/teacher/to_object/title}</td>
             <td>
-                <tal:ts define="ts python:api.content.find(Type='Teacher', teacheSubjects=item.title)"
+                <tal:ts define="ts python:api.content.find(Type='Teacher', teachSubjects=item.title)"
                         repeat="teacher ts">
                     ${teacher/Title} <span tal:condition="not:repeat/teacher/end"> / </span>
                 </tal:ts>
