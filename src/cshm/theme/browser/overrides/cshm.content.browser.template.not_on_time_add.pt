@@ -1,0 +1,127 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<h3>講師調課／遲到／早退登記系統</h3>
+
+<!-- <a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a> | -->
+
+<a id="" target="_blank" href="${context/absolute_url}/@@not_on_time">講師調課/遲到/早退登記系統</a> │
+<a id="" target="_blank" href="${context/absolute_url}/@@not_on_time?list">調課/遲到/早退列表</a> │
+<a id="" target="_blank" href="${context/absolute_url}/@@teacher_mana">講師清單</a> │
+<a id="" target="_blank" href="${context/absolute_url}/@@search_teacher_by_course">課程清單</a> │
+<a id="" target="_blank" href="${context/absolute_url}/@@add_teacher">新增講師</a> │
+<a id="" target="_blank" href="${context/absolute_url}/@@change_log">近期異動</a> │
+
+<a id="export-teacher-list" target="_blank" href="${context/absolute_url}/@@teacher_mana?output=">匯出講師清單</a>
+
+<br>
+<br>
+
+
+
+
+<form action="${context/absolute_url}/@@not_on_time" method="post">
+  <div class="row">
+    <div class="col col-md-2">老師姓名:</div>
+    <div class="col col-md-10">
+      <select name="teacher-name">
+        <option tal:repeat="item view/getTeachers"
+                tal:attributes="value item/UID"
+                tal:content="item/Title">Teacher Name</option>
+      </select>
+    </div>
+
+    <div class="col col-md-2">日期:</div>
+    <div class="col col-md-10">
+      <input name="date" value="" required> 格式: 民國年/月/日, 107/3/21
+    </div>
+
+    <div class="col col-md-2">課程:</div>
+    <div class="col col-md-10">
+      <select name="subject-name">
+        <tal:item repeat="item view/getSubjects">
+          <option tal:define="obj item/getObject;
+                              echlon obj/getParentNode;
+                              course echlon/getParentNode"
+                  tal:attributes="value item/UID"
+                  tal:content="python:'%s-%s-%s' % (course.title, echlon.title, obj.title)">Subject Name</option>
+        </tal:item>
+      </select>
+    </div>
+
+    <div class="col col-md-2">列入紀錄:</div>
+    <div class="col col-md-10">
+      <input name="in_scope" type="checkbox">
+    </div>
+
+    <div class="col col-md-2">類別:</div>
+    <div class="col col-md-10">
+      <select name="status_code">
+        <tal:item repeat="item view/getNotOnTimeStatus">
+          <option tal:attributes="value item/id"
+                  tal:content="item/status">Status Name</option>
+        </tal:item>
+      </select>
+    </div>
+
+    <div class="col col-md-2">原因說明:</div>
+    <div class="col col-md-10">
+      <textarea name="detail" required></textarea>
+    </div>
+
+    <div class="col col-md-2">送出:</div>
+    <div class="col col-md-10">
+      <input name="submit" type="submit" value="確認送出">
+    </div>
+
+
+  </div>
+</form>
+
+
+
+<script>
+$(document).ready(function(){
+    $('a.update').click(function(){
+
+    })
+
+})
+</script>
+
+
+
+
+<script>
+var app = new Vue({
+    el: '#content-core',
+    data: {
+      message: 'Hello Vue!'
+    },
+    methods: {
+    }
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
