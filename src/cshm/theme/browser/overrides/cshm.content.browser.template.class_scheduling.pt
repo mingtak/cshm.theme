@@ -1,0 +1,92 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<h3>排課管理-- ${python:context.getParentNode().title} ${context/title}</h3>
+
+<table>
+  <tr class="tr-title">
+    <td>科目編號</td>
+    <td>科目名稱</td>
+    <td>講師</td>
+    <td>時數</td>
+    <td>排課</td>
+    <td>確認/更新</td>
+  </tr>
+  <tr class="tr-body" tal:repeat="item python:context.getChildNodes()">
+    <td>${item/id/upper}</td>
+    <td>${item/title}</td>
+    <td tal:content="item/teacher/to_object/title | nothing">講師</td>
+    <td>${item/hours}</td>
+    <td>
+      日期:
+      <input placeholder="格式: 2018/2/12" name="year" style="width:100px">
+      起: <input placeholder="格式: 18:00" style="width:100px">
+      迄: <input placeholder="格式: 21:00" style="width:100px">
+    </td>
+    <td>
+<a href="javascript:voild(0)">更新</a>
+    </td>
+  </tr>
+</table>
+
+<script>
+$(document).ready(function(){})
+    $('a.update').click(function(){
+        uid = $(this).data('uid')
+
+        data = {uid: uid,
+                isMember: $('#isMember-' + uid).prop('checked'),
+                cellPhone: $('#cellPhone-' + uid).val(),
+                contactAddr: $('#contactAddr-' + uid).val(),
+                update_teacher: true
+               }
+        $.post('${context/absolute_url}/@@teacher_mana',
+            data=data,
+        ).done(function(){
+            alert('教師資料已更新')
+          }
+        ).fail(function(){
+            alert('更新失敗，請稍候再試，若一直失敗，請聯絡系統管理員')
+        })
+
+    })
+
+})
+</script>
+
+
+
+
+<script>
+var app = new Vue({
+    el: '#content-core',
+    data: {
+      message: 'Hello Vue!'
+    },
+    methods: {
+    }
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
