@@ -1,0 +1,95 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<h3>新增講師</h3>
+
+<!-- <a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a> | -->
+
+<a id="" target="_blank" href="${context/absolute_url}/@@not_on_time">講師調課/遲到/早退登記系統</a> │
+<a id="" target="_blank" href="${context/absolute_url}/@@not_on_time?list">調課/遲到/早退列表</a> │
+<a id="" target="_blank" href="${context/absolute_url}/@@teacher_mana">講師清單</a> │
+<a id="" target="_blank" href="${context/absolute_url}/@@search_teacher_by_course">課程清單</a> │
+<a id="" target="_blank" href="${context/absolute_url}/@@add_teacher">新增講師</a> │
+<a id="" target="_blank" href="${context/absolute_url}/@@change_log">近期異動</a> │
+
+<a id="export-teacher-list" target="_blank" href="${context/absolute_url}/@@teacher_mana?output=">匯出講師清單</a>
+
+<br>
+<br>
+
+<?python
+from plone import api
+?>
+
+<form action="${context/absolute_url}/@@add_teacher" method="post">
+<table>
+  <tr class="tr-title">
+    <td>姓名</td>
+    <td>身份證號</td>
+    <td>出生年月日</td>
+    <td>聯絡電話</td>
+    <td>手機</td>
+    <td>聯絡地址</td>
+    <td>學歷</td>
+  </tr>
+  <tr class="tr-body">
+    <td><input name="teacher-name" required></td>
+    <td><input name="id-card-no" required></td>
+    <td><input name="birthday" placeholder="請輸入民國年/月/日" required>格式: 107/3/21</td>
+    <td><input name="contact-phone" required></td>
+    <td><input name="cell-phone"></td>
+    <td><input name="contact-addr" required></td>
+    <td>學歷</td>
+  </tr>
+<table>
+<br><br>
+<input name="add-teacher" value="1" hidden>
+<input name="submit" value="確定新增" type="submit">
+</form>
+
+
+<script>
+$(document).ready(function(){
+    $('a.update').click(function(){
+
+    })
+
+})
+</script>
+
+
+
+
+<script>
+var app = new Vue({
+    el: '#content-core',
+    data: {
+      message: 'Hello Vue!'
+    },
+    methods: {
+    }
+})
+</script>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
