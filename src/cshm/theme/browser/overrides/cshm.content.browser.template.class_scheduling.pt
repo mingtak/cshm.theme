@@ -29,38 +29,78 @@
     <td>排課</td>
     <td>確認/更新</td>
   </tr>
-  <tr class="tr-body" tal:repeat="item python:context.getChildNodes()">
-    <td>${item/id/upper}</td>
-    <td>${item/title}</td>
-    <td tal:content="item/teacher/to_object/title | nothing">講師</td>
-    <td>${item/hours}</td>
-    <td>
-      日期:
-      <input placeholder="格式: 2018/2/12" name="year" style="width:100px">
-      起: <input placeholder="格式: 18:00" style="width:100px">
-      迄: <input placeholder="格式: 21:00" style="width:100px">
-    </td>
-    <td>
-<a href="javascript:voild(0)">更新</a>
-    </td>
-  </tr>
+
+  <tal:scheduling repeat="item python:context.getChildNodes()">
+    <tal:uid define="sqlResult python:view.alreadyScheduling(item.UID())"
+             switch="python:sqlResult">
+      <tr class="tr-body" tal:case="python:[]" tal:attributes="id python:'tr-%s' % item.UID()">
+        <td>${item/id/upper}</td>
+        <td>${item/title}</td>
+        <td tal:content="item/teacher/to_object/title | nothing">講師</td>
+        <td>${item/hours}</td>
+        <td>
+          日期:
+          <input placeholder="格式: 107/2/12" name="year" style="width:100px" id="date-${item/UID}">
+          起: <input placeholder="格式: 1800" style="width:100px" id="start-${item/UID}">
+          迄: <input placeholder="格式: 2100" style="width:100px" id="end-${item/UID}">
+        </td>
+        <td>
+          <a class="update" data-uid="${item/UID}" href="javascript:voild(0)">更新</a>
+        </td>
+      </tr>
+
+      <tal:notempty case="python:default">
+        <tr class="tr-body" tal:repeat="record python:sqlResult" tal:attributes="id python:'tr-%s' % record['id']">
+          <td>${item/id/upper}</td>
+          <td>${item/title}</td>
+          <td tal:content="item/teacher/to_object/title | nothing">講師</td>
+          <td>${item/hours}</td>
+          <td>
+            日期:
+            <input placeholder="格式: 107/2/12" name="year" style="width:100px"
+                   value="${python:record['start'].year-1911}/${python:record['start'].strftime('%-m/%-d')}"
+                   id="date-${record/id}">
+            起: <input placeholder="格式: 1800" style="width:100px"
+                       value="${python:record['start'].strftime('%H%M')}"
+                       id="start-${record/id}">
+            迄: <input placeholder="格式: 2100" style="width:100px"
+                       value="${python:record['end'].strftime('%H%M')}"
+                       id="end-${record/id}">
+          </td>
+          <td>
+            <a class="update" data-uid="${record/id}" href="javascript:voild(0)">更新</a>
+          </td>
+        </tr>
+      </tal:notempty>
+
+
+
+    </tal:uid>
+  </tal:scheduling>
 </table>
 
 <script>
-$(document).ready(function(){})
+$(document).ready(function(){
     $('a.update').click(function(){
         uid = $(this).data('uid')
+//alert(uid)
 
         data = {uid: uid,
-                isMember: $('#isMember-' + uid).prop('checked'),
-                cellPhone: $('#cellPhone-' + uid).val(),
-                contactAddr: $('#contactAddr-' + uid).val(),
-                update_teacher: true
+                date: $('#date-' + uid).val(),
+                start: $('#start-' + uid).val(),
+                end: $('#end-' + uid).val(),
+                update_class_scheduling: true
                }
-        $.post('${context/absolute_url}/@@teacher_mana',
+        $.post('${context/absolute_url}/@@class_scheduling',
             data=data,
-        ).done(function(){
-            alert('教師資料已更新')
+        ).done(function(data){
+            if(data.split(':')[0] == 'overtime'){
+                $('#' + data.split(':')[1]).css('background', '#e77')
+                alert('時間衝突')
+                return
+            }
+            $('#tr-' + uid).css('background', '#8c8')
+            alert(data)
           }
         ).fail(function(){
             alert('更新失敗，請稍候再試，若一直失敗，請聯絡系統管理員')
