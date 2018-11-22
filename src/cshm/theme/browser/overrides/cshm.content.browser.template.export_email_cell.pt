@@ -18,19 +18,41 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
-<h3>正取學會 Email 清單</h3>
-<tal:list repeat="item view/rightEmails">${item}; </tal:list>
+<h3>發送簡訊/Email</h3>
+
+<form action="${context/absolute_url}/@@export_email_cell" method="post">
+<h4>正取學會 Email 清單</h4>
+  <p>發送郵件清單</p>
+  <textarea name='email'><tal:list repeat="item view/rightEmails">${item};</tal:list></textarea>
+<br>
+  <span>郵件標題: </span><input name='title' />
+<br><br>
+  <p>Email 內容</p>
+  <textarea name='message'></textarea>
+  <input name='sendmail' hidden />
+  <input type='submit' name='submit' value='發送Email' />
+
+</form>
+<br><br>
+<form action="${context/absolute_url}/@@export_email_cell" method="post">
+<h4>正取學員手機清單</h4>
+  <p>發送簡訊清單</p>
+  <textarea name='cell'><tal:list repeat="item view/rightCells">${item}, </tal:list></textarea>
+ <br>
+  <span>簡訊內容: </span><input name='message'/>
+  <input name='sendmsg' hidden />
+  <input type='submit' name='submit' value='發送簡訊' />
+</form>
 
 
-<h3>正取學員手機清單</h3>
-<tal:list repeat="item view/rightCells">${item}, </tal:list>
 
-<h3>無效 Email 清單</h3>
+
+<h4>無效 Email 清單</h4>
 <tal:list repeat="item view/wrongEmails">
 ${python:item[0]}: ${python:item[1]}<br>
 </tal:list>
 
-<h3>無效手機清單</h3>
+<h4>無效手機清單</h4>
 <tal:list repeat="item view/wrongCells">
 ${python:item[0]}: ${python:item[1]}<br>
 </tal:list>

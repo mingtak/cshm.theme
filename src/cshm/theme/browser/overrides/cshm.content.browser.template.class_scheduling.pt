@@ -24,18 +24,48 @@
   <tr class="tr-title">
     <td>科目編號</td>
     <td>科目名稱</td>
+    <td>教室</td>
     <td>講師</td>
     <td>時數</td>
     <td>排課</td>
     <td>確認/更新</td>
   </tr>
 
+<div>
+  <p>開課單位: ${context/trainingCenter/to_object/title}</p>
+  <p>批次設定教室:
+          <select id='select-classroom'>
+            <tal:item repeat="item python:context.trainingCenter.to_object.getChildNodes()">
+              <option value="${item/UID}">${item/title}</option>
+            </tal:item>
+          </select>
+
+  </p>
+  <p>新增一列排課:
+          <select class='add-scheduling'>
+            <tal:item repeat="item python:context.getChildNodes()">
+              <option value="${item/UID}">${item/title}</option>
+            </tal:item>
+          </select>
+          <input type="button" class="add-scheduling" value="新增">
+  </p>
+
+</div>
+
+
   <tal:scheduling repeat="item python:context.getChildNodes()">
     <tal:uid define="sqlResult python:view.alreadyScheduling(item.UID())"
              switch="python:sqlResult">
-      <tr class="tr-body" tal:case="python:[]" tal:attributes="id python:'tr-%s' % item.UID()">
+      <tr class="tr-body not-schedule" tal:case="python:[]" tal:attributes="id python:'tr-%s' % item.UID()">
         <td>${item/id/upper}</td>
         <td>${item/title}</td>
+        <td>
+          <select name="classroom" id='classroom-${item/UID}'>
+            <tal:classroom repeat="classroom python:context.trainingCenter.to_object.getChildNodes()">
+              <option class="${classroom/UID}" value="${classroom/UID}">${classroom/title}</option>
+            </tal:classroom>
+          </select>
+        </td>
         <td tal:content="item/teacher/to_object/title | nothing">講師</td>
         <td>${item/hours}</td>
         <td>
@@ -45,14 +75,28 @@
           迄: <input placeholder="格式: 2100" style="width:100px" id="end-${item/UID}">
         </td>
         <td>
-          <a class="update" data-uid="${item/UID}" href="javascript:voild(0)">更新</a>
+          <a tal:condition="not:item/ignoreSchedule" class="update" data-uid="${item/UID}" href="javascript:voild(0)">更新</a>
+          <span tal:condition="item/ignoreSchedule">不用排課</span>
         </td>
       </tr>
 
       <tal:notempty case="python:default">
-        <tr class="tr-body" tal:repeat="record python:sqlResult" tal:attributes="id python:'tr-%s' % record['id']">
+        <tr class="tr-body scheduled" tal:repeat="record python:sqlResult" tal:attributes="id python:'tr-%s' % record['id']">
           <td>${item/id/upper}</td>
           <td>${item/title}</td>
+
+          <td>    
+            <select name="classroom" id='classroom-${record/id}'>
+              <tal:item repeat="classroom python:context.trainingCenter.to_object.getChildNodes()">
+                <option value="${classroom/UID}"
+                        tal:attributes="selected python:True if record['classroom'].split('-')[1] == classroom.id else False">${classroom/title}
+                </option>
+              </tal:item>
+            </select>
+          </td>
+
+
+
           <td tal:content="item/teacher/to_object/title | nothing">講師</td>
           <td>${item/hours}</td>
           <td>
@@ -89,8 +133,11 @@ $(document).ready(function(){
                 date: $('#date-' + uid).val(),
                 start: $('#start-' + uid).val(),
                 end: $('#end-' + uid).val(),
-                update_class_scheduling: true
+                update_class_scheduling: true,
+                classroom: $('#classroom-' + uid).val()
                }
+//debugger
+//alert($('#classroom-' + uid).val())
         $.post('${context/absolute_url}/@@class_scheduling',
             data=data,
         ).done(function(data){
@@ -106,6 +153,19 @@ $(document).ready(function(){
             alert('更新失敗，請稍候再試，若一直失敗，請聯絡系統管理員')
         })
 
+    })
+
+
+    /* 批次選教室 */
+    $('#select-classroom').change(function(){
+        uid = $(this).val()
+        $('.not-schedule option').attr('selected', false)
+        $('.not-schedule .' + uid).attr('selected', true)
+    })
+
+    /* 新增一列 */
+    $('input.add-scheduling').click(function(){
+        uid = $('select.add-scheduling').val()
     })
 
 })

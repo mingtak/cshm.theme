@@ -25,7 +25,7 @@ current = api.user.get_current()
       <tr>
         <th style="background:#a1dcde">開課作業</th>
       </tr>
-      <tr><td>TODO</td>
+      <tr><td><a href="${view/portal/absolute_url}/@@create_class">開新課程</a></td>
       </tr>
     </table>
 
