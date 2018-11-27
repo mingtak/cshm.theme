@@ -28,6 +28,8 @@
     <td>講師</td>
     <td>時數</td>
     <td>排課</td>
+    <td>講酬</td>
+    <td>車馬$</td>
     <td>確認/更新</td>
   </tr>
 
@@ -74,6 +76,14 @@
           起: <input placeholder="格式: 1800" style="width:100px" id="start-${item/UID}">
           迄: <input placeholder="格式: 2100" style="width:100px" id="end-${item/UID}">
         </td>
+
+        <td>
+          <input type="number" value="${python:int(item.hours * 800)}" name="teacher_fee" id="teacher_fee-${item/UID}">
+        </td>
+        <td>
+          <input type="number" value="400" name="traffic_fee" id="traffic_fee-${item/UID}">
+        </td>
+
         <td>
           <a tal:condition="not:item/ignoreSchedule" class="update" data-uid="${item/UID}" href="javascript:voild(0)">更新</a>
           <span tal:condition="item/ignoreSchedule">不用排課</span>
@@ -102,8 +112,6 @@
             </select>
           </td>
 
-
-
           <td tal:content="item/teacher/to_object/title | nothing">講師</td>
           <td>${item/hours}</td>
           <td tal:condition="python:record['start'] is None">
@@ -126,6 +134,15 @@
             迄: <input placeholder="格式: 2100" style="width:100px"
                        value="${python:record['end'].strftime('%H%M')}"
                        id="end-${record/id}">
+          </td>
+
+          <td>   
+            <input type="number" id="teacher_fee-${record/id}"
+                   value="${python:int(item.hours * 800) if record['teacher_fee'] is None else record['teacher_fee']}" name="teacher_fee">
+          </td>
+          <td>
+            <input type="number" id="traffic_fee-${record/id}"
+                   value="${python:400 if record['traffic_fee'] is None else record['traffic_fee']}" name="traffic_fee">
           </td>
 
           <td>
@@ -168,7 +185,9 @@ $(document).ready(function(){
                 start: $('#start-' + uid).val(),
                 end: $('#end-' + uid).val(),
                 update_class_scheduling: true,
-                classroom: $('#classroom-' + uid).val()
+                classroom: $('#classroom-' + uid).val(),
+                teacher_fee: $('#teacher_fee-' + uid).val(),
+                traffic_fee: $('#traffic_fee-' + uid).val()
                }
         rest(uid, data)
     })
