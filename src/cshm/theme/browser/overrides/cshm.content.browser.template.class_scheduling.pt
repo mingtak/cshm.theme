@@ -18,19 +18,21 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
+<a href="${context/absolute_url}/@@register_detail" style="float:right">回課程管理</a>
+
 <h3>排課管理-- ${python:context.getParentNode().title} ${context/title}</h3>
 
 <table>
   <tr class="tr-title">
-    <td>科目編號</td>
-    <td>科目名稱</td>
-    <td>教室</td>
-    <td>講師</td>
-    <td>時數</td>
-    <td>排課</td>
-    <td>講酬</td>
-    <td>車馬$</td>
-    <td>確認/更新</td>
+    <td style="width:5%">科目編號</td>
+    <td style="width:13%">科目名稱</td>
+    <td style="width:5%">教室</td>
+    <td style="width:8%">講師</td>
+    <td style="width:3%">時數</td>
+    <td style="width:40%">排課</td>
+    <td style="width:8%">講酬</td>
+    <td style="width:8%">車馬$</td>
+    <td style="width:10%">確認/更新</td>
   </tr>
 
 <div>

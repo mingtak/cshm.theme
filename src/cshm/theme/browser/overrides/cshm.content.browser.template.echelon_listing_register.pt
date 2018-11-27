@@ -23,10 +23,15 @@ current = api.user.get_current()
   <div class="col col-sm-12 col-md-6">
     <table id="customers">
       <tr>
-        <th style="background:#a1dcde">開課作業</th>
+        <th style="background:#a1dcde">管理作業</th>
       </tr>
-      <tr><td><a href="${view/portal/absolute_url}/@@create_class">開新課程</a></td>
+      <tr>
+        <td><a href="${portal_url}/@@create_class">開新課程</a></td>
       </tr>
+      <tr>
+        <td><a href="${portal_url}/@@not_on_time">講師調課／遲到／早退登記</a></td>
+      </tr>
+
     </table>
 
   </div>
