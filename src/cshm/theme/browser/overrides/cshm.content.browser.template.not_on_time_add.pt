@@ -2,6 +2,8 @@
     xmlns:tal="http://xml.zope.org/namespaces/tal"
     xmlns:metal="http://xml.zope.org/namespaces/metal"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://vue.org/v-bind"
+    xmlns:v-on="http://vue.org/v-on"
     lang="en"
     metal:use-macro="context/main_template/macros/master"
     i18n:domain="cshm.content">
@@ -25,7 +27,7 @@
 <a id="" target="_blank" href="${context/absolute_url}/@@not_on_time">講師調課/遲到/早退登記系統</a> │
 <a id="" target="_blank" href="${context/absolute_url}/@@not_on_time?list">調課/遲到/早退列表</a> │
 <a id="" target="_blank" href="${context/absolute_url}/@@teacher_mana">講師清單</a> │
-<a id="" target="_blank" href="${context/absolute_url}/@@search_teacher_by_course">課程清單</a> │
+<!-- <a id="" target="_blank" href="${context/absolute_url}/@@search_teacher_by_course">課程清單</a> │ -->
 <a id="" target="_blank" href="${context/absolute_url}/@@add_teacher">新增講師</a> │
 <a id="" target="_blank" href="${context/absolute_url}/@@change_log">近期異動</a> │
 
@@ -41,7 +43,7 @@
   <div class="row">
     <div class="col col-md-2">老師姓名:</div>
     <div class="col col-md-10">
-      <select name="teacher-name">
+      <select name="teacher-name" id="teacher-name">
         <option tal:repeat="item view/getTeachers"
                 tal:attributes="value item/UID"
                 tal:content="item/Title">Teacher Name</option>
@@ -55,14 +57,10 @@
 
     <div class="col col-md-2">課程:</div>
     <div class="col col-md-10">
-      <select name="subject-name">
-        <tal:item repeat="item view/getSubjects">
-          <option tal:define="obj item/getObject;
-                              echlon obj/getParentNode;
-                              course echlon/getParentNode"
-                  tal:attributes="value item/UID"
-                  tal:content="python:'%s-%s-%s' % (course.title, echlon.title, obj.title)">Subject Name</option>
-        </tal:item>
+      <select name="subject-name" id="subject-name">
+          <template v-for="item in teachSubjects">
+            <option v-bind:value="item[0]">{{ item[1] }}</option>
+          </template>
       </select>
     </div>
 
@@ -96,9 +94,26 @@
 </form>
 
 
-
 <script>
 $(document).ready(function(){
+
+    $('#teacher-name').change(function(){
+        uid= $(this).val()
+        postData = {uid: uid,
+            getSubject: true,
+        }
+
+        $.post('${context/absolute_url}/@@not_on_time',
+            data=postData,
+        ).done(function(data){
+            app['teachSubjects'] = JSON.parse( data )
+          }
+        ).fail(function(){
+            alert('更新失敗，請稍候再試，若一直失敗，請聯絡系統管理員')
+        })
+
+    })
+
     $('a.update').click(function(){
 
     })
@@ -113,12 +128,25 @@ $(document).ready(function(){
 var app = new Vue({
     el: '#content-core',
     data: {
-      message: 'Hello Vue!'
+      message: 'Hello Vue!',
+      teachSubjects: JSON.parse( '${python:view.getSubjects(view.getTeachers()[0].UID)}' )
     },
     methods: {
     }
 })
 </script>
+
+
+
+
+        <tal:item repeat="item python:view.getTeachers()[0].getObject().teachSubjects">
+          <option tal:define="obj python:item.to_object;
+                              course python:obj.getParentNode();"
+                  tal:attributes="value obj/UID"
+                  tal:content="python:'%s-%s' % (course.title, obj.title)">Subject Name</option>
+        </tal:item>
+
+
 
 </metal:content-core>
 </metal:content-core>

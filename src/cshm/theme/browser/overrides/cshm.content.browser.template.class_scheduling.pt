@@ -22,19 +22,6 @@
 
 <h3>排課管理-- ${python:context.getParentNode().title} ${context/title}</h3>
 
-<table>
-  <tr class="tr-title">
-    <td style="width:5%">科目編號</td>
-    <td style="width:13%">科目名稱</td>
-    <td style="width:5%">教室</td>
-    <td style="width:8%">講師</td>
-    <td style="width:3%">時數</td>
-    <td style="width:40%">排課</td>
-    <td style="width:8%">講酬</td>
-    <td style="width:8%">車馬$</td>
-    <td style="width:10%">確認/更新</td>
-  </tr>
-
 <div>
   <p>開課單位: ${context/trainingCenter/to_object/title}</p>
   <p>批次設定教室:
@@ -53,8 +40,27 @@
           </select>
           <input type="button" class="add-scheduling" value="新增">
   </p>
-
 </div>
+<a class="check-hours" href="javascript:void(0)" style="float:right">時數檢核</a> <span style="float:right">&nbsp;|&nbsp;</span>
+<a class="download" href="${context/absolute_url}/@@class_scheduling?download=1" target="_blank" style="float:right">排課報表下載</a>
+
+<span style="background:#fff;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;未排課&nbsp;&nbsp;</span>
+<span style="background:#8c8;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;已排課&nbsp;&nbsp;</span>
+<span style="background:#e77;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;時間衝突&nbsp;&nbsp;</span>
+<span style="background:yellow;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;時數不足&nbsp;&nbsp;</span> 
+<span style="background:#8df;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;檢核通過&nbsp;&nbsp;</span>
+<table>
+  <tr class="tr-title">
+    <td style="width:5%">科目編號</td>
+    <td style="width:11%">科目名稱</td>
+    <td style="width:5%">教室</td>
+    <td style="width:8%">講師</td>
+    <td style="width:3%">時數</td>
+    <td style="width:40%">排課</td>
+    <td style="width:9%">講酬</td>
+    <td style="width:9%">車馬$</td>
+    <td style="width:10%">確認/更新</td>
+  </tr>
 
 
   <tal:scheduling repeat="item python:context.getChildNodes()">
@@ -75,8 +81,15 @@
         <td>
           日期:
           <input placeholder="格式: 107/2/12" name="year" style="width:100px" id="date-${item/UID}">
-          起: <input placeholder="格式: 1800" style="width:100px" id="start-${item/UID}">
-          迄: <input placeholder="格式: 2100" style="width:100px" id="end-${item/UID}">
+          <tal:ignore condition="not:item/ignoreSchedule">
+            起: <input placeholder="格式: 1800" style="width:100px" id="start-${item/UID}">
+            迄: <input placeholder="格式: 2100" style="width:100px" id="end-${item/UID}">
+          </tal:ignore>
+          <tal:ignore condition="item/ignoreSchedule">
+            起: <input value="0900" placeholder="格式: 1800" style="width:100px" id="start-${item/UID}">
+            迄: <input value="1800" placeholder="格式: 2100" style="width:100px" id="end-${item/UID}">
+          </tal:ignore>
+
         </td>
 
         <td>
@@ -87,8 +100,7 @@
         </td>
 
         <td>
-          <a tal:condition="not:item/ignoreSchedule" class="update" data-uid="${item/UID}" href="javascript:voild(0)">更新</a>
-          <span tal:condition="item/ignoreSchedule">不用排課</span>
+          <a class="update ${python:'ignore' if item.ignoreSchedule else ''}" data-uid="${item/UID}" href="javascript:voild(0)">更新</a>
         </td>
       </tr>
 
@@ -159,8 +171,39 @@
     </tal:uid>
   </tal:scheduling>
 </table>
+<br>
+<a class="check-hours" href="javascript:void(0)" style="float:right">時數檢核</a> <span style="float:right">&nbsp;|&nbsp;</span>
+<a class="download" href="${context/absolute_url}/@@class_scheduling?download=1" target="_blank" style="float:right">排課報表下載</a>
 
 <script>
+/* 檢核時數 */
+$(document).ready(function(){
+    $('.check-hours').click(function(){
+        location.reload();
+    })
+
+    postData = {checkhours: true}
+    $.post('${context/absolute_url}/@@class_scheduling',
+        data=postData,
+    ).done(function(data){
+        result = JSON.parse(data)
+        for(var key in result){
+            if( result[key][0] == result[key][1] ){
+                for(i=2; i<= result[key].length; i++){
+                    $('#tr-' + result[key][i]).css('background', '#8df')
+                }
+            }else{
+                for(i=2; i<= result[key].length; i++){
+                    $('#tr-' + result[key][i]).css('background', 'yellow')
+                }
+            }
+        }
+      }
+    ).fail(function(){
+        alert('檢核失敗，請稍候再試，若一直失敗，請聯絡系統管理員')
+    })
+
+})
 
 rest = function(uid, postData){
         $.post('${context/absolute_url}/@@class_scheduling',
@@ -168,10 +211,12 @@ rest = function(uid, postData){
         ).done(function(data){
             if(data.split(':')[0] == 'overtime'){
                 $('#' + data.split(':')[1]).css('background', '#e77')
-                alert('時間衝突')
+                alert('時間衝突: ' + data.split(':')[2])
                 return
             }
-            $('#tr-' + uid).css('background', '#8c8')
+            if(data != 'Over Hours'){
+                $('#tr-' + uid).css('background', '#8c8')
+            }
             alert(data)
           }
         ).fail(function(){
