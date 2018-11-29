@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-bind="http://vue.org/v-bind"
+    xmlns:v-on="http://vue.org/v-on"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<div class="col col-md-4">
+        <tal:block replace="structure provider:plone.leftcolumn" />
+</div>
+
+<?python
+from plone import api
+portal = api.portal.get()
+trainingCenter = portal['resource']['training_center'].getChildNodes()
+?>
+
+<div class="col col-md-8">
+<h3>教室表</h3>
+
+<tal:trainingcenter repeat="center trainingCenter">
+<tal:cond define="result python:view.getScheduling(center.title)"
+          condition="result">
+<h4>${center/title}</h4>
+<table>
+  <tr class="tr-title">
+    <td>教室</td>
+    <td>時段</td>
+    <td>課程名稱／期別／科目</td>
+    <td>課輔員(值班)</td>
+    <td>講師</td>
+    <td>備註</td>
+    <td>檢視</td>
+  </tr>
+  <tr class="tr-body" tal:repeat="row result">
+    <td>${python:row['classroom']}</td>
+    <td>${python:view.adYear2Tw(row['start'].strftime('%Y/%m/%d'))} ${python:row['start'].strftime('%H:%M')}</td>
+    <td>${python:api.content.find(UID=row['uid'])[0].Title}</td>
+    <td>TODO</td>
+    <td>${python:api.content.find(UID=row['uid'])[0].getObject().teacher.to_object.title}</td>
+    <td>TODO</td>
+    <td>TODO</td>
+  </tr>
+</table>
+<hr>
+</tal:cond>
+</tal:trainingcenter>
+
+
+</div>
+
+
+<script>
+$(document).ready(function(){
+})
+</script>
+
+<script>
+var app = new Vue({
+    el: '#content-core',
+    data: {
+      message: 'Hello Vue!',
+    },
+    methods: {
+    }
+})
+</script>
+
+
+
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
