@@ -1,0 +1,101 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+
+<h3>企業訓練需求表</h3>
+
+<form>
+
+<table>
+  <tr class="tr-tile"><td>企業基本資料</td></tr>
+  <tr class="tr-body">
+    <td>公司名稱</td>
+    <td><input id="company-name" name="company-name"></td>
+  </tr>
+  <tr class="tr-body"> 
+    <td>統一編號</td>
+    <td><input id="tax-no" name="tax-no"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>負責人</td>
+    <td><input id="owner" name="owner"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>公司人數</td>
+    <td><input id="staff-amount" name="staff-amount"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>資本額</td>
+    <td><input id="capital" name="capital"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>營業額</td>
+    <td><input id="turnover" name="turnover"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>主要產品</td>
+    <td><input id="main-product" name="main-product"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>聯絡人</td>
+    <td><input id="contact" name="contact"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>聯絡人部門/職稱</td>
+    <td><input id="dep_title" name="dep_title"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>電話</td>
+    <td><input id="phone" name="phone"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>手機</td>
+    <td><input id="cell" name="cell"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>傳真</td>
+    <td><input id="fax" name="fax"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>email</td>
+    <td><input id="email" name="email"></td>
+  </tr>
+  <tr class="tr-body">
+    <td>地址</td>
+    <td><input id="address" name="address"></td>
+  </tr>
+</table>
+
+
+
+</form>
+
+
+
+
+
+
+
+
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
