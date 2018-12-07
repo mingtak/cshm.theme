@@ -29,6 +29,9 @@ current = api.user.get_current()
         <td><a href="${portal_url}/@@create_class">開新課程</a></td>
       </tr>
       <tr>
+        <td><a href="${portal_url}/classroom_overview/@@classroom_overview">教室表</a></td>
+      </tr>
+      <tr>
         <td><a href="${portal_url}/@@not_on_time">講師調課／遲到／早退登記</a></td>
       </tr>
 
