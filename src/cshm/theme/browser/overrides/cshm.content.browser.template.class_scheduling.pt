@@ -29,6 +29,8 @@
             <tal:item repeat="item python:context.trainingCenter.to_object.getChildNodes()">
               <option value="${item/UID}">${item/title}</option>
             </tal:item>
+              <option value="other">其它</option>
+              <option value="special">專班</option>
           </select>
 
   </p>
@@ -70,10 +72,12 @@
         <td>${item/id/upper}</td>
         <td>${item/title}</td>
         <td>
-          <select name="classroom" id='classroom-${item/UID}'>
+          <select name="classroom" class="classroom" id='classroom-${item/UID}'>
             <tal:classroom repeat="classroom python:context.trainingCenter.to_object.getChildNodes()">
               <option class="${classroom/UID}" value="${classroom/UID}">${classroom/title}</option>
             </tal:classroom>
+              <option class="other" value="other">其它</option>
+              <option class="special" value="special">專班</option>
           </select>
         </td>
         <td tal:content="item/teacher/to_object/title | nothing">講師</td>
@@ -111,18 +115,19 @@
           <td>${item/id/upper}</td>
           <td>${item/title}</td>
 
-          <td>    
-            <select name="classroom" id='classroom-${record/id}'>
+          <td>
+            <select name="classroom" id='classroom-${record/id}' class="classroom">
               <tal:item repeat="classroom python:context.trainingCenter.to_object.getChildNodes()">
                 <option value="${classroom/UID}"
                         tal:condition="python:record['classroom'] is None">${classroom/title}
                 </option>
-
                 <option value="${classroom/UID}"
                         tal:condition="python:record['classroom'] is not None"
                         tal:attributes="selected python:True if record['classroom'].split('-')[1] == classroom.id else False">${classroom/title}
                 </option>
               </tal:item>
+                <option value="other" tal:attributes="selected python:True if record['classroom'].endswith('other') else False">其它</option>
+                <option value="special" tal:attributes="selected python:True if record['classroom'].endswith('special') else False">專班</option>
             </select>
           </td>
 
@@ -244,7 +249,8 @@ $(document).ready(function(){
     $('#select-classroom').change(function(){
         uid = $(this).val()
         $('.not-schedule option').attr('selected', false)
-        $('.not-schedule .' + uid).attr('selected', true)
+//        $('.not-schedule .' + uid).attr('selected', true)
+        $('.not-schedule select.classroom').val(uid)
     })
 
     /* 新增一列 */
