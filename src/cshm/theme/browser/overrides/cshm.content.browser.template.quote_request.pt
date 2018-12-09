@@ -17,13 +17,17 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
+<?python
+from plone import api
+portal = api.portal.get()
+?>
 
 <h3>企業訓練需求表</h3>
 
 <form>
 
+<h4>企業基本資料</h4>
 <table>
-  <tr class="tr-tile"><td>企業基本資料</td></tr>
   <tr class="tr-body">
     <td>公司名稱</td>
     <td><input id="company-name" name="company-name"></td>
@@ -82,8 +86,40 @@
   </tr>
 </table>
 
+<h4>企業訓練需求</h4>
+<table>
+  <tr class="tr-body">
+    <td>訓練項目(多選)</td>
+    <td>
+      <tal:item repeat="item python:portal['resource']['corese_template'].getChildNodes()">
+        <span style="white-space:nowrap">
+          <input type="checkbox" value="${item/UID}" name="course-name">${item/title} /
+        </span>
+      </tal:item>
+    </td>
+  </tr>
+
+  <tr class="tr-body">
+    <td>上課地點(請選擇離您希望的上課地點最近的訓練中心)</td>
+    <td>
+      <select id='training-center' name='training-center'>
+        <tal:item repeat="item python:portal['resource']['training_center'].getChildNodes()">
+          <option value="${item/UID}">${item/title}</option>
+        </tal:item>
+      </select>
+    </td>
+  </tr>
+
+  <tr class="tr-body">
+    <td>受訓人數</td>
+    <td><input id="people-number" name="people-number" type="number"></td>
+  </tr>
 
 
+</table>
+
+
+<input type="submit" name="submit">
 </form>
 
 
