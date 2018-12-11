@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<?python
+from plone import api
+portal = api.portal.get()
+?>
+
+<h3>企業訓練需求列表</h3>
+
+<table>
+  <tr class="tr-title">
+    <td>填表日期</td>
+    <td>公司名稱</td>
+    <td>聯絡人</td>
+    <td>電話</td>
+    <td>手機</td>
+    <td>需求項目</td>
+    <td>預計上課地點</td>
+    <td>受訓人數</td>
+    <td>狀態</td>
+    <td>管理報價</td>
+  </tr>
+
+  <tr class="tr-body" tal:repeat="item view/getList">
+    <td tal:content="item/created">填表日期</td>
+    <td tal:content="item/company_name">公司名稱</td>
+    <td tal:content="item/contact">聯絡人</td>
+    <td tal:content="item/phone">電話</td>
+    <td tal:content="item/cell">手機</td>
+    <td tal:content="item/course_name">需求項目</td>
+    <td tal:content="python:api.content.find(UID=item['training_center'])[0].Title">預計上課地點</td>
+    <td tal:content="item/people_number">受訓人數</td>
+    <td tal:content="python:view.getStatus(item['status'])[0]['status']">狀態</td>
+    <td>管理報價</td>
+  </tr>
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
