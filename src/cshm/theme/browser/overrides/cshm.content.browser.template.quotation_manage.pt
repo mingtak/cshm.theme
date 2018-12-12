@@ -22,11 +22,11 @@ from plone import api
 portal = api.portal.get()
 ?>
 
-<h3>企業訓練報價管理</h3>
+<a href="${portal/absolute_url}/@@add_signature" style="float:right" target="_blank">建立報價簽呈</a>
+<span style="float:right"> | </span>
+<a href="${portal/absolute_url}/@@create_quotation?id=${view/request/form/id}" style="float:right" target="_blank">建立報價單</a>
 
-<p tal:repeat="item view/result">
-${python:item.keys()}
-</p>
+<h3>企業訓練報價管理</h3>
 
 <form method="post" action="${portal/absolute_url}/@@quotation_manage">
   <table tal:define="item python:view.result[0]"
@@ -185,6 +185,7 @@ ${python:item.keys()}
       企業訓練需求
      </p>
     </td>
+
    </tr>
    <tr class="ro1">
     <td class="ce3" style="text-align:left;width:22.58mm; ">
@@ -192,15 +193,39 @@ ${python:item.keys()}
       課程名稱
      </p>
     </td>
-    <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; ">
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
       <select name="course_uid" value="${item/course_uid}">
         <option value="${item/course_uid}">${item/course_name}</option>
+
         <option tal:repeat="course python:portal['resource']['course_template'].getChildNodes()"
                 tal:content="course/title"
-                tal:attributes="course/UID">
+                tal:attributes="value course/UID">
         </option>
+
+
       </select>
     </td>
+
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      訓練地點
+     </p>
+    </td>
+
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+      <select name="training_center" value="${item/training_center}">
+        <option tal:repeat="trainingcenter python:portal['resource']['training_center'].getChildNodes()"
+                tal:content="trainingcenter/title"
+                tal:attributes="value trainingcenter/UID;
+                                selected python:True if trainingcenter.UID() == item['training_center'] else False">
+        </option>
+
+
+      </select>
+    </td>
+
+
+
    </tr>
    <tr class="ro1">
     <td class="ce3" style="text-align:left;width:22.58mm; ">
@@ -217,21 +242,26 @@ ${python:item.keys()}
      </p>
     </td>
     <td class="ce3" style="text-align:left;width:22.58mm; ">
-     目前狀態:${python:view.getStatus(item['status'])[0]['status']} /
-     更新狀態:
+     目前狀態:${python:view.getStatus(item['status'])[0]['status']}
+<tal:cond condition="python:not view.getStatus(item['status'])[0]['next_status']">
+<input name="status" value="${item/status}" hidden>
+</tal:cond>
+
+<tal:cond condition="python:view.getStatus(item['status'])[0]['next_status']">
+     / 更新狀態:
        <select name="status" value="item/status">
          <option tal:content="python:view.getStatus(item['status'])[0]['status']"
                  tal:attributes="value item/status">
          </option>
-
          <option tal:repeat="next python:view.getStatus(item['status'])[0]['next_status'].split(',')"
                  tal:content="python:view.getStatus(next)[0]['status']"
                  tal:attributes="value next">
          </option>
        </select>
+</tal:cond>
     </td>
    </tr>
-   <tr class="ro1">
+   <tr class="ro1 tr-title">
     <td class="ce1" colspan="4" style="text-align:left;width:22.58mm; ">
      <p>
       聯絡紀錄
@@ -254,7 +284,7 @@ ${python:item.keys()}
 
 
 
-
+<!--
   <style type="text/css">
    @page {  }
     table { border-collapse:collapse; border-spacing:0; empty-cells:show }
@@ -277,6 +307,7 @@ ${python:item.keys()}
     /* ODF styles with no properties representable as CSS */
      { }
   </style>
+-->
 
 
 </metal:content-core>
