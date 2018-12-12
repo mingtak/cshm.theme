@@ -91,7 +91,7 @@ portal = api.portal.get()
   <tr class="tr-body">
     <td>訓練項目(多選)</td>
     <td>
-      <tal:item repeat="item python:portal['resource']['corese_template'].getChildNodes()">
+      <tal:item repeat="item python:portal['resource']['course_template'].getChildNodes()">
         <span style="white-space:nowrap">
           <input type="checkbox" value="${item/UID}" name="course-name">${item/title} /
         </span>

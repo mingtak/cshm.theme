@@ -1,0 +1,286 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<?python
+from plone import api
+portal = api.portal.get()
+?>
+
+<h3>企業訓練報價管理</h3>
+
+<p tal:repeat="item view/result">
+${python:item.keys()}
+</p>
+
+<form method="post" action="${portal/absolute_url}/@@quotation_manage">
+  <table tal:define="item python:view.result[0]"
+         border="0" cellpadding="0" cellspacing="0" class="ta1">
+   <colgroup>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+   </colgroup>
+   <tr class="ro1 tr-title">
+    <td class="ce2" colspan="4" style="text-align:left;width:22.58mm; ">
+     <p>
+      公司基本資料
+     </p>
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      公司名稱
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+      <input name="company_name" value="${item/company_name}">
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      統編
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+      <input name="tax_no" value="${item/tax_no}">
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      地址
+     </p>
+    </td>
+    <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; ">
+      <input name="address" value="${item/address}">
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      公司負責人
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+      <input name="owner" value="${item/owner}">
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      員工人數
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+      <input name="staff_amount" value="${item/staff_amount}">
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      資本額
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+      <input name="capital" value="${item/capital}">
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      營業額
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+      <input name="turnover" value="${item/turnover}">
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      公司主要產品
+     </p>
+    </td>
+    <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; ">
+      <input name="main_product" value="${item/main_product}">
+    </td>
+   </tr>
+   <tr class="ro1 tr-title">
+    <td class="ce1" colspan="4" style="text-align:left;width:22.58mm; ">
+     <p>
+      聯絡人資訊
+     </p>
+    </td>
+   </tr>
+   <tr class="ro2">
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      姓名
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+      <input name="contact" value="${item/contact}">
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      部門/職稱
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+      <input name="dep_title" value="${item/dep_title}">
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      電話
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+      <input name="phone" value="${item/phone}">
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      傳真
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+      <input name="fax" value="${item/fax}">
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      手機
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+      <input name="cell" value="${item/cell}">
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      email
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+      <input name="email" value="${item/email}">
+    </td>
+   </tr>
+   <tr class="ro1 tr-title">
+    <td class="ce1" colspan="4" style="text-align:left;width:22.58mm; ">
+     <p>
+      企業訓練需求
+     </p>
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      課程名稱
+     </p>
+    </td>
+    <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; ">
+      <select name="course_uid" value="${item/course_uid}">
+        <option value="${item/course_uid}">${item/course_name}</option>
+        <option tal:repeat="course python:portal['resource']['course_template'].getChildNodes()"
+                tal:content="course/title"
+                tal:attributes="course/UID">
+        </option>
+      </select>
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      訓練人數
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+      <input name="people_number" value="${item/people_number}">
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      報價狀態
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     目前狀態:${python:view.getStatus(item['status'])[0]['status']} /
+     更新狀態:
+       <select name="status" value="item/status">
+         <option tal:content="python:view.getStatus(item['status'])[0]['status']"
+                 tal:attributes="value item/status">
+         </option>
+
+         <option tal:repeat="next python:view.getStatus(item['status'])[0]['next_status'].split(',')"
+                 tal:content="python:view.getStatus(next)[0]['status']"
+                 tal:attributes="value next">
+         </option>
+       </select>
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce1" colspan="4" style="text-align:left;width:22.58mm; ">
+     <p>
+      聯絡紀錄
+     </p>
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce1" colspan="4" style="text-align:left;width:22.58mm; ">
+<textarea name="contactLog">${item/contactLog}</textarea>
+    </td>
+   </tr>
+
+<input name="id" value="${item/id}" hidden>
+<input name="update" hidden>
+
+  </table>
+<br>
+<input type="submit" name="submit">
+</form>
+
+
+
+
+  <style type="text/css">
+   @page {  }
+    table { border-collapse:collapse; border-spacing:0; empty-cells:show }
+    td, th { vertical-align:top; font-size:10pt;}
+    h1, h2, h3, h4, h5, h6 { clear:both;}
+    ol, ul { margin:0; padding:0;}
+    li { list-style: none; margin:0; padding:0;}
+    /* "li span.odfLiEnd" - IE 7 issue*/
+    li span. { clear: both; line-height:0; width:0; height:0; margin:0; padding:0; }
+    span.footnodeNumber { padding-right:1em; }
+    span.annotation_style_by_filter { font-size:95%; font-family:Arial; background-color:#fff000;  margin:0; border:0; padding:0;  }
+    span.heading_numbering { margin-right: 0.8rem; }* { margin:0;}
+    .ta1 { writing-mode:lr-tb; }
+    .ce1 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; vertical-align:middle; text-align:center ! important; }
+    .ce2 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; vertical-align:middle; text-align:center ! important; margin-left:0mm; }
+    .ce3 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; }
+    .co1 { width:22.58mm; }
+    .ro1 { height:4.52mm; }
+    .ro2 { height:5.82mm; }
+    /* ODF styles with no properties representable as CSS */
+     { }
+  </style>
+
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

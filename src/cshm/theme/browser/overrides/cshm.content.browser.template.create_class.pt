@@ -21,7 +21,7 @@
 <?python
 from plone import api
 portal = api.portal.get()
-courses = portal['resource']['corese_template'].getChildNodes()
+courses = portal['resource']['course_template'].getChildNodes()
 ?>
 <form>
   <h4>開課作業</h4>

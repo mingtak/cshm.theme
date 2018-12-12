@@ -48,7 +48,7 @@ portal = api.portal.get()
     <td tal:content="python:api.content.find(UID=item['training_center'])[0].Title">預計上課地點</td>
     <td tal:content="item/people_number">受訓人數</td>
     <td tal:content="python:view.getStatus(item['status'])[0]['status']">狀態</td>
-    <td>管理報價</td>
+    <td><a target="_blank" href="${portal/absolute_url}/@@quotation_manage?id=${item/id}">管理報價</a></td>
   </tr>
 
 </table>
