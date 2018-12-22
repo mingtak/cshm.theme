@@ -23,9 +23,103 @@ portal = api.portal.get()
 ?>
 
 
-<h3>報價單</h3>
 
 
+  <table border="0" cellpadding="0" cellspacing="0" class="ta1">
+   <colgroup>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+   </colgroup>
+   <tr class="ro1">
+    <td class="ce1 tr-title" colspan="5" style="text-align:left;width:22.58mm; ">
+     <p>${python:view.course[0].Title}      成本分析表
+     </p>
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      項次
+     </p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      名稱
+     </p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      數量
+     </p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      單價成本
+     </p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      小計
+     </p>
+    </td>
+   </tr>
+   <tr class="ro1" tal:repeat="item python:portal['resource']['material_folder'].getChildNodes()">
+    <td class="ce2" style="text-align:right; width:22.58mm; ">
+     <span tal:replace="repeat/item/number">
+      1
+     </span>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p tal:replace="item/title">
+      abc
+     </p>
+    </td>
+    <td class="ce2" style="text-align:right; width:22.58mm; ">
+     <p tal:replace="python:view.quote[0]['people_number']">
+      20
+     </p>
+    </td>
+    <td class="ce2" style="text-align:right; width:22.58mm; ">
+     <p tal:replace="python:item.price">
+      5
+     </p>
+    </td>
+    <td class="ce2" style="text-align:right; width:22.58mm; ">
+     <p tal:replace="python:float(item.price) * int(view.quote[0]['people_number'])">
+      100
+     </p>
+    </td>
+   </tr>
+  </table>
+
+
+
+
+<!--
+  <style type="text/css">
+   @page {  }
+    table { border-collapse:collapse; border-spacing:0; empty-cells:show }
+    td, th { vertical-align:top; font-size:10pt;}
+    h1, h2, h3, h4, h5, h6 { clear:both;}
+    ol, ul { margin:0; padding:0;}
+    li { list-style: none; margin:0; padding:0;}
+    /* "li span.odfLiEnd" - IE 7 issue*/
+    li span. { clear: both; line-height:0; width:0; height:0; margin:0; padding:0; }
+    span.footnodeNumber { padding-right:1em; }
+    span.annotation_style_by_filter { font-size:95%; font-family:Arial; background-color:#fff000;  margin:0; border:0; padding:0;  }
+    span.heading_numbering { margin-right: 0.8rem; }* { margin:0;}
+    .ta1 { writing-mode:lr-tb; }
+    .ce1 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; vertical-align:middle; text-align:center ! important; }
+    .ce2 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; }
+    .co1 { width:22.58mm; }
+    .ro1 { height:4.52mm; }
+    /* ODF styles with no properties representable as CSS */
+     { }
+  </style>
+-->
 </metal:content-core>
 </metal:content-core>
 

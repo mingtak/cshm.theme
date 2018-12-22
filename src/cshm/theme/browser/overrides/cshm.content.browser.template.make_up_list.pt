@@ -1,0 +1,165 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<h3>補課管理系統</h3>
+
+
+  <table border="0" cellpadding="0" cellspacing="0" class="ta1">
+   <colgroup>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+   </colgroup>
+   <tr class="ro1">
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      序號
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      學員姓名
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      課程名稱
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      原期別
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      補課期別
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      補課狀態
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      繳費狀態
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      檢視
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      刪除
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      列印
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      課表
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      查核
+     </p>
+    </td>
+   </tr>
+   <tr class="ro1" tal:repeat="item view/result">
+<tal:data define="result python:view.get_reg_data(item['origin_reg_id']);
+                  data python:result[0];
+                  course python:view.get_course(data['uid'])[0];
+                  status python:view.get_training_status(data['training_status'])[0]">
+    <td class="ce1" style="text-align:left;width:22.58mm; ">${repeat/item/number}
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">${data/name}
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">${python:course.getObject().getParentNode().title}
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">${course/Title}
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">${status/status}
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+      <a target="_blank" href="${view/context/absolute_url}/@@make_up_detail?id=${item/id}">檢視</a>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </td>
+</tal:data>
+   </tr>
+  </table>
+
+
+
+
+
+
+
+  <style type="text/css">
+   @page {  }
+    table { border-collapse:collapse; border-spacing:0; empty-cells:show }
+    td, th { vertical-align:top; font-size:10pt;}
+    h1, h2, h3, h4, h5, h6 { clear:both;}
+    ol, ul { margin:0; padding:0;}
+    li { list-style: none; margin:0; padding:0;}
+    /* "li span.odfLiEnd" - IE 7 issue*/
+    li span. { clear: both; line-height:0; width:0; height:0; margin:0; padding:0; }
+    span.footnodeNumber { padding-right:1em; }
+    span.annotation_style_by_filter { font-size:95%; font-family:Arial; background-color:#fff000;  margin:0; border:0; padding:0;  }
+    span.heading_numbering { margin-right: 0.8rem; }* { margin:0;}
+    .ta1 { writing-mode:lr-tb; }
+    .ce1 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; }
+    .co1 { width:22.58mm; }
+    .ro1 { height:4.52mm; }
+    /* ODF styles with no properties representable as CSS */
+     { }
+  </style>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

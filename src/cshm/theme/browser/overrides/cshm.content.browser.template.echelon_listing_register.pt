@@ -34,6 +34,12 @@ current = api.user.get_current()
       <tr>
         <td><a href="${portal_url}/@@not_on_time">講師調課／遲到／早退登記</a></td>
       </tr>
+      <tr>
+        <td><a href="${portal_url}/@@quotation_list">報價管理系統</a></td>
+      </tr>
+      <tr>
+        <td><a href="${portal_url}/@@make_up_list">補課管理系統</a></td>
+      </tr>
 
     </table>
 

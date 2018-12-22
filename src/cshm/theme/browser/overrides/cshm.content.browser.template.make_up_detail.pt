@@ -1,0 +1,298 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<?python
+from plone import api
+?>
+
+  <table tal:define="item python:view.getCourse(view.result[0]['uid'])[0];
+                     obj python:item.getObject()"
+         border="0" cellpadding="0" cellspacing="0" class="ta1">
+   <colgroup>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+   </colgroup>
+   <tr class="ro1">
+    <td class="ce1" colspan="6" style="text-align:left;width:22.58mm; ">
+     <p>
+      學員資料
+     </p>
+    </td>
+   </tr>
+   <tr class="ro2">
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      課程
+     </p>
+    </td>
+    <td class="ce6" colspan="5" style="text-align:left;width:22.58mm; ">
+${python:obj.getParentNode().title}
+    </td>
+   </tr>
+   <tr class="ro2">
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      期別
+     </p>
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">
+${python:obj.title}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      開訓日
+     </p>
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">
+${python:obj.courseStart}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      結訓日
+     </p>
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">
+${python:obj.courseEnd}
+    </td>
+   </tr>
+   <tr class="ro2">
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      姓名
+     </p>
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">
+${python:view.result[0]['name']}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      身份證字號
+     </p>
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">
+${python:view.result[0]['studId']}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      生日
+     </p>
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">
+${python:view.result[0]['birthday']}
+    </td>
+   </tr>
+   <tr class="ro2">
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      電話
+     </p>
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">
+${python:view.result[0]['phone']}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      手機
+     </p>
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">
+${python:view.result[0]['cellphone']}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      傳真
+     </p>
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">
+${python:view.result[0]['fax']}
+    </td>
+   </tr>
+   <tr class="ro3">
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      Email
+     </p>
+    </td>
+    <td class="ce6" colspan="5" style="text-align:left;width:22.58mm; ">
+個人: <a href="mailto:${python:view.result[0]['priv_email']}">${python:view.result[0]['priv_email']}</a>
+公司: <a href="mailto:${python:view.result[0]['com_email']">${python:view.result[0]['com_email']}</a>
+    </td>
+   </tr>
+   <tr class="ro2">
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      證書編號
+     </p>
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">待補課
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      學科
+     </p>
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">0
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      術科
+     </p>
+    </td>
+    <td class="ce4" style="text-align:left;width:22.58mm; ">0
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce1" colspan="6" style="text-align:left;width:22.58mm; ">
+     <p>
+      缺課紀錄
+     </p>
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce3" colspan="6" style="text-align:left;width:22.58mm; ">
+     <p>
+<form method="get">
+  <select name="subject">
+    <tal:option repeat="subject python:view.getSubjects(obj.getParentNode().title)">
+      <option value="${subject/UID}">${subject/title}</option>
+    </tal:option>
+  </select>
+  <input name="add_make_up" hidden>
+  <input name="id" value="${python:view.request.form.get('id')}" hidden>
+  <input name="origin_reg_id" value="${python:view.result[0]['reg_course_id']}" hidden>
+  <input type="submit" name="submit" value="新增缺課">
+</form>
+
+
+
+     </p>
+    </td>
+   </tr>
+   <tr class="ro2">
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      序號
+     </p>
+    </td>
+    <td class="ce9" colspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      科目名稱
+     </p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      時數
+     </p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      刪除
+     </p>
+    </td>
+   </tr>
+   <tr class="ro1" tal:repeat="makeItem python:view.getMakeUpList()">
+
+<tal:subject define="sub_obj python:api.content.find(UID=makeItem['subject_name'])[0].getObject()">
+
+    <td class="ce4" style="text-align:left;width:22.58mm; ">
+${repeat/makeItem/number}
+    </td>
+    <td class="ce5" colspan="3" style="text-align:left;width:22.58mm; ">
+${sub_obj/title}
+    </td>
+    <td class="ce4" style="text-align:left;width:22.58mm; ">
+${sub_obj/hours}
+    </td>
+<form>
+    <td class="ce4" style="text-align:left;width:22.58mm; ">
+<input name="del_make_up" hidden>
+<input name="id" value="${python:view.request.form.get('id')}" hidden>
+<input name="make_up_detail_id" value="${makeItem/id}" hidden>
+<input type="submit" name="submit" value="刪除">
+    </td>
+</form>
+</tal:subject>
+
+   </tr>
+   <tr class="ro1">
+    <td class="ce1" colspan="6" style="text-align:left;width:22.58mm; ">
+     <p>
+      登記補課
+     </p>
+    </td>
+   </tr>
+   <tr class="ro1">
+    <td class="ce5" colspan="6" style="text-align:left;width:22.58mm; ">
+
+<form>
+    <select name="uid">
+    <tal:course repeat="item python:view.getSameNameCourse(obj.getParentNode().title)">
+      <option value="${item/UID}">${item/title}</option>
+    </tal:course>
+    </select>
+    <input name="id" value="${python:view.request.form.get('id')}" hidden>
+    <input name="origin_reg_id" value="${python:view.result[0]['reg_course_id']}" hidden>
+    <input name="reg_make_up" hidden>
+    <input type="submit" name="submit" value="登記補課">
+</form>
+
+
+    </td>
+   </tr>
+  </table>
+
+  <style type="text/css">
+   @page {  }
+	table { border-collapse:collapse; border-spacing:0; empty-cells:show }
+	td, th { vertical-align:top; font-size:10pt;}
+	h1, h2, h3, h4, h5, h6 { clear:both }
+	ol, ul { margin:0; padding:0;}
+	li { list-style: none; margin:0; padding:0;}
+	<!-- "li span.odfLiEnd" - IE 7 issue-->
+	li span. { clear: both; line-height:0; width:0; height:0; margin:0; padding:0; }
+	span.footnodeNumber { padding-right:1em; }
+	span.annotation_style_by_filter { font-size:95%; font-family:Arial; background-color:#fff000;  margin:0; border:0; padding:0;  }
+	* { margin:0;}
+	.ta1 { writing-mode:lr-tb; }
+	.ce1 { font-family:Liberation Sans; background-color:#ffff00; border-width:0.0133cm; border-style:solid; border-color:#000000; vertical-align:middle; text-align:center ! important; }
+	.ce2 { font-family:Liberation Serif; border-width:0.0133cm; border-style:solid; border-color:#000000; font-size:10pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; }
+	.ce3 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; vertical-align:middle; text-align:left ! important; margin-left:0mm; }
+	.ce4 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; }
+	.ce5 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; vertical-align:middle; text-align:center ! important; }
+	.ce6 { font-family:Liberation Serif; border-width:0.0133cm; border-style:solid; border-color:#000000; vertical-align:middle; text-align:center ! important; font-size:10pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; }
+	.ce7 { font-family:Liberation Serif; border-width:0.0133cm; border-style:solid; border-color:#000000; font-size:10pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; }
+	.ce8 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; text-align:left ! important; margin-left:0mm; }
+	.ce9 { font-family:Liberation Serif; border-width:0.0133cm; border-style:solid; border-color:#000000; vertical-align:middle; text-align:center ! important; font-size:10pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; }
+	.co1 { width:22.58mm; }
+	.ro1 { height:4.52mm; }
+	.ro2 { height:4.92mm; }
+	.ro3 { height:4.57mm; }
+	<!-- ODF styles with no properties representable as CSS -->
+	 { }
+  </style>
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

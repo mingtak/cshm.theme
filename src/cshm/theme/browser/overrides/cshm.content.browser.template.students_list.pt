@@ -70,7 +70,11 @@
 <div tal:content="structure python:context.discountInfo_no_open.replace('\n', '<br>') if context.discountInfo_no_open else ''"></div>
 <hr>
 
-<h4>正取學員</h4>
+<h4>正取學員名單</h4>
+<span style="background:#fff;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;正取&nbsp;&nbsp;</span>
+<span style="background:#8c8;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;待補課&nbsp;&nbsp;</span>
+<span style="background:#e77;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;保留&nbsp;&nbsp;</span>
+
 <table border="1" id="admit-list" cellspacing="0" cellpadding="0">
   <thead>
     <tr class="tr-title">
@@ -85,7 +89,7 @@
   </thead>
   <tbody>
    <tal:tr repeat="item view/admit">
-    <tr tal:attributes="class string:on_training_${item/on_training}">
+    <tr tal:attributes="class string:on_training_${item/on_training} training_status_${item/training_status}">
       <td  align='center' valign="middle">
         <tal:cond condition="not:item/isReserve">
           <input class="seatNo" id="seatNo-${item/seatNo}" value="${item/seatNo}" data-id="${item/id}" style="width:50px">

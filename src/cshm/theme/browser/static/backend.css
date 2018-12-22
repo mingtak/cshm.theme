@@ -2,6 +2,10 @@ tr.on_training_2 {
     background-color: #f77;
 }
 
+tr.training_status_3 {
+    background-color: #8c8;
+}
+
 .tr-head {
     background: #4CAF50;
     color: #fff;
