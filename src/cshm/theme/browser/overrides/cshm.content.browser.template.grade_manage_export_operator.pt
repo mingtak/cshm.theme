@@ -19,17 +19,10 @@
                     tal:define="toc context/table_of_contents|nothing;">
 
 <h3>中國勞工安全衛生管理學會</h3>
-<h4>學員訓後考照追蹤表</h4>
+<h4>學員訓後考照追蹤表(操作類)</h4>
 
 <b>訓練班</b>:${python:context.getParentNode().title} <b>期別</b>:${context/title} <b>結訓日期</b>: YYYY/MM/DD <b>完訓人數</b>:OO
-<br>
-<a target="_blank" href="${context/absolute_url}/@@grade_manage_export_normal">學員訓後考照追蹤表</a>
-<span> | </span>
-<a target="_blank" href="${context/absolute_url}/@@grade_manage_export_operator">學員訓後考照追蹤表(操作類)</a>
 
-
-
-<form method="POST">
   <table border="0" cellpadding="0" cellspacing="0" class="ta1">
    <colgroup>
     <col width="99"/>
@@ -69,35 +62,23 @@
     </td>
 
 <tal:step define="result view/getStep">
-    <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; " tal:repeat="step result">
+    <td class="ce1" colspan="2" style="text-align:left;width:22.58mm; " tal:repeat="step result">
      <p>
       第${repeat/step/number}梯
      </p>
     </td>
-    <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; ">
-     <p>
-      第${python:len(result)+1}梯
-     </p>
-    </td>
 </tal:step>
-
-
    </tr>
 
 
    <tr class="ro2">
 <tal:step repeat="step view/getStep">
-    <td class="ce4" colspan="3" style="text-align:right; width:22.58mm; ">
+    <td class="ce4" colspan="2" style="text-align:right; width:22.58mm; ">
      <p>
-      <input type="date" name="olddate-${python:step[0]}" value="${python:view.getExamDate(step[0])[0]['exam_date']}">
+      ${python:view.getExamDate(step[0])[0]['exam_date']}
      </p>
     </td>
 </tal:step>
-    <td class="ce4" colspan="3" style="text-align:right; width:22.58mm; ">
-     <p>
-      <input type="date" name="newdate" value="">
-     </p>
-    </td>
    </tr>
 
 
@@ -105,11 +86,6 @@
 <tal:step repeat="step view/getStep">   
     <td class="ce2" style="text-align:left;width:22.58mm; ">
      <p>
-      未報考
-     </p>
-    </td>
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-     <p>
       通過
      </p>
     </td>
@@ -120,21 +96,6 @@
     </td>
 </tal:step>
 
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-     <p>
-      未報考
-     </p>
-    </td>
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-     <p>
-      通過
-     </p>
-    </td>
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-     <p>
-      不通過
-     </p>
-    </td>
    </tr>
 
 
@@ -169,47 +130,83 @@ ${item/license_code}
     </td>
 
 
-<!-- 前期資料 -->
 <!-- name format: old-梯-reg_id-grade_mana.id -->
 
 <tal:step repeat="step view/getStep">
     <td class="ce2" style="text-align:left;width:22.58mm; ">
-<input type="radio" class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" value="1"
-       tal:attributes="checked python:True if grade.has_key(step[0]) and grade[step[0]][1] == 1 else False">
+<span tal:content="python:'V' if grade.has_key(step[0]) and grade[step[0]][1] == 2 else '&nbsp;'"></span>
     </td>
     <td class="ce2" style="text-align:left;width:22.58mm; ">
-<input type="radio" class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" value="2" 
-       tal:attributes="checked python:True if grade.has_key(step[0]) and grade[step[0]][1] == 2 else False">
-    </td>
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-<input type="radio" class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" value="3" 
-       tal:attributes="checked python:True if grade.has_key(step[0]) and grade[step[0]][1] == 3 else False">
+<span tal:content="python:'V' if grade.has_key(step[0]) and grade[step[0]][1] == 3 else '&nbsp;'"></span>
     </td>
 </tal:step>
 
-
-<!-- 新增一梯 -->
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-<input type="radio" class="new-${item/id}" name="new-${item/id}" value="1">
-    </td>
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-<input type="radio" class="new-${item/id}" name="new-${item/id}" value="2">
-    </td>
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-<input type="radio" class="new-${item/id}" name="new-${item/id}" value="3">
-    </td>
-
-
-
      </tal:grade>
    </tr>
+
+
+   <tr class="ro2">
+    <td class="ce1" colspan="5" rowspan="2" style="text-align:left;width:22.58mm; ">
+     <p>
+      小計
+     </p>
+    </td>
+
+<tal:step repeat="step view/getStep">
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      通過人數
+     </p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+      不通過人數
+     </p>
+    </td>
+</tal:step>
+
+   </tr>
+   <tr class="ro2">
+
+<tal:step repeat="step view/getStep">
+  <tal:status define="value python:view.getSum(step[0])">
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+${python:value[2]}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+${python:value[3]}
+    </td>
+  </tal:status>
+</tal:step>
+
+   </tr>
+
+
+   <tr class="ro3">
+    <td class="ce1" colspan="5" style="text-align:left;width:22.58mm; ">
+     <p>
+      承辦人簽核
+     </p>
+    </td>
+<tal:step repeat="step view/getStep">
+    <td class="ce1" colspan="2" style="text-align:left;width:22.58mm; ">
+    </td>
+</tal:step>
+   </tr>
+   <tr class="ro3">
+    <td class="ce1" colspan="5" style="text-align:left;width:22.58mm; ">
+     <p>
+      部門主管簽核
+     </p>
+    </td>
+<tal:step repeat="step view/getStep">
+    <td class="ce1" colspan="2" style="text-align:left;width:22.58mm; ">
+    </td>
+</tal:step>
+   </tr>
+
+
   </table>
-
-<input name="update" hidden>
-<input type="submit" name="submit" value="更新追蹤表">
-
-
-</form>
 
 
 <script>
