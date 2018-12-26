@@ -35,27 +35,27 @@
     <col width="99"/>
    </colgroup>
    <tr class="ro1">
-    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+    <td class="ce1" rowspan="2" style="text-align:left;width:22.58mm; ">
      <p>
       座號
      </p>
     </td>
-    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+    <td class="ce1" rowspan="2" style="text-align:left;width:22.58mm; ">
      <p>
       姓名
      </p>
     </td>
-    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+    <td class="ce1" rowspan="2" style="text-align:left;width:22.58mm; ">
      <p>
       身分證字號
      </p>
     </td>
-    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+    <td class="ce1" rowspan="2" style="text-align:left;width:22.58mm; ">
      <p>
       出生年月日
      </p>
     </td>
-    <td class="ce1" rowspan="3" style="text-align:left;width:37.31mm; ">
+    <td class="ce1" rowspan="2" style="text-align:left;width:37.31mm; ">
      <p>
       期滿證明證書編號
      </p>
@@ -65,17 +65,6 @@
     <td class="ce1" colspan="2" style="text-align:left;width:22.58mm; " tal:repeat="step result">
      <p>
       第${repeat/step/number}梯
-     </p>
-    </td>
-</tal:step>
-   </tr>
-
-
-   <tr class="ro2">
-<tal:step repeat="step view/getStep">
-    <td class="ce4" colspan="2" style="text-align:right; width:22.58mm; ">
-     <p>
-      ${python:view.getExamDate(step[0])[0]['exam_date']}
      </p>
     </td>
 </tal:step>
