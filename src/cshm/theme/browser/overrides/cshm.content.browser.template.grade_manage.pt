@@ -82,6 +82,18 @@
 </tal:step>
 
 
+    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      姓名
+     </p>
+    </td>
+    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      座號
+     </p>
+    </td>
+
+
    </tr>
 
 
@@ -199,6 +211,18 @@ ${item/license_code}
 <input type="radio" class="new-${item/id}" name="new-${item/id}" value="3">
     </td>
 
+
+
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+${item/name}
+     </p>
+    </td>
+    <td class="ce2" style="text-align:right; width:22.58mm; ">
+     <p>
+${item/seatNo}
+     </p>
+    </td>
 
 
      </tal:grade>
