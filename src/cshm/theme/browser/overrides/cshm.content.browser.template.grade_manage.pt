@@ -68,12 +68,17 @@
      </p>
     </td>
 
-<tal:step define="result view/getStep">
-    <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; " tal:repeat="step result">
-     <p>
-      第${repeat/step/number}梯
-     </p>
-    </td>
+<tal:step define="result view/getStep;
+                  total python:len(result)">
+  <tal:td repeat="step result">
+    <tal:cond condition="python:repeat['step'].number > (total-3)"> <!-- 只顯示最新3梯 -->
+      <td class="ce1" colspan="3" style="text-align:left;width:22.58mm;">
+       <p>
+        第${repeat/step/number}梯
+       </p>
+      </td>
+    </tal:cond>
+  </tal:td>
     <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; ">
      <p>
       第${python:len(result)+1}梯
@@ -98,13 +103,16 @@
 
 
    <tr class="ro2">
-<tal:step repeat="step view/getStep">
+<tal:step define="result view/getStep; total python:len(result)" repeat="step result">
+  <tal:cond condition="python:repeat['step'].number > (total-3) and 1"> <!-- 只顯示最新3梯 -->
     <td class="ce4" colspan="3" style="text-align:right; width:22.58mm; ">
      <p>
       <input type="date" name="olddate-${python:step[0]}" value="${python:view.getExamDate(step[0])[0]['exam_date']}">
      </p>
     </td>
+  </tal:cond>
 </tal:step>
+
     <td class="ce4" colspan="3" style="text-align:right; width:22.58mm; ">
      <p>
       <input type="date" name="newdate" value="">
@@ -114,7 +122,8 @@
 
 
    <tr class="ro2">
-<tal:step repeat="step view/getStep">   
+<tal:step define="result view/getStep; total python:len(result)" repeat="step result">
+  <tal:cond condition="python:repeat['step'].number > (total-3) and 1"> <!-- 只顯示最新3梯 -->
     <td class="ce2" style="text-align:left;width:22.58mm; ">
      <p>
       未報考
@@ -130,6 +139,7 @@
       不通過
      </p>
     </td>
+  </tal:cond>
 </tal:step>
 
     <td class="ce2" style="text-align:left;width:22.58mm; ">
@@ -184,7 +194,9 @@ ${item/license_code}
 <!-- 前期資料 -->
 <!-- name format: old-梯-reg_id-grade_mana.id -->
 
-<tal:step repeat="step view/getStep">
+<tal:step define="result view/getStep; total python:len(result)" repeat="step result">
+  <tal:cond condition="python:repeat['step'].number > (total-3) and 1"> <!-- 只顯示最新3梯 -->
+
     <td class="ce2" style="text-align:left;width:22.58mm; ">
 <input type="radio" class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" value="1"
        tal:attributes="checked python:True if grade.has_key(step[0]) and grade[step[0]][1] == 1 else False">
@@ -197,6 +209,8 @@ ${item/license_code}
 <input type="radio" class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" value="3" 
        tal:attributes="checked python:True if grade.has_key(step[0]) and grade[step[0]][1] == 3 else False">
     </td>
+
+  </tal:cond>
 </tal:step>
 
 
