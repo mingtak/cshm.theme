@@ -1,3 +1,7 @@
+.template-grade_manage2 input[type="number"] {
+    width: 70px;
+}
+
 tr.on_training_2 {
     background-color: #f77;
 }

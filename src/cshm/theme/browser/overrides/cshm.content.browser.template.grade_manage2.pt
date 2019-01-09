@@ -90,7 +90,7 @@
     </td>
     <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
      <p>
-      姓名
+      下載通知書
      </p>
     </td>
     <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
@@ -226,8 +226,10 @@ ${item/license_code}
      </p>
     </td>
     <td class="ce2" style="text-align:left;width:22.58mm; ">
-     <p>
-${item/name}
+     <p tal:define="status python:view.getStatus(item['id']);
+                    score python:view.getScore(item['id'])">
+<a target="_blank"
+   href="${context/absolute_url}/@@grade_manage2_export?name=${item/name}&siteno=${item/seatNo}&status=${python:score[0]}&score_1=${python:score[1]}&score_2=${python:score[2]}&score_3=${python:score[3]}&exam_date=${python:score[4]}">下載</a>
      </p>
     </td>
     <td class="ce2" style="text-align:right; width:22.58mm; ">
