@@ -1,0 +1,291 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<h3>中國勞工安全衛生管理學會</h3>
+<h4>學員訓後考照追蹤表</h4>
+
+<b>訓練班</b>:${python:context.getParentNode().title} <b>期別</b>:${context/title} <b>結訓日期</b>: YYYY/MM/DD <b>完訓人數</b>:OO
+<br>
+<a target="_blank" href="${context/absolute_url}/@@grade_manage2_export">匯出學員成績通知單</a>
+
+
+<form method="POST">
+  <table border="0" cellpadding="0" cellspacing="0" class="ta1">
+   <colgroup>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="163"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+   </colgroup>
+   <tr class="ro1">
+    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      講習單位代碼
+     </p>
+    </td>
+    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      姓名
+     </p>
+    </td>
+    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      身分證字號
+     </p>
+    </td>
+    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      出生年月日
+     </p>
+    </td>
+    <td class="ce1" rowspan="3" style="text-align:left;width:37.31mm; ">
+     <p>
+      期滿證明證書編號
+     </p>
+    </td>
+
+<tal:step define="result view/getStep; total python:len(result)">
+ <tal:td repeat="step result">
+  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新3梯 -->
+    <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      第${repeat/step/number}梯
+     </p>
+    </td>
+  </tal:cond>
+ </tal:td>
+    <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      第${python:len(result)+1}梯
+     </p>
+    </td>
+</tal:step>
+
+
+    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      狀態
+     </p>
+    </td>
+    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      下載通知書
+     </p>
+    </td>
+    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
+      座號
+     </p>
+    </td>
+
+
+   </tr>
+
+
+   <tr class="ro2">
+<tal:step define="result view/getStep; total python:len(result)" repeat="step result">
+  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新3梯 -->
+
+    <td class="ce4" colspan="3" style="text-align:right; width:22.58mm; ">
+     <p>
+      <input type="date" name="olddate-${python:step[0]}" value="${python:view.getExamDate(step[0])[0]['exam_date']}">
+     </p>
+    </td>
+  </tal:cond>
+</tal:step>
+    <td class="ce4" colspan="3" style="text-align:right; width:22.58mm; ">
+     <p>
+      <input type="date" name="newdate" value="">
+     </p>
+    </td>
+   </tr>
+
+
+   <tr class="ro2">
+<tal:step define="result view/getStep; total python:len(result)" repeat="step result">
+  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新3梯 -->
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>室內空氣品質管理相關法規與實務</p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>室內空氣品質改善管理與測定</p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>室內空氣品質巡查檢驗</p>
+    </td>
+  </tal:cond>
+</tal:step>
+
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>室內空氣品質管理相關法規與實務</p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>室內空氣品質改善管理與測定</p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>室內空氣品質巡查檢驗</p>
+    </td>
+   </tr>
+
+
+
+   <tr class="ro2" tal:repeat="item python:view.getUidCourseData()">
+    <tal:grade define="grade python:view.getGrade(item['id'])">
+
+    <td class="ce2" style="text-align:right; width:22.58mm; ">
+     <p>
+${item/seatNo}QQ
+<input name="study-no-${item/id}">
+     </p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+${item/name}
+     </p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+${item/studId}
+     </p>
+    </td>
+    <td class="ce3" style="text-align:right; width:22.58mm; ">
+     <p>
+${item/birthday}
+     </p>
+    </td>
+    <td class="ce2" style="text-align:left;width:37.31mm; ">
+     <p>
+${item/license_code}
+     </p>
+    </td>
+
+
+<!-- 前期資料 -->
+<!-- name format: old-梯-reg_id-grade_mana.id -->
+
+<tal:step define="result view/getStep; total python:len(result)" repeat="step result">
+  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新3梯 -->
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+<input class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" type="number" min="0" max="100"
+       tal:attributes="value python:grade[step[0]][1] if grade.has_key(step[0]) else ''">
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+<input class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" type="number" min="0" max="100"
+       tal:attributes="value python:grade[step[0]][2] if grade.has_key(step[0]) else ''">
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+<input class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" type="number" min="0" max="100"
+       tal:attributes="value python:grade[step[0]][3] if grade.has_key(step[0]) else ''">
+    </td>
+  </tal:cond>
+</tal:step>
+
+
+<!-- 新增一梯 -->
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+<input type="number" min="0" max="100" class="new-${item/id}" name="new-${item/id}">
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+<input type="number" min="0" max="100" class="new-${item/id}" name="new-${item/id}">
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+<input type="number" min="0" max="100" class="new-${item/id}" name="new-${item/id}">
+    </td>
+
+
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p tal:define="status python:view.getStatus(item['id']);
+                    statusList python:view.getStatusList()">
+<select name="status-${item/id}"
+        tal:attributes="value1 python:'1' if not status else status[0]['value']">
+    <option tal:repeat="statusItem statusList"
+            tal:content="statusItem/status"
+            tal:attributes="value statusItem/id;
+                            selected python:False if not status else (statusItem['id'] == status[0]['value'])">
+</select>
+     </p>
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p tal:define="status python:view.getStatus(item['id']);
+                    score python:view.getScore(item['id'])">
+<a target="_blank"
+   href="${context/absolute_url}/@@grade_manage2_export?name=${item/name}&siteno=${item/seatNo}&status=${python:score[0]}&score_1=${python:score[1]}&score_2=${python:score[2]}&score_3=${python:score[3]}&exam_date=${python:score[4]}">下載</a>
+     </p>
+    </td>
+    <td class="ce2" style="text-align:right; width:22.58mm; ">
+     <p>
+${item/seatNo}
+     </p>
+    </td>
+
+
+     </tal:grade>
+   </tr>
+  </table>
+
+<input name="update" hidden>
+<input type="submit" name="submit" value="更新追蹤表">
+
+
+</form>
+
+
+<script>
+$(document).ready(function(){
+
+
+})
+</script>
+
+
+
+  <style type="text/css">
+   @page {  }
+    table { border-collapse:collapse; border-spacing:0; empty-cells:show }
+    td, th { vertical-align:top; font-size:10pt;}
+    h1, h2, h3, h4, h5, h6 { clear:both;}
+    ol, ul { margin:0; padding:0;}
+    li { list-style: none; margin:0; padding:0;}
+    /* "li span.odfLiEnd" - IE 7 issue*/
+    li span. { clear: both; line-height:0; width:0; height:0; margin:0; padding:0; }
+    span.footnodeNumber { padding-right:1em; }
+    span.annotation_style_by_filter { font-size:95%; font-family:Arial; background-color:#fff000;  margin:0; border:0; padding:0;  }
+    span.heading_numbering { margin-right: 0.8rem; }* { margin:0;}
+    .ta1 { writing-mode:lr-tb; }
+    .ce1 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; vertical-align:middle; text-align:center ! important; }
+    .ce2 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; }
+    .ce3 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; }
+    .ce4 { font-family:Liberation Sans; border-width:0.0133cm; border-style:solid; border-color:#000000; vertical-align:middle; text-align:center ! important; }
+    .co1 { width:22.58mm; }
+    .co2 { width:37.31mm; }
+    .ro1 { height:5.56mm; }
+    .ro2 { height:4.52mm; }
+    /* ODF styles with no properties representable as CSS */
+     { }
+  </style>
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
