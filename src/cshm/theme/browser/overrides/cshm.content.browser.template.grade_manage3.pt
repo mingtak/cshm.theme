@@ -17,6 +17,10 @@
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
+<?python
+from plone import api
+portal = api.portal.get()
+?>
 
 <h3>中國勞工安全衛生管理學會</h3>
 <h4>學員訓後考照追蹤表</h4>
@@ -51,31 +55,34 @@
     </td>
     <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
      <p>
-      身分證字號
+      首考講習編號
      </p>
     </td>
     <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
      <p>
-      出生年月日
+      補考講習編號
      </p>
     </td>
     <td class="ce1" rowspan="3" style="text-align:left;width:37.31mm; ">
      <p>
-      期滿證明證書編號
+      考區名稱
      </p>
     </td>
+
+
+
 
 <tal:step define="result view/getStep; total python:len(result)">
  <tal:td repeat="step result">
   <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新3梯 -->
-    <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; ">
+    <td class="ce1" colspan="2" style="text-align:left;width:22.58mm; ">
      <p>
       第${repeat/step/number}梯
      </p>
     </td>
   </tal:cond>
  </tal:td>
-    <td class="ce1" colspan="3" style="text-align:left;width:22.58mm; ">
+    <td class="ce1" colspan="2" style="text-align:left;width:22.58mm; ">
      <p>
       第${python:len(result)+1}梯
      </p>
@@ -105,16 +112,16 @@
 
    <tr class="ro2">
 <tal:step define="result view/getStep; total python:len(result)" repeat="step result">
-  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新3梯 -->
+  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新2梯 -->
 
-    <td class="ce4" colspan="3" style="text-align:right; width:22.58mm; ">
+    <td class="ce4" colspan="2" style="text-align:right; width:22.58mm; ">
      <p>
       <input type="date" name="olddate-${python:step[0]}" value="${python:view.getExamDate(step[0])[0]['exam_date']}">
      </p>
     </td>
   </tal:cond>
 </tal:step>
-    <td class="ce4" colspan="3" style="text-align:right; width:22.58mm; ">
+    <td class="ce4" colspan="2" style="text-align:right; width:22.58mm; ">
      <p>
       <input type="date" name="newdate" value="">
      </p>
@@ -124,39 +131,33 @@
 
    <tr class="ro2">
 <tal:step define="result view/getStep; total python:len(result)" repeat="step result">
-  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新3梯 -->
+  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新2梯 -->
     <td class="ce2" style="text-align:left;width:22.58mm; ">
-     <p>室內空氣品質管理相關法規與實務</p>
+     <p>第一類科成績</p>
     </td>
     <td class="ce2" style="text-align:left;width:22.58mm; ">
-     <p>室內空氣品質改善管理與測定</p>
-    </td>
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-     <p>室內空氣品質巡查檢驗</p>
+     <p>第二類科成績</p>
     </td>
   </tal:cond>
 </tal:step>
 
     <td class="ce2" style="text-align:left;width:22.58mm; ">
-     <p>室內空氣品質管理相關法規與實務</p>
+     <p>第一類科成績</p>
     </td>
     <td class="ce2" style="text-align:left;width:22.58mm; ">
-     <p>室內空氣品質改善管理與測定</p>
-    </td>
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-     <p>室內空氣品質巡查檢驗</p>
+     <p>第二類科成績</p>
     </td>
    </tr>
 
 
 
    <tr class="ro2" tal:repeat="item python:view.getUidCourseData()">
-    <tal:grade define="grade python:view.getGrade(item['id'])">
+    <tal:grade define="grade python:view.getGrade(item['id']);
+                       gradeInfo python:view.getGradeInfo(item['id'])">
 
     <td class="ce2" style="text-align:right; width:22.58mm; ">
      <p>
-${item/seatNo}QQ
-<input name="study-no-${item/id}">
+<input name="study_no-${item/id}" value="${gradeInfo/study_no}">
      </p>
     </td>
     <td class="ce2" style="text-align:left;width:22.58mm; ">
@@ -166,17 +167,17 @@ ${item/name}
     </td>
     <td class="ce2" style="text-align:left;width:22.58mm; ">
      <p>
-${item/studId}
+<input name="first_exam_sn-${item/id}" value="${gradeInfo/first_exam_sn}">
      </p>
     </td>
     <td class="ce3" style="text-align:right; width:22.58mm; ">
      <p>
-${item/birthday}
+<input name="exam_sn-${item/id}" value="${gradeInfo/exam_sn}">
      </p>
     </td>
     <td class="ce2" style="text-align:left;width:37.31mm; ">
      <p>
-${item/license_code}
+${python:api.content.find(UID=item['uid'])[0].getObject().trainingCenter.to_object.title}
      </p>
     </td>
 
@@ -185,7 +186,7 @@ ${item/license_code}
 <!-- name format: old-梯-reg_id-grade_mana.id -->
 
 <tal:step define="result view/getStep; total python:len(result)" repeat="step result">
-  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新3梯 -->
+  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新2梯 -->
     <td class="ce2" style="text-align:left;width:22.58mm; ">
 <input class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" type="number" min="0" max="100"
        tal:attributes="value python:grade[step[0]][1] if grade.has_key(step[0]) else ''">
@@ -194,18 +195,11 @@ ${item/license_code}
 <input class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" type="number" min="0" max="100"
        tal:attributes="value python:grade[step[0]][2] if grade.has_key(step[0]) else ''">
     </td>
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-<input class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" type="number" min="0" max="100"
-       tal:attributes="value python:grade[step[0]][3] if grade.has_key(step[0]) else ''">
-    </td>
   </tal:cond>
 </tal:step>
 
 
 <!-- 新增一梯 -->
-    <td class="ce2" style="text-align:left;width:22.58mm; ">
-<input type="number" min="0" max="100" class="new-${item/id}" name="new-${item/id}">
-    </td>
     <td class="ce2" style="text-align:left;width:22.58mm; ">
 <input type="number" min="0" max="100" class="new-${item/id}" name="new-${item/id}">
     </td>
@@ -229,8 +223,7 @@ ${item/license_code}
     <td class="ce2" style="text-align:left;width:22.58mm; ">
      <p tal:define="status python:view.getStatus(item['id']);
                     score python:view.getScore(item['id'])">
-<a target="_blank"
-   href="${context/absolute_url}/@@grade_manage2_export?name=${item/name}&siteno=${item/seatNo}&status=${python:score[0]}&score_1=${python:score[1]}&score_2=${python:score[2]}&score_3=${python:score[3]}&exam_date=${python:score[4]}">下載</a>
+<a target="_blank" href="#">下載</a>
      </p>
     </td>
     <td class="ce2" style="text-align:right; width:22.58mm; ">
@@ -238,9 +231,9 @@ ${item/license_code}
 ${item/seatNo}
      </p>
     </td>
-
-
      </tal:grade>
+
+
    </tr>
   </table>
 
