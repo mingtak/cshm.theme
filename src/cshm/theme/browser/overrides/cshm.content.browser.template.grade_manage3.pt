@@ -23,7 +23,7 @@ portal = api.portal.get()
 ?>
 
 <h3>中國勞工安全衛生管理學會</h3>
-<h4>學員訓後考照追蹤表</h4>
+<h4>工地主任220小時評定追蹤</h4>
 
 <b>訓練班</b>:${python:context.getParentNode().title} <b>期別</b>:${context/title} <b>結訓日期</b>: YYYY/MM/DD <b>完訓人數</b>:OO
 <br>

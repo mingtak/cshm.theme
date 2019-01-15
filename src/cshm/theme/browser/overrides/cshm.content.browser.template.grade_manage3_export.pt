@@ -1,0 +1,209 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<h3>中國勞工安全衛生管理學會</h3>
+<h4>工地主任220小時評定考試　考生報名表　${python:view.request.form.get('exam_date')} 考試</h4>
+<form>
+請選擇考試日期<input type="date" name="exam_date" style="width:15%">
+<input type="submit" name="submit">
+<br><br>
+</form>
+
+  <table border="0" cellpadding="0" cellspacing="0" class="ta1">
+   <colgroup>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="99"/>
+   </colgroup>
+   <tr class="ro1">
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      講　　習
+     </p>
+     <p>
+      單位代碼
+     </p>
+    </td>
+    <td class="ce3" style="text-align:left;width:22.58mm; ">
+     <p>
+      首　考
+     </p>
+     <p>
+      講習編號
+     </p>
+    </td>
+    <td class="ce5" style="text-align:left;width:22.58mm; ">
+     <p>
+      補　考
+     </p>
+     <p>
+      講習編號
+     </p>
+    </td>
+    <td class="ce6" style="text-align:left;width:22.58mm; ">
+     <p>
+      補　考
+     </p>
+     <p>
+      <span class="T1">
+       講習學號
+      </span>
+     </p>
+    </td>
+    <td class="ce8" style="text-align:left;width:22.58mm; ">
+     <p>
+      考區名稱
+     </p>
+    </td>
+    <td class="ce9" style="text-align:left;width:22.58mm; ">
+     <p>
+      身分證字號
+     </p>
+    </td>
+    <td class="ce9" style="text-align:left;width:22.58mm; ">
+     <p>
+      姓名
+     </p>
+    </td>
+    <td class="ce9" style="text-align:left;width:22.58mm; ">
+     <p>
+      性別
+     </p>
+    </td>
+    <td class="ce10" style="text-align:left;width:22.58mm; ">
+     <p>
+      第一類科成績
+     </p>
+     <p>
+      <span class="T2">
+       合格成績
+      </span>
+     </p>
+    </td>
+    <td class="ce11" style="text-align:left;width:22.58mm; ">
+     <p>
+      <span class="T3">
+       三年內之最高成績
+      </span>
+     </p>
+     <p>
+      <span class="T4">
+       第二類科成績
+      </span>
+     </p>
+    </td>
+    <td class="ce12" style="text-align:left;width:22.58mm; ">
+     <p>
+      考生首次
+     </p>
+     <p>
+      考試日期
+     </p>
+    </td>
+   </tr>
+   <tr class="ro2" tal:repeat="item view/result">
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+${item/study_no}
+    </td>
+    <td class="ce4" style="text-align:left;width:22.58mm; ">
+${item/first_exam_sn}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+${item/exam_sn}
+    </td>
+    <td class="ce7" style="text-align:left;width:22.58mm; ">
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+${item/exam_area}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+${item/studId}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+${item/name}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+${python:'男' if item['studId'][1] == '1' else '女'}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+${item/score_1}
+    </td>
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+${item/score_2}
+    </td>
+    <td class="ce13" style="text-align:left;width:22.58mm; ">
+${item/first_exam_date}
+    </td>
+   </tr>
+  </table>
+
+
+
+
+  <style type="text/css">
+   @page {  }
+    table { border-collapse:collapse; border-spacing:0; empty-cells:show }
+    td, th { vertical-align:top; font-size:10pt;}
+    h1, h2, h3, h4, h5, h6 { clear:both;}
+    ol, ul { margin:0; padding:0;}
+    li { list-style: none; margin:0; padding:0;}
+    /* "li span.odfLiEnd" - IE 7 issue*/
+    li span. { clear: both; line-height:0; width:0; height:0; margin:0; padding:0; }
+    span.footnodeNumber { padding-right:1em; }
+    span.annotation_style_by_filter { font-size:95%; font-family:Arial; background-color:#fff000;  margin:0; border:0; padding:0;  }
+    span.heading_numbering { margin-right: 0.8rem; }* { margin:0;}
+    .ta1 { writing-mode:lr-tb; }
+    .ce1 { font-family:新細明體; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:middle; text-align:center ! important; margin-left:0mm; writing-mode:page; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:bold; }
+    .ce10 { font-family:新細明體; background-color:transparent; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:middle; text-align:center ! important; margin-left:0mm; writing-mode:page; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:bold; }
+    .ce11 { font-family:新細明體; background-color:#ffff99; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:middle; text-align:center ! important; margin-left:0mm; writing-mode:page; color:#0000ff; font-size:10pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:bold; }
+    .ce12 { font-family:新細明體; background-color:#ccffff; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:middle; text-align:center ! important; margin-left:0mm; writing-mode:page; color:#0000ff; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:bold; }
+    .ce13 { font-family:細明體; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:top; text-align:center ! important; margin-left:0mm; writing-mode:page; color:#000000; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; }
+    .ce2 { font-family:細明體; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:top; text-align:center ! important; margin-left:0mm; writing-mode:page; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; }
+    .ce3 { font-family:新細明體; background-color:#ffff00; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:middle; text-align:center ! important; margin-left:0mm; writing-mode:page; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:bold; }
+    .ce4 { font-family:新細明體; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:top; text-align:center ! important; margin-left:0mm; writing-mode:page; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; }
+    .ce5 { font-family:新細明體; background-color:#cc99ff; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:middle; text-align:center ! important; margin-left:0mm; writing-mode:page; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:bold; }
+    .ce6 { font-family:新細明體; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:middle; text-align:center ! important; margin-left:0mm; writing-mode:page; color:#ff0000; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:bold; }
+    .ce7 { font-family:細明體; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:top; text-align:center ! important; margin-left:0mm; writing-mode:page; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:normal; }
+    .ce8 { font-family:新細明體; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:middle; text-align:center ! important; margin-left:0mm; writing-mode:page; color:#0000ff; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:bold; }
+    .ce9 { font-family:新細明體; border-width:0.0261cm; border-style:solid; border-color:#4c4c4c; padding:0.71mm; vertical-align:middle; text-align:center ! important; margin-left:0mm; writing-mode:page; font-size:12pt; font-style:normal; text-shadow:none; text-decoration:none ! important; font-weight:bold; }
+    .co1 { width:22.58mm; }
+    .ro1 { height:23.69mm; }
+    .ro2 { height:6mm; }
+    .T1 { color:#000000; font-family:新細明體; font-size:12pt; font-weight:bold; text-decoration:none ! important; font-style:normal; text-shadow:none; }
+    .T2 { color:#0000ff; font-family:新細明體; font-size:11pt; font-weight:bold; text-decoration:none ! important; font-style:normal; text-shadow:none; }
+    .T3 { color:#ff0000; font-family:新細明體; font-size:10pt; font-weight:bold; text-decoration:none ! important; font-style:normal; text-shadow:none; }
+    .T4 { font-family:新細明體; font-size:12pt; font-weight:bold; text-decoration:none ! important; font-style:normal; text-shadow:none; }
+    /* ODF styles with no properties representable as CSS */
+     { }
+  </style>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
