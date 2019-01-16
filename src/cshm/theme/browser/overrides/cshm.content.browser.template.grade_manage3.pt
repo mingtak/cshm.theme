@@ -74,17 +74,15 @@ portal = api.portal.get()
 
 <tal:step define="result view/getStep; total python:len(result)">
  <tal:td repeat="step result">
-  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新3梯 -->
     <td class="ce1" colspan="2" style="text-align:left;width:22.58mm; ">
      <p>
       第${repeat/step/number}梯
      </p>
     </td>
-  </tal:cond>
  </tal:td>
     <td class="ce1" colspan="2" style="text-align:left;width:22.58mm; ">
      <p>
-      第${python:len(result)+1}梯
+新增一梯
      </p>
     </td>
 </tal:step>
@@ -112,14 +110,11 @@ portal = api.portal.get()
 
    <tr class="ro2">
 <tal:step define="result view/getStep; total python:len(result)" repeat="step result">
-  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新2梯 -->
-
     <td class="ce4" colspan="2" style="text-align:right; width:22.58mm; ">
      <p>
       <input type="date" name="olddate-${python:step[0]}" value="${python:view.getExamDate(step[0])[0]['exam_date']}">
      </p>
     </td>
-  </tal:cond>
 </tal:step>
     <td class="ce4" colspan="2" style="text-align:right; width:22.58mm; ">
      <p>
@@ -131,14 +126,12 @@ portal = api.portal.get()
 
    <tr class="ro2">
 <tal:step define="result view/getStep; total python:len(result)" repeat="step result">
-  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新2梯 -->
     <td class="ce2" style="text-align:left;width:22.58mm; ">
      <p>第一類科成績</p>
     </td>
     <td class="ce2" style="text-align:left;width:22.58mm; ">
      <p>第二類科成績</p>
     </td>
-  </tal:cond>
 </tal:step>
 
     <td class="ce2" style="text-align:left;width:22.58mm; ">
@@ -186,7 +179,6 @@ ${python:api.content.find(UID=item['uid'])[0].getObject().trainingCenter.to_obje
 <!-- name format: old-梯-reg_id-grade_mana.id -->
 
 <tal:step define="result view/getStep; total python:len(result)" repeat="step result">
-  <tal:cond condition="python:repeat['step'].number > (total-2)"> <!-- 只顯示最新2梯 -->
     <td class="ce2" style="text-align:left;width:22.58mm; ">
 <input class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" type="number" min="0" max="100"
        tal:attributes="value python:grade[step[0]][1] if grade.has_key(step[0]) else ''">
@@ -195,7 +187,6 @@ ${python:api.content.find(UID=item['uid'])[0].getObject().trainingCenter.to_obje
 <input class="" name="old-${python:step[0]}-${python:item['id']}-${python:grade.get(step[0], [None])[0]}" type="number" min="0" max="100"
        tal:attributes="value python:grade[step[0]][2] if grade.has_key(step[0]) else ''">
     </td>
-  </tal:cond>
 </tal:step>
 
 
