@@ -27,7 +27,7 @@ portal = api.portal.get()
 
 <b>訓練班</b>:${python:context.getParentNode().title} <b>期別</b>:${context/title} <b>結訓日期</b>: YYYY/MM/DD <b>完訓人數</b>:OO
 <br>
-<a target="_blank" href="${context/absolute_url}/@@grade_manage2_export">匯出學員成績通知單</a>
+<a target="_blank" href="${context/absolute_url}/@@grade_manage3_export">匯出學員成績通知單</a>
 
 
 <form method="POST">
@@ -177,7 +177,7 @@ ${item/name}
     </td>
     <td class="ce2" style="text-align:left;width:37.31mm; ">
      <p>
-${python:api.content.find(UID=item['uid'])[0].getObject().trainingCenter.to_object.title}
+${python:api.content.find(UID=item['uid'])[0].getObject().trainingCenter.to_object.simpleTitle}區
      </p>
     </td>
 
