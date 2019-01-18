@@ -127,6 +127,7 @@
     </td>
    </tr>
    <tr class="ro2" tal:repeat="item view/result">
+   <tal:score define="score python:view.getHighestsocre(item['reg_id'])">
     <td class="ce2" style="text-align:left;width:22.58mm; ">
 ${item/study_no}
     </td>
@@ -151,14 +152,15 @@ ${item/name}
 ${python:'男' if item['studId'][1] == '1' else '女'}
     </td>
     <td class="ce2" style="text-align:left;width:22.58mm; ">
-${item/score_1}
+${python:score[0]['score_1']}
     </td>
     <td class="ce2" style="text-align:left;width:22.58mm; ">
-${item/score_2}
+${python:score[0]['score_2']}
     </td>
     <td class="ce13" style="text-align:left;width:22.58mm; ">
 ${item/first_exam_date}
     </td>
+   </tal:score>
    </tr>
   </table>
 
