@@ -1,6 +1,5 @@
 
 $(document).ready(function(){
-    $('.template-course_info #content-core .row').css('margin-top', 20).first().css('margin-top', '40px')
 
     //**************************************
     // 台灣身份證檢查簡短版 for Javascript

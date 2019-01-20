@@ -33,7 +33,7 @@
     <form action="${view/request/ACTUAL_URL}" method="post">
 <p>      <input type="text" name="studId" id="studId" value="" placeholder="身份證字號" required></p>
 <p>      <input type="text" name="name" id="name" value="" placeholder="姓名" required></p>
-<p>      <label for="birthday">出生日期</label>
+<p>      <label for="birthday">出生日期(西元)</label>
 <p>      <input type="date" name="birthday" id="birthday" value="" required></p>
 <p>      <input type="text" name="phone" id="phone" value="" placeholder="聯絡電話" required></p>
 <p>      <input type="text" name="cellphone" id="cellphone" value="" placeholder="行動電話" required></p>
@@ -152,7 +152,7 @@
     <h3>個人資料使用同意書</h3>
     <ol>
 <li>
-社團法人中國勞工安全衛生管理學會（下稱本會）為提供課程報名相關服務，並確保報名台端之利益，將遵循個人資料保護法及相關法令之規定，蒐集、處理及利用報名學員所提供之個人資料，包括台端電子郵件帳號姓名、性別、出生年月日、身分證字號、特徵、服務機構、職稱、戶籍地址、通訊住址 、行動電話、學校紀錄、受訓紀錄 、職業、產業特性及資格技術等。
+社團法人中國勞工安全衛生管理學會（下稱本會）為提供課程報名相關服務，並確保報名台端之利益，將遵循個人資料保護法及相關法令之規定，蒐集、處理及利用報名學員所提供之個人資料，包括台端電子郵件帳號姓名、性別、出生年月日(西元年)、身分證字號、特徵、服務機構、職稱、戶籍地址、通訊住址 、行動電話、學校紀錄、受訓紀錄 、職業、產業特性及資格技術等。
 </li>
 
 <li>
@@ -285,8 +285,21 @@ var app = new Vue({
 
 
 </script>
+
+<?python
+from plone import api
+isFrontendView = api.content.get_view(name='is_frontend', context=context, request=request)
+isFront = isFrontendView(view)
+?>
+
+<script tal:condition="not:isFront"
+        src="/cshm/++theme++theme-for-cshm/js/backend.js" type="application/javascript"></script>
+
+
+
 </div>
 </metal:js>
+
 
 
 </body>

@@ -39,7 +39,8 @@
   <p>發送簡訊清單</p>
   <textarea name='cell'><tal:list repeat="item view/rightCells">${item}, </tal:list></textarea>
  <br>
-  <span>簡訊內容: </span><input name='message'/>
+  <span>簡訊內容: </span>
+  <textarea name='message'/>
   <input name='sendmsg' hidden />
   <input type='submit' name='submit' value='發送簡訊' />
 </form>
