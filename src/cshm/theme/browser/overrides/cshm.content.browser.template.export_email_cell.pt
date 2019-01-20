@@ -19,6 +19,33 @@
                     tal:define="toc context/table_of_contents|nothing;">
 
 <h3>發送簡訊/Email</h3>
+<div class="row">
+
+<div class="col-md-4">
+  <div>
+    <h4>Email內容範本</h4>
+    <ul>
+      <li tal:repeat="item python:view.email_template.split('\n')">
+        <a tal:content="item" href="javascript:void(0)" class="email_template"></a>
+      </li>
+    </ul>
+
+
+  </div>
+
+  <div>
+    <h4>簡訊範本</h4>
+    <ul>
+      <li tal:repeat="item python:view.msg_template.split('\n')">
+        <a tal:content="item" href="javascript:void(0)" class="msg_template"></a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+
+<div class="col-md-8">
 
 <form action="${context/absolute_url}/@@export_email_cell" method="post">
 <h4>正取學會 Email 清單</h4>
@@ -28,7 +55,7 @@
   <span>郵件標題: </span><input name='title' />
 <br><br>
   <p>Email 內容</p>
-  <textarea name='message'></textarea>
+  <textarea name='message' class="email-content-box"></textarea>
   <input name='sendmail' hidden />
   <input type='submit' name='submit' value='發送Email' />
 
@@ -40,7 +67,7 @@
   <textarea name='cell'><tal:list repeat="item view/rightCells">${item}, </tal:list></textarea>
  <br>
   <span>簡訊內容: </span>
-  <textarea name='message'/>
+  <textarea name='message' class="msg-content-box" />
   <input name='sendmsg' hidden />
   <input type='submit' name='submit' value='發送簡訊' />
 </form>
@@ -57,6 +84,23 @@ ${python:item[0]}: ${python:item[1]}<br>
 <tal:list repeat="item view/wrongCells">
 ${python:item[0]}: ${python:item[1]}<br>
 </tal:list>
+
+</div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('.email_template').click(function(){
+      $('.email-content-box').val($(this).text())
+    })
+
+    $('.msg_template').click(function(){
+      $('.msg-content-box').val($(this).text())
+    })
+
+  })
+</script>
+
 
 
 
