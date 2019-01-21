@@ -29,12 +29,17 @@
 </ul>
 <h4>公司團報請先下載<a class="group-reg" target="_blank" href="@@download_group_reg">團體報名表</a>，填寫後<a class="group-reg" href="@@group_reg_course">上傳報名表</a> </h4>
 <hr>
+
+<?python
+from DateTime import DateTime
+?>
+
 <h4>個人資料</h4>
-    <form action="${view/request/ACTUAL_URL}" method="post">
+    <form action="${view/request/ACTUAL_URL}" method="post" enctype="multipart/form-data">
 <p>      <input type="text" name="studId" id="studId" value="" placeholder="身份證字號" required></p>
 <p>      <input type="text" name="name" id="name" value="" placeholder="姓名" required></p>
 <p>      <label for="birthday">出生日期(西元)</label>
-<p>      <input type="date" name="birthday" id="birthday" value="" required></p>
+<p>      <input type="date" name="birthday" id="birthday" value="${python:(DateTime()-6600).strftime('%Y-%m-%d')}" required></p> <!-- 預設18歲 -->
 <p>      <input type="text" name="phone" id="phone" value="" placeholder="聯絡電話" required></p>
 <p>      <input type="text" name="cellphone" id="cellphone" value="" placeholder="行動電話" required></p>
 <p>      <input type="text" name="fax" id="fax" value="" placeholder="傳真電話"></p>
@@ -125,8 +130,13 @@
 <p>      <input type="email" name="priv_email" id="priv_email" value="" placeholder="電子郵件(私人)" required></p>
 <p>      <input type="email" name="com_email" id="com_email" value="" placeholder="電子郵件(公司)"></p>
 <hr>
+<h4>資料上傳</h4>
+<p><input type="file" name="idCard" accept="image/*" multiple"></p>
+<p><input type="file" name="document_1" accept="image/*" multiple></p>
+<p><input type="file" name="document_2" accept="image/*" multiple></p>
+<p><input type="file" name="document_3" accept="image/*" multiple></p>
 
-
+<hr>
 <h4>公司資料</h4>
 <p>      <input type="text" name="tax_no" id="tax_no" placeholder="統一編號"
                 v-model="tax_no" v-on:input="getCompanyName($event)"></p>

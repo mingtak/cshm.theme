@@ -469,7 +469,17 @@
      </td>
     </tr>
     <tr>
-     <td colspan="10">TODO
+     <td colspan="10">
+
+已繳證件照:
+<tal:path define="path string:${portal_url}/++plone++cshm.content/images_folder"
+          condition="python:student['idCard_filename'] or student['document_1_filename'] or student['document_2_filename'] or student['document_3_filename']">
+  <a tal:condition="python:student['idCard_filename']" tal:attributes="href python:'%s/%s' % (path, student['idCard_filename'])" target="_blank">身份證件</a> |
+  <a tal:condition="python:student['document_1_filename']" tal:attributes="href python:'%s/%s' % (path, student['document_1_filename'])" target="_blank">證件1</a> |
+  <a tal:condition="python:student['document_2_filename']" tal:attributes="href python:'%s/%s' % (path, student['document_2_filename'])" target="_blank">證件2</a> |
+  <a tal:condition="python:student['document_3_filename']" tal:attributes="href python:'%s/%s' % (path, student['document_3_filename'])" target="_blank">證件3</a>
+</tal:path>
+
      </td>
     </tr>
    </table>
