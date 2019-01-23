@@ -1,0 +1,103 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:style fill-slot="style_slot">
+</metal:style>
+<metal:js fill-slot="javascript_head_slot">
+    <script type="text/javascript" src="${portal_url}/++plone++cshm.theme/backend.js"></script>
+</metal:js>
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+<h3>中國勞工安全衛生管理學會</h3>
+<h4>證照費用核銷狀態追蹤表</h4>
+<b>說明事項</b> <br>
+追蹤課程包括: <br>
+A005	職業安全衛生管理員 / A007	甲種職業安全衛生業務主管 / A008	乙種職業安全衛生業務主管 / A009	丙種職業安全衛生業務主管 /
+A011	營造業甲種職業安全衛生業務主管 / A012	營造業乙種職業安全衛生業務主管 / A013	營造業丙種職業安全衛生業務主管 / 
+D001	有機溶劑作業主管 / D003	缺氧作業主管
+
+<br>註: 目前測試中，有包含 A001 課程 <br>
+
+<?python
+from plone import api
+?>
+
+
+  <table border="0" cellpadding="0" cellspacing="0" class="ta1">
+   <colgroup>
+    <col width="99"/>
+    <col width="99"/>
+    <col width="131"/>
+    <col width="99"/>
+    <col width="147"/>
+   </colgroup>
+   <tr class="ro1">
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      身份證字號
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      姓名
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:29.95mm; ">
+     <p>
+      所上課程/期別
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:22.58mm; ">
+     <p>
+      最近一次考照日/考照狀態
+     </p>
+    </td>
+    <td class="ce1" style="text-align:left;width:33.58mm; ">
+     <p>
+      證照費用(未核銷)
+     </p>
+    </td>
+   </tr>
+   <tal:student repeat="student view/students">
+     <tr class="ro2"
+         tal:define="item python:view.getDetail(student['id'])"
+         tal:condition="python:item[0]['status'] == 3">
+      <td class="ce2" style="text-align:left;width:22.58mm; ">
+${python:item[0]['studId']}
+      </td>
+      <td class="ce2" style="text-align:left;width:22.58mm; ">
+${python:item[0]['name']}
+      </td>
+      <td class="ce2" style="text-align:left;width:29.95mm; "
+          tal:define="course python:api.content.find(UID=item[0]['uid'])[0]">
+${python:course.getObject().getParentNode().title} / ${python:course.Title}
+      </td>
+      <td class="ce2" style="text-align:left;width:22.58mm; ">
+${python:item[0]['exam_date']} / 不通過
+      </td>
+      <td class="ce2" style="text-align:left;width:33.58mm; ">160
+      </td>
+     </tr>
+   </tal:student>
+  </table>
+
+
+
+
+
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
