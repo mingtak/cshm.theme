@@ -30,6 +30,7 @@ D001	有機溶劑作業主管 / D003	缺氧作業主管
 
 <?python
 from plone import api
+status = {1:'未報考', 2:'通過', 3:'不通過'}
 ?>
 
 
@@ -71,7 +72,7 @@ from plone import api
    <tal:student repeat="student view/students">
      <tr class="ro2"
          tal:define="item python:view.getDetail(student['id'])"
-         tal:condition="python:item[0]['status'] == 3">
+         tal:condition="python:view.everExam(student['id']) and item[0]['status'] != 2">
       <td class="ce2" style="text-align:left;width:22.58mm; ">
 ${python:item[0]['studId']}
       </td>
@@ -83,7 +84,7 @@ ${python:item[0]['name']}
 ${python:course.getObject().getParentNode().title} / ${python:course.Title}
       </td>
       <td class="ce2" style="text-align:left;width:22.58mm; ">
-${python:item[0]['exam_date']} / 不通過
+${python:item[0]['exam_date']} / ${python:status[item[0]['status']]}
       </td>
       <td class="ce2" style="text-align:left;width:33.58mm; ">160
       </td>
