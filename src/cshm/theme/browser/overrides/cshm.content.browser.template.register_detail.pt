@@ -22,14 +22,14 @@
 <hr>
 <h3>${python:context.getParentNode().title} / ${context/title}</h3>
 
-<a target="_blank" href="${context/absolute_url}/edit#autotoc-item-autotoc-1">編輯課程狀態</a> |
 <a target="_blank" href="${context/absolute_url}/@@students_list">名單</a> |
 <a target="_blank" href="${context/absolute_url}/@@class_scheduling">排課</a>
 <hr>
+
   <table border="1" cellpadding="0" cellspacing="0" width="850px">
    <tbody>
     <tr height="30" class="tr-title">
-     <td colspan="6">課程基本資料</td>
+     <td colspan="6">課程基本資料(<a href="${context/absolute_url}/edit#autotoc-item-autotoc-1">編輯</a>)</td>
     </tr>
     <tr height="30">
      <td width="120">
@@ -65,7 +65,7 @@
        專班
       </b>
      </td>
-     <td>TODO</td>
+     <td>${context/specialCourse}</td>
      <td>
       <b>
        承辦人員
@@ -81,7 +81,7 @@
       ${context/counselor}
       <br/>
       <span>
-       (代理輔導員：TODO)
+<!--       (代理輔導員：TODO) -->
       </span>
      </td>
     </tr>
@@ -99,7 +99,7 @@
        承辦人員
       </b>
      </td>
-     <td colspan="3">TODO</td>
+     <td colspan="3">${context/trainingCenterAgent}</td>
     </tr>
     <tr>
     </tr>
@@ -110,7 +110,7 @@
       </b>
      </td>
      <td colspan="5">
-      ●主管機關：TODO　●核備日期／文號：TODO
+      ●主管機關：${context/manageOrg}　●核備日期／文號：${context/docSN}
      </td>
     </tr>
     <tr height="30">
@@ -125,19 +125,13 @@
        結訓人數
       </b>
      </td>
-     <td>TODO</td>
+     <td>${view/finishAmount}</td>
      <td>
       <b>
        發證日期
       </b>
      </td>
-     <td>TODO</td>
-    </tr>
-    <tr height="30">
-     <td>
-      <b>隨班檢定</b>
-     </td>
-     <td colspan="5">TODO</td>
+     <td>${view/licenseDate}</td>
     </tr>
     <tr height="30" class="tr-title">
      <td colspan="6">
@@ -148,19 +142,19 @@
      <td>
       <b>學員資料寄件</b>
      </td>
-     <td>
+     <td>${context/studDataSendDate}
      </td>
      <td>
       <b>結報寄件</b>
      </td>
-     <td>
+     <td>${context/finishCourseSendDate}
      </td>
      <td>
       <b>
        收件日期
       </b>
      </td>
-     <td>
+     <td>${context/receivedDate}
      </td>
     </tr>
     <tr height="30">
@@ -171,13 +165,13 @@
        狀　　態
       </b>
      </td>
-     <td>TODO</td>
+     <td>${context/giveLicenseStatus}</td>
      <td>
       <b>
        查核註記
       </b>
      </td>
-     <td colspan="3">TODO
+     <td colspan="3">${context/checkNote}
      </td>
     </tr>
     <tr height="30">
@@ -186,20 +180,20 @@
        預支款請領
       </b>
      </td>
-     <td colspan="1">TODO     </td>
+     <td colspan="1">${context/preFee}</td>
      <td>
       <b>
        收支明細
       </b>
      </td>
-     <td>TODO
+     <td>${context/feeDetail}
      </td>
      <td>
       <b>
        管理費
       </b>
      </td>
-     <td>TODO
+     <td>${context/manageFee}
      </td>
     </tr>
     <tr height="30">
@@ -208,14 +202,14 @@
        結報狀態
       </b>
      </td>
-     <td>TODO
+     <td>${context/finishCourseStatus}
      </td>
      <td>
       <b>
        出納註記
       </b>
      </td>
-     <td colspan="3">TODO
+     <td colspan="3">${context/cashierNote}
      </td>
     </tr>
     <tr height="30">
@@ -224,7 +218,7 @@
        備　　註
       </b>
      </td>
-     <td colspan="5">TODO
+     <td colspan="5">${context/statusNote}
      </td>
     </tr>
     <tr height="30" class="tr-title">
@@ -234,29 +228,12 @@
     </tr>
     <tr height="50">
      <td>
-      (TODO, 例:)台北市政府勞動局
-      <br/>
-      107/4/17
      </td>
      <td colspan="3">
-      <u>
-       北市勞職字第10733143700號
-      </u>
-      <br/>
-      安師176同意備查。
      </td>
      <td>
-      核准開班公文
-      <br/>
-      <a href="http://www.cshm.org.tw/magement/clada_injectionInfo.asp?did=1070682&amp;clano=A001&amp;clanu=176">
-       [設定為發證文號]
-      </a>
      </td>
      <td>
-      <a href="http://www.cshm.org.tw/magement/%E5%85%AC%E6%96%87%E6%8E%83%E6%8F%8F%E6%AA%94/%E6%94%B6%E6%96%87%E6%8E%83%E6%8F%8F%E6%AA%94/107%E5%B9%B4/1070682.pdf" target="new">
-       <img border="0" src="http://www.cshm.org.tw/magement/images/paper.gif"/>
-       掃描檔
-      </a>
      </td>
     </tr>
     <tr height="30" class="tr-title">
@@ -266,37 +243,16 @@
     </tr>
     <tr height="50">
      <td>
-      (TODO, 例:)臺北市政府勞動局
-      <br/>
-      107/5/28
-      <br/>
-      (已寄送)
      </td>
      <td colspan="3">
-      <u>
-       勞安管教字第1070001130號
-      </u>
-      <br/>
-      本會附設台北職業訓練中心於107年5月21日至107年8月27日於台北市辦理「職業安全管理師」安全衛生教育訓練班第176期(130...
      </td>
      <td>
-      <a href="http://www.cshm.org.tw/magement/of_wrt.asp?ofclass=%A4@%AF%EB&amp;no=37032&amp;bkurl=clada">
-       <img border="0" src="http://www.cshm.org.tw/magement/images/pen.gif"/>
-      </a>
-      <a href="http://www.cshm.org.tw/magement/of_print.asp?no=37032&amp;ofclass=%A4@%AF%EB" target="new">
-       套印
-      </a>
      </td>
      <td align="center">
-      <a href="http://www.cshm.org.tw/magement/%E5%85%AC%E6%96%87%E6%8E%83%E6%8F%8F%E6%AA%94/%E7%99%BC%E6%96%87%E6%8E%83%E6%8F%8F%E6%AA%94/107%E5%B9%B4/%E4%B8%80%E8%88%AC/1070001130.pdf" target="new">
-       <img border="0" src="http://www.cshm.org.tw/magement/images/paper.gif"/>
-       掃描檔
-      </a>
      </td>
     </tr>
     <tr height="35">
      <td colspan="6">
-      TODO 建立預支款請領簽...
      </td>
     </tr>
     <tr height="30" class="tr-title">
@@ -306,22 +262,10 @@
     </tr>
     <tr height="40">
      <td>
-      (TODO, 例:)1070678
-      <br/>
-      107年4月13日
-      <br/>
-      沈裕棠
      </td>
      <td colspan="4" valign="top">
-      【已核准】
-      <br/>
-      本會訂於107年5月21日至107年8月27日於台北辦理「職業安全管理師」班第176期，擬借預支週轉金新台幣壹拾參萬元整...
      </td>
      <td>
-      -
-      <a href="http://www.cshm.org.tw/magement/notePaper_print.asp?nid1=107&amp;nid2=678">
-       套印
-      </a>
      </td>
     </tr>
    </tbody>

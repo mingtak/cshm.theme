@@ -89,6 +89,12 @@
 
     <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
      <p>
+      成績
+     </p>
+    </td>
+
+    <td class="ce1" rowspan="3" style="text-align:left;width:22.58mm; ">
+     <p>
       姓名
      </p>
     </td>
@@ -229,9 +235,15 @@ ${item/license_code}
 
     <td class="ce2" style="text-align:left;width:22.58mm; ">
      <p>
-${item/name}
+<!-- grade1,是何？ -->${item/grade1}
      </p>
     </td>
+
+    <td class="ce2" style="text-align:left;width:22.58mm; ">
+     <p>
+${item/name}
+     </p>
+    </td> 
     <td class="ce2" style="text-align:right; width:22.58mm; ">
      <p>
 ${item/seatNo}
