@@ -1,0 +1,161 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+  <table>
+   <tr class="tr-title">
+    <td>
+     <p>
+      檢視
+     </p>
+    </td>
+    <td>
+     <p>
+      期別
+     </p>
+    </td>
+    <td>
+     <p>
+      辦事處
+     </p>
+    </td>
+    <td>
+     <p>
+      時段
+     </p>
+    </td>
+    <td>
+     <p>
+      開始日期
+     </p>
+    </td>
+    <td>
+     <p>
+      結束日期
+     </p>
+    </td>
+    <td>
+     <p>
+      地點
+     </p>
+    </td>
+    <td>
+     <p>
+      上課人數
+     </p>
+    </td>
+    <td>
+     <p>
+      結訓人數
+     </p>
+    </td>
+    <td>
+     <p>
+      發證日期
+     </p>
+    </td>
+    <td>
+     <p>
+      承辦人
+     </p>
+    </td>
+    <td>
+     <p>
+      外辦承辦人
+     </p>
+    </td>
+    <td>
+     <p>
+      管理費
+     </p>
+    </td>
+   </tr>
+   <tr class="tr-body" tal:repeat="item context/getChildNodes">
+    <td>
+<a href="${item/absolute_url}/register_detail">檢視</a>
+    </td>
+    <td>
+     <p>
+${item/title}
+     </p>
+    </td>
+    <td>
+     <p>
+<tal:cond condition="item/trainingCenter">
+  ${item/trainingCenter/to_object/simpleTitle}
+</tal:cond>
+     </p>
+    </td>
+    <td>
+     <p i18n:translate>
+${item/duringTime}
+     </p>
+    </td>
+    <td>
+     <p>
+<tal:cond condition="item/courseStart">
+  ${python:item.courseStart.strftime('%Y/%m/%d')}
+</tal:cond>
+     </p>
+    </td>
+    <td>
+<p><tal:cond condition="item/courseEnd">
+  ${python:item.courseEnd.strftime('%Y/%m/%d')}
+</tal:cond>
+     </p>
+    </td>
+    <td>
+     <p>
+<tal:cond condition="item/trainingCenter"> 
+  ${item/trainingCenter/to_object/address}
+</tal:cond>
+     </p>
+    </td>
+    <td>
+     <p>
+${python:view.getRegCount(uid=item.UID())}
+     </p>
+    </td>
+    <td>
+     <p>
+${python:view.getPassCount(uid=item.UID())}
+     </p>
+    </td>
+    <td>
+     <p>
+${item/licenseDate}
+     </p>
+    </td>
+    <td>
+     <p>
+${item/undertaker}
+     </p>
+    </td>
+    <td>
+     <p>
+${item/trainingCenterAgent}
+     </p>
+    </td>
+    <td>
+     <p>
+${item/manageFee}
+     </p>
+    </td>
+   </tr>
+  </table>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

@@ -165,3 +165,13 @@ a
 }
 
 .template-class_scheduling .scheduled { background: #8c8}
+
+.template-admin_course_listing tr:nth-child(2n),
+.template-echelon_listing tr:nth-child(2n){
+  background:#e2e2e2;
+}
+
+.template-admin_course_listing table tr th{
+  padding: 8px;
+  color: #fff
+}
