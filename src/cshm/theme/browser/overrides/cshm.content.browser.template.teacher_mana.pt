@@ -21,7 +21,6 @@
 <h3>教師管理</h3>
 
 <!-- <a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a> | -->
-<a href="${portal_url}/@@echelon_listing_register">回作業區域</a> │
 <a id="" href="${context/absolute_url}/@@not_on_time">講師調課/遲到/早退登記系統</a> │
 <a id="" href="${context/absolute_url}/@@not_on_time?list">調課/遲到/早退列表</a> │
 <a id="" href="${context/absolute_url}/@@teacher_mana">講師清單</a> │

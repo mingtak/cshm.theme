@@ -16,7 +16,6 @@
 from plone import api
 ?>
 
-<a href="${view/portal/absolute_url}/@@echelon_listing_register">回作業區域</a>
 <table>
   <tr class="tr-title">
     <th>課程名稱</th>

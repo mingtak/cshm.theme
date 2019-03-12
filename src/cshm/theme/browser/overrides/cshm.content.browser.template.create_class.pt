@@ -24,15 +24,6 @@ portal = api.portal.get()
 courses = portal['resource']['course_template'].getChildNodes()
 ?>
 
-<div class="main_menu">
-<a href="${portal_url}/mana_course/@@admin_course_listing">期別表</a> |
-<a href="${portal_url}/@@create_class">開新課程</a> |
-<a href="${portal_url}/classroom_overview/@@classroom_overview">教室表</a> |
-<a href="${portal_url}/@@teacher_mana">講師管理</a> |
-<a href="${portal_url}/@@quotation_list">報價管理</a> |
-<a href="${portal_url}/@@make_up_list">補課管理</a>
-<hr>
-</div>
 
 <form>
   <h4>開課作業</h4>
