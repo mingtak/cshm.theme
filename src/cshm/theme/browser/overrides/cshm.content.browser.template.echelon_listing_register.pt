@@ -15,61 +15,10 @@
 from plone import api
 current = api.user.get_current()
 ?>
-<a href="${portal_url}/mana_course/@@admin_course_listing">期別表</a> |
-<a href="${portal_url}/@@create_class">開新課程</a> |
-<a href="${portal_url}/classroom_overview/@@classroom_overview">教室表</a> |
-<a href="${portal_url}/@@teacher_mana">講師管理</a> |
-<a href="${portal_url}/@@quotation_list">報價管理</a> |
-<a href="${portal_url}/@@make_up_list">補課管理</a>
-
-
+<!--
 <h3>${current/fullname} 您好,這是您的作業區域</h3>
 <hr>
-
-<div class="row">
-  <div class="col col-sm-12 col-md-12">
-    <table id="customers">
-      <tr>
-        <th style="background:#a1dcde">管理作業</th>
-      </tr>
-      <tr>
-        <td><a href="${portal_url}/mana_course/@@admin_course_listing">期別表</a></td>
-      </tr>
-      <tr>
-        <td><a href="${portal_url}/@@create_class">開新課程</a></td>
-      </tr>
-      <tr>
-        <td><a href="${portal_url}/classroom_overview/@@classroom_overview">教室表</a></td>
-      </tr>
-      <tr>
-        <td><a href="${portal_url}/@@teacher_mana">講師管理</a></td>
-      </tr>
-      <tr>
-        <td><a href="${portal_url}/@@quotation_list">報價管理系統</a></td>
-      </tr>
-      <tr>
-        <td><a href="${portal_url}/@@make_up_list">補課管理系統</a></td>
-      </tr>
-
-    </table>
-
-  </div>
-
-<!--
-  <div class="col col-sm-12 col-md-6">
-    <table id="customers">
-      <tr>
-        <th style="background:#f8a74c">訓前作業</th>
-      </tr>
-      <tr><td>TODO</td>
-      </tr>
-    </table>
-  </div>
 -->
-
-</div>
-
-<hr>
 
 <div class="row">
 <div tal:repeat="status view/statusList" class="col col-sm-12 col-md-6">

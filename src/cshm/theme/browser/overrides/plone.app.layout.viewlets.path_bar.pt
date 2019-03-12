@@ -1,0 +1,53 @@
+<nav id="portal-breadcrumbs" class="plone-breadcrumb"
+         i18n:domain="plone"
+         tal:define="breadcrumbs view/breadcrumbs">
+  <div class="container">
+    <span id="breadcrumbs-you-are-here" class="hiddenStructure"
+            i18n:translate="you_are_here">You are here:</span>
+    <ol aria-labelledby="breadcrumbs-you-are-here">
+      <li id="breadcrumbs-home">
+        <a i18n:translate="tabs_home"
+            tal:attributes="href view/navigation_root_url">Home</a>
+      </li>
+      <li tal:repeat="crumb breadcrumbs"
+          tal:attributes="id string:breadcrumbs-${repeat/crumb/number};">
+        <tal:item tal:define="is_last repeat/crumb/end;
+                                url crumb/absolute_url;
+                                title crumb/Title">
+          <a href="#"
+              tal:omit-tag="not: url"
+              tal:condition="python:not is_last"
+              tal:attributes="href url"
+              tal:content="title">
+                  crumb
+          </a>
+          <span id="breadcrumbs-current"
+                tal:condition="is_last"
+                tal:content="title">crumb</span>
+        </tal:item>
+      </li>
+    </ol>
+  </div>
+</nav>
+
+<?python
+from plone import api
+portal = api.portal.get()
+portal_url = portal.absolute_url()
+?>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <a href="${portal_url}/@@echelon_listing_register">後台首頁</a> |
+      <a href="${portal_url}/mana_course/@@admin_course_listing">期別表</a> |
+      <a href="${portal_url}/@@create_class">開新課程</a> |
+      <a href="${portal_url}/classroom_overview/@@classroom_overview">教室表</a> |
+      <a href="${portal_url}/mana_course/@@has_export_count">轉出管理</a> |
+      <a href="${portal_url}/@@teacher_mana">講師管理</a> |
+      <a href="${portal_url}/@@quotation_list">報價管理</a> |
+      <a href="${portal_url}/@@make_up_list">補課管理</a>
+      <hr>
+    </div>
+  </div>
+</div>
+
