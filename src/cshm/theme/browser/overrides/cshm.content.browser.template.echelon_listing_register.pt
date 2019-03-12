@@ -15,12 +15,19 @@
 from plone import api
 current = api.user.get_current()
 ?>
+<a href="${portal_url}/mana_course/@@admin_course_listing">期別表</a> |
+<a href="${portal_url}/@@create_class">開新課程</a> |
+<a href="${portal_url}/classroom_overview/@@classroom_overview">教室表</a> |
+<a href="${portal_url}/@@teacher_mana">講師管理</a> |
+<a href="${portal_url}/@@quotation_list">報價管理</a> |
+<a href="${portal_url}/@@make_up_list">補課管理</a>
+
 
 <h3>${current/fullname} 您好,這是您的作業區域</h3>
 <hr>
 
 <div class="row">
-  <div class="col col-sm-12 col-md-6">
+  <div class="col col-sm-12 col-md-12">
     <table id="customers">
       <tr>
         <th style="background:#a1dcde">管理作業</th>
@@ -35,7 +42,7 @@ current = api.user.get_current()
         <td><a href="${portal_url}/classroom_overview/@@classroom_overview">教室表</a></td>
       </tr>
       <tr>
-        <td><a href="${portal_url}/@@not_on_time">講師調課／遲到／早退登記</a></td>
+        <td><a href="${portal_url}/@@teacher_mana">講師管理</a></td>
       </tr>
       <tr>
         <td><a href="${portal_url}/@@quotation_list">報價管理系統</a></td>
@@ -48,6 +55,7 @@ current = api.user.get_current()
 
   </div>
 
+<!--
   <div class="col col-sm-12 col-md-6">
     <table id="customers">
       <tr>
@@ -57,7 +65,7 @@ current = api.user.get_current()
       </tr>
     </table>
   </div>
-
+-->
 
 </div>
 

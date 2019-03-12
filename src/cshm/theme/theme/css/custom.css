@@ -112,3 +112,14 @@ input[type=text], input[type=number], input[type=email], input[type=file], input
 }
 
 .template-echelon_detail table a {color:blue}
+
+.template-course_listing #content-core .status-div > ul {
+    background: #ddd;
+    padding: 15px;
+    box-shadow:3px 3px 5px 6px #999;
+}
+
+.template-course_listing #content-core .status-div > h4 {
+    font-size: 32px;
+    margin-top:45px;
+}

@@ -73,7 +73,7 @@
 <h4>正取學員名單</h4>
 <span style="background:#fff;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;正取&nbsp;&nbsp;</span>
 <span style="background:#8c8;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;待補課&nbsp;&nbsp;</span>
-<span style="background:#e77;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;保留&nbsp;&nbsp;</span>
+<span style="background:#faa;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;保留&nbsp;&nbsp;</span>
 
 <table border="1" id="admit-list" cellspacing="0" cellpadding="0">
   <thead>

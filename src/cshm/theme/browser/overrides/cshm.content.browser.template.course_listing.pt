@@ -20,8 +20,10 @@
     <hr>
 </div>
 
-<ul tal:repeat="status view/statusList">
-  <h4 i18n:translate="">${status}</h4>
+<tal:status tal:repeat="status view/statusList">
+ <div class="status-div" id="status-${status}">
+  <h4><a href="javascript:void(0)" i18n:translate="">${status}</a></h4>
+  <ul>
   <tal:li repeat="item python:view.echelonBrain[status]">
     <li>
       <tal:obj define="obj item/getObject">
@@ -40,14 +42,30 @@
     </li>
     <hr>
   </tal:li>
-</ul>
+  </ul>
+ </div>
+</tal:status>
 
 <script>
-    <tal:reg_alert condition="python:view.request.form.get('reg_alert') == '1'">
+
+<tal:reg_alert condition="python:view.request.form.get('reg_alert') == '1'">
         alert('${python:view.request.form.get('msg')}')
     </tal:reg_alert>
-</script>
 
+
+document.addEventListener('DOMContentLoaded', function(event) {
+    $('.status-div').children('ul').hide()
+    $('#status-willStart').children('ul').show()
+    $('.status-div').click(function(){
+        $(this).siblings().each(function(e){
+            $(this).children('ul').hide('slow')
+        })
+        $(this).children('ul').show('slow')
+    })
+})
+
+
+</script>
 </metal:content-core>
 </metal:content-core>
 

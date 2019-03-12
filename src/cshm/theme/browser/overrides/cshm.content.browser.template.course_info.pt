@@ -40,7 +40,7 @@
 
     <div class="row">
         <div class="col-xs-3"><b>詳細資訊</b></div>
-        <div class="col-xs-9"><a style="color:blue" target="_blank" href="${context/absolute_url}/@@echelon_detail">前往查閱詳細資訊</a></div>
+        <div class="col-xs-9"><a style="color:blue" target="_blank" href="${context/absolute_url}/@@echelon_detail">前往查閱簡章</a></div>
     </div>
 
 </div>

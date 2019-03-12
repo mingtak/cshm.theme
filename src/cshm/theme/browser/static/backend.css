@@ -35,7 +35,7 @@ tr.on_training_2 {
 }
 
 tr.training_status_3 {
-    background-color: #8c8;
+    background-color: #faa;
 }
 
 .tr-head {
@@ -164,7 +164,7 @@ a
     border-bottom: 2px solid #cf9a35eb;
 }
 
-.template-class_scheduling .scheduled { background: #8c8}
+.template-class_scheduling .scheduled { background: #faa}
 
 .template-admin_course_listing tr:nth-child(2n),
 .template-echelon_listing tr:nth-child(2n){

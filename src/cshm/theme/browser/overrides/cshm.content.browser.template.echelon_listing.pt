@@ -12,6 +12,8 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
+<a href="${python:context.getParentNode().absolute_url()}/@@admin_course_listing">回期別表</a> |
+<a href="${context/absolute_url}/@@echelon_listing">檢視最近30期</a> | <a href="${context/absolute_url}/@@echelon_listing?all">檢視所有期別</a>
   <table>
    <tr class="tr-title">
     <td>
@@ -80,7 +82,7 @@
      </p>
     </td>
    </tr>
-   <tr class="tr-body" tal:repeat="item context/getChildNodes">
+   <tr class="tr-body" tal:repeat="item view/childNodes">
     <td>
 <a href="${item/absolute_url}/register_detail">檢視</a>
     </td>
