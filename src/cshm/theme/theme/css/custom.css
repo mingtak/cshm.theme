@@ -1,3 +1,21 @@
+p {
+    margin: 0 0 10px;
+	font:15px;
+}
+
+.envor-content .envor-widget h3 {
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+h3.portletHeader {
+    background-color: 9f1012;
+    padding: 10px 15px;
+    /* border: 2px #ccc solid; */
+    border-radius: 6px;
+}
+
+
 /* 中尺寸: 768~480px */
 @media (max-width: 768px) and (min-width: 480px) {
     .envor-header-1 .envor-top-bar p.contacts {

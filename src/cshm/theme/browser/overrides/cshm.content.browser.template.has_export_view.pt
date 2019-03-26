@@ -16,6 +16,7 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 <style>
+/*
 .deepblue{
     background: #307bb3;
     color: white;
@@ -32,13 +33,14 @@ table{
     background: #3d84a8;
     color: white;
 }
+*/
 </style>
 
   <table>
-    <tr class='deepblue'>
+    <tr class='tr-title'>
       <td colspan='12' style='font-size: 22px'>${view/course_name}      ${view/time}</td>
     </tr>
-    <tr class='header'>
+    <tr class='tr-title'>
       <td>單位</td>
       <td>姓名/身份證</td>
       <td>報名日期</td>
@@ -52,18 +54,26 @@ table{
       <td>收據輔助</td>
       <td>轉介</td>
     </tr>
-    <tr tal:repeat="user view/result" >
+    <tr tal:repeat="user view/result" class='tr-body'>
       <tal:define define="obj python: dict(user)">
         <td>${python: obj['company_name']}</td>
-        <td>${python: '%s/%s' %(obj['name'], obj['studId'])}</td>
-        <td>${python: obj['apply_time'].strftime('%Y-%m-%d')}</td>
-        <td>${python: ''}</td>
+        <td tal:content="structure python: '%s<br>%s' %(obj['name'], obj['studId'])"></td>
+        <td>${python: view.adYear2Tw(obj['apply_time'].strftime('%Y/%m/%d'))}</td>
+        <td>${python: obj.get('contactLog')}</td>
         <td>${python: ''}</td>
         <td>${python: '繳費狀況'}</td>
         <td>${python: obj['training_hour']}</td>
         <td>${python: 'send mail'}</td>
         <td>${python: ''}</td>
-        <td>${python: ''}</td>
+        <td>
+            <form method='post'>
+                <select name='updateUid'>
+                    <option tal:repeat="period view/periodList" value='${period/uid}'>${period/title}</option>
+                </select>
+                <input type='hidden' value="${obj/id}" name='updateId'/>
+                <input type='submit'>
+            </form>
+        </td>
         <td>${python: ''}</td>
         <td>${python: ''}</td>
       </tal:define>
