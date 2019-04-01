@@ -72,13 +72,15 @@ echelon = context.getChildNodes()
   <th>開課狀態</th>
   <th>檢視</th>
 </tr>
-<tr class="course-body" tal:repeat="item course">
-  <td>${item/trainingCenter/to_object/title}</td>
-  <td i18n:translate="">${item/duringTime}</td>
-  <td>${python:item.courseStart}</td>
-  <td i18n:translate="">${item/classStatus}</td>
-  <td><a href="${item/absolute_url}/@@echelon_detail" target="_blank">開課資訊</a></td>
-</tr>
+<tal:tr tal:repeat="item course">
+  <tr class="course-body" tal:condition="item/trainingCenter">
+    <td>${item/trainingCenter/to_object/title}</td>
+    <td i18n:translate="">${item/duringTime}</td>
+    <td>${python:item.courseStart}</td>
+    <td i18n:translate="">${item/classStatus}</td>
+    <td><a href="${item/absolute_url}/@@echelon_detail" target="_blank">開課資訊</a></td>
+  </tr>
+</tal:tr>
 </table>
 
         </div>

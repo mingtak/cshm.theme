@@ -16,10 +16,6 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
-<?python
-from plone import api
-portal = api.portal.get()
-?>
 <tal:rep1 repeat="subject view/sortList">
     <div class="subject-block">
       <div class="subject">${subject}</div>
@@ -27,10 +23,7 @@ portal = api.portal.get()
       <tal:rep2 repeat="course python: view.courseList[subject]">
         <div class="course">
           ${python: course['title']} [${python: course['courseHour']}小時]
-<a tal:condition="python:portal['mana_course'].has_key(course['id'])"
-   class="detail"
-   href="${python:'%s/mana_course/%s/%s/@@echelon_detail' %
-                  (portal.absolute_url(), course['id'], portal['mana_course'][course['id']].getFirstChild().id)}">詳細資料</a>
+<a href="${python:portal['course_mana']}${python:course/id}">詳細資料</a>
         </div>
       </tal:rep2>
     </div>

@@ -141,7 +141,7 @@
       <td>
           廠商名稱: ${item/company_name}<br>
         <tal:cond condition="not:item/isReserve">
-          承辦人:TODO<br>
+<!--          承辦人:TODO<br> -->
           電話:${item/phone}<br>
           手機:${item/cellphone}<br>
           email:<a href="mailto:${item/priv_email}">${item/priv_email}</a><br>
