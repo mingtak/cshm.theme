@@ -12,6 +12,9 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
+<?python
+from plone import api
+?>
 <a href="${python:context.getParentNode().absolute_url()}/@@admin_course_listing">回期別表</a> |
 <a href="${context/absolute_url}/@@echelon_listing">檢視最近30期</a> | <a href="${context/absolute_url}/@@echelon_listing?all">檢視所有期別</a>
   <table>
@@ -81,6 +84,9 @@
       管理費
      </p>
     </td>
+    <td>
+課程發佈狀態
+    </td>
    </tr>
    <tr class="tr-body" tal:repeat="item view/childNodes">
     <td style="white-space:nowrap;">
@@ -141,7 +147,7 @@ ${item/licenseDate}
     </td>
     <td>
      <p>
-${item/undertaker}
+${python:item.undertaker}
      </p>
     </td>
     <td>
@@ -154,9 +160,33 @@ ${item/trainingCenterAgent}
 ${item/manageFee}
      </p>
     </td>
+    <td>
+<a href="javascript:void(0)" class="state" data-state="published" data-uid="${item/UID}"
+   style="color:blue" tal:condition="python: api.content.get_state(obj=item)=='published'">已發佈</a>
+<a href="javascript:void(0)" class="state" data-state="private" data-uid="${item/UID}"
+   style="color:red" tal:condition="not:python:api.content.get_state(obj=item)=='published'">未發佈</a>
+
+    </td>
    </tr>
   </table>
 
+<script>
+$(document).ready(function(){
+  $('a.state').click(function(){
+    state = $(this).data('state')
+    uid = $(this).data('uid')
+    data = {state: state, uid:uid}
+    $.post(location.href, data=data)
+      .done(function(res){
+alert('已變更發佈狀態')
+location.reload()
+      })
+      .fail(function(res){
+alert('變更失敗，請再試一次，若重覆失敗狀態，請洽系統管理員')
+      })
+  })
+})
+</script>
 </metal:content-core>
 </metal:content-core>
 

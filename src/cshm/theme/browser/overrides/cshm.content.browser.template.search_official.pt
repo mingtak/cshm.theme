@@ -22,8 +22,44 @@ input[type="text"]{
 流水號：<input id='docSN' type='text'>
 
 <button class='btn'>Search</button>
+<a href="${portal_url}/@@create_official_view" class="pull-right">新建公文</a>
 
-<div id='result'></div>
+<br><br>
+<div id='result'>
+<?python
+from plone import api
+portal = api.portal.get()
+?>
+<table>
+  <tr class="tr-title">
+    <td>主旨</td>
+    <td>文號</td>
+    <td>收件人</td>
+    <td>日期</td>
+    <td>歸於課程期別</td>
+    <td>下載</td>
+
+  </tr>
+  <tr tal:repeat="obj view/result" class="tr-body">
+<tal:item define="item python:obj.getObject()">
+    <td>${item/title}</td>
+    <td>${item/docHeader}${item/docSN}</td>
+    <td>${item/recipient}</td>
+    <td>${python:item.docDate.strftime('%Y/%m/%d')}</td>
+    <td>
+    ${python:item.relatedEchelon.to_object.getParentNode().title if item.relatedEchelon else ''}
+    ${python:item.relatedEchelon.to_object.title if item.relatedEchelon else ''}
+    <span tal:condition="item/relatedEchelon"> / </span>
+    <a target="_blank"
+       href="${python:item.absolute_url()}/edit#autotoc-item-autotoc-1">編輯</a>
+    </td>
+    <td><a href="${portal/absolute_url}/@@download_official_doc?uid=${item/UID}">下載</a></td>
+</tal:item>
+  </tr>
+</table>
+
+
+</div>
 
 <script>
 $(function(){

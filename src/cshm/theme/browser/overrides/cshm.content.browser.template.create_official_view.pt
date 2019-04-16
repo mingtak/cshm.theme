@@ -18,42 +18,43 @@ now = datetime.now().strftime('%Y-%m-%d')
 <style>
 input[type="text"], input[type="date"]{
     display: inline;
-    width: 20%;
+    width: 100%;
     margin: 5px 0 10px 5px;
 }
 </style>
 
 <form action='create_official_view' method='post'>
 
+字號:
 <select name='official_header'>
   <option tal:repeat="header python: view.office_header.split('/')" val="${python: header.split(':')[0]}">${python: header.split(':')[0]}</option>
 </select>
-<br>
+<br><br>
 <span>標題：</span><input name='title' type='text'>
 <br>
 <span>日期：</span><input name='date' type='date' value='${now}' style='width: 20%'>
 <br>
 <span>收件人：</span><input name='recipient' type='text'>
 <br>
-<span>細節1：</span><input name='detail_1' type='text'>
+<span>公文內容1：</span><input name='detail_1' type='text'>
 <br>
-<span>細節2：</span><input name='detail_2' type='text'>
+<span>公文內容2：</span><input name='detail_2' type='text'>
 <br>
-<span>細節3：</span><input name='detail_3' type='text'>
+<span>公文內容3：</span><input name='detail_3' type='text'>
 <br>
-<span>細節4：</span><input name='detail_4' type='text'>
+<span>公文內容4：</span><input name='detail_4' type='text'>
 <br>
-<span>細節5：</span><input name='detail_5' type='text'>
+<span>公文內容5：</span><input name='detail_5' type='text'>
 <br>
-<span>細節6：</span><input name='detail_6' type='text'>
+<span>公文內容6：</span><input name='detail_6' type='text'>
 <br>
-<span>細節7：</span><input name='detail_7' type='text'>
+<span>公文內容7：</span><input name='detail_7' type='text'>
 <br>
-<span>細節8：</span><input name='detail_8' type='text'>
+<span>公文內容8：</span><input name='detail_8' type='text'>
 <br>
-<span>細節9：</span><input name='detail_9' type='text'>
+<span>公文內容9：</span><input name='detail_9' type='text'>
 <br>
-<span>細節10：</span><input name='detail_10' type='text'>
+<span>公文內容10：</span><input name='detail_10' type='text'>
 <br>
 <button>Send</button>
 </form>

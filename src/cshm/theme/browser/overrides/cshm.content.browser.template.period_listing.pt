@@ -65,6 +65,8 @@
     color: #f33535;
 }
 </style>
+<h3>期別教材總覽</h3>
+
 <button id='view_all' class='center_btn' style='margin-right: 15px'>總覽</button>
 <button tal:repeat="trainingCenter view/trainingCenterBrains" data-target='${trainingCenter/Title}'
         class='center_btn'>${python: trainingCenter.Title}</button>

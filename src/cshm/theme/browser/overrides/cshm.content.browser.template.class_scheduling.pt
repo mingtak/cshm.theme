@@ -20,7 +20,7 @@
 
 <a href="${context/absolute_url}/@@register_detail" style="float:right">回課程管理</a>
 
-<h3>排課管理-- ${python:context.getParentNode().title} ${context/title}</h3>
+<h3>排課系統-- ${python:context.getParentNode().title} ${context/title}</h3>
 
 <div>
   <p>開課單位: ${context/trainingCenter/to_object/title}</p>

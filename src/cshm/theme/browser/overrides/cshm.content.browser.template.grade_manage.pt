@@ -20,8 +20,9 @@
 
 <h3>中國勞工安全衛生管理學會</h3>
 <h4>學員訓後考照追蹤表</h4>
-
+<!--
 <b>訓練班</b>:${python:context.getParentNode().title} <b>期別</b>:${context/title} <b>結訓日期</b>: YYYY/MM/DD <b>完訓人數</b>:OO
+-->
 <br>
 <a target="_blank" href="${context/absolute_url}/@@grade_manage_export_normal">學員訓後考照追蹤表</a>
 <span> | </span>

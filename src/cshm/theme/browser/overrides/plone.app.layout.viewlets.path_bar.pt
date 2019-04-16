@@ -46,7 +46,11 @@ portal_url = portal.absolute_url()
       <a href="${portal_url}/mana_course/@@has_export_count">轉出管理</a> |
       <a href="${portal_url}/@@teacher_mana">講師管理</a> |
       <a href="${portal_url}/@@quotation_list">報價管理</a> |
-      <a href="${portal_url}/@@make_up_list">補課管理</a>
+      <a href="${portal_url}/@@make_up_list">補課管理</a> |
+      <a href="${portal_url}/@@search_official">公文</a> |
+      <a href="${portal_url}/@@signature_view">簽呈</a> |
+
+
       <hr>
     </div>
   </div>

@@ -1,14 +1,21 @@
+<?python
+from plone import api
+portal = api.portal.get()
+?>
+
 <table>
-  <tr>
+  <tr class="tr-title">
     <td>主旨</td>
     <td>文號</td>
     <td>收件人</td>
     <td>日期</td>
+    <td>下載</td>
   </tr>
-  <tr tal:repeat="item view/data">
+  <tr tal:repeat="item view/data" class="tr-body">
     <td>${python: item[0]}</td>
     <td>${python: item[1]}</td>
     <td>${python: item[3]}</td>
     <td>${python: item[2]}</td>
+    <td><a href="${portal/absolute_url}/@@download_official_doc?uid=${python: item[4]}">下載</a></td>
   </tr>
 </table>

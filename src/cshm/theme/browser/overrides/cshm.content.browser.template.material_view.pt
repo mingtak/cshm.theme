@@ -95,7 +95,7 @@ a{
   <li data-target='return'>教材退還</li>
   <li style='padding: 0'><a href="${python: view.context.absolute_url()}/print_order?type=material" target='_blank' 
          style='color: white;border: none;text-decoration: none;padding: 9px 10px;background: #545b62;border-radius: 8px'>套印教材單</a></li>
-  <li><a href="${portal_url}/period_listing" style='color: white'>回到期別表</a></li>
+  <li><a href="${portal_url}/period_listing" style='color: white'>回到期別教材總表</a></li>
   <li><a href="${portal_url}/resource/material_folder/material_listing" target='_blank' style='color: white'>教材價目表</a></li>
 <ul>
 

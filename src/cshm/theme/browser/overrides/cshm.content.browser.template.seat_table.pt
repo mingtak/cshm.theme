@@ -18,6 +18,8 @@
 
 
 <h3>${python:context.getParentNode().title} ${context/title} 座位表</h3>
+
+<h4>若無法產生座位表，請檢查本班是否尚未完成編號(所有學生都有編號才能排座位)</h4>
 <input type='text' placeholder='範例: 3-4-3, 4-3-3 或其它，走道以 - 區隔' v-model="seat_state">
 <input type='text' placeholder='跳號，請輸入要跳開的座位編號，以半型逗點(,)隔開,由小到大依序填寫' v-model="seat_jump">
 <a class="submit-widget button-field context" href="javascript:void(0)" v-on:click="foo">產生座位表</a>

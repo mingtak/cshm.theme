@@ -102,25 +102,25 @@ now = datetime.now().strftime('%Y/%m/%d')
     <div class="w100  black_border bold">承辦人</div>
     <div class="w100  black_border">${view/context/undertaker}</div>
     <div class="w100  black_border bold">部門</div>
-    <div class="w100  black_border">TODO</div>
+    <div class="w100  black_border"></div>
     <div class="black_border bold" style='width: 97px'>電話</div>
-    <div class="w300  black_border">TODO</div>
+    <div class="w300  black_border"></div>
   </div>
   <div class="inline">
     <div class="w100  black_border bold">傳真</div>
-    <div class="w300  black_border">TODO</div>
+    <div class="w300  black_border"></div>
     <div class="w100  black_border bold">Email</div>
-    <div class="w300  black_border">TODO</div>
+    <div class="w300  black_border"></div>
   </div>
   <div class="inline">
     <div class="w100  black_border bold">上課狀況</div>
     <div class="w300  black_border">${python: result['status']}</div>
     <div class="w100  black_border bold">繳費狀況</div>
-    <div class="w300  black_border">TODO</div>
+    <div class="w300  black_border"></div>
   </div>
   <div class="inline">
     <div class="w100  black_border bold">折扣</div>
-    <div class="w700  black_border">TODO</div>
+    <div class="w700  black_border"></div>
   </div>
   <div class="inline">
     <div class="w800 black_border bold">----------聯絡紀錄----------</div>

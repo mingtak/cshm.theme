@@ -25,8 +25,8 @@
   <h4><a href="javascript:void(0)" i18n:translate="">${status}</a></h4>
   <ul>
   <tal:li repeat="item python:view.echelonBrain[status]">
-    <li>
-      <tal:obj define="obj item/getObject">
+    <li tal:define="obj item/getObject"
+        tal:condition="obj/trainingCenter">
         <h4>${python:obj.getParentNode().title} / ${item/Title} [<span i18n:translate="">${obj/duringTime}</span>]</h4>
         <h5><b>課程資訊</b></h5>
         <ul tal:define="subjects obj/getChildNodes">
@@ -38,7 +38,6 @@
         <br>
         <a class="btn btn-info" href="${item/getURL}/@@course_info">詳細資訊</a>
         <a class="btn btn-success" href="${item/getURL}/@@reg_course">前往報名</a>
-      </tal:obj>
     </li>
     <hr>
   </tal:li>

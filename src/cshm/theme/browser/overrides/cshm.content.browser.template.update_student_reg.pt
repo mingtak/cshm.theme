@@ -221,13 +221,13 @@
       承辦人員
      </td>
      <td>
-      <input type="text" value="TODO"/>
+      <input type="text" value=" "/>
      </td>
      <td>
       部　　門
      </td>
      <td>
-      <input type="text" value="TODO"/>
+      <input type="text" value=" "/>
      </td>
      <td>
       職稱
@@ -239,7 +239,7 @@
       電　　話
      </td>
      <td>
-      <input type="text" value="TODO"/>
+      <input type="text" value=" "/>
      </td>
     </tr>
     <tr>
@@ -247,7 +247,7 @@
       傳　　真
      </td>
      <td colspan="9">
-      <input type="text" value="TODO"/>
+      <input type="text" value=" "/>
      </td>
     </tr>
     <tr class="tr-head">
@@ -324,7 +324,7 @@
      <td colspan="9">
       <select name="d1">
        <option>
-        TODO
+        
        </option>
        <option>
         確定上課
@@ -351,7 +351,7 @@
      <td colspan="9">
       <select name="d10">
        <option>
-        TODO
+        
        </option>
        <option>
         已mail
@@ -372,7 +372,7 @@
         已告知
        </option>
       </select>
-      <input maxlength="40" name="d11" type="text" value="TODO"/>
+      <input maxlength="40" name="d11" type="text" value=" "/>
      </td>
     </tr>
     <tr>
@@ -392,18 +392,18 @@
      <td colspan="9">
       <select name="d2">
        <option>
-        已繳費TODO
+        未繳費
        </option>
       </select>
       收據號碼
-      <input maxlength="20" name="d8" type="text" value="TODO"/>
+      <input maxlength="20" name="d8" type="text" value=" "/>
       金額
-      <input maxlength="5" name="d25" type="text" value="TODO"/>
+      <input maxlength="5" name="d25" type="text" value=" "/>
       折扣
-      <input maxlength="30" name="d26" type="text" value="TODO"/>
+      <input maxlength="30" name="d26" type="text" value=" "/>
       <br/>
       介紹人
-      <input maxlength="20" name="d29" type="text" value="TODO"/>
+      <input maxlength="20" name="d29" type="text" value=" "/>
      </td>
     </tr>
     <tr>
@@ -411,14 +411,14 @@
       匯款紀錄
      </td>
      <td colspan="9">
-      <input maxlength="50" name="payInfo" type="text" value="TODO"/>
+      <input maxlength="50" name="payInfo" type="text" value=" "/>
      </td>
     </tr>
     <tr>
      <td>
       繳交資料
      </td>
-     <td colspan="3">TODO
+     <td colspan="3">
       <input name="d_1" type="checkbox"/>
       照片
       <input name="d_2" type="checkbox"/>
@@ -430,7 +430,7 @@
       教材領取
      </td>
      <td colspan="3">
-      <input name="x2" type="text" value="TODO"/>
+      <input name="x2" type="text" value=" "/>
      </td>
     </tr>
     <tr>
@@ -438,13 +438,13 @@
       資料說明
      </td>
      <td colspan="3">
-      TODO
+      
      </td>
      <td>
       最近修改
      </td>
      <td colspan="3">
-      TODO
+      
      </td>
     </tr>
     <tr>
@@ -452,7 +452,7 @@
       註　　記
      </td>
      <td colspan="9">
-      TODO
+      
      </td>
     </tr>
     <tr>
@@ -460,7 +460,7 @@
       備　　註
      </td>
      <td colspan="9">
-      TODO
+      
      </td>
     </tr>
     <tr class="tr-head">

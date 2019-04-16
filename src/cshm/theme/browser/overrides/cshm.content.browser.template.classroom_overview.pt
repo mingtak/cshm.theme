@@ -51,10 +51,10 @@ trainingCenter = portal['resource']['training_center'].getChildNodes()
     <td>${python:row['classroom']}</td>
     <td>${python:view.adYear2Tw(row['start'].strftime('%Y/%m/%d'))} ${python:row['start'].strftime('%H:%M')}</td>
     <td>${python:api.content.find(UID=row['uid'])[0].Title}</td>
-    <td>TODO</td>
+    <td></td>
     <td>${python:api.content.find(UID=row['uid'])[0].getObject().teacher.to_object.title}</td>
-    <td>TODO</td>
-    <td>TODO</td>
+    <td></td>
+    <td></td>
   </tr>
 </table>
 <hr>

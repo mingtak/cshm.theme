@@ -22,26 +22,36 @@
 
 <a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a> |
 <a id="teacher-selector" target="_blank" href="@@teacher_selector">老師遴選</a> |
+<a id="class_scheduling" target="_blank" href="@@class_scheduling">排課系統</a> |
 <a id="admin-reg-course" target="_blank" href="@@admin_reg_course">後台報名</a> |
 <a id="admin-group-reg-course" target="_blank" href="@@admin_group_reg_course">後台團報</a> |
 <a id="export-email-cell" target="_blank" href="@@export_email_cell">匯出Email/手機清單</a> |
 <a id="seat_table" target="_blank" href="@@seat_table">套印座位表</a> |
-<a id="batch_update_before_training" target="_blank" href="@@batch_update_before_training">批次修改(開課前)</a> |
+<a id="batch_update_before_training" target="_blank" href="@@batch_update_before_training">轉出操作</a> |
 <a id="batch_update_on_training" target="_blank" href="@@batch_update_on_training">批次修改(開課中)</a> |
 <a id="batch_update_after_training" target="_blank" href="@@batch_update_after_training">批次修改(結訓)</a> |
 <a id="echelon_view" target="_blank" href="@@echelon_view">滿意度調查</a> |
 <a id="calculate_satisfaction" target="_blank" href="@@calculate_satisfaction">滿意度報表</a>｜
-<a id="register_excel_class" target="_blank" href="@@register_excel_class">課程表</a>｜
-<a id="register_excel_teacher" target="_blank" href="@@register_excel_teacher">講師表</a>｜
-<a id="register_excel_graduaction" target="_blank" href="@@register_excel_graduaction">學員表(報班)</a>｜
-<a id="period_listing" target="_blank" href="@@period_listing">期別表</a>｜
+<a id="register_excel_class" href="@@register_excel_class">課程表</a>｜
+<a id="register_excel_teacher" href="@@register_excel_teacher">講師表</a>｜
+<a id="register_excel_graduaction" href="@@register_excel_graduaction">學員表</a>｜
+<a id="triple_excel" href="@@triple_excel">三合一表格</a>｜
+<span class="gernal_report">防火點名/核發清冊</span>
+( <a id="gernal_report" href="@@gernal_report?mode=horizon">橫式</a> /
+<a id="gernal_report" href="@@gernal_report?mode=straight">直式</a> /
+<a id="gernal_report" href="@@gernal_report?mode=fire">防火</a> /
+<a id="gernal_report" href="@@gernal_report?mode=issue">核發清冊</a> /
+<a id="gernal_report" href="@@gernal_report?mode=emergency_grade">成績冊</a> )｜
 <a id="list_print" target="_blank" href="@@list_print">點名表</a>｜
+<a id="period_listing" target="_blank" href="@@period_listing">期別教材總覽</a>｜
 <a id="material_view" target="_blank" href="@@material_view">教材</a>｜
 <a id="receipt_list" target="_blank" href="@@receipt_list">收據</a>｜
 <a id="search_receipt" target="_blank" href="@@search_receipt?action=title">收據查詢</a>｜
-<a id="@@student_list_report" target="_blank" href="@@@@student_list_report">防火點名</a>｜
-<a id="student_issue_repor" target="_blank" href="@@student_issue_repor">核發清冊</a>｜
-<a id="triple_excel" target="_blank" href="@@triple_excel">三合一</a>｜
+<span class="gernal_report">成績追蹤</span>
+( <a id="grade_manage" href="@@grade_manage">一般/操作類</a> /
+ <a id="grade_manage2" href="@@grade_manage2">室內空氣品質維護管理專責人員訓練班</a> /
+ <a id="grade_manage3" href="@@grade_manage3">工地主任220小時評定追蹤</a> ) |
+
 
 <hr>
 <input name="url" class="to-url" type="text" placeholder="請輸入下載專區網址" style="width: 300px; float:left">
@@ -130,7 +140,7 @@
       </td>
 
 
-      <td>TODO</td>
+      <td></td>
       <td>
         <tal:cond condition="not:item/isReserve">
           <p>${python:item.contactLog.split('\n')[-1] if item.contactLog is not None else ''}</p>
@@ -141,7 +151,7 @@
       <td>
           廠商名稱: ${item/company_name}<br>
         <tal:cond condition="not:item/isReserve">
-<!--          承辦人:TODO<br> -->
+<!--          承辦人:<br> -->
           電話:${item/phone}<br>
           手機:${item/cellphone}<br>
           email:<a href="mailto:${item/priv_email}">${item/priv_email}</a><br>
@@ -183,9 +193,9 @@
       <td>${item/isAlt}</td>
       <td>${item/name}</td>
       <td>電話:${item/phone}<br />手機:${item/cellphone}</td>
-      <td>TODO</td>
+      <td></td>
       <td>${item/priv_email}</td>
-      <td>TODO</td>
+      <td></td>
       <td>
           <input type="text" name='contactLog' style="width:80%; float:left" id="log-data-${item/id}"/>
           <a href="javascript:void(0)" class="add-log" data-id="${item/id}" data-currentname="${view/currentName}">新增</a>
