@@ -63,6 +63,7 @@ abs_url = api.portal.get().absolute_url()
 
 <br/>
 <form class="col-xs-12 col-sm-12" action="result_satisfaction" method="post" onsubmit="return checkForm()">
+    <input type='hidden' value='${view/studId}' readonly='readonly' name='studId'/>
     <div>
         <p>課程名稱：</p>
         <input type="text" value='${view/subjectName}' readonly="readonly"  name='subjectName'/>    

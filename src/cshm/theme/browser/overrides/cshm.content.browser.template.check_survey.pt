@@ -31,12 +31,19 @@
 
 </style>
 <form method="post" action="check_survey">
-      <p>請填入座號</p>
-      <select name='seat_number'  id="seat_number">
-          <option selected>請選擇</option>
-      </select>
-  <input type="submit" value="送出" class="btn">
-
+  <div class='row'>
+  <div class='col-md-3 col-xs-12' style='padding: 0;margin-bottom: 10px'>
+    <p style='font-size: 19px'>請填入座號</p>
+    <select name='seat_number'  id="seat_number" required>
+        <option selected value=''>請選擇</option>
+    </select>
+  </div>
+  <div class='col-md-3 col-xs-12' style='padding: 0;margin-bottom: 10px'>
+    <p style='font-size: 19px'>請輸入身份證號碼</p>
+    <input type='text' name='studId' required>
+  </div>
+  <input type="submit" value="送出" class="btn col-xs-10" style='margin-top: 10px'>
+</div>
 </form>
 <script>
 window.onload = function(){

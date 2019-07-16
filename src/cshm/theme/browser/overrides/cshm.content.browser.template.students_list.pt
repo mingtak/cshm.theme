@@ -23,7 +23,7 @@
 <a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a> |
 <a id="teacher-selector" target="_blank" href="@@teacher_selector">老師遴選</a> |
 <a id="class_scheduling" target="_blank" href="@@class_scheduling">排課系統</a> |
-<a id="admin-reg-course" target="_blank" href="@@admin_reg_course">後台報名</a> |
+<a id="admin-reg-course" target="_blank" href="@@admin_reg_course">後台報名(個人)</a> |
 <a id="admin-group-reg-course" target="_blank" href="@@admin_group_reg_course">後台團報</a> |
 <a id="export-email-cell" target="_blank" href="@@export_email_cell">匯出Email/手機清單</a> |
 <a id="seat_table" target="_blank" href="@@seat_table">套印座位表</a> |
@@ -31,7 +31,7 @@
 <a id="batch_update_on_training" target="_blank" href="@@batch_update_on_training">批次修改(開課中)</a> |
 <a id="batch_update_after_training" target="_blank" href="@@batch_update_after_training">批次修改(結訓)</a> |
 <a id="echelon_view" target="_blank" href="@@echelon_view">滿意度調查</a> |
-<a id="calculate_satisfaction" target="_blank" href="@@calculate_satisfaction">滿意度報表</a>｜
+<a id="calculate_satisfaction" target="_blank" href="@@show_statistics">滿意度報表</a>｜
 <a id="register_excel_class" href="@@register_excel_class">課程表</a>｜
 <a id="register_excel_teacher" href="@@register_excel_teacher">講師表</a>｜
 <a id="register_excel_graduaction" href="@@register_excel_graduaction">學員表</a>｜

@@ -71,7 +71,7 @@ table{
                     <option tal:repeat="period view/periodList" value='${period/uid}'>${period/title}</option>
                 </select>
                 <input type='hidden' value="${obj/id}" name='updateId'/>
-                <input type='submit'>
+                <input type='submit' value="送出">
             </form>
         </td>
         <td>${python: ''}</td>

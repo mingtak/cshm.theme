@@ -9,10 +9,19 @@
 
 
 <body>
+<metal:style fill-slot="style_slot">
+    <link rel="stylesheet" type="text/css" href="${portal_url}/++plone++cshm.theme/c3.min.css">
+</metal:style>
+
+<metal:js fill-slot="top_slot">
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+
+<script type="text/javascript" src="${portal_url}/++plone++cshm.theme/c3.min.js"></script>
+</metal:js>
+
 <metal:content-core fill-slot="content-core">
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
-<link rel="stylesheet" href="++theme++theme-for-cshm/css/c3.min.css" />
 
 <style>
 input{
@@ -46,73 +55,40 @@ input[type='number']{
     border-radius: 3px;
 }
 </style>
-<?python
-from plone import api
-abs_url = api.portal.get().absolute_url()
-?>
-<button id='back' style='margin-bottom:20px' 
-   onclick="backFolderContents()">回目錄</button>
-<br/>
-<p  style='display:none'>訓前</p>
-<select name="course" id="course1" style='display:none'>
-    <option value="職業安全衛生管理員">職業安全衛生管理員 </option>
-    <option value="荷重再一噸以上之堆高機操作人員">荷重再一噸以上之堆高機操作人員</option>
-    <option value="丙種職業安全衛生業務主管">丙種職業安全衛生業務主管</option>
-    <option value="急救人員">急救人員</option>
-</select>
-
-<p  style='display:none'>期數</p> <input type="hidden" id="period1"   />
-
-<button class='send' id='send1' data-target="1"   style='display:none'>送出</button>
-<br>
-
-滿意度
-<select id="course2">
-    <option tal:repeat="item python: view.result.keys()" value="${python: item}">${python: view.result[item]}</option>
-</select>
-期數 <input type="number" id="period2"  />
-<button class='send' id='send2'  data-target="2" >送出</button>
+<div id='survey_btn'>
+    <button id='satisfaction'>滿意度</button>
+    <button id='manager'>訓前-管理員</button> 
+    <button id='c_type'>訓前-丙種職業</button>
+    <button id='stacker'>訓前-堆高機</button>
+    <button id='emergency'>訓前-急救人員</button>
+</div>
 
 <div id="result"></div>
 
 <script>
-function backFolderContents(){
-        location.href = location.href.replace('show_satisfaction_statistics', 'folder_contents')
-}
-document.getElementById('send2').addEventListener('click', function(event){  
-    target = event.currentTarget.dataset['target']
-    period = document.querySelector('#period' + target).value
-    course = document.querySelector('#course' + target).value
-
-    if(period == ''){
-        alert('請填寫期數')
-        return false
-    }
-    if(target == 2){
-        url = location.href.replace('show_satisfaction_statistics', 'calculate_satisfaction')
-    }
-    else if(target == 1){
-        url = location.href.replace('show_satisfaction_statistics', 'calculate_training')
-    }
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function(rep) {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById('result').innerHTML = this.response
-            var s = document.createElement('script');
-            s.src = '++theme++theme-for-cshm/js/drawPie.js'
-            document.body.appendChild(s);
+$(document).ready(function(){
+    $('#survey_btn button').click(function(){
+        id = this.id
+        if(id == 'satisfaction'){
+            url = location.href.replace('show_statistics', 'calculate_satisfaction')
+        }else{
+            url = location.href.replace('show_statistics', 'calculate_training')
         }
-    };
-    xhttp.open("POST", url, true);
-    var data = new FormData();
-    data.append('period', period);
-    data.append('course', course);
-    xhttp.send(data);
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: {'course': id},
+            success: function(rep){
+                if(rep == 'error'){
+                    rep = '<h3>查無資料</h3>'
+                }
+                $('#result').html(rep)
+            }
+        })   
+    })
 })
 </script>
-<script src="++theme++theme-for-cshm/js/d3.v3.min.js"></script>
-<script src="++theme++theme-for-cshm/js/c3.min.js"></script>
+
 
 </metal:content-core>
 </metal:content-core>
