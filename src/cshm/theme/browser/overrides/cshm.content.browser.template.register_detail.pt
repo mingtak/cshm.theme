@@ -18,46 +18,119 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
+<style>
+input.edit, select.edit, p.edit, #send, #cancel_edit, textarea.edit{
+    display: none;
+}
+</style>
+
 <h2>報名作業 / 開班程序</h2>
 <hr>
 <h3>${python:context.getParentNode().title} / ${context/title}</h3>
 
 <a target="_blank" href="${context/absolute_url}/@@students_list">名單</a> |
-<a target="_blank" href="${context/absolute_url}/@@class_scheduling">排課</a>
+<a target="_blank" href="${context/absolute_url}/@@class_scheduling">排課</a>|
+<a traget='_blank' href="${context/absolute_url}/add_signature">簽呈</a>|
 <hr>
+<?python
+   timeDict = {'notYat': '時間未定', 'inDay': '日間', 'inEvening': '夜間', 'inWeekend': '假日', 'inWeekendEvening': '周末夜間', 'complex': '混合時段', 'phone': '電話'}
+   statusDict = {'willStart': '確定開課', 'fullCanAlt': '額滿候補', 'planed': '預定開課', 'registerFirst': '請先報名', 'altFull': '報名額滿'}
+   roomDict = {'first_room': '第一教室', 'second_room': '第二教室', 'Taoyuan': '桃園', 'Zhongli': '中壢', 'Tainan': '台南', 'Kaohsiung': '高雄'}
+?>
+<form method='post' onsubmit='return confirm("確認要更新嘛？")'>
+  <input type='submit' id='send'>
+  <button id='cancel_edit'>取消</button>
 
+  <input type='hidden' value='1' name='update'/>
   <table border="1" cellpadding="0" cellspacing="0" width="850px">
    <tbody>
     <tr height="30" class="tr-title">
-     <td colspan="6">課程基本資料(<a href="${context/absolute_url}/edit#autotoc-item-autotoc-1">編輯</a>)</td>
+     <td colspan="6">課程基本資料(<span id='enableEdit' style='color: black;cursor:pointer'>編輯</span>)</td>
+    </tr>
+    <tr>
+     <td>
+       <b>期    別</b>
+     </td>
+     <td>
+       <p>${context/title}</p>
+       <input name='title' class='edit' value='${context/title}'>
+     </td>
+     <td>
+       <b>課程狀態</b>
+     </td>
+     <td>
+       <p>${python: statusDict[context.classStatus]}</p>
+       <select name='classStatus' class='edit'>
+         <option tal:repeat="status statusDict" value='${status}' tal:attributes="selected python: context.classStatus == status">${python: statusDict[status]}</option>
+       </select>
+     </td>
+     <td>
+       <b>報名截止日期</b>
+     </td>
+     <td>
+       <p>${context/regDeadline}</p>
+       <input type='date' name='regDeadline' class='edit' value='${context/regDeadline}'>
+     </td>
     </tr>
     <tr height="30">
      <td width="120">
       <b>時　　段</b>
      </td>
-     <td width="160" i18n:translate="">${context/duringTime}</td>
+     <td width="160">
+       <p>${python: timeDict[context.duringTime]}</p>
+       <select class='edit' name='duringTime'>
+         <option value='notYat' tal:attributes="selected python: context.duringTime == 'notYat'">時段未定</option>
+         <option value='inDay' tal:attributes="selected python: context.duringTime == 'inDay'">日間</option>
+         <option value='inEvening' tal:attributes="selected python: context.duringTime == 'inEvening'">夜間</option>
+         <option value='inWeekend' tal:attributes="selected python: context.duringTime == 'inWeekend'">假日</option>
+         <option value='inWeekendEvening' tal:attributes="selected python: context.duringTime == 'inWeekendEvening'">周末夜間</option>
+         <option value='complex' tal:attributes="selected python: context.duringTime == 'complex'">混合時段</option>
+         <option value='phone' tal:attributes="selected python: context.duringTime == 'phone'">電話</option>
+       </select>
+     </td>
+
      <td width="120"><b>開訓日期</b></td>
-     <td width="160">${context/courseStart}</td>
+     <td width="160">
+       <p>${context/courseStart}</p>
+       <input type='date' value='${context/courseStart}' name='courseStart' class='edit'>
+     </td>
      <td width="120">
       <b>
        結訓日期
       </b>
      </td>
-     <td width="160">${context/courseEnd}</td>
+     <td width="160">
+       <p>${context/courseEnd}</p>
+       <input type='date' value='${context/courseEnd}' name='courseEnd' class='edit'>
+     </td>
     </tr>
     <tr height="30">
+     <td>
+       <b>上課時間</b>
+     </td>
+     <td>
+       <p>${context/classTime}</p>
+       <input class='edit' name='classTime' value='${context/classTime}' placeholder='例:0900-1800'>
+     </td>
      <td>
       <b>
        外辦單位
       </b>
      </td>
-     <td>${context/trainingCenter/to_object/title}</td>
+     <td>
+       <p>${python: context.trainingCenter.to_object.title if context.trainingCenter else ''}</p>
+       <select name='trainingCenter' class='edit' tal:define='centerDict view/getTrainingCenter'>
+         <option tal:attributes='selected  python: not context.trainingCenter'></option>
+         <option tal:repeat="item centerDict" value='${python: centerDict[item]}'
+                 tal:attributes='selected  python: context.trainingCenter.to_object.title == item'>${item}</option>
+       </select>
+     </td>
      <td>
       <b>
        訓練地點
       </b>
      </td>
-     <td colspan="3">${context/trainingCenter/to_object/address}</td>
+     <td colspan="3">${python: context.trainingCenter.to_object.address if context.trainingCenter else ''}</td>
     </tr>
     <tr height="30">
      <td>
@@ -65,20 +138,36 @@
        專班
       </b>
      </td>
-     <td>${context/specialCourse}</td>
+     <td>
+       <p>${context/specialCourse}</p>
+       <input class='edit' value="${context/specialCourse}" name='specialCourse'/>
+     </td>
      <td>
       <b>
        承辦人員
       </b>
      </td>
-     <td>${context/undertaker}</td>
+     <td>
+       <p>${python: view.getFullName(context.undertaker)}</p>
+       <select name='undertaker' class='edit' tal:define='allUser view/allUser'>
+         <option values='' tal:attributes="selected python: context.undertaker == ''"></option>
+         <option tal:repeat="user allUser" value='${python: allUser[user]}' 
+                 tal:attributes="selected python: context.undertaker == allUser[user]">${user}</option>
+       </select>
+     </td>
      <td>
       <b>
        專職輔導員
       </b>
      </td>
      <td>
-      ${context/counselor}
+       <p>${python: view.getFullName(context.counselor)}</p>
+       <select name='counselor' class='edit' tal:define='allUser view/allUser'>
+         <option values='' tal:attributes="selected python: context.counselor == ''"></option>
+         <option tal:repeat="user allUser" value='${python: allUser[user]}'
+                 tal:attributes="selected python: context.counselor == allUser[user]">${user}</option>
+       </select>
+
       <br/>
       <span>
 <!--       (代理輔導員：) -->
@@ -91,7 +180,10 @@
        人數上限
       </b>
      </td>
-     <td>${context/quota}</td>
+     <td>
+       <p>${context/quota}</p>
+       <input class='edit' value="${context/quota}" name='quota' type='number'/>
+     </td>
      <td>
       <b>
        職訓中心
@@ -99,7 +191,21 @@
        承辦人員
       </b>
      </td>
-     <td colspan="3">${context/trainingCenterAgent}</td>
+     <td>
+      <p>${context/trainingCenterAgent}</p>
+      <input class='edit' name='trainingCenterAgent' value='${context/trainingCenterAgent}'/>
+     </td>
+     <td>
+      <b>
+       教室
+      </b>
+     </td>
+     <td>
+      <p>${python: roomDict[context.classroom]}</p>
+      <select name='classroom' class='edit'>
+        <option tal:repeat='room roomDict' value='${room}' tal:attributes="selected python: context.classroom == room">${python: roomDict[room]}</option>
+      </select>
+     </td>	
     </tr>
     <tr>
     </tr>
@@ -109,8 +215,19 @@
        發證文號
       </b>
      </td>
-     <td colspan="5">
-      ●主管機關：${context/manageOrg}　●核備日期／文號：${context/docSN}
+     <td colspan='3'>
+      <p>●主管機關：${context/manageOrg}　●核備日期／文號：${context/docSN}</p>
+      <p class='edit'>
+         ●主管機關：<input class='edit' name='manageOrg' value='${context/manageOrg}'/>
+　       ●核備日期／文號：<input class='edit' name='docSN' value='${context/docSN}' type='date' style='width: 20%'/>
+      </p>
+     </td>
+     <td>
+       <b>課程費用</b>
+     </td>
+     <td>
+       <p>${context/courseFee}</p>
+       <input class='edit' name='courseFee' value='${context/courseFee}' type='number'/>
      </td>
     </tr>
     <tr height="30">
@@ -133,6 +250,113 @@
      </td>
      <td>${view/licenseDate}</td>
     </tr>
+
+    <tr height="30" class="tr-title">
+     <td colspan="6">
+      簡章資訊
+     </td>
+    </tr>
+    <tr height='30'>
+     <td>
+      <b>聯絡資訊</b>
+     </td>
+     <td>
+       <p>${context/contact}</p>
+       <textarea value='${context/contact}' class='edit' name='contact'>${context/contact}</textarea>
+     </td>
+
+     <td>
+      <b>繳交資料</b>
+     </td>
+     <td>
+       <p>${context/prepareInfo}</p>
+       <textarea value='${context/prepareInfo}' class='edit' name='prepareInfo'>${context/prepareInfo}</textarea>
+     </td>
+
+     <td>
+      <b>上課詳細時間</b>
+     </td>
+     <td>
+       <p>${context/detailClassTime}</p>
+       <textarea value='${context/detailClassTime}' class='edit' name='detailClassTime'>${context/detailClassTime}</textarea>
+     </td>
+    </tr>
+
+    <tr>
+     <td>
+      <b>優惠方案</b>
+     </td>
+     <td>
+       <p>${context/discountProgram}</p>
+       <textarea value='${context/discountProgram}' class='edit' name='discountProgram'>${context/discountProgram}</textarea>
+     </td>
+     <td>
+      <b>折扣開始日期</b>
+     </td>
+     <td>
+       <p>${context/discountStart}</p>
+       <input type='date' class='edit' name='discountStart' value='${context/discountStart}' />
+     </td>
+     <td>
+      <b>折扣結束日期</b>
+     </td>
+     <td>
+       <p>${context/discountEnd}</p>
+       <input type='date' class='edit' name='discountEnd' value='${context/discountEnd}' />
+     </td>
+
+    </tr>
+
+    <tr>
+     <td><b>起重機具機型</b></td>
+     <td>
+       <p>${context/craneType}</p>
+       <input class='edit' name='craneType' value='${context/craneType}'>
+     </td>
+     <td><b>認    證</b></td>
+     <td>
+       <p>${context/qualification}</p>
+       <input class='edit' name='qualification' value='${context/qualification}'>
+     </td>
+     <td><b>報班日期</b></td>
+     <td>
+       <p>${context/submitClassDate}</p>
+       <input type='date' class='edit' name='submitClassDate' value='${context/submitClassDate}'>
+     </td>
+    </tr>
+
+    <tr>
+      <td>
+        <b>回訓細節</b>
+      </td>
+      <td>
+        <p>${context/reTrainingDetail}</p>
+        <textarea class='edit' name='reTrainingDetail'>${context/reTrainingDetail}</textarea>
+      </td>
+      <td>  
+        <b>課程介紹</b>
+      </td>
+      <td>
+        <p>${context/courseIntro}</p>
+        <textarea class='edit' name='courseIntro'>${context/courseIntro}</textarea>
+      </td>
+      <td>  
+        <b>適用範圍</b>
+      </td>
+      <td>
+        <p>${context/courseScope}</p>
+        <textarea class='edit' name='courseScope'>${context/courseScope}</textarea>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b>考試方式</b>
+      </td>
+      <td>
+        <p>${context/testMethod}</p>
+        <textarea class='edit' name='testMethod'>${context/testMethod}</textarea>
+      </td>
+    </tr>
     <tr height="30" class="tr-title">
      <td colspan="6">
       辦理狀態
@@ -142,19 +366,25 @@
      <td>
       <b>學員資料寄件</b>
      </td>
-     <td>${context/studDataSendDate}
+     <td>
+       <p>${context/studDataSendDate}</p>
+       <input type='date' value='${context/studDataSendDate}' class='edit' name='studDataSendDate'/>
      </td>
      <td>
       <b>結報寄件</b>
      </td>
-     <td>${context/finishCourseSendDate}
+     <td>
+       <p>${context/finishCourseSendDate}</p>
+       <input type='date' value='${context/finishCourseSendDate}' class='edit' name='finishCourseSendDate'/>
      </td>
      <td>
       <b>
        收件日期
       </b>
      </td>
-     <td>${context/receivedDate}
+     <td>
+       <p>${context/receivedDate}</p>
+       <input type='date' value='${context/receivedDate}' class='edit' name='receivedDate'/>
      </td>
     </tr>
     <tr height="30">
@@ -165,13 +395,18 @@
        狀　　態
       </b>
      </td>
-     <td>${context/giveLicenseStatus}</td>
+     <td>
+       <p>${context/giveLicenseStatus}</p>
+       <input value='${context/giveLicenseStatus}' class='edit' name='giveLicenseStatus'/>
+     </td>
      <td>
       <b>
        查核註記
       </b>
      </td>
-     <td colspan="3">${context/checkNote}
+     <td colspan="3">
+       <p>${context/checkNote}</p>
+       <input value='${context/checkNote}' class='edit' name='checkNote'/>
      </td>
     </tr>
     <tr height="30">
@@ -180,20 +415,27 @@
        預支款請領
       </b>
      </td>
-     <td colspan="1">${context/preFee}</td>
+     <td colspan="1">
+       <p>${context/preFee}</p>
+       <input value='${context/preFee}' class='edit' name='preFee'/>
+     </td>
      <td>
       <b>
        收支明細
       </b>
      </td>
-     <td>${context/feeDetail}
+     <td>
+       <p>${context/feeDetail}</p>
+       <input value='${context/feeDetail}' class='edit' name='feeDetail'/>
      </td>
      <td>
       <b>
        管理費
       </b>
      </td>
-     <td>${context/manageFee}
+     <td>
+       <p>${context/manageFee}</p>
+       <input value='${context/manageFee}' class='edit' name='manageFee'/>
      </td>
     </tr>
     <tr height="30">
@@ -202,14 +444,18 @@
        結報狀態
       </b>
      </td>
-     <td>${context/finishCourseStatus}
+     <td>
+       <p>${context/finishCourseStatus}</p>
+       <input value='${context/finishCourseStatus}' class='edit' name='finishCourseStatus'/>
      </td>
      <td>
       <b>
        出納註記
       </b>
      </td>
-     <td colspan="3">${context/cashierNote}
+     <td colspan="3">
+       <p>${context/cashierNote}</p>
+       <input value='${context/cashierNote}' class='edit' name='cashierNote'/>
      </td>
     </tr>
     <tr height="30">
@@ -218,7 +464,9 @@
        備　　註
       </b>
      </td>
-     <td colspan="5">${context/statusNote}
+     <td colspan="5">
+       <p>${context/statusNote}</p>
+       <input value='${context/statusNote}' class='edit' name='statusNote'/>
      </td>
     </tr>
     <tr height="30" class="tr-title">
@@ -270,7 +518,27 @@
     </tr>
    </tbody>
   </table>
+</form>
 
+<script>
+$(function(){
+  $('#enableEdit').click(function(){
+    $('.edit').show()
+    $('.edit').siblings().hide()
+    $('p.edit input').show()
+    $('#cancel_edit').show()
+    $('#send').show()
+  })
+  $('#cancel_edit').click(function(){
+    $('.edit').hide()
+    $('.edit').siblings().show()
+    $('p.edit input').hide()
+    $('#cancel_edit').hide()
+    $('#send').hide()
+    event.preventDefault()
+  })
+})
+</script>
 
 </metal:content-core>
 </metal:content-core>
