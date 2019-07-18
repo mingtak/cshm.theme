@@ -90,8 +90,7 @@ from plone import api
    </tr>
    <tr class="tr-body" tal:repeat="item view/childNodes">
     <td style="white-space:nowrap;">
-<a href="${item/absolute_url}/register_detail">檢視</a> /
-<a href="${item/absolute_url}/edit#autotoc-item-autotoc-2">簡章</a>
+<a href="${item/absolute_url}/register_detail">檢視</a> 
     </td>
     <td>
      <p>

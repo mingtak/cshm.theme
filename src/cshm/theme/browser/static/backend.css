@@ -81,7 +81,7 @@ tr.training_status_3 {
     color:#fff;
 }
 
-.plone-toolbar-expanded table tr td {
+.plone-toolbar-expanded table tr td, .plone-toolbar-expanded table tr th{
     padding:8px;
     border: 1px solid #999;
 }

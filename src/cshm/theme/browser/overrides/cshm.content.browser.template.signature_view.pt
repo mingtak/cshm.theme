@@ -26,7 +26,6 @@ a{
 </style>
 
 
-<button onclick="location.href='${portal_url}/add_signature'">新增簽呈</button>
 <button onclick="location.href='${portal_url}/search_signature_view'">簽呈查詢</button>
 <button onclick="location.href='${portal_url}/add_signature_sample'">新增範本</button>
 <button onclick="location.href='${portal_url}/search_signature_view'">新增範本</button>
