@@ -23,7 +23,7 @@
 <h3>排課系統-- ${python:context.getParentNode().title} ${context/title}</h3>
 
 <div>
-  <p>開課單位: ${context/trainingCenter/to_object/title}</p>
+  <p>開課單位: <span id='tainingCenter'>${context/trainingCenter/to_object/title}</span></p>
   <p>批次設定教室:
           <select id='select-classroom'>
             <tal:item repeat="item python:context.trainingCenter.to_object.getChildNodes()">
@@ -256,7 +256,12 @@ $(document).ready(function(){
     /* 新增一列 */
     $('input.add-scheduling').click(function(){
         uid = $('select.add-scheduling').val()
-        data = {uid: uid,
+        classroom = $('#select-classroom').val()
+        trainingCenter = $('#tainingCenter').text()
+        data = {
+                uid: uid,
+                classroom: classroom,
+                trainingCenter: trainingCenter,
                 update_class_scheduling: true,
                 addrow: true,
                }
