@@ -50,7 +50,9 @@
 <span style="background:#8c8;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;已排課&nbsp;&nbsp;</span>
 <span style="background:#e77;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;時間衝突&nbsp;&nbsp;</span>
 <span style="background:yellow;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;時數不足&nbsp;&nbsp;</span> 
+<span style="background:#dcb0e1;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;未選老師&nbsp;&nbsp;</span>
 <span style="background:#8df;border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;檢核通過&nbsp;&nbsp;</span>
+
 <table>
   <tr class="tr-title">
     <td style="width:5%">科目編號</td>
@@ -66,11 +68,12 @@
 
 
   <tal:scheduling repeat="item python:context.getChildNodes()">
-    <tal:uid define="sqlResult python:view.alreadyScheduling(item.UID())"
+    <tal:uid define="sqlResult python:view.alreadyScheduling(item.UID());
+                     teacherBrain view/teacherBrain"
              switch="python:sqlResult">
       <tr class="tr-body not-schedule" tal:case="python:[]" tal:attributes="id python:'tr-%s' % item.UID()">
         <td>${item/id/upper}</td>
-        <td>${item/title}</td>
+        <td>sss${item/title}</td>
         <td>
           <select name="classroom" class="classroom" id='classroom-${item/UID}'>
             <tal:classroom repeat="classroom python:context.trainingCenter.to_object.getChildNodes()">
@@ -80,7 +83,14 @@
               <option class="special" value="special">專班</option>
           </select>
         </td>
-        <td tal:content="item/teacher/to_object/title | nothing">講師</td>
+        <td>
+            <select id='teacher-${item/UID}' tal:condition='python: not item.ignoreSchedule'>
+              <option value=''></option>
+              <option tal:repeat="brain teacherBrain" value='${brain/Title}'>${brain/Title}</option>
+            </select>
+            <input type='hidden' value='${python: 1 if item.isQuiz else 0}' id='isQuiz-${item/UID}'/>
+            <input type='hidden' value='${python: 1 if item.ignoreSchedule else 0}' id='ignoreSchedule-${item/UID}'/>
+        </td>
         <td>${item/hours}</td>
         <td>
           日期:
@@ -113,7 +123,7 @@
             tal:attributes="id python:'tr-%s' % record['id'];
                             class python:'tr-body' if record['start'] is None else 'tr-body scheduled'">
           <td>${item/id/upper}</td>
-          <td>${item/title}</td>
+          <td>aaaa${item/title}</td>
 
           <td>
             <select name="classroom" id='classroom-${record/id}' class="classroom">
@@ -131,7 +141,15 @@
             </select>
           </td>
 
-          <td tal:content="item/teacher/to_object/title | nothing">講師</td>
+          <td tal:define="teacher record/teacher">
+            <select id='teacher-${record/id}'  tal:condition='python: not record.ignoreSchedule'>
+              <option value='' tal:attributes='selected python: teacher'></option>
+              <option tal:repeat="brain teacherBrain" value='${brain/Title}'
+                      tal:attributes='selected python: teacher == brain.Title'>${brain/Title}</option>
+            </select>
+            <input type='hidden' value='${record/isQuiz}' id='isQuiz-${record/id}'/>
+            <input type='hidden' value='${record/ignoreSchedule}' id='ignoreSchedule-${record/id}'/>
+          </td>
           <td>${item/hours}</td>
           <td tal:condition="python:record['start'] is None">
             日期:
@@ -165,8 +183,8 @@
           </td>
 
           <td>
-            <a class="update" data-uid="${record/id}" href="javascript:voild(0)">更新</a> / 
-            <a class="deleterow" data-uid="${record/id}" href="javascript:voild(0)">刪除</a>
+            <a class="update" data-uid="${record/id}" data-ploneuid='${record/uid}' href="javascript:voild(0)">更新</a> / 
+            <a class="deleterow" data-uid="${record/id}" data-ploneuid='${record/uid}' href="javascript:voild(0)">刪除</a>
           </td>
         </tr>
       </tal:notempty>
@@ -193,7 +211,12 @@ $(document).ready(function(){
     ).done(function(data){
         result = JSON.parse(data)
         for(var key in result){
-            if( result[key][0] == result[key][1] ){
+            if(result[key][3]){
+                for(i=2; i<= result[key].length; i++){
+                    $('#tr-' + result[key][i]).css('background', '#dcb0e1')
+                }
+            }
+            else if( result[key][0] == result[key][1]){
                 for(i=2; i<= result[key].length; i++){
                     $('#tr-' + result[key][i]).css('background', '#8df')
                 }
@@ -232,6 +255,10 @@ rest = function(uid, postData){
 $(document).ready(function(){
     $('a.update').click(function(){
         uid = $(this).data('uid')
+        if(!$('#start-' + uid).val() && !$('#end-' + uid).val()){
+            alert('請輸入時間')
+            return
+        }
         data = {uid: uid,
                 date: $('#date-' + uid).val(),
                 start: $('#start-' + uid).val(),
@@ -239,7 +266,10 @@ $(document).ready(function(){
                 update_class_scheduling: true,
                 classroom: $('#classroom-' + uid).val(),
                 teacher_fee: $('#teacher_fee-' + uid).val(),
-                traffic_fee: $('#traffic_fee-' + uid).val()
+                traffic_fee: $('#traffic_fee-' + uid).val(),
+                teacher: $('#teacher-' + uid).val(),
+                isQuiz: $('#isQuiz-' + uid).val(),
+                ignoreSchedule: $('#ignoreSchedule-' + uid).val()
                }
         rest(uid, data)
     })
