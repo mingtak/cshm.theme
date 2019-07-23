@@ -247,7 +247,10 @@ input.edit, select.edit, p.edit, #send, #cancel_edit, textarea.edit{
        發證日期
       </b>
      </td>
-     <td>${view/licenseDate}</td>
+     <td>
+      <p>${view/licenseDate}</p>
+      <input type='date' class='edit' value='${view/licenseDate}' name='licenseDate'/>
+     </td>
     </tr>
 
     <tr height="30" class="tr-title">

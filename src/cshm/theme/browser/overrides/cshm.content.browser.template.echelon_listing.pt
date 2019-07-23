@@ -177,11 +177,15 @@ $(document).ready(function(){
     data = {state: state, uid:uid}
     $.post(location.href, data=data)
       .done(function(res){
-alert('已變更發佈狀態')
-location.reload()
+          if(res == 'err'){
+              alert('有資訊尚未填寫。\r請確認期別,報名截止日期,外辦單位,上課人數')
+          }else{
+              alert('已變更發佈狀態')
+              location.reload()
+          }
       })
       .fail(function(res){
-alert('變更失敗，請再試一次，若重覆失敗狀態，請洽系統管理員')
+          alert('變更失敗，請再試一次，若重覆失敗狀態，請洽系統管理員')
       })
   })
 })

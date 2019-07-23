@@ -69,6 +69,7 @@ input[type='number']{
 $(document).ready(function(){
     $('#survey_btn button').click(function(){
         id = this.id
+        $('#result').html('')
         if(id == 'satisfaction'){
             url = location.href.replace('show_statistics', 'calculate_satisfaction')
         }else{
