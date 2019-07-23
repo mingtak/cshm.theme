@@ -74,7 +74,7 @@ abs_url = api.portal.get().absolute_url()
     </div>
     <div>
         <p>日期：</p>
-        <input type="text" value='${python:view.startDateTime}' readonly="readonly"  name='startDateTime'/>
+        <input type="text" value='${python:view.start}' readonly="readonly"  name='start'/>
     </div>
     <div>
         <p>老師：</p>
@@ -193,7 +193,7 @@ abs_url = api.portal.get().absolute_url()
     <textarea name="question12" cols="30" rows="10"></textarea>
     <br><br><br><br>
     <input type="submit" value="送出" class='btn' style="margin-bottom:15px"/>
-    <input type="hidden" name="uid" value="${view/uid}"/>
+    <input type="hidden" name="pin" value="${view/pin}"/>
 </form>
 
 <script>
