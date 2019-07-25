@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="cshm.content">
+<body>
+
+
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+
+
+<style>
+input[type="text"], input[type="date"]{
+    display: inline;
+    width: 100%;
+    margin: 5px 0 10px 5px;
+}
+</style>
+
+<form  method='post' >
+<input type='hidden' name='update' value='1'>
+字號:<input type='text' value='${python: "%s%s" %(context.docHeader, context.docSN)}' style='width: 20%' readonly>
+<br><br>
+<span>公文類型：</span>
+<select name='status' required>
+  <option value='send' tal:attributes='selected python: context.status == "send"'>發文</option>
+  <option value='receive' tal:attributes='selected python: context.status == "receive"'>收文</option>
+</select>
+<br>
+<span>日期：</span><input name='docDate' type='date' value='${context/docDate}' style='width: 20%' required>
+<br>
+<span>標題：</span><input name='title' type='text' value='${context/title}' required>
+<br>
+<span>收件人：</span><input name='recipient' type='text' value='${context/recipient}' required>
+<br>
+<span>公文內容1：</span><input name='detail_1' type='text' value='${context/detail_1}' required>
+<br>
+<span>公文內容2：</span><input name='detail_2' type='text' value='${context/detail_2}'>
+<br>
+<span>公文內容3：</span><input name='detail_3' type='text' value='${context/detail_3}'>
+<br>
+<span>公文內容4：</span><input name='detail_4' type='text' value='${context/detail_4}'>
+<br>
+<span>公文內容5：</span><input name='detail_5' type='text' value='${context/detail_5}'>
+<br>
+<span>公文內容6：</span><input name='detail_6' type='text' value='${context/detail_6}'>
+<br>
+<span>公文內容7：</span><input name='detail_7' type='text' value='${context/detail_7}'>
+<br>
+<span>公文內容8：</span><input name='detail_8' type='text' value='${context/detail_8}'>
+<br>
+<span>公文內容9：</span><input name='detail_9' type='text' value='${context/detail_9}'>
+<br>
+<span>公文內容10：</span><input name='detail_10' type='text' value='${context/detail_10}'>
+<br>
+<button>更新</button>
+</form>
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>
+
