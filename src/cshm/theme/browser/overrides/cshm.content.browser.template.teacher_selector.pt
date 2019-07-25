@@ -45,7 +45,7 @@ from plone import api
           <tr tal:repeat="item python:view.refObj.getChildNodes()">
             <td>${python:context.getParentNode().id.upper()}-${item/id}</td>
             <td>${item/title}</td>
-            <td>${item/teacher/to_object/title}</td>
+            <td>${python: item.teacher.to_object.title if item.teacher else ''}</td>
             <td>
                 <tal:ts define="ts python:api.content.find(Type='Teacher', teachSubjects=item.title)"
                         repeat="teacher ts">
@@ -60,7 +60,7 @@ from plone import api
 <ul tal:condition="python:not view.request.form.get('uid')">
   <li tal:repeat="item python:folder.getChildNodes()" style="padding:10px">
     <a target="_blank" href="@@teacher_selector?uid=${item/UID}">
-       ${folder/title}: ${item/title} (${item/trainingCenter/to_object/title} /
+       ${folder/title}: ${item/title} (${context/trainingCenter/to_object/title} /
        <span i18n:translate="">${item/duringTime}</span>)
     </a>
   </li>

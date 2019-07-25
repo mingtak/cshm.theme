@@ -37,66 +37,66 @@
     <col width="99"/>
    </colgroup>
    <tr class="ro1">
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       序號
      </p>
-    </td>
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </th>
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       學員姓名
      </p>
-    </td>
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </th>
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       課程名稱
      </p>
-    </td>
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </th>
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       原期別
      </p>
-    </td>
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </th>
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       補課期別
      </p>
-    </td>
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </th>
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       補課狀態
      </p>
-    </td>
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </th>
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       繳費狀態
      </p>
-    </td>
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </th>
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       檢視
      </p>
-    </td>
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </th>
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       刪除
      </p>
-    </td>
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </th>
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       列印
      </p>
-    </td>
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </th>
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       課表
      </p>
-    </td>
-    <td class="ce1" style="text-align:left;width:22.58mm; ">
+    </th>
+    <th class="ce1" style="text-align:left;width:22.58mm; ">
      <p>
       查核
      </p>
-    </td>
+    </th>
    </tr>
    <tr class="ro1" tal:repeat="item view/result">
 <tal:data define="result python:view.get_reg_data(item['origin_reg_id']);

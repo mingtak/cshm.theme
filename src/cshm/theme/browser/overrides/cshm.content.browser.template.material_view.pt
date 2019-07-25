@@ -150,9 +150,9 @@ a{
 
 	  <form action='manipulate_material' method='post'>
             <div style='display:inline'>
-	      <label>※指定寄送地址：<input type='text' name='address'></label><br>
-	      <label>※備　　　　註：<input type='text' name='remark'></label><br>
-	      <label>※希望寄達日期：<input type='date' name='send_date'></label>
+	      <label>※指定寄送地址：<input type='text' name='address' required></label><br>
+	      <label>※備　　　　註：<input type='text' name='remark' required></label><br>
+	      <label>※希望寄達日期：<input type='date' name='send_date' required></label>
             </div>
 	    <input type='hidden' name='action' value='add'>
 	    <table>
@@ -166,7 +166,7 @@ a{
 		  <td>${repeat/material/number}</td>
 		  <td>${python: material[0]}</td>
 		  <td>${python: material[2]}</td>
-		  <td><input type='number' min=0 class='add_material' data-name='${python: material[0]}'></td>
+		  <td><input type='number' min=0 class='add_material' data-name='${python: material[0]}' value='0'></td>
 	      </tr>
 	      <input type='hidden' name='detail' class='material_detail'>
 	    </table>
@@ -181,9 +181,9 @@ a{
 	  <p class='content_title deepred'>教材退還申請</p>
 	  <form action='manipulate_material' method='post'>
             <div style='display:inline'>
-              <label>※指定寄送地址：<input type='text' name='address'></label><br>
-              <label>※備　　　　註：<input type='text' name='remark'></label><br>
-              <label>※希望寄達日期：<input type='date' name='send_date'></label>
+              <label>※指定寄送地址：<input type='text' name='address' required></label><br>
+              <label>※備　　　　註：<input type='text' name='remark' required></label><br>
+              <label>※希望寄達日期：<input type='date' name='send_date' required></label>
             </div>
 	    <input type='hidden' name='action' value='return'>
 	    <table>
@@ -197,7 +197,7 @@ a{
 		  <td>${repeat/material/number}</td>
 		  <td>${python: material[0]}</td>
 		  <td>${python: material[2]}</td>
-		  <td><input type='number' min=0 class='add_material' data-name='${python: material[0]}'></td>
+		  <td><input type='number' min=0 class='add_material' data-name='${python: material[0]}' value='0'></td>
 	      </tr>
 	      <input type='hidden' name='detail' class='material_detail'>
 	    </table>
