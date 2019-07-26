@@ -22,7 +22,7 @@ from plone import api
 ?>
 
 <tal:folder tal:define="folder python:context.getParentNode()">
-  <tal:table tal:condition="python:view.request.form.get('uid')">
+  <tal:table tal:condition="python:view.request.form.get('echelon')">
       <h3>老師遴選表</h3>
       <h4>${folder/title} ${context/title}
           (${context/trainingCenter/to_object/title} /
@@ -42,12 +42,12 @@ from plone import api
           </tr>
         </thead>
         <tbody>
-          <tr tal:repeat="item python:view.refObj.getChildNodes()">
-            <td>${python:context.getParentNode().id.upper()}-${item/id}</td>
-            <td>${item/title}</td>
-            <td>${python: item.teacher.to_object.title if item.teacher else ''}</td>
+          <tr tal:repeat="item view/classList">
+            <td>${python:context.getParentNode().id.upper()}-${python: item['subject_code']}</td>
+            <td>${python: item['subject_name']}</td>
+            <td>${python: item['teacher']}</td>
             <td>
-                <tal:ts define="ts python:api.content.find(Type='Teacher', teachSubjects=item.title)"
+                <tal:ts define="ts python: api.content.find(Type='Teacher', teachSubjects=item['subject_name'])"
                         repeat="teacher ts">
                     ${teacher/Title} <span tal:condition="not:repeat/teacher/end"> / </span>
                 </tal:ts>
@@ -57,9 +57,9 @@ from plone import api
       </table>
   </tal:table>
 
-<ul tal:condition="python:not view.request.form.get('uid')">
+<ul tal:condition="python:not view.request.form.get('echelon')">
   <li tal:repeat="item python:folder.getChildNodes()" style="padding:10px">
-    <a target="_blank" href="@@teacher_selector?uid=${item/UID}">
+    <a target="_blank" href="@@teacher_selector?echelon=${item/UID}">
        ${folder/title}: ${item/title} (${context/trainingCenter/to_object/title} /
        <span i18n:translate="">${item/duringTime}</span>)
     </a>

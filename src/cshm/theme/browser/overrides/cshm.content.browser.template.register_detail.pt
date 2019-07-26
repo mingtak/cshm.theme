@@ -509,7 +509,7 @@ input.edit, select.edit, p.edit, #send, #cancel_edit, textarea.edit, #materialAr
       <td>${python: receive['title']}</td>
       <td>${python: receive['date']}</td>
       <td>
-        <a href="${python: receive['editUrl']}">編輯</a>
+        <a href="${python: receive['editUrl']}" target='_blank'>編輯</a>
       </td>
     </tr>
     <tr height="30" class="tr-title">
@@ -528,7 +528,7 @@ input.edit, select.edit, p.edit, #send, #cancel_edit, textarea.edit, #materialAr
       <td>${python: send['title']}</td>
       <td>${python: send['date']}</td>
       <td>
-        <a href="${python: send['editUrl']}">編輯</a>
+        <a href="${python: send['editUrl']}" target='_blank'>編輯</a>
       </td>
     </tr>
 </table>
