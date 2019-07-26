@@ -39,8 +39,6 @@
       <td>數量</td>
       <td>定價</td>
       <td>處理狀態</td>
-      <td>/</td>
-      <td>/</td>
     </tr>
     <tr tal:repeat="detail python: result[8].split('/')">
       <tal:condition condition="detail"
@@ -51,8 +49,6 @@
         <td style='70px'>${python: detail.split('*')[1]}</td>
         <td style='70px'>${python: view.materialList[name][0]}</td>
         <td style='110px'></td>
-        <td style='70px'>修改</td>
-        <td style='70px'>刪除</td>
       </tal:condition>
     </tr>
   </table>

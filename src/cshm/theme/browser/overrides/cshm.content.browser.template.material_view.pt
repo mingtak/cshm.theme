@@ -87,6 +87,9 @@ a{
    border: none !important;
    text-decoration: none !important;
 }
+.hide, input.hide{
+    display: none;
+}
 </style>
 
 <ul class='btn_group'>
@@ -108,17 +111,27 @@ a{
 		<td>序號</td>
 		<td>處理狀態</td>
 		<td>請領時間</td>
-		<td>寄送日期</td>
+		<td>希望寄送日期</td>
 		<td>貨運單號</td>
 		<td></td>
 		<td></td>
+                <td></td>
 	      </tr>
 	      <tr tal:repeat="order view/orderList" class="${python: order[5]}">
 		<td>${repeat/order/number}</td>
-		<td>${python: order[0]}</td>
+		<td>
+                  <p>${python: order[0]}</p>
+                  <select class='hide'>
+                    <option value='尚未處理' tal:attributes="selected python: order[0] == '尚未處理'">尚未處理</option>
+                    <option value='出貨中' tal:attributes="selected python: order[0] == '出貨中'">出貨中</option>
+                  </select>
+                </td>
 		<td>${python: order[1]}</td>
 		<td>${python: order[4]}</td>
-		<td>${python: order[3]}</td>
+		<td>
+                  <p>${python: order[3]}</p>
+                  <input type='text' value='${python: order[3]}' class='hide'/>
+                </td>
 		<td>
                   <a href="${contextUrl}/print_order?type=shipment&order_id=${python: order[2]}" 
                      target='_blank' tal:condition="python: order[5] == 'add'">出貨單</a>
@@ -126,6 +139,13 @@ a{
                      target='_blank' tal:condition="python: order[5] == 'return'">退還單</a>
                 </td>
 		<td class='preview' data-order_id="${python: order[2]}" style='cursor: pointer;color: #007bb1'>檢視</td>
+                <td date-order_id="${python: order[2]}" style='cursor: pointer;color: #007bb1'>
+                  <button class='update'>更新</button>
+                  <div class='hide'>
+                    <button class='confirm' data-order_id='${python: order[2]}'>確認</button>
+                    <button class='cancel' style='background: brown;border-color: brown'>取消</button>
+                  </div>
+                </td>
 	      </tr>
 	    </table>
 	    <br>
@@ -211,6 +231,42 @@ a{
 
 <script>
 $(function(){
+    $('.update').click(function(){
+        tr = $(this).parent().parent()
+        tr.find('.hide').show()
+        tr.find('.hide').siblings().hide()
+    })
+    $('.confirm').click(function(){
+        if(confirm('確認要更新嘛？')){
+        tr = $(this).parent().parent().parent()
+        status = tr.find('select').val()
+        logistics_code = tr.find('input').val()
+        id = $(this).data()['order_id']
+        $.ajax({
+            method: 'post',
+            url: '${view/context/absolute_url}/update_material',
+            data: {
+                id: id,
+                status: status,
+                logistics_code: logistics_code
+            },
+            success: function(rep){
+                if(rep == 'success'){
+                    location.reload()
+                }
+                else{
+                     alert('更新失敗!多次失敗請聯繫管理員')
+                }
+            }
+        })
+        }
+    })
+    $('.cancel').click(function(){
+        tr = $(this).parent().parent().parent()
+        tr.find('.hide').hide()
+        tr.find('.hide').siblings().show()
+    })
+
     $('form').submit(function(){
         detail = ''
         $('.add_material').each(function(){
