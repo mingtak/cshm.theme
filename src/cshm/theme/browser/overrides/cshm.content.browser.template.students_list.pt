@@ -21,7 +21,7 @@
 <h3>${python:context.getParentNode().title} / ${context/title}: 學生名單</h3>
 
 <a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a> |
-<a id="teacher-selector" target="_blank" href="@@teacher_selector">ERROR: 老師遴選</a> |
+<a id="teacher-selector" target="_blank" href="@@teacher_selector">老師遴選</a> |
 <a id="class_scheduling" target="_blank" href="@@class_scheduling">排課系統</a> |
 <a id="admin-reg-course" target="_blank" href="@@admin_reg_course">後台報名(個人)</a> |
 <a id="admin-group-reg-course" target="_blank" href="@@admin_group_reg_course">後台團報</a> |
@@ -33,8 +33,8 @@
 <a id="echelon_view" target="_blank" href="@@echelon_view">滿意度調查</a> |
 <a id="calculate_satisfaction" target="_blank" href="@@show_statistics">滿意度報表</a>｜
 <a id="register_excel_class" href="@@register_excel_class">課程表</a>｜
-<a id="register_excel_teacher" href="@@register_excel_teacher">ERROR:講師表</a>｜
-<a id="register_excel_graduaction" href="@@register_excel_graduaction">ERROR:學員表</a>｜
+<a id="register_excel_teacher" href="@@register_excel_teacher">講師表</a>｜
+<a id="register_excel_graduaction" href="@@register_excel_graduaction">學員表</a>｜
 <a id="triple_excel" href="@@triple_excel">三合一表格</a>｜
 <span class="gernal_report">防火點名/核發清冊</span>
 ( <a id="gernal_report" href="@@gernal_report?mode=horizon">橫式</a> /
@@ -42,7 +42,7 @@
 <a id="gernal_report" href="@@gernal_report?mode=fire">防火</a> /
 <a id="gernal_report" href="@@gernal_report?mode=issue">核發清冊</a> /
 <a id="gernal_report" href="@@gernal_report?mode=emergency_grade">成績冊</a> )｜
-<a id="list_print" target="_blank" href="@@list_print">ERROR:點名表</a>｜
+<a id="list_print" target="_blank" href="@@list_print">點名表</a>｜
 <a id="period_listing" target="_blank" href="@@period_listing">ERROR:期別教材總覽</a>｜
 <a id="material_view" target="_blank" href="@@material_view">ERROR:教材</a>｜
 <a id="receipt_list" target="_blank" href="@@receipt_list">收據</a>｜
