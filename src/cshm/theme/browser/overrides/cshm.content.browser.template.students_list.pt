@@ -35,6 +35,7 @@
 <a id="register_excel_class" href="@@register_excel_class">課程表</a>｜
 <a id="register_excel_teacher" href="@@register_excel_teacher">講師表</a>｜
 <a id="register_excel_graduaction" href="@@register_excel_graduaction">學員表</a>｜
+<br>
 <a id="triple_excel" href="@@triple_excel">三合一表格</a>｜
 <span class="gernal_report">防火點名/核發清冊</span>
 ( <a id="gernal_report" href="@@gernal_report?mode=horizon">橫式</a> /
@@ -43,10 +44,11 @@
 <a id="gernal_report" href="@@gernal_report?mode=issue">核發清冊</a> /
 <a id="gernal_report" href="@@gernal_report?mode=emergency_grade">成績冊</a> )｜
 <a id="list_print" target="_blank" href="@@list_print">點名表</a>｜
-<a id="period_listing" target="_blank" href="@@period_listing">ERROR:期別教材總覽</a>｜
-<a id="material_view" target="_blank" href="@@material_view">ERROR:教材</a>｜
+<a id="period_listing" target="_blank" href="@@period_listing">期別教材總覽</a>｜
+<a id="material_view" target="_blank" href="@@material_view">教材</a>｜
 <a id="receipt_list" target="_blank" href="@@receipt_list">收據</a>｜
 <a id="search_receipt" target="_blank" href="@@search_receipt?action=title">收據查詢</a>｜
+<br>
 <span class="gernal_report">成績追蹤</span>
 ( <a id="grade_manage" href="@@grade_manage">一般/操作類</a> /
  <a id="grade_manage2" href="@@grade_manage2">室內空氣品質維護管理專責人員訓練班</a> /
@@ -54,21 +56,23 @@
 
 
 <hr>
-<input name="url" class="to-url" type="text" placeholder="請輸入下載專區網址" style="width: 300px; float:left">
-<a class="to-url" href="javascript:void(0)" >匯出至下載專區</a>
+<div style='display: flex;align-items: center'>
+    <input name="url" class="to-url" type="text" placeholder="請輸入下載專區網址" style="width: 300px; float:left">
+    <a class="to-url" href="javascript:void(0)" style='margin-left: 10px'>匯出至下載專區</a>
+</div>
 <hr>
 
 <h3>總人數：${view/numberCount}  (已繳費：${view/count}人，金額：${view/totalMoney})
 <form method="post" action="${context/absolute_url}/@@reserve_seat">
     <table>
       <tr>
-        <td>
+        <td style='border: 1px solid'>
           <input name="quota" min=1 max=100 class="" type="number" placeholder="請輸入預留人數">
         </td>
-        <td>
+        <td style='border: 1px solid'>
           <input name="company_name" class="" type="text" placeholder="服務單位">
         </td>
-        <td>
+        <td style='border: 1px solid'>
           <input name="submit" type="submit" value="送出">
         </td>
       </tr>
