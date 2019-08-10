@@ -16,17 +16,21 @@
 from plone import api
 ?>
 
-<table>
-  <tr class="tr-title">
-    <th>課程名稱</th>
-    <th>期數</th>
-  </tr>
-  <tr tal:repeat="item view/children" class="even">
-    <td>
-      <a tal:content="item/title" tal:attributes="href string:${item/absolute_url}/@@echelon_listing">課程名稱</a>
-    </td>
-    <td tal:content="python:len(api.content.find(context=item, portal_type='Echelon'))">期數</td>
-  </tr>
+<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>課程名稱</th>
+      <th>期數</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr tal:repeat="item view/children">
+      <td>
+        <a tal:content="item/title" tal:attributes="href string:${item/absolute_url}/@@echelon_listing">課程名稱</a>
+      </td>
+      <td tal:content="python:len(api.content.find(context=item, portal_type='Echelon'))">期數</td>
+    </tr>
+  </tbody>
 
 
 </table>

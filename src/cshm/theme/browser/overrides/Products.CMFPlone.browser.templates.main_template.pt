@@ -24,6 +24,7 @@
 
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css" href="${portal_url}/++plone++cshm.theme/bootstrap.min.css" />
     <div tal:replace="structure provider:plone.htmlhead" />
 <script src="${portal_url}/++theme++theme-for-cshm/js/vue.js"></script>
 
