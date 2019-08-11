@@ -22,18 +22,6 @@
 
 <h3>講師調課／遲到／早退登記系統</h3>
 
-<!-- <a id="admit-batch-numbering" href="javascript:void(0)">批次編號</a> | -->
-
-<a id="" href="${context/absolute_url}/@@not_on_time">講師調課/遲到/早退登記系統</a> │
-<a id="" href="${context/absolute_url}/@@not_on_time?list">調課/遲到/早退列表</a> │
-<a id="" href="${context/absolute_url}/@@teacher_mana">講師清單</a> │
-<!-- <a id="" target="_blank" href="${context/absolute_url}/@@search_teacher_by_course">課程清單</a> │ -->
-<a id="" href="${context/absolute_url}/@@add_teacher">新增講師</a> │
-<!-- <a id="" href="${context/absolute_url}/@@change_log">近期異動</a> │ -->
-
-<a id="export-teacher-list" href="${context/absolute_url}/@@teacher_mana?output=">匯出講師清單</a>
-
-<br>
 <br>
 
 
