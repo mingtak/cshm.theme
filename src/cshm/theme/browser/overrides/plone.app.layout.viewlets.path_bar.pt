@@ -1,6 +1,9 @@
+<tal:commit condition="False" content="string:pathbar先拿掉"/>
+
 <nav id="portal-breadcrumbs" class="plone-breadcrumb"
          i18n:domain="plone"
-         tal:define="breadcrumbs view/breadcrumbs">
+         tal:define="breadcrumbs view/breadcrumbs"
+         tal:condition="False">
   <div class="container">
     <span id="breadcrumbs-you-are-here" class="hiddenStructure"
             i18n:translate="you_are_here">You are here:</span>
@@ -38,6 +41,7 @@ portal_url = portal.absolute_url()
 <div class="container">
   <div class="row">
     <div class="col-md-12" id='viewlet_path_bar'>
+      <span>功能列表:</span>
       <a href="${portal_url}/@@echelon_listing_register">後台首頁</a>  / 
       <a href="${portal_url}/mana_course/@@admin_course_listing">期別表</a>  / 
       <a href="${portal_url}/@@create_class">開新課程</a>  / 
@@ -52,5 +56,18 @@ portal_url = portal.absolute_url()
       <hr>
     </div>
   </div>
-</div>
 
+
+
+<!-- 次選單 -->
+  <div class="row" tal:condition="python:view.view.__name__ == 'echelon_listing'">
+    <div class="col-md-12">
+      <span>期別管理功能列表:</span>
+      <a href="${python:context.getParentNode().absolute_url()}/@@admin_course_listing">回期別表</a> |
+      <a href="${context/absolute_url}/@@echelon_listing">檢視最近30期</a> |
+      <a href="${context/absolute_url}/@@echelon_listing?all">檢視所有期別</a>
+      <hr>
+    </div>
+  </div>
+
+</div>

@@ -15,8 +15,6 @@
 <?python
 from plone import api
 ?>
-<a href="${python:context.getParentNode().absolute_url()}/@@admin_course_listing">回期別表</a> |
-<a href="${context/absolute_url}/@@echelon_listing">檢視最近30期</a> | <a href="${context/absolute_url}/@@echelon_listing?all">檢視所有期別</a>
   <table>
    <tr class="tr-title">
     <td>
